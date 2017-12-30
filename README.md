@@ -90,7 +90,7 @@ koalanlp.initialize({
 - `option`: Object (필수). 아래와 같은 설정이 가능함.
   - `option.tagger`: `TYPES` (기본값 `EUNJEON`). 품사분석기 지정.
   - `option.parser`: `TYPES` (기본값 `KKMA`). 의존구문분석기 지정.
-  - `option.version`: String (기본값 `1.8.4`). 사용할 KoalaNLP 버전 지정.
+  - `option.version`: String (기본값 `1.8.4`). 사용할 KoalaNLP 버전 지정. [최신 버전 확인](https://nearbydelta.github.io/KoalaNLP)
   - `option.debug`: Boolean (기본값 false). Debug 기록 표시여부
 - `callback`: Function (void => void) (필수). 초기화 완료 후 실행할 콜백함수.
 
@@ -122,7 +122,7 @@ koalanlp.initialize({
 ## 결과의 형태
 
 아래와 같은 구조를 따릅니다.
-```json
+```js
 {
   error: Error|Boolean, // Error 발생시, error object. 아닌 경우는 false.
   result: [ // 문장의 배열.
