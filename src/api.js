@@ -14,7 +14,8 @@ export let TYPES = require('./koalanlp/const').TYPES;
  */
 export class Tagger{
     constructor(){
-        this.tagger = java.newInstanceSync(`kr.bydelta.koala.${conf.tagger}.Tagger`);
+        let Base = java.import(`kr.bydelta.koala.${conf.tagger}.Tagger`);
+        this.tagger = new Base();
     }
 
     /**
@@ -25,12 +26,10 @@ export class Tagger{
      */
     tag(paragraph, callback){
         if(callback){
-            this.tagger.tagPromise(paragraph)
-                .then(function(result){
-                    callback({error: false, result: converter(result)});
-                }, function(e){
-                    callback({error: e});
-                })
+            this.tagger.tag(paragraph, function(err, result){
+                if(err) callback({error: err});
+                else callback({error: false, result: converter(result)});
+            });
         }else{
             return converter(this.tagger.tagSync(paragraph))
         }
@@ -44,12 +43,10 @@ export class Tagger{
      */
     tagSentence(sentence, callback){
         if(callback){
-            this.tagger.tagSentencePromise(sentence)
-                .then(function(result){
-                    callback({error: false, result: [convertSentence(result)]});
-                }, function(e){
-                    callback({error: e});
-                })
+            this.tagger.tagSentence(sentence, function(err, result){
+                if(err) callback({error: err});
+                else callback({error: false, result: [convertSentence(result)]});
+            });
         }else{
             return convertSentence(this.tagger.tagSentenceSync(sentence))
         }
@@ -61,10 +58,11 @@ export class Tagger{
  */
 export class Parser{
     constructor(){
-        this.tagger = java.newInstanceSync(`kr.bydelta.koala.${conf.tagger}.Tagger`);
-        this.parser = java.newInstanceSync(`kr.bydelta.koala.${conf.parser}.Parser`);
+        let TagBase = java.import(`kr.bydelta.koala.${conf.tagger}.Tagger`);
+        let ParseBase = java.import(`kr.bydelta.koala.${conf.parser}.Parser`);
+        this.tagger = new TagBase();
+        this.parser = new ParseBase();
     }
-
 
     /**
      * 문단단위 분석
@@ -74,14 +72,14 @@ export class Parser{
      */
     parse(paragraph, callback){
         if(callback){
-            this.tagger.tagPromise(paragraph)
-                .then(function(result){
-                    this.parser.parsePromise(result)
-                }).then(function(result) {
-                    callback({error: false, result: converter(result)});
-                }, function(e){
-                    callback({error: e});
-                })
+            let parser = this.parser;
+            this.tagger.tag(paragraph, function(err, result){
+                if(err) callback({error: err});
+                else parser.parse(result, function(err2, parsed){
+                    if(err2) callback({error: err2});
+                    else callback({error: false, result: converter(parsed)});
+                });
+            });
         }else{
             let tagged = this.tagger.tagSync(paragraph);
             let parsed = this.parser.parseSync(tagged);
@@ -97,17 +95,17 @@ export class Parser{
      */
     parseSentence(sentence, callback){
         if(callback){
-            this.tagger.tagSentencePromise(sentence)
-                .then(function(result){
-                    this.parser.parsePromise(result)
-                }).then(function(result) {
-                callback({error: false, result: [convertSentence(result)]});
-            }, function(e){
-                callback({error: e});
-            })
+            let parser = this.parser;
+            this.tagger.tagSentence(sentence, function(err, result){
+                if(err) callback({error: err});
+                else parser.parseSentence(result, function(err2, parsed){
+                    if(err2) callback({error: err2});
+                    else callback({error: false, result: [convertSentence(parsed)]});
+                });
+            });
         }else{
             let tagged = this.tagger.tagSentenceSync(sentence);
-            let parsed = this.parser.parseSync(tagged);
+            let parsed = this.parser.parseSentenceSync(tagged);
             return convertSentence(parsed);
         }
     }

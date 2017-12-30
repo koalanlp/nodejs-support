@@ -99,7 +99,7 @@ export function initializer(conf, callback) {
             }
             mvnResults.classpath.forEach(function(c) {
                 console.info('adding ' + c + ' to classpath');
-                java.classpath.push(c);
+                java.classpath.push(path.resolve(c));
             });
 
             callback(java);
