@@ -1,13 +1,27 @@
 {
-  "name": "nodejs-koalanlp",
+  "name": "koalanlp",
   "version": "1.0.0",
   "description": "An integrated API for processing Korean in Javascript (Node.js version of KoalaNLP in Scala)",
+  "author": {
+    "name": "nearbydelta"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nearbydelta/nodejs-koalanlp.git"
+  },
+  "bugs": {
+    "url": "http://github.com/nearbydelta/nodejs-koalanlp/issues"
+  },
   "main": "./lib/api.js",
   "scripts": {
     "test": "node ./lib/test.js",
     "compile": "./node_modules/babel-cli/bin/babel.js --presets=es2015 -d lib/ src/"
   },
-  "license": "MIT",
+  "licenses": [ {
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/MIT"
+  } ],
+  "keywords": ["korean", "koalanlp", "natural language processing"],
   "dependencies": {
     "java": "^0.9.0",
     "node-java-maven": "^0.1.1"
