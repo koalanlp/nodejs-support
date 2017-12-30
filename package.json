@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-koalanlp",
+  "version": "1.0.0",
+  "description": "An integrated API for processing Korean in Javascript (Node.js version of KoalaNLP in Scala)",
+  "main": "./lib/api.js",
+  "scripts": {
+    "test": "node ./lib/test.js",
+    "compile": "./node_modules/babel-cli/bin/babel.js --presets=es2015 -d lib/ src/"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "java": "^0.9.0",
+    "node-java-maven": "^0.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
