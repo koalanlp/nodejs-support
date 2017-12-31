@@ -1,6 +1,8 @@
 /**
  * Created by bydelta on 17. 12. 30.
  */
+import {Sentence, Word, Morpheme, Relationship, POS} from './koalanlp/data';
+
 let java = {};
 let conf = {};
 
@@ -129,42 +131,40 @@ export let initialize = function(obj, callback){
     });
 };
 
-let convertWord = function(result){
+let convertWord = function(result, widx){
     let len = result.lengthSync();
     let buffer = [];
     let surface = result.surfaceSync();
 
     for(let i = 0; i < len; i ++){
         let morphs = result.applySync(i);
-        let morpheme = {
-            'id': i,
-            'surface': morphs.surfaceSync(),
-            'tag': morphs.tagSync().toStringSync()
-        };
-        morpheme[`${conf.tagger}Tag`] = morphs.rawTagSync();
+        let morpheme =
+            new Morpheme(
+                morphs.surfaceSync(),
+                morphs.tagSync().toStringSync(),
+                morphs.rawTagSync(),
+                i
+            );
         buffer.push(morpheme);
     }
 
+    let word = new Word(surface, buffer, widx);
     let dependents = result.depsSync().toSeqSync();
-    let depBuffer = [];
     len = dependents.sizeSync();
 
     for(let i = 0; i < len; i ++){
         let rel = dependents.applySync(i);
-        let relationship = {
-            'headId': rel.headSync(),
-            'targetId': rel.targetSync(),
-            'relation': rel.relationSync().toStringSync()
-        };
-        relationship[`${conf.parser}Rel`] = rel.rawRelSync();
-        depBuffer.push(relationship);
+        let relationship =
+            new Relationship(
+                rel.headSync(),
+                rel.relationSync().toStringSync(),
+                rel.rawRelSync(),
+                rel.targetSync()
+            );
+        word.dependents.push(relationship);
     }
 
-    return {
-        'surface': surface,
-        'morphemes': buffer,
-        'dependents': depBuffer
-    };
+    return word;
 };
 
 let convertSentence = function(result){
@@ -173,15 +173,26 @@ let convertSentence = function(result){
 
     for(let i = 0; i < len; i ++){
         let word = result.applySync(i);
-        words.push(convertWord(word));
+        words.push(convertWord(word, i));
     }
 
-    let root = convertWord(result.rootSync());
+    let sentence = new Sentence(words);
+    let dependents = result.rootSync().depsSync().toSeqSync();
+    len = dependents.sizeSync();
 
-    return {
-        'words': words,
-        'root': root.dependents
-    };
+    for(let i = 0; i < len; i ++){
+        let rel = dependents.applySync(i);
+        let relationship =
+            new Relationship(
+                rel.headSync(),
+                rel.relationSync().toStringSync(),
+                rel.rawRelSync(),
+                rel.targetSync()
+            );
+        sentence.root.dependents.push(relationship);
+    }
+
+    return sentence;
 };
 
 let converter = function(result){

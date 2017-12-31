@@ -19,7 +19,10 @@ koalanlp.initialize({
 
     // Asynchronous POS Tagging
     tagger.tag("안녕하세요. 눈이 오는 설날 아침입니다.", function(taggedAsync){
-        console.log("Async", JSON.stringify(taggedAsync));
+        if(taggedAsync.error)
+            console.error(taggedAsync.error);
+        else
+            console.log("Async", taggedAsync.result.map(s => s.toString()).join("\n"));
     });
 
     // 의존구문분석기 이용법
