@@ -6,10 +6,10 @@ import {Sentence, Word, Morpheme, Relationship, POS} from './koalanlp/data';
 let java = {};
 let conf = {};
 
-/**
- * 분석기 종류
- */
-export let TYPES = require('./koalanlp/const').TYPES;
+export let util = {
+    POS: POS,
+    TYPES: require('./koalanlp/const').TYPES
+};
 
 /**
  * 품사분석기 Wrapper 클래스
@@ -119,9 +119,9 @@ export class Parser{
  * @param callback 콜백 함수 (void => void)
  */
 export let initialize = function(obj, callback){
-    conf.version = obj.version || "1.8.4";
-    conf.tagger = obj.tagger || TYPES.EUNJEON;
-    conf.parser = obj.parser || TYPES.KKMA;
+    conf.version = obj.version || "1.9.0";
+    conf.tagger = obj.tagger || util.TYPES.EUNJEON;
+    conf.parser = obj.parser || util.TYPES.KKMA;
     conf.tempJsonName = obj.tempJsonName || "koalanlp.json";
     conf.debug = obj.debug === true;
 

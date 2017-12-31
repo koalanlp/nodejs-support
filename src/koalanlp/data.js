@@ -12,7 +12,11 @@ let _SYMB_SET = ["SF", "SP", "SS", "SE", "SW", "SO"];
 let _UNKN_SET = ["NF", "NV", "NA"];
 
 let finder = function(set, tag){
-    return set.indexOf(tag) >= 0;
+    if(typeof tag === "string")
+        return set.indexOf(tag) >= 0;
+    else if(tag instanceof Morpheme)
+        return set.indexOf(tag.tag) >= 0;
+    else return false;
 };
 
 let assert = function(cond, msg){
@@ -189,11 +193,11 @@ export class Word{
         return this.morphemes[idx];
     }
 
-    matches(tag){ //TODO fix bug in scala version
+    matches(tag){
         if(Array.isArray(tag)){
             let list = tag.reverse();
             for(let i = 0; i < this.morphemes.length; i++){
-                if (list.length > 0 && this.morphemes[i].matches(list[list.length - 1]))
+                if (list.length > 0 && this.morphemes[i].tag.startsWith(list[list.length - 1]))
                     list.pop();
             }
             return list.length == 0;
@@ -210,7 +214,7 @@ export class Word{
     }
 
     exists(fn){
-        let found = find(fn);
+        let found = this.find(fn);
         return typeof found !== "undefined";
     }
 
@@ -265,7 +269,7 @@ export class Sentence{
         this.root = new Word();
     }
 
-    matches(tag){ //TODO fix bug in scala version
+    matches(tag){
         if(Array.isArray(tag)){
             let list = tag.reverse();
             for(let i = 0; i < this.words.length; i++){
@@ -276,16 +280,30 @@ export class Sentence{
         }else return false;
     }
 
+    find(fn){
+        if(typeof fn === "function"){
+            return this.words.find(fn);
+        }else if(fn instanceof Word){
+            return this.words.find(w => w.equals(fn));
+        }else
+            return undefined;
+    }
+
+    exists(fn){
+        let found = this.find(fn);
+        return typeof found !== "undefined";
+    }
+
     nouns(){
-        return this.words.filter(m => m.exists(POS.isNoun))
+        return this.words.filter(w => w.exists(POS.isNoun))
     }
 
     verbs(){
-        return this.words.filter(m => m.exists(POS.isPredicate))
+        return this.words.filter(w => w.exists(POS.isPredicate))
     }
 
     modifiers(){
-        return this.words.filter(m => m.exists(POS.isModifier))
+        return this.words.filter(w => w.exists(POS.isModifier))
     }
 
     get(idx){

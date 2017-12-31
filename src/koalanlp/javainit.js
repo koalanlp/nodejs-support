@@ -76,7 +76,15 @@ export function initializer(conf, callback) {
     console.info(`Writing java dependency informations into ${packPath}`);
 
     fs.writeFile(packPath, JSON.stringify({
-        java: { dependencies: dependencies }
+        java: {
+            dependencies: dependencies,
+            exclusions: [
+                {
+                    groupId: "com.jsuereth",
+                    artifactId: "sbt-pgp"
+                }
+            ]
+        }
     }), function(){
         console.info("Start to fetch dependencies of koalaNLP using Maven.");
 
