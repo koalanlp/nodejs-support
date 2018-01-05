@@ -15,7 +15,8 @@
   "main": "./lib/api.js",
   "scripts": {
     "test": "node ./lib/test.js",
-    "compile": "./node_modules/babel-cli/bin/babel.js --presets=es2015 -d lib/ src/"
+    "compile": "./node_modules/babel-cli/bin/babel.js --presets=es2015 -d lib/ src/",
+    "jsdoc": "jsdoc -d docs/ -r src/"
   },
   "licenses": [
     {

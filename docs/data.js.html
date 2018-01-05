@@ -1,13 +1,44 @@
-"use strict";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: data.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: data.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i &lt; props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * Created by bydelta on 17. 12. 31.
+ */
 var _NOUN_SET = ["NNG", "NNP", "NNB", "NR", "NP"];
 var _PRED_SET = ["VV", "VA", "VX", "VCP", "VCN"];
 var _MODF_SET = ["MM", "MAG", "MAJ"];
@@ -214,7 +245,7 @@ var Morpheme = exports.Morpheme = function () {
         key: "equals",
         value: function equals(morph) {
             if (morph instanceof Morpheme) {
-                return morph.surface === this.surface && morph.tag === this.tag;
+                return morph.surface === this.surface &amp;&amp; morph.tag === this.tag;
             } else return false;
         }
 
@@ -299,7 +330,7 @@ var Relationship = exports.Relationship = function () {
     _createClass(Relationship, [{
         key: "equals",
         value: function equals(obj) {
-            if (obj instanceof Relationship) return this.head === obj.head && this.relation === obj.relation && this.target === obj.target;else return false;
+            if (obj instanceof Relationship) return this.head === obj.head &amp;&amp; this.relation === obj.relation &amp;&amp; this.target === obj.target;else return false;
         }
 
         /**
@@ -350,7 +381,7 @@ var Word = exports.Word = function () {
 
         if (typeof surface !== "undefined") {
             assert(typeof surface === "string", "Surface should be a string!");
-            assert(Array.isArray(morphemes) && morphemes[0] instanceof Morpheme, "Morphemes are not an array: " + morphemes + " && isMorpheme=" + (morphemes[0] instanceof Morpheme));
+            assert(Array.isArray(morphemes) &amp;&amp; morphemes[0] instanceof Morpheme, "Morphemes are not an array: " + morphemes + " &amp;&amp; isMorpheme=" + (morphemes[0] instanceof Morpheme));
             assert(typeof id === "number", "Id is not a number: " + id);
 
             this.surface = surface;
@@ -399,8 +430,8 @@ var Word = exports.Word = function () {
         value: function matches(tag) {
             if (Array.isArray(tag)) {
                 var list = tag.reverse();
-                for (var i = 0; i < this.morphemes.length; i++) {
-                    if (list.length > 0 && this.morphemes[i].tag.startsWith(list[list.length - 1])) list.pop();
+                for (var i = 0; i &lt; this.morphemes.length; i++) {
+                    if (list.length > 0 &amp;&amp; this.morphemes[i].tag.startsWith(list[list.length - 1])) list.pop();
                 }
                 return list.length == 0;
             } else return false;
@@ -468,9 +499,9 @@ var Word = exports.Word = function () {
         key: "equals",
         value: function equals(another) {
             if (another instanceof Word) {
-                var isEqual = another.id === this.id && this.length() === another.length();
-                for (var i = 0; i < this.length() && isEqual; i++) {
-                    isEqual = isEqual && this.get(i) === another.get(i);
+                var isEqual = another.id === this.id &amp;&amp; this.length() === another.length();
+                for (var i = 0; i &lt; this.length() &amp;&amp; isEqual; i++) {
+                    isEqual = isEqual &amp;&amp; this.get(i) === another.get(i);
                 }
                 return isEqual;
             } else return false;
@@ -546,7 +577,7 @@ var Sentence = exports.Sentence = function () {
     function Sentence(words) {
         _classCallCheck(this, Sentence);
 
-        assert(Array.isArray(words) && words[0] instanceof Word);
+        assert(Array.isArray(words) &amp;&amp; words[0] instanceof Word);
 
         this.words = words;
         this.root = new Word();
@@ -564,8 +595,8 @@ var Sentence = exports.Sentence = function () {
         value: function matches(tag) {
             if (Array.isArray(tag)) {
                 var list = tag.reverse();
-                for (var i = 0; i < this.words.length; i++) {
-                    if (list.length > 0 && this.words[i].matches(list[list.length - 1])) list.pop();
+                for (var i = 0; i &lt; this.words.length; i++) {
+                    if (list.length > 0 &amp;&amp; this.words[i].matches(list[list.length - 1])) list.pop();
                 }
                 return list.length == 0;
             } else return false;
@@ -694,7 +725,7 @@ var Sentence = exports.Sentence = function () {
                 buffer += "\n";
             };
 
-            for (var i = 0; i < this.words.length; i++) {
+            for (var i = 0; i &lt; this.words.length; i++) {
                 _loop(i);
             }
             return buffer;
@@ -748,4 +779,26 @@ var Sentence = exports.Sentence = function () {
     }]);
 
     return Sentence;
-}();
+}();</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#_NOUN_SET">_NOUN_SET</a></li><li><a href="global.html#initializer">initializer</a></li><li><a href="global.html#Morpheme">Morpheme</a></li><li><a href="global.html#POS">POS</a></li><li><a href="global.html#Relationship">Relationship</a></li><li><a href="global.html#Sentence">Sentence</a></li><li><a href="global.html#TYPES">TYPES</a></li><li><a href="global.html#value">value</a></li><li><a href="global.html#Word">Word</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Jan 05 2018 22:17:28 GMT+0900 (KST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

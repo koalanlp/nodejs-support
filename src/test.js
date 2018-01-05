@@ -1,6 +1,3 @@
-/**
- * Created by bydelta on 17. 12. 30.
- */
 let koalanlp = require('./api'); // Import
 let TYPES = koalanlp.util.TYPES; // Tagger/Parser Package 지정을 위한 목록
 let POS = koalanlp.util.POS;

@@ -3,6 +3,7 @@
 [![NPM Version](https://img.shields.io/npm/v/koalanlp.svg?style=flat-square)](https://github.com/nearbydelta/nodejs-koalanlp)
 [![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
+[![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://nearbydelta.github.com/docs/global.html)
 
 # 소개
 한국어 형태소 및 구문 분석기의 모음인, [KoalaNLP](https://github.com/nearbydelta/koalanlp)의 Node.js 판본입니다.
@@ -25,6 +26,7 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 또한, 추가하고자 하는 새로운 프로젝트가 있으시면, Issue에 등록해주십시오.
 
 # 사용법
+API 문서는 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://nearbydelta.github.com/docs/global.html)를 참고하세요.
 
 ## Dependency 추가
 * `Java` 8 이상이 설치되어 있어야 합니다. 

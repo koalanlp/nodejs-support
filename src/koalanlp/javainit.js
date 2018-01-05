@@ -1,6 +1,3 @@
-/**
- * Created by bydelta on 17. 12. 30.
- */
 let TYPES = require('./const').TYPES;
 
 let makeDependencyItem = function(type, version){
@@ -48,6 +45,7 @@ let makeDependencyItem = function(type, version){
 };
 
 /**
+ * @private
  * 자바 및 의존패키지 초기화
  * @param conf 초기화에 사용할 조건
  * @param callback 콜백함수
