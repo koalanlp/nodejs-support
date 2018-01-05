@@ -59,17 +59,22 @@ export function initializer(conf, callback) {
     let java = require('java');
     let mvn = require('node-java-maven');
 
+    if(!Array.isArray(conf.javaOptions))
+        conf.javaOptions = [conf.javaOptions];
+    for(let i = 0; i < conf.javaOptions.length; i ++){
+        java.options.push(conf.javaOptions[i]);
+    }
+
     let fs = require('fs');
     let path = require('path');
     let os = require('os');
 
     // Write dependencies as new package.json
     let dependencies = [];
-    if (conf.tagger == conf.parser){
-        dependencies.push(makeDependencyItem(conf.tagger, conf.version));
-    }else{
-        dependencies.push(makeDependencyItem(conf.tagger, conf.version));
-        dependencies.push(makeDependencyItem(conf.parser, conf.version));
+    if(!Array.isArray(conf.packages))
+        conf.packages = [conf.packages];
+    for(let i = 0; i < conf.packages.length; i ++){
+        dependencies.push(makeDependencyItem(conf.packages[i], conf.version))
     }
 
     let packPath = path.join(os.tmpdir(), conf.tempJsonName);

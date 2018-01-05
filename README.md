@@ -3,7 +3,6 @@
 [![NPM Version](https://img.shields.io/npm/v/koalanlp.svg?style=flat-square)](https://github.com/nearbydelta/nodejs-koalanlp)
 [![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
-[![Gitter](https://img.shields.io/gitter/room/nearbydelta/KoalaNLP.svg?style=flat-square)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # 소개
 한국어 형태소 및 구문 분석기의 모음인, [KoalaNLP](https://github.com/nearbydelta/koalanlp)의 Node.js 판본입니다.
@@ -28,6 +27,8 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 # 사용법
 
 ## Dependency 추가
+* `Java` 8 이상이 설치되어 있어야 합니다. 
+
 아래와 같이 `koalanlp`를 추가해주세요.
 ```shell
 $ npm install koalanlp --save 
@@ -47,13 +48,14 @@ let TYPES = koalanlp.util.TYPES; // Tagger/Parser Package 지정을 위한 목�
 let POS = koalanlp.util.POS; // 품사 관련 utility
 
 koalanlp.initialize({
-    tagger: TYPES.EUNJEON, // 품사분석(POS Tagging)을 위해서, 은전한닢 사용
-    parser: TYPES.KKMA, // 의존구문분석(Dependency Parsing)을 위해서, 꼬꼬마 사용
+    packages: [TYPES.EUNJEON, // 품사분석(POS Tagging)을 위해서, 은전한닢 사용
+               TYPES.KKMA], // 의존구문분석(Dependency Parsing)을 위해서, 꼬꼬마 사용
     version: "1.9.0", // 사용하는 KoalaNLP 버전 (1.9.0 사용)
+    javaOptions: ["-Xmx4g"],
     debug: true // Debug output 출력여부
 }, function(){
     // 품사분석기 이용법
-    let tagger = new koalanlp.Tagger();
+    let tagger = new koalanlp.Tagger(TYPES.EUNJEON);
 
     // Synchronous POS Tagging
     let tagged = tagger.tag("안녕하세요. 눈이 오는 설날 아침입니다.");
@@ -68,7 +70,7 @@ koalanlp.initialize({
     });
 
     // 의존구문분석기 이용법
-    let parser = new koalanlp.Parser();
+    let parser = new koalanlp.Parser(TYPES.KKMA, TYPES.EUNJEON);
 
     // Synchronous Dependency Parsing
     let parsed = parser.parse("안녕하세요. 눈이 오는 설날 아침입니다.");
@@ -108,9 +110,9 @@ koalanlp.initialize({
 분석기 초기화 함수입니다. (사용 전, 초기화 **필수**)
 
 - `option`: Object (필수). 아래와 같은 설정을 포함합니다.
-  - `option.tagger`: `TYPES` (기본값 `EUNJEON`). 품사분석기 지정.
-  - `option.parser`: `TYPES` (기본값 `KKMA`). 의존구문분석기 지정.
+  - `option.packages`: `TYPES[]` (기본값 `[EUNJEON, KKMA]`). 사용할 분석기 패키지목록.
   - `option.version`: String (기본값 `1.9.0`). 사용할 KoalaNLP 버전 지정. [최신 버전 확인](https://nearbydelta.github.io/KoalaNLP)
+  - `option.javaOptions`: String[] (기본값 `["-Xmx4g"]`). 자바 JVM Option.
   - `option.debug`: Boolean (기본값 false). Debug 기록 표시여부
 - `callback`: Function (void => void) (필수). 초기화 완료 후 실행할 콜백함수.
 
@@ -132,6 +134,9 @@ koalanlp.initialize({
 - `Morpheme`: 이 경우, `obj`는 품사가 표기된 형태소 객체(Morpheme)로 인식됩니다.
 
 ## `koalanlp.Tagger` 클래스 (품사분석기)
+- `constructor(taggerType)` 품사분석기를 생성합니다.
+  - `taggerType`: `TYPES` (필수). 사용할 품사분석기의 유형.
+
 아래의 두 method 모두, `callback`이 지정된 경우는 callback에 결과값이 전달되고, 그렇지 않은 경우는 결과값을 직접 반환합니다.
 
 - `Tagger#tag(text, callback)` 문단 단위의 분석.
@@ -146,6 +151,10 @@ koalanlp.initialize({
   - callback이 없으면, Sentence 1개 또는 Sentence 배열이 반환됩니다.
 
 ## `koalanlp.Parser` 클래스 (의존구문분석기)
+- `constructor(parserType taggerType)` 의존구문분석기를 생성합니다.
+  - `parserType`: `TYPES` (필수). 사용할 의존구문분석기의 유형.
+  - `taggerType`: `TYPES` (선택. 기본값 `undefined`). 사용할 품사분석기의 유형. `undefined`일 경우 의존구문분석기의 품사분석결과 사용.
+  
 아래의 두 method 모두, `callback`이 지정된 경우는 callback에 결과값이 전달되고, 그렇지 않은 경우는 결과값을 직접 반환합니다.
 
 > [참고] Parser가 사용하는 품사분석결과는, tagger로 지정된 분석기를 따릅니다.
@@ -183,7 +192,7 @@ koalanlp.initialize({
 - `Relationship#target` (number) 이 관계의 피지배소에 해당하는 어절의, 문장 내에서의 위치입니다.
 - `Relationship#relation` (string) 두 어절 사이의 관계입니다.
 - `Relationship#rawRel` (string) 의존구문분석기가 출력한 원본 관계입니다.
-- `Relationship#equals(morph)` 의존관계가 같은지 확인합니다.
+- `Relationship#equals(rel)` 의존관계가 같은지 확인합니다.
 - `Relationship#toString()` string으로 변환합니다.
 - `Relationship#toJson()` JSON 객체로 변환합니다.
 
