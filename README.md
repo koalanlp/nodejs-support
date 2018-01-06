@@ -135,6 +135,24 @@ koalanlp.initialize({
 - `string`: 이 경우, `obj`는 품사표기(POS tag) 자체로 인식됩니다.
 - `Morpheme`: 이 경우, `obj`는 품사가 표기된 형태소 객체(Morpheme)로 인식됩니다.
 
+## `koalanlp.SentenceSplitter` 클래스 (품사표기 전 문장분리)
+- `constructor(splitterType)`: 해당하는 문장분리기를 생성합니다.
+  - `splitterType`: `TYPES` (필수) 문장분리에 사용될 API를 지정합니다.
+  
+아래의 두 method 모두, `callback`이 지정된 경우는 callback에 결과값이 전달되고, 그렇지 않은 경우는 결과값을 직접 반환합니다.
+
+- `SentenceSplitter#sentences(text, callback)` 문단을 문장으로 분리.
+- `SentenceSplitter.sentencesByKoala(paragraph, callback)` KoalaNLP에서 구현한 방식에 따라, paragraph로 지정된 품사분석 결과를 문장으로 분리합니다.
+
+위의 method가 취하는 argument는 다음과 같습니다.
+- `text`: string (필수). 분석할 문단.
+- `paragraph`: `Sentence` 객체로, 분리할 문단입니다. (문단을 1개 문장으로 간주하고 품사표기한 결과입니다.)
+- `callback`: function (Object => void) (선택). 분석 완료 후 결과를 처리할 함수.
+  - callback이 받는 object는 `error` 키(오류 발생시 오류를 전송하는 부분)와 `result` 키(결과값 부분)를 포함합니다.
+    - `error`는 오류가 없었던 경우 반드시 `false`로 지정됩니다.
+    - `result`는 함수에 관계 없이 `string` 배열(`#sentences` 메서드) 또는 `Sentence`(`.sentencesByKoala` 정적메서드)의 배열 형태를 취합니다.
+  - callback이 없으면, `string` 배열(`#sentences` 메서드) 또는 `Sentence`(`.sentencesByKoala` 정적메서드) 배열이 반환됩니다.
+
 ## `koalanlp.Tagger` 클래스 (품사분석기)
 - `constructor(taggerType)` 품사분석기를 생성합니다.
   - `taggerType`: `TYPES` (필수). 사용할 품사분석기의 유형.
@@ -171,6 +189,20 @@ koalanlp.initialize({
     - `error`는 오류가 없었던 경우 반드시 `false`로 지정됩니다.
     - `result`는 함수에 관계 없이 Sentence의 배열 형태를 취합니다. (`parseSentence`는 문장 1개를 포함한 배열)
   - callback이 없으면, Sentence 1개 또는 Sentence 배열이 반환됩니다.
+  
+## `koalanlp.Dictionary` 클래스 (사용자정의 사전)
+- `constructor(self, dictType)`: 해당하는 사전을 연결합니다.
+  - `dictType`: `TYPES` (필수) 사용될 사용자 사전 API를 지정합니다.
+- `Dictionary#addUserDictionary(morph, tag)`: 새 형태소-품사를 등록합니다.
+  - `morph`: string 또는 string[]. 형태소입니다.
+  - `tag`: string 또는 string[]. 세종 품사표기입니다.
+  - 둘 다 string이거나, 둘 다 같은 길이의 string 배열이어야 합니다.
+- `Dictionary#contains(morph, ...tags)`: 사전에 형태소가 해당 품사로 등록되어있는지 확인합니다.
+  - `morph`: string. 확인할 형태소입니다.
+  - `tags` : string[]. 형태소가 존재하는지 확인할 품사입니다.
+- `Dictionary#getNotExists(onlySystemDic, ...pairs)`: 사전에 등재되지 않은 품사만 남깁니다.
+  - `onlySystemDic`: 분석기 내장 사전만 검색하려는 경우 true, 사용자사전을 포함하려는 경우 false.
+  - `pairs`: {morph: string, tag: string}[]. (형태소, 품사)의 목록입니다.
 
 ## Data classes
 결과값은, 다음과 같은 Data Class에 담겨 전송됩니다.

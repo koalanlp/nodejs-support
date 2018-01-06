@@ -427,11 +427,13 @@ export class Sentence{
     /**
      * 문장 객체 생성.
      * @param {Word[]} words 문장에 포함될 어절 목록.
+     * @param {*} reference KoalaNLP(Java) 분석결과.
      */
-    constructor(words){
+    constructor(words, reference){
         assert(Array.isArray(words) && words[0] instanceof Word);
 
         this.words = words;
+        this.reference = reference;
         this.root = new Word();
     }
 
