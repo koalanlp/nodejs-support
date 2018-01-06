@@ -1,6 +1,6 @@
 {
   "name": "koalanlp",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Node.js wrapper for KoalaNLP (An integrated API for processing Korean in with Scala/Java)",
   "author": {
     "name": "nearbydelta"
