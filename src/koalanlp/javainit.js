@@ -67,6 +67,10 @@ export function initializer(conf, callback) {
     let path = require('path');
     let os = require('os');
 
+    let getUserHome = function() {
+        return process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
+    };
+
     // Write dependencies as new package.json
     let dependencies = [];
     if(!Array.isArray(conf.packages))
@@ -91,19 +95,33 @@ export function initializer(conf, callback) {
     }), function(){
         console.info("Start to fetch dependencies of koalaNLP using Maven.");
 
+        let localRepo = "";
+        if (conf.useIvy2 && fs.existsSync(path.join(getUserHome(), '.ivy2'))){
+            localRepo = path.join(getUserHome(), '.ivy2', 'cache');
+        }
+
         mvn({
             packageJsonPath: packPath,
             debug: conf.debug,
             repositories: [
                 {
-                    id: 'maven-central',
+                    id: 'sonatype',
+                    url: 'https://oss.sonatype.org/content/repositories/public/'
+                },
+                {
+                    id: 'maven-central-1',
+                    url: 'http://repo1.maven.org/maven2/'
+                },
+                {
+                    id: 'maven-central-2',
                     url: 'http://central.maven.org/maven2/'
                 },
                 {
                     id: "jitpack.io",
                     url: "https://jitpack.io/"
                 }
-            ]
+            ],
+            localRepository: localRepo
         }, function(err, mvnResults) {
             if (err) {
                 return console.error('could not resolve maven dependencies', err);

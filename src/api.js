@@ -7,6 +7,16 @@ import {Sentence, Word, Morpheme, Relationship, POS} from './koalanlp/data';
 let java = {};
 
 /**
+ * Assert method
+ * @param cond Condition to be checked.
+ * @param msg Message to be thrown if condition check is failed.
+ */
+let assert = function(cond, msg){
+    if(!cond)
+        throw new Error(msg ? msg : "Assertion failed!");
+};
+
+/**
  * Utility methods
  * @type {{POS: POS, TYPES}}
  * @property {POS} POS 품사분석을 위한 도구.
@@ -326,7 +336,8 @@ export class Dictionary{
 /**
  * 의존패키지 초기화 및 사전적재 함수
  * @param {{version: string|undefined, packages: string[]|undefined,
- * tempJsonName: string|undefined, debug: boolean|undefined, javaOptions: string[]|undefined}} obj 설정 Object
+ * tempJsonName: string|undefined, debug: boolean|undefined, javaOptions: string[]|undefined,
+ * useIvy2: boolean}} obj 설정 Object
  * @param {initCallback} callback 콜백 함수 (void => void)
  */
 export let initialize = function(obj, callback){
@@ -342,6 +353,7 @@ export let initialize = function(obj, callback){
     obj.tempJsonName = obj.tempJsonName || "koalanlp.json";
     obj.debug = obj.debug === true;
     obj.javaOptions = obj.javaOptions || ["-Xmx4g"];
+    obj.useIvy2 = obj.useIvy2 || false;
 
     require('./koalanlp/javainit').initializer(obj, function(jvm){
         java = jvm;
