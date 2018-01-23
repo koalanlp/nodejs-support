@@ -9,7 +9,7 @@
 [![py-koalanlp](https://img.shields.io/badge/Python-KoalaNLP-blue.svg?style=flat-square)](https://nearbydelta.github.io/py-koalanlp)
 
 # 소개
-한국어 형태소 및 구문 분석기의 모음인, [KoalaNLP](https://github.com/nearbydelta/koalanlp)의 Node.js 판본입니다.
+한국어 형태소 및 구문 분석기의 모음인, [KoalaNLP](https://github.com/nearbydelta/koalanlp)의 Javascript (Node.js) Wrapper입니다.
 
 이 프로젝트는 __서로 다른 형태의 형태소 분석기를__ 모아,
 __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이 목적입니다.
