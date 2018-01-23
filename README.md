@@ -29,7 +29,7 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 또한, 추가하고자 하는 새로운 프로젝트가 있으시면, Issue에 등록해주십시오.
 
 # 사용법
-API 문서는 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://nearbydelta.github.com/nodejs-koalanlp/docs/global.html)를 참고하세요.
+API 문서는 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://nearbydelta.github.com/nodejs-koalanlp/docs/global.html)에서, 간단한 사용법은 [Wiki](https://github.com/nearbydelta/nodejs-koalanlp/wiki)에서 확인하시면 됩니다.
 
 ## Dependency 추가
 * `Java` 8 이상이 설치되어 있어야 합니다. 
@@ -107,171 +107,16 @@ koalanlp.initialize({
 | 품사분석    | v1.4.0 | v2  | v3.3.3 | v1  | v2.1.2 | v1.1.3 | v2.5.4 |
 | 의존구문분석 | 지원안함 | 가능 | 지원안함 | 가능 | 지원안함 | 지원안함 | 지원안함 |
 
-# API
+# License 조항
+이 프로젝트 자체(py-KoalaNLP)와 인터페이스 통합을 위한 Java/Scala 코드는 [*MIT License*](https://tldrlegal.com/license/mit-license)을 따르며,
+각 분석기의 License와 저작권은 각 프로젝트에서 지정한 바를 따릅니다.
+* Hannanum: [GPL v3](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3))
+* KKMA: [GPL v2](https://tldrlegal.com/license/gnu-general-public-license-v2) (GPL v2를 따르지 않더라도, 상업적 이용시 별도 협의 가능)
+* KOMORAN: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
+* Twitter: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
+* Eunjeon: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
+* Arirang: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
+* RHINO: 비상업적 용도 사용가능.
 
-## Utilities
-
-### `koalanlp.initialize(option, callback)`
-분석기 초기화 함수입니다. (사용 전, 초기화 **필수**)
-
-- `option`: Object (필수). 아래와 같은 설정을 포함합니다.
-  - `option.packages`: `TYPES[]` (기본값 `[EUNJEON, KKMA]`). 사용할 분석기 패키지목록.
-  - `option.version`: String (기본값 `1.9.0`). 사용할 KoalaNLP 버전 지정. [최신 버전 확인](https://nearbydelta.github.io/KoalaNLP)
-  - `option.javaOptions`: String[] (기본값 `["-Xmx4g"]`). 자바 JVM Option.
-  - `option.debug`: Boolean (기본값 false). Debug 기록 표시여부
-- `callback`: Function (void => void) (필수). 초기화 완료 후 실행할 콜백함수.
-
-### `koalanlp.util.POS`
-품사 분석을 도와주는 도구입니다.
-
-- `POS.isNoun(obj)` 주어진 객체가 체언(명사/대명사/수사)인지 확인함.
-- `POS.isPredicate(obj)` 주어진 객체가 용언(동사/형용사)인지 확인함.
-- `POS.isModifier(obj)` 주어진 객체가 수식언(관형사/부사)인지 확인함.
-- `POS.isPostposition(obj)` 주어진 객체가 관계언(조사)인지 확인함.
-- `POS.isEnding(obj)` 주어진 객체가 어미(어말어미/선어말어미/...)인지 확인함.
-- `POS.isAffix(obj)` 주어진 객체가 접사인지 확인함.
-- `POS.isSuffix(obj)` 주어진 객체가 접미사인지 확인함.
-- `POS.isSymbol(obj)` 주어진 객체가 기호(문장부호/화폐기호/...)인지 확인함.
-- `POS.isUnknown(obj)` 주어진 객체가 품사분석기가 분석하지 못한 내용인지 확인함.
-
-위의 모든 static method가 취하는 argument `obj`는 다음 타입을 가져야 합니다.
-- `string`: 이 경우, `obj`는 품사표기(POS tag) 자체로 인식됩니다.
-- `Morpheme`: 이 경우, `obj`는 품사가 표기된 형태소 객체(Morpheme)로 인식됩니다.
-
-## `koalanlp.SentenceSplitter` 클래스 (품사표기 전 문장분리)
-- `constructor(splitterType)`: 해당하는 문장분리기를 생성합니다.
-  - `splitterType`: `TYPES` (필수) 문장분리에 사용될 API를 지정합니다.
-  
-아래의 두 method 모두, `callback`이 지정된 경우는 callback에 결과값이 전달되고, 그렇지 않은 경우는 결과값을 직접 반환합니다.
-
-- `SentenceSplitter#sentences(text, callback)` 문단을 문장으로 분리.
-- `SentenceSplitter.sentencesByKoala(paragraph, callback)` KoalaNLP에서 구현한 방식에 따라, paragraph로 지정된 품사분석 결과를 문장으로 분리합니다.
-
-위의 method가 취하는 argument는 다음과 같습니다.
-- `text`: string (필수). 분석할 문단.
-- `paragraph`: `Sentence` 객체로, 분리할 문단입니다. (문단을 1개 문장으로 간주하고 품사표기한 결과입니다.)
-- `callback`: function (Object => void) (선택). 분석 완료 후 결과를 처리할 함수.
-  - callback이 받는 object는 `error` 키(오류 발생시 오류를 전송하는 부분)와 `result` 키(결과값 부분)를 포함합니다.
-    - `error`는 오류가 없었던 경우 반드시 `false`로 지정됩니다.
-    - `result`는 함수에 관계 없이 `string` 배열(`#sentences` 메서드) 또는 `Sentence`(`.sentencesByKoala` 정적메서드)의 배열 형태를 취합니다.
-  - callback이 없으면, `string` 배열(`#sentences` 메서드) 또는 `Sentence`(`.sentencesByKoala` 정적메서드) 배열이 반환됩니다.
-
-## `koalanlp.Tagger` 클래스 (품사분석기)
-- `constructor(taggerType)` 품사분석기를 생성합니다.
-  - `taggerType`: `TYPES` (필수). 사용할 품사분석기의 유형.
-
-아래의 두 method 모두, `callback`이 지정된 경우는 callback에 결과값이 전달되고, 그렇지 않은 경우는 결과값을 직접 반환합니다.
-
-- `Tagger#tag(text, callback)` 문단 단위의 분석.
-- `Tagger#tagSentence(text, callback)` 1개 문장으로 강제하여 분석.
-
-위의 method가 취하는 argument는 다음과 같습니다.
-- `text`: string (필수). 분석할 문단/문장.
-- `callback`: function (Object => void) (선택). 분석 완료 후 결과를 처리할 함수.
-  - callback이 받는 object는 `error` 키(오류 발생시 오류를 전송하는 부분)와 `result` 키(결과값 부분)를 포함합니다.
-    - `error`는 오류가 없었던 경우 반드시 `false`로 지정됩니다.
-    - `result`는 함수에 관계 없이 Sentence의 배열 형태를 취합니다. (`tagSentence`는 문장 1개를 포함한 배열)
-  - callback이 없으면, Sentence 1개 또는 Sentence 배열이 반환됩니다.
-
-## `koalanlp.Parser` 클래스 (의존구문분석기)
-- `constructor(parserType taggerType)` 의존구문분석기를 생성합니다.
-  - `parserType`: `TYPES` (필수). 사용할 의존구문분석기의 유형.
-  - `taggerType`: `TYPES` (선택. 기본값 `undefined`). 사용할 품사분석기의 유형. `undefined`일 경우 의존구문분석기의 품사분석결과 사용.
-  
-아래의 두 method 모두, `callback`이 지정된 경우는 callback에 결과값이 전달되고, 그렇지 않은 경우는 결과값을 직접 반환합니다.
-
-> [참고] Parser가 사용하는 품사분석결과는, tagger로 지정된 분석기를 따릅니다.
-
-- `Parser#parse(text, callback)` 문단 단위의 분석.
-- `Parser#parseSentence(text, callback)` 1개 문장으로 강제하여 분석.
-
-위의 method가 취하는 argument는 다음과 같습니다.
-- `text`: string (필수). 분석할 문단/문장.
-- `callback`: function (Object => void) (선택). 분석 완료 후 결과를 처리할 함수.
-  - callback이 받는 object는 `error` 키(오류 발생시 오류를 전송하는 부분)와 `result` 키(결과값 부분)를 포함합니다.
-    - `error`는 오류가 없었던 경우 반드시 `false`로 지정됩니다.
-    - `result`는 함수에 관계 없이 Sentence의 배열 형태를 취합니다. (`parseSentence`는 문장 1개를 포함한 배열)
-  - callback이 없으면, Sentence 1개 또는 Sentence 배열이 반환됩니다.
-  
-## `koalanlp.Dictionary` 클래스 (사용자정의 사전)
-- `constructor(self, dictType)`: 해당하는 사전을 연결합니다.
-  - `dictType`: `TYPES` (필수) 사용될 사용자 사전 API를 지정합니다.
-- `Dictionary#addUserDictionary(morph, tag)`: 새 형태소-품사를 등록합니다.
-  - `morph`: string 또는 string[]. 형태소입니다.
-  - `tag`: string 또는 string[]. 세종 품사표기입니다.
-  - 둘 다 string이거나, 둘 다 같은 길이의 string 배열이어야 합니다.
-- `Dictionary#contains(morph, ...tags)`: 사전에 형태소가 해당 품사로 등록되어있는지 확인합니다.
-  - `morph`: string. 확인할 형태소입니다.
-  - `tags` : string[]. 형태소가 존재하는지 확인할 품사입니다.
-- `Dictionary#getNotExists(onlySystemDic, ...pairs)`: 사전에 등재되지 않은 품사만 남깁니다.
-  - `onlySystemDic`: 분석기 내장 사전만 검색하려는 경우 true, 사용자사전을 포함하려는 경우 false.
-  - `pairs`: {morph: string, tag: string}[]. (형태소, 품사)의 목록입니다.
-
-## Data classes
-결과값은, 다음과 같은 Data Class에 담겨 전송됩니다.
-
-### `koalanlp.Morpheme` 클래스 (형태소)
-- `Morpheme#surface` (string) 형태소 표면형입니다.
-- `Morpheme#tag` (string) 세종 품사 표기로 KoalaNLP가 변환한 결과입니다.
-- `Morpheme#rawTag` (string) 사용한 품사 분석기가 명명한 원본 품사입니다. (세종 품사보다 범위가 넓거나 좁을 수 있습니다)
-- `Morpheme#id` (number) 어절 내에서의 위치입니다.
-- `Morpheme#hasTag(tag)` 주어진 tag가 형태소와 일치하면 true.
-  - `tag`가 `string`타입일 때, `Morpheme#tag`가 `tag`로 시작하는지 확인합니다.
-  - `tag`가 `string[]`타입일 때, `tag` 중의 하나라도 `Morpheme#tag`의 시작과 일치하는지 확인합니다.
-- `Morpheme#hasRawTag(tag)` 주어진 tag가 원본 결과와 일치하면 true.
-- `Morpheme#equals(morph)` 형태소가 같은지 확인합니다.
-- `Morpheme#equalsWithoutTag(morph)` 형태소의 표면형이 같은지 확인합니다.
-- `Morpheme#toString()` 형태소를 string으로 변환합니다.
-- `Morpheme#toJson()` 형태소를 JSON 객체로 변환합니다.
-
-### `koalanlp.Relationship` 클래스 (의존관계)
-- `Relationship#head` (number) 이 관계의 지배소에 해당하는 어절의, 문장 내에서의 위치입니다.
-- `Relationship#target` (number) 이 관계의 피지배소에 해당하는 어절의, 문장 내에서의 위치입니다.
-- `Relationship#relation` (string) 두 어절 사이의 관계입니다.
-- `Relationship#rawRel` (string) 의존구문분석기가 출력한 원본 관계입니다.
-- `Relationship#equals(rel)` 의존관계가 같은지 확인합니다.
-- `Relationship#toString()` string으로 변환합니다.
-- `Relationship#toJson()` JSON 객체로 변환합니다.
-
-### `koalanlp.Word` 클래스 (어절)
-- `Word#surface` (string) 어절의 표면형입니다.
-- `Word#morphemes` (Morpheme[]) 어절을 구성하는 형태소의 목록입니다.
-- `Word#id` (number) 문장 내에서의 위치입니다.
-- `Word#dependents` (Relationship[]) 현재 어절에 의존하는 관계의 목록입니다.
-- `Word#length()` 형태소의 개수를 돌려줍니다.
-- `Word#get(idx)` 어절 내에서 `idx`번째에 위치한 형태소를 반환합니다.
-- `Word#matches(tag)` 주어진 tag 목록이 어절과 순서가 일치하면 true.
-  - `tag`가 `string[]` 타입일 때, 어절 내 형태소 품사 목록과 순서가 일치하면 true. (연속하지 않아도 됨)
-- `Word#find(fn)` 주어진 조건에 맞는 형태소를 찾습니다.
-  - `fn`이 `function` 타입일 때, `fn`이 true인 첫 형태소를 반환.
-  - `fn`이 `Morpheme` 타입일 때, `fn`과 `Morpheme#equal()`이 성립하는 첫 형태소를 반환.
-- `Word#exists(fn)` 주어진 조건에 맞는 형태소가 있는지 확인합니다. 있다면 true.
-  - `fn`이 `function` 타입일 때, `fn`이 하나라도 만족되면 true.
-  - `fn`이 `Morpheme` 타입일 때, `fn`과 `Morpheme#equal()`이 성립하는 형태소가 하나라도 있으면 true.
-- `Word#equals(word)` 두 어절이 위치와 형태소가 같은지 확인합니다.
-- `Word#equalsWithoutTag(word)` 두 어절의 표면형이 같은지 확인합니다.
-- `Word#toString()` string으로 변환합니다.
-- `Word#toJson()` JSON 객체로 변환합니다.
-- `Word#singleLineString()` 형태소 분석 결과를 한 줄로 반환합니다.
-
-### `koalanlp.Sentence` 클래스 (문장)
-- `Sentence#words` (Word[]) 문장을 구성하는 어절의 목록입니다.
-- `Sentence#root` (Word) 문장의 의존관계를 표시하기 위한, 허상의 최상위 노드입니다. root에 의존하는 단어가 핵심어가 됩니다.
-- `Sentence#length()` 어절의 개수를 돌려줍니다.
-- `Sentence#get(idx)` 문장 내에서 `idx`번째에 위치한 어절을 반환합니다.
-- `Sentence#matches(tag)` 주어진 tag 목록이 문장과 순서가 일치하면 true.
-  - `tag`가 `string[][]` 타입일 때, 문장 내 어절과 순서가 일치하면 true. (연속하지 않아도 됨)
-- `Sentence#find(fn)` 주어진 조건에 맞는 어절을 찾습니다.
-  - `fn`이 `function` 타입일 때, `fn`이 true인 첫 어절을 반환.
-  - `fn`이 `Word` 타입일 때, `fn`과 `Word#equal()`이 성립하는 첫 어절을 반환.
-- `Sentence#exists(fn)` 주어진 조건에 맞는 어절이 있는지 확인합니다. 있다면 true.
-  - `fn`이 `function` 타입일 때, `fn`이 하나라도 만족되면 true.
-  - `fn`이 `Word` 타입일 때, `fn`과 `Word#equal()`이 성립하는 형태소가 하나라도 있으면 true.
-- `Sentence#nouns()` 문장 내 체언을 포함한 어절의 목록을 반환합니다.
-- `Sentence#verbs()` 문장 내 용언을 포함한 어절의 목록을 반환합니다.
-- `Sentence#modifiers()` 문장 내 수식언을 포함한 어절의 목록을 반환합니다.
-- `Sentence#toString()` string으로 변환합니다.
-- `Sentence#surfaceString(delimiter)` 문장 내 어절의 표면형을 모아 원본 문장에 가깝게 구성합니다.
-  - `delimiter`는 선택으로, 지정하지 않으면 빈칸으로 어절이 구분됩니다.
-- `Sentence#toJson()` JSON 객체로 변환합니다.
-- `Sentence#singleLineString()` 형태소 분석 결과를 한 줄로 반환합니다.
+# 결과 비교
+[Java/Scala Version KoalaNLP의 Wiki:결과비교](https://github.com/nearbydelta/KoalaNLP/wiki/4.-결과-비교)를 참조해주세요.
