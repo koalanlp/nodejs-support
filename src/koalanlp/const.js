@@ -1,4 +1,4 @@
-export const TYPES = Object.seal({
+export const API = Object.seal({
     HANNANUM: 'hnn',
     KOMORAN: 'kmr',
     KKMA: 'kkma',

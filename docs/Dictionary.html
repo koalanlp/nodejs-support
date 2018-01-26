@@ -146,7 +146,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line250">line 250</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line263">line 263</a>
     </li></ul></dd>
     
 
@@ -330,7 +330,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line267">line 267</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line280">line 280</a>
     </li></ul></dd>
     
 
@@ -353,6 +353,163 @@
 
 
 
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="baseEntriesOf"><span class="type-signature"></span>baseEntriesOf<span class="signature">(filterFn)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>filterFn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#POSFilter">POSFilter</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">가져올 품사인지 판단하는 함수.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line366">line 366</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    (형태소, 품사) generator.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -508,7 +665,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line294">line 294</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line307">line 307</a>
     </li></ul></dd>
     
 
@@ -686,7 +843,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line312">line 312</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line325">line 325</a>
     </li></ul></dd>
     
 
@@ -725,6 +882,210 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="importFrom"><span class="type-signature"></span>importFrom<span class="signature">(other, filterFn, fastAppend, callback)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>other</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Dictionary.html">Dictionary</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">참조할 사전</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>filterFn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#POSFilter">POSFilter</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">추가할 품사를 지정하는 함수.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fastAppend</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">선택된 사전에 존재하는지를 검사하지 않고 빠르게 추가하고자 할 때. (기본값 false)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#DictImportCallback">DictImportCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">사전 import가 종료된 다음 호출될 Callback 함수</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line350">line 350</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     
@@ -740,13 +1101,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dictionary.html">Dictionary</a></li><li><a href="Morpheme.html">Morpheme</a></li><li><a href="Parser.html">Parser</a></li><li><a href="POS.html">POS</a></li><li><a href="Relationship.html">Relationship</a></li><li><a href="Sentence.html">Sentence</a></li><li><a href="SentenceSplitter.html">SentenceSplitter</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#assert">assert</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#util">util</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dictionary.html">Dictionary</a></li><li><a href="Morpheme.html">Morpheme</a></li><li><a href="Parser.html">Parser</a></li><li><a href="Relationship.html">Relationship</a></li><li><a href="Sentence.html">Sentence</a></li><li><a href="SentenceSplitter.html">SentenceSplitter</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API">API</a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#isAffix">isAffix</a></li><li><a href="global.html#isEnding">isEnding</a></li><li><a href="global.html#isModifier">isModifier</a></li><li><a href="global.html#isNoun">isNoun</a></li><li><a href="global.html#isPostposition">isPostposition</a></li><li><a href="global.html#isPredicate">isPredicate</a></li><li><a href="global.html#isSuffix">isSuffix</a></li><li><a href="global.html#isSymbol">isSymbol</a></li><li><a href="global.html#isUnknown">isUnknown</a></li><li><a href="global.html#POS">POS</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 13 2018 01:31:17 GMT+0900 (KST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Jan 26 2018 18:08:10 GMT+0900 (KST)
 </footer>
 
 <script> prettyPrint(); </script>

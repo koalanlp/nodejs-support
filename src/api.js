@@ -1,4 +1,4 @@
-import {Sentence, Word, Morpheme, Relationship, POS} from './koalanlp/data';
+import {Sentence, Word, Morpheme, Relationship} from './koalanlp/data';
 
 /**
  * @private
@@ -17,15 +17,15 @@ let assert = function(cond, msg){
 };
 
 /**
- * Utility methods
- * @type {{POS: POS, TYPES}}
- * @property {POS} POS 품사분석을 위한 도구.
- * @property {Object} TYPES 분석기 API 목록.
+ * 분석기 API 목록.
  */
-export let util = {
-    POS: POS,
-    TYPES: require('./koalanlp/const').TYPES
-};
+export let API = require('./koalanlp/const').API;
+
+/**
+ * 품사분석을 위한 도구.
+ * @type {POS}
+ */
+export let POS = require('./koalanlp/POS');
 
 /**
  * 분석결과 Callback
@@ -245,6 +245,19 @@ export class SentenceSplitter{
 }
 
 /**
+ * 품사 필터링 함수
+ * @callback POSFilter
+ * @param {string} POS 품사
+ * @return {boolean} 품사가 포함 되는지의 여부.
+ */
+
+/**
+ * 사전 import 콜백 함수.
+ * @callback DictImportCallback
+ * @return *
+ */
+
+/**
  * 사용자 정의 사전 클래스
  */
 export class Dictionary{
@@ -324,6 +337,47 @@ export class Dictionary{
         }
 
         return returnValue;
+    }
+
+    /**
+     * 다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.
+     *
+     * @param {Dictionary} other 참조할 사전
+     * @param {POSFilter} filterFn 추가할 품사를 지정하는 함수.
+     * @param {boolean} fastAppend 선택된 사전에 존재하는지를 검사하지 않고 빠르게 추가하고자 할 때. (기본값 false)
+     * @param {DictImportCallback} callback 사전 import가 종료된 다음 호출될 Callback 함수
+     */
+    importFrom(other, filterFn, fastAppend, callback){
+        assert(typeof callback !== "undefined", "Callback should be defined.");
+        fastAppend = fastAppend || false;
+
+        let tags = POS.TAGS.filter(filterFn);
+        let tagSet = java.callStaticMethodSync("scala.Predef", "genericArrayOps", tags).toSetSync();
+
+        this.dict.importFrom(other.dict, filterFn, fastAppend, callback);
+    }
+
+    /**
+     * 원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)
+     *
+     * @param {POSFilter} filterFn 가져올 품사인지 판단하는 함수.
+     * @return {{morph: string, tag: string}} (형태소, 품사) generator.
+     */
+    baseEntriesOf(filterFn){
+        filterFn = filterFn || POS.isNoun;
+
+        let tags = POS.TAGS.filter(filterFn);
+        let tagSet = java.callStaticMethodSync("scala.Predef", "genericArrayOps", tags).toSetSync();
+
+        let entries = this.dict.baseEntriesOfSync(tagSet);
+        let generator = function*(){
+            while (entries.hasNextSync()){
+                let entry = entries.nextSync();
+                yield {morph: entry._1, tag: entry._2.toStringSync()};
+            }
+        };
+
+        return generator();
     }
 }
 

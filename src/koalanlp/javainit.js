@@ -1,32 +1,32 @@
-let TYPES = require('./const').TYPES;
+let API = require('./const').API;
 
 let makeDependencyItem = function(type, version){
     let artifactName = "";
     let isAssembly = false;
     switch (type){
-        case TYPES.HANNANUM:
+        case API.HANNANUM:
             artifactName = "hannanum";
             isAssembly = true;
             break;
-        case TYPES.KOMORAN:
+        case API.KOMORAN:
             artifactName = "komoran";
             break;
-        case TYPES.KKMA:
+        case API.KKMA:
             artifactName = "kkma";
             isAssembly = true;
             break;
-        case TYPES.EUNJEON:
+        case API.EUNJEON:
             artifactName = "eunjeon";
             break;
-        case TYPES.ARIRANG:
+        case API.ARIRANG:
             artifactName = "arirang";
             isAssembly = true;
             break;
-        case TYPES.RHINO:
+        case API.RHINO:
             artifactName = "rhino";
             isAssembly = true;
             break;
-        case TYPES.TWITTER:
+        case API.TWITTER:
             artifactName = "twitter";
             isAssembly = false;
             break;

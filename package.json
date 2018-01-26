@@ -16,7 +16,7 @@
   "scripts": {
     "test": "node ./lib/test.js",
     "compile": "./node_modules/babel-cli/bin/babel.js --presets=es2015 -d lib/ src/",
-    "jsdoc": "jsdoc -d docs/ -r src/"
+    "jsdoc": "./node_modules/jsdoc/jsdoc.js -d docs/ -r src/"
   },
   "licenses": [
     {
@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1"
+    "babel-preset-es2015": "^6.24.1",
+    "jsdoc": "^3.5.5"
   }
 }
