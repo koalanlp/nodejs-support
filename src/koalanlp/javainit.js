@@ -48,12 +48,9 @@ let makeDependencyItem = function(type, version){
  * @private
  * 자바 및 의존패키지 초기화
  * @param conf 초기화에 사용할 조건
- * @param callback 콜백함수
+ * @return {Promise} 초기화 종료 Promise
  */
-export function initializer(conf, callback) {
-    if(!callback)
-        throw new Error("Callback은 반드시 필요합니다!");
-
+export function initializer(conf) {
     let java = require('java');
     let mvn = require('node-java-maven');
 
@@ -80,20 +77,22 @@ export function initializer(conf, callback) {
     }
 
     let packPath = path.join(os.tmpdir(), conf.tempJsonName);
-    console.info(`Writing java dependency informations into ${packPath}`);
 
-    fs.writeFile(packPath, JSON.stringify({
-        java: {
-            dependencies: dependencies,
-            exclusions: [
-                {
-                    groupId: "com.jsuereth",
-                    artifactId: "sbt-pgp"
-                }
-            ]
-        }
-    }), function(){
-        console.info("Start to fetch dependencies of koalaNLP using Maven.");
+    return new Promise((resolve, reject) => {
+        fs.writeFileSync(packPath, JSON.stringify({
+            java: {
+                dependencies: dependencies,
+                exclusions: [
+                    {
+                        groupId: "com.jsuereth",
+                        artifactId: "sbt-pgp"
+                    }
+                ]
+            }
+        }));
+
+        if (conf.debug)
+            console.info("Start to fetch dependencies of koalaNLP using Maven.");
 
         let localRepo = "";
         if (conf.useIvy2 && fs.existsSync(path.join(getUserHome(), '.ivy2'))){
@@ -124,14 +123,18 @@ export function initializer(conf, callback) {
             localRepository: localRepo
         }, function(err, mvnResults) {
             if (err) {
-                return console.error('could not resolve maven dependencies', err);
-            }
-            mvnResults.classpath.forEach(function(c) {
-                console.info('adding ' + c + ' to classpath');
-                java.classpath.push(path.resolve(c));
-            });
+                if (conf.debug)
+                    console.error('cannot resolve required dependencies');
+                reject(err);
+            }else {
+                mvnResults.classpath.forEach(function (c) {
+                    if (conf.debug)
+                        console.info('adding ' + c + ' to classpath');
+                    java.classpath.push(path.resolve(c));
+                });
 
-            callback(java);
+                resolve(java);
+            }
         });
     });
 }
