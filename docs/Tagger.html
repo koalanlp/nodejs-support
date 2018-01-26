@@ -146,7 +146,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line40">line 40</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line36">line 36</a>
     </li></ul></dd>
     
 
@@ -200,7 +200,7 @@
     
 
     
-    <h4 class="name" id="tag"><span class="type-signature"></span>tag<span class="signature">(paragraph, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="Sentence.html">Sentence</a>>|undefined}</span></h4>
+    <h4 class="name" id="tag"><span class="type-signature"></span>tag<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="Sentence.html">Sentence</a>>>}</span></h4>
     
 
     
@@ -232,8 +232,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -259,51 +257,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last">품사표기할 문단.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#parseCallback">parseCallback</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">콜백함수 (Object[] => void). 지정된 경우, 결과를 전달받음.</td>
         </tr>
 
     
@@ -344,7 +301,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line56">line 56</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -371,7 +328,7 @@
 
         
 <div class="param-desc">
-    callback이 없는 경우, 품사표기 결과가 반환됨.
+    품사표기 결과가 반환될, promise 객체
 </div>
 
 
@@ -382,10 +339,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;<a href="Sentence.html">Sentence</a>></span>
-|
-
-<span class="param-type">undefined</span>
+<span class="param-type">Promise.&lt;Array.&lt;<a href="Sentence.html">Sentence</a>>></span>
 
 
     </dd>
@@ -403,7 +357,7 @@
     
 
     
-    <h4 class="name" id="tagSentence"><span class="type-signature"></span>tagSentence<span class="signature">(sentence, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="Sentence.html">Sentence</a>>|undefined}</span></h4>
+    <h4 class="name" id="tagSentence"><span class="type-signature"></span>tagSentence<span class="signature">(sentence)</span><span class="type-signature"> &rarr; {Promise.&lt;<a href="Sentence.html">Sentence</a>>}</span></h4>
     
 
     
@@ -435,8 +389,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -462,51 +414,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last">품사표기할 문장.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#parseCallback">parseCallback</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">콜백함수 (Object => void). 지정된 경우, 결과를 전달받음.</td>
         </tr>
 
     
@@ -547,7 +458,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line73">line 73</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line65">line 65</a>
     </li></ul></dd>
     
 
@@ -574,7 +485,7 @@
 
         
 <div class="param-desc">
-    callback이 없는 경우, 품사표기 결과가 반환됨.
+    품사표기 결과인 문장 1개를 담을 Promise가 반환됨.
 </div>
 
 
@@ -585,10 +496,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;<a href="Sentence.html">Sentence</a>></span>
-|
-
-<span class="param-type">undefined</span>
+<span class="param-type">Promise.&lt;<a href="Sentence.html">Sentence</a>></span>
 
 
     </dd>
@@ -616,13 +524,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dictionary.html">Dictionary</a></li><li><a href="Morpheme.html">Morpheme</a></li><li><a href="Parser.html">Parser</a></li><li><a href="Relationship.html">Relationship</a></li><li><a href="Sentence.html">Sentence</a></li><li><a href="SentenceSplitter.html">SentenceSplitter</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API">API</a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#isAffix">isAffix</a></li><li><a href="global.html#isEnding">isEnding</a></li><li><a href="global.html#isModifier">isModifier</a></li><li><a href="global.html#isNoun">isNoun</a></li><li><a href="global.html#isPostposition">isPostposition</a></li><li><a href="global.html#isPredicate">isPredicate</a></li><li><a href="global.html#isSuffix">isSuffix</a></li><li><a href="global.html#isSymbol">isSymbol</a></li><li><a href="global.html#isUnknown">isUnknown</a></li><li><a href="global.html#POS">POS</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dictionary.html">Dictionary</a></li><li><a href="Morpheme.html">Morpheme</a></li><li><a href="Parser.html">Parser</a></li><li><a href="Relationship.html">Relationship</a></li><li><a href="Sentence.html">Sentence</a></li><li><a href="SentenceSplitter.html">SentenceSplitter</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API">API</a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#EC">EC</a></li><li><a href="global.html#EF">EF</a></li><li><a href="global.html#EP">EP</a></li><li><a href="global.html#ETM">ETM</a></li><li><a href="global.html#ETN">ETN</a></li><li><a href="global.html#IC">IC</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#isAffix">isAffix</a></li><li><a href="global.html#isEnding">isEnding</a></li><li><a href="global.html#isModifier">isModifier</a></li><li><a href="global.html#isNoun">isNoun</a></li><li><a href="global.html#isPostposition">isPostposition</a></li><li><a href="global.html#isPredicate">isPredicate</a></li><li><a href="global.html#isSuffix">isSuffix</a></li><li><a href="global.html#isSymbol">isSymbol</a></li><li><a href="global.html#isUnknown">isUnknown</a></li><li><a href="global.html#JC">JC</a></li><li><a href="global.html#JKB">JKB</a></li><li><a href="global.html#JKC">JKC</a></li><li><a href="global.html#JKG">JKG</a></li><li><a href="global.html#JKO">JKO</a></li><li><a href="global.html#JKQ">JKQ</a></li><li><a href="global.html#JKS">JKS</a></li><li><a href="global.html#JKV">JKV</a></li><li><a href="global.html#JX">JX</a></li><li><a href="global.html#MAG">MAG</a></li><li><a href="global.html#MAJ">MAJ</a></li><li><a href="global.html#MM">MM</a></li><li><a href="global.html#MorphemeGenerator">MorphemeGenerator</a></li><li><a href="global.html#NA">NA</a></li><li><a href="global.html#NF">NF</a></li><li><a href="global.html#NNB">NNB</a></li><li><a href="global.html#NNG">NNG</a></li><li><a href="global.html#NNM">NNM</a></li><li><a href="global.html#NNP">NNP</a></li><li><a href="global.html#NP">NP</a></li><li><a href="global.html#NR">NR</a></li><li><a href="global.html#NV">NV</a></li><li><a href="global.html#POS">POS</a></li><li><a href="global.html#SE">SE</a></li><li><a href="global.html#SF">SF</a></li><li><a href="global.html#SO">SO</a></li><li><a href="global.html#SP">SP</a></li><li><a href="global.html#SS">SS</a></li><li><a href="global.html#SW">SW</a></li><li><a href="global.html#Tags">Tags</a></li><li><a href="global.html#VA">VA</a></li><li><a href="global.html#VCN">VCN</a></li><li><a href="global.html#VCP">VCP</a></li><li><a href="global.html#VV">VV</a></li><li><a href="global.html#VX">VX</a></li><li><a href="global.html#XPN">XPN</a></li><li><a href="global.html#XPV">XPV</a></li><li><a href="global.html#XR">XR</a></li><li><a href="global.html#XSA">XSA</a></li><li><a href="global.html#XSM">XSM</a></li><li><a href="global.html#XSN">XSN</a></li><li><a href="global.html#XSO">XSO</a></li><li><a href="global.html#XSV">XSV</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Jan 26 2018 18:08:10 GMT+0900 (KST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 01:35:02 GMT+0900 (KST)
 </footer>
 
 <script> prettyPrint(); </script>
