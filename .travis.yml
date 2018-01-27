@@ -9,9 +9,9 @@ install:
 cache:
   directories:
   - $HOME/.m2
-  - ./mode_modules
+  - ./node_modules
 script:
-  - ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/dictionary.js
-  - ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/parser.js
-  - ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/segmenter.js
-  - ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/tagger.js
+  - ./node_modules/mocha/bin/mocha -r should -r assert --no-timeouts --exit test/dictionary.js
+  - ./node_modules/mocha/bin/mocha -r should -r assert --no-timeouts --exit test/parser.js
+  - ./node_modules/mocha/bin/mocha -r should -r assert --no-timeouts --exit test/segmenter.js
+  - ./node_modules/mocha/bin/mocha -r should -r assert --no-timeouts --exit test/tagger.js

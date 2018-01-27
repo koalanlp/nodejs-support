@@ -26,7 +26,8 @@ describe('Dictionary', function () {
     describe('#addUserDictionary(), #contains()', function () {
         it('appends a single item', function(){
             dict1.addUserDictionary("설빙", POS.NNP);
-            return dict1.contains("설빙", POS.NNP).then(res => res.should.be.true());
+            return dict1.contains("설빙", POS.NNP)
+                .then(res => res.should.be.true());
         });
 
         it('appends list of items', function(){
@@ -44,7 +45,8 @@ describe('Dictionary', function () {
             return dict2.getNotExists(true,
                 {morph: "설빙", tag: POS.NNP},
                 {morph: "일", tag:POS.NNG}
-            ).then(res => res.should.have.length(1));
+            ).then(res => res.should.have.length(1))
+                ;
         });
     });
 
@@ -59,7 +61,8 @@ describe('Dictionary', function () {
 
     describe('#importFrom()', function () {
         it('ends without error', function () {
-            return dict2.importFrom(dict1, POS.isNoun, true);
+            return dict2.importFrom(dict1, POS.isNoun, true)
+                .then(ret => ret.should.be.true());
         });
     });
 

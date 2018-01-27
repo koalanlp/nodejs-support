@@ -30,12 +30,12 @@ describe('Parser', function () {
     describe('#parseSentence(string)', function(){
         it('should throw exception', function(){
             return parser1.parseSentence("안녕하세요.")
-                .should.not.be.fulfilled();
+                .then(res => {throw new Error(res)}, err => {true.should.be.true()})
         });
 
         it('handles paragraph as a single sentence', function(){
             return parser1.parseSentence("안녕하세요. 눈이 오는 설날 아침입니다.")
-                .should.not.be.fulfilled();
+                .then(res => {throw new Error(res)}, err => {true.should.be.true()})
         });
     });
 
@@ -95,14 +95,14 @@ describe('Parser', function () {
         it('must be same with the result of tagger-parser', function(){
             return tagger.tagSentence("안녕하세요. 눈이 오는 설날 아침입니다.")
                 .then(tagged => {
-                    parser1.parse(tagged.reference)
+                    parser1.parseSentence(tagged.reference)
                         .then(parsed1 => {
                             parser2.parseSentence("안녕하세요. 눈이 오는 설날 아침입니다.")
                                 .then(parsed2 => {
                                     parsed1.should.be.deepEqual(parsed2);
                                 })
                         })
-                })
+                });
         });
     });
 

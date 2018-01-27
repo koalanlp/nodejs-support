@@ -44,10 +44,10 @@ describe('SentenceSplitter', function () {
     describe('.sentences()', function(){
         it('correctly segments Sentence object', function(){
             return tagger.tagSentence("안녕하세요. 눈이 오는 설날 아침입니다.")
-                .then(result => {
-                    koalanlp.SentenceSplitter.sentences(result)
-                        .then(res => {
-                            res.should.have.length(2);
+                .then(res => {
+                    koalanlp.SentenceSplitter.sentences(res)
+                        .then(result => {
+                            result.should.have.length(2);
 
                             result[0].length().should.equals(2);
                             result[0].surfaceString().should.equal("안녕하세요 .");
