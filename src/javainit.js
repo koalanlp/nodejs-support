@@ -45,8 +45,9 @@ let makeDependencyItem = function(type, version){
 };
 
 /**
- * @private
  * 자바 및 의존패키지 초기화
+ *
+ * @private
  * @param conf 초기화에 사용할 조건
  * @return {Promise} 초기화 종료 Promise
  */

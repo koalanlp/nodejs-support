@@ -28,7 +28,8 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Dictionary<span class="signature">(dicType)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-koalanlp.html">koalanlp</a>.</span>Dictionary<span class="signature">(dicType)</span><span class="type-signature"></span></h2>
         
             <div class="class-description">사용자 정의 사전 클래스</div>
         
@@ -146,7 +147,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line226">line 226</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line282">line 282</a>
     </li></ul></dd>
     
 
@@ -171,6 +172,17 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let API = koalanlp.API;
+let POS = koalanlp.POS;
+let Dictionary = koalanlp.Dictionary;
+let EDict = new Dicionary(API.EUNJEON);
+let promise = EDict.addUserDictionary("설빙",POS.NNP);
+// 삽입 결과는 Promise 객체에 담겨있습니다.
+promise.then(console.log);</code></pre>
 
 
 
@@ -330,7 +342,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line244">line 244</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line300">line 300</a>
     </li></ul></dd>
     
 
@@ -386,7 +398,7 @@
     
 
     
-    <h4 class="name" id="baseEntriesOf"><span class="type-signature"></span>baseEntriesOf<span class="signature">(filterFn)</span><span class="type-signature"> &rarr; {Promise.&lt;<a href="global.html#MorphemeGenerator">MorphemeGenerator</a>>}</span></h4>
+    <h4 class="name" id="baseEntriesOf"><span class="type-signature"></span>baseEntriesOf<span class="signature">(filterFn)</span><span class="type-signature"> &rarr; {Promise.&lt;MorphemeGenerator>}</span></h4>
     
 
     
@@ -436,7 +448,7 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#POSFilter">POSFilter</a></span>
+<span class="param-type">POSFilter</span>
 
 
             
@@ -487,7 +499,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line355">line 355</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line411">line 411</a>
     </li></ul></dd>
     
 
@@ -525,7 +537,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;<a href="global.html#MorphemeGenerator">MorphemeGenerator</a>></span>
+<span class="param-type">Promise.&lt;MorphemeGenerator></span>
 
 
     </dd>
@@ -687,7 +699,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line282">line 282</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line338">line 338</a>
     </li></ul></dd>
     
 
@@ -743,7 +755,7 @@
     
 
     
-    <h4 class="name" id="getNotExists"><span class="type-signature"></span>getNotExists<span class="signature">(onlySystemDic, &hellip;word)</span><span class="type-signature"> &rarr; {Promise.&lt;{morph:string, tag:string}>}</span></h4>
+    <h4 class="name" id="getNotExists"><span class="type-signature"></span>getNotExists<span class="signature">(onlySystemDic, &hellip;word)</span><span class="type-signature"> &rarr; {Promise.&lt;MorphInterface>}</span></h4>
     
 
     
@@ -826,7 +838,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">MorphInterface</span>
 
 
             
@@ -887,7 +899,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line305">line 305</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line361">line 361</a>
     </li></ul></dd>
     
 
@@ -925,7 +937,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;{morph:string, tag:string}></span>
+<span class="param-type">Promise.&lt;MorphInterface></span>
 
 
     </dd>
@@ -993,7 +1005,7 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="Dictionary.html">Dictionary</a></span>
+<span class="param-type">Dictionary</span>
 
 
             
@@ -1016,7 +1028,7 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#POSFilter">POSFilter</a></span>
+<span class="param-type">POSFilter</span>
 
 
             
@@ -1090,7 +1102,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line335">line 335</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line391">line 391</a>
     </li></ul></dd>
     
 
@@ -1156,13 +1168,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-POS.html">POS</a></li></ul><h3>Classes</h3><ul><li><a href="Dictionary.html">Dictionary</a></li><li><a href="Morpheme.html">Morpheme</a></li><li><a href="Parser.html">Parser</a></li><li><a href="Relationship.html">Relationship</a></li><li><a href="Sentence.html">Sentence</a></li><li><a href="SentenceSplitter.html">SentenceSplitter</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API">API</a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#MorphemeGenerator">MorphemeGenerator</a></li><li><a href="global.html#POS">POS</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-koalanlp.html">koalanlp</a></li><li><a href="module-koalanlp_data.html">koalanlp/data</a></li><li><a href="module-koalanlp_POS.html">koalanlp/POS</a></li></ul><h3>Classes</h3><ul><li><a href="module-koalanlp.Dictionary.html">Dictionary</a></li><li><a href="module-koalanlp.Parser.html">Parser</a></li><li><a href="module-koalanlp.SentenceSplitter.html">SentenceSplitter</a></li><li><a href="module-koalanlp.Tagger.html">Tagger</a></li><li><a href="module-koalanlp_data.Morpheme.html">Morpheme</a></li><li><a href="module-koalanlp_data.Relationship.html">Relationship</a></li><li><a href="module-koalanlp_data.Sentence.html">Sentence</a></li><li><a href="module-koalanlp_data.Word.html">Word</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 10:12:35 GMT+0900 (KST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 11:06:58 GMT+0900 (KST)
 </footer>
 
 <script> prettyPrint(); </script>

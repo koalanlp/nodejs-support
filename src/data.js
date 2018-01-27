@@ -1,3 +1,8 @@
+/**
+ * Data 구조
+ * @module koalanlp/data
+ */
+
 let POS = require('./POS');
 
 let assert = function(cond, msg){

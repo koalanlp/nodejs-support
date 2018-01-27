@@ -26,8 +26,10 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import "babel-polyfill";
-import {Sentence, Word, Morpheme, Relationship} from './koalanlp/data';
+            <pre class="prettyprint source linenums"><code>/** @module koalanlp **/
+
+import "babel-polyfill";
+import {Sentence, Word, Morpheme, Relationship} from './data';
 
 /**
  * @private
@@ -37,6 +39,8 @@ let java = {};
 
 /**
  * Assert method
+ *
+ * @private
  * @param cond Condition to be checked.
  * @param msg Message to be thrown if condition check is failed.
  * @param reject Function if assert is using inside of a Promise.
@@ -50,16 +54,37 @@ let assert = function(cond, msg, reject){
 
 /**
  * 분석기 API 목록.
+ * @readonly
+ * @property {string} HANNANUM 한나눔 분석기.
+ * @property {string} EUNJEON 은전한닢(Mecab) 분석기.
+ * @property {string} KOMORAN 코모란 분석기.
+ * @property {string} KKMA 꼬꼬마 분석기.
+ * @property {string} TWITTER 트위터(OpenKoreanText) 분석기.
+ * @property {string} ARIRANG 아리랑 분석기.
+ * @property {string} RHINO 라이노 분석기.
  */
-export const API = require('./koalanlp/const').API;
+export const API = require('./const').API;
 
 /**
- * 품사분석을 위한 도구.
+ * 품사분석을 위한 도구. (Shortcut)
+ * @example
+ * let koalanlp = require('koalanlp');
+ * let POS = koalanlp.POS;
+ * POS.isNoun(someMorpheme);
+ * @readonly
+ * @see {@link module:koalanlp/POS}
  */
-export const POS = require('./koalanlp/POS');
+export const POS = require('./POS');
 
 /**
  * 품사분석기 Wrapper 클래스
+ * @example
+ * let API = koalanlp.API;
+ * let Tagger = koalanlp.Tagger;
+ * let eunjeonTagger = new Tagger(API.EUNJEON);
+ * let promise = eunjeonTagger.tag("이렇게 사용하면 문단을 분석합니다. 간단하지 않나요?");
+ * // 분석 결과는 Promise 객체에 담겨있습니다.
+ * promise.then(console.log);
  */
 export class Tagger{
     /**
@@ -102,6 +127,13 @@ export class Tagger{
 
 /**
  * 의존구문분석기 Wrapper 클래스
+ * @example
+ * let API = koalanlp.API;
+ * let Parser = koalanlp.Parser;
+ * let kkmaParser = new Parser(API.KKMA);
+ * let promise = kkmaParser.parse("이렇게 사용하면 문단을 분석합니다. 간단하지 않나요?");
+ * // 분석 결과는 Promise 객체에 담겨있습니다.
+ * promise.then(console.log);
  */
 export class Parser{
     /**
@@ -187,6 +219,14 @@ export class Parser{
 
 /**
  * 문장분리기 클래스
+ *
+ * @example
+ * let API = koalanlp.API;
+ * let SentenceSplitter = koalanlp.SentenceSplitter;
+ * let splitter = new SentenceSplitter(API.HANNANUM);
+ * let promise = splitter.sentences("이렇게 사용하면 문단을 분리합니다. 간단하지 않나요?");
+ * // 분석 결과는 Promise 객체에 담겨있습니다.
+ * promise.then(console.log);
  */
 export class SentenceSplitter{
     /**
@@ -235,9 +275,16 @@ export class SentenceSplitter{
 
 /**
  * 품사 필터링 함수
- * @callback POSFilter
+ * @function POSFilter
  * @param {string} POS 품사
  * @return {boolean} 품사가 포함 되는지의 여부.
+ */
+
+/**
+ * (형태소, 품사) 묶음.
+ * @name MorphInterface
+ * @property {string} morph 형태소 표면형
+ * @property {string} tag 세종 품사 태그
  */
 
 /**
@@ -245,11 +292,20 @@ export class SentenceSplitter{
  *
  * @generator
  * @function MorphemeGenerator
- * @yields {{morph: string, tag: string}} (형태소, 품사) 객체.
+ * @yields {MorphInterface} (형태소, 품사) 객체.
  */
 
 /**
  * 사용자 정의 사전 클래스
+ *
+ * @example
+ * let API = koalanlp.API;
+ * let POS = koalanlp.POS;
+ * let Dictionary = koalanlp.Dictionary;
+ * let EDict = new Dicionary(API.EUNJEON);
+ * let promise = EDict.addUserDictionary("설빙",POS.NNP);
+ * // 삽입 결과는 Promise 객체에 담겨있습니다.
+ * promise.then(console.log);
  */
 export class Dictionary{
     /**
@@ -327,8 +383,8 @@ export class Dictionary{
      * 사전에 등재되어 있는지 확인하고, 사전에 없는단어만 반환합니다.
      *
      * @param {boolean} onlySystemDic 시스템 사전에서만 검색할지 결정합니다.
-     * @param {...{morph:string, tag:string}} word 확인할 (형태소, 품사)들.
-     * @return {Promise&lt;{morph:string, tag:string}>} 사전에 없는 단어들을 담을 Promise.
+     * @param {...MorphInterface} word 확인할 (형태소, 품사)들.
+     * @return {Promise&lt;MorphInterface>} 사전에 없는 단어들을 담을 Promise.
      */
     getNotExists(onlySystemDic, ...word){
         return new Promise((resolve, reject) => {
@@ -405,28 +461,33 @@ export class Dictionary{
 }
 
 /**
- * 초기화 Callback
- * @callback initCallback
- * @return *
+ * 초기화 Option
+ * @name InitOption
+ * @property {string[]} [packages=[API.EUNJEON,API.KKMA]] 사용할 분석기의 목록
+ * @property {string} [version="1.9.2"] 사용할 분석기의 KoalaNLP wrapper Version
+ * @property {string} [tempJsonName="koalanlp.json"] 사용중인 분석기 파일을 불러오기 위한 Json을 저장할 임시 경로 (임시폴더 내).
+ * @property {boolean} [debug=false] 분석기 적재 과정을 모두 출력할 것인지의 여부
+ * @property {string[]} [javaOptions=["-Xmx4g","-Dfile.encoding=utf-8"]] JVM 실행시 필요한 옵션 지정
+ * @property {boolean} [useIvy2=false] Maven local repository(.m2) 대신 Ivy local repository(.ivy2)를 사용할 지의 여부.
  */
 
 /**
  * 의존패키지 초기화 및 사전적재 함수
- * @param {{version: string|undefined, packages: string[]|undefined,
- * tempJsonName: string|undefined, debug: boolean|undefined, javaOptions: string[]|undefined,
- * useIvy2: boolean}} obj 설정 Object
+ *
+ * @function
+ * @param {InitOption} obj 설정 Object
  * @return {Promise&lt;boolean>} 설정 완료되면 종료될 Promise
  */
 export let initialize = function(obj){
-    obj.version = obj.version || "1.9.0";
+    obj.version = obj.version || "1.9.2";
     obj.packages = obj.packages || [API.EUNJEON, API.KKMA];
     obj.tempJsonName = obj.tempJsonName || "koalanlp.json";
     obj.debug = obj.debug === true;
-    obj.javaOptions = obj.javaOptions || ["-Xmx4g"];
+    obj.javaOptions = obj.javaOptions || ["-Xmx4g", "-Dfile.encoding=utf-8"];
     obj.useIvy2 = obj.useIvy2 || false;
 
     return new Promise((resolve, reject) => {
-        require('./koalanlp/javainit').initializer(obj)
+        require('./javainit').initializer(obj)
             .catch(reject)
             .then(function(jvm){
                 java = jvm;
@@ -540,13 +601,13 @@ let morphToTuple = function(obj, tag){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dictionary.html">Dictionary</a></li><li><a href="Morpheme.html">Morpheme</a></li><li><a href="Parser.html">Parser</a></li><li><a href="Relationship.html">Relationship</a></li><li><a href="Sentence.html">Sentence</a></li><li><a href="SentenceSplitter.html">SentenceSplitter</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API">API</a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#EC">EC</a></li><li><a href="global.html#EF">EF</a></li><li><a href="global.html#EP">EP</a></li><li><a href="global.html#ETM">ETM</a></li><li><a href="global.html#ETN">ETN</a></li><li><a href="global.html#IC">IC</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#isAffix">isAffix</a></li><li><a href="global.html#isEnding">isEnding</a></li><li><a href="global.html#isModifier">isModifier</a></li><li><a href="global.html#isNoun">isNoun</a></li><li><a href="global.html#isPostposition">isPostposition</a></li><li><a href="global.html#isPredicate">isPredicate</a></li><li><a href="global.html#isSuffix">isSuffix</a></li><li><a href="global.html#isSymbol">isSymbol</a></li><li><a href="global.html#isUnknown">isUnknown</a></li><li><a href="global.html#JC">JC</a></li><li><a href="global.html#JKB">JKB</a></li><li><a href="global.html#JKC">JKC</a></li><li><a href="global.html#JKG">JKG</a></li><li><a href="global.html#JKO">JKO</a></li><li><a href="global.html#JKQ">JKQ</a></li><li><a href="global.html#JKS">JKS</a></li><li><a href="global.html#JKV">JKV</a></li><li><a href="global.html#JX">JX</a></li><li><a href="global.html#MAG">MAG</a></li><li><a href="global.html#MAJ">MAJ</a></li><li><a href="global.html#MM">MM</a></li><li><a href="global.html#MorphemeGenerator">MorphemeGenerator</a></li><li><a href="global.html#NA">NA</a></li><li><a href="global.html#NF">NF</a></li><li><a href="global.html#NNB">NNB</a></li><li><a href="global.html#NNG">NNG</a></li><li><a href="global.html#NNM">NNM</a></li><li><a href="global.html#NNP">NNP</a></li><li><a href="global.html#NP">NP</a></li><li><a href="global.html#NR">NR</a></li><li><a href="global.html#NV">NV</a></li><li><a href="global.html#POS">POS</a></li><li><a href="global.html#SE">SE</a></li><li><a href="global.html#SF">SF</a></li><li><a href="global.html#SO">SO</a></li><li><a href="global.html#SP">SP</a></li><li><a href="global.html#SS">SS</a></li><li><a href="global.html#SW">SW</a></li><li><a href="global.html#Tags">Tags</a></li><li><a href="global.html#VA">VA</a></li><li><a href="global.html#VCN">VCN</a></li><li><a href="global.html#VCP">VCP</a></li><li><a href="global.html#VV">VV</a></li><li><a href="global.html#VX">VX</a></li><li><a href="global.html#XPN">XPN</a></li><li><a href="global.html#XPV">XPV</a></li><li><a href="global.html#XR">XR</a></li><li><a href="global.html#XSA">XSA</a></li><li><a href="global.html#XSM">XSM</a></li><li><a href="global.html#XSN">XSN</a></li><li><a href="global.html#XSO">XSO</a></li><li><a href="global.html#XSV">XSV</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-koalanlp.html">koalanlp</a></li><li><a href="module-koalanlp_data.html">koalanlp/data</a></li><li><a href="module-koalanlp_POS.html">koalanlp/POS</a></li></ul><h3>Classes</h3><ul><li><a href="module-koalanlp.Dictionary.html">Dictionary</a></li><li><a href="module-koalanlp.Parser.html">Parser</a></li><li><a href="module-koalanlp.SentenceSplitter.html">SentenceSplitter</a></li><li><a href="module-koalanlp.Tagger.html">Tagger</a></li><li><a href="module-koalanlp_data.Morpheme.html">Morpheme</a></li><li><a href="module-koalanlp_data.Relationship.html">Relationship</a></li><li><a href="module-koalanlp_data.Sentence.html">Sentence</a></li><li><a href="module-koalanlp_data.Word.html">Word</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 01:35:02 GMT+0900 (KST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 11:06:58 GMT+0900 (KST)
 </footer>
 
 <script> prettyPrint(); </script>

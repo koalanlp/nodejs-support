@@ -1,5 +1,7 @@
+/** @module koalanlp **/
+
 import "babel-polyfill";
-import {Sentence, Word, Morpheme, Relationship} from './koalanlp/data';
+import {Sentence, Word, Morpheme, Relationship} from './data';
 
 /**
  * @private
@@ -9,6 +11,8 @@ let java = {};
 
 /**
  * Assert method
+ *
+ * @private
  * @param cond Condition to be checked.
  * @param msg Message to be thrown if condition check is failed.
  * @param reject Function if assert is using inside of a Promise.
@@ -22,16 +26,37 @@ let assert = function(cond, msg, reject){
 
 /**
  * 분석기 API 목록.
+ * @readonly
+ * @property {string} HANNANUM 한나눔 분석기.
+ * @property {string} EUNJEON 은전한닢(Mecab) 분석기.
+ * @property {string} KOMORAN 코모란 분석기.
+ * @property {string} KKMA 꼬꼬마 분석기.
+ * @property {string} TWITTER 트위터(OpenKoreanText) 분석기.
+ * @property {string} ARIRANG 아리랑 분석기.
+ * @property {string} RHINO 라이노 분석기.
  */
-export const API = require('./koalanlp/const').API;
+export const API = require('./const').API;
 
 /**
- * 품사분석을 위한 도구.
+ * 품사분석을 위한 도구. (Shortcut)
+ * @example
+ * let koalanlp = require('koalanlp');
+ * let POS = koalanlp.POS;
+ * POS.isNoun(someMorpheme);
+ * @readonly
+ * @see {@link module:koalanlp/POS}
  */
-export const POS = require('./koalanlp/POS');
+export const POS = require('./POS');
 
 /**
  * 품사분석기 Wrapper 클래스
+ * @example
+ * let API = koalanlp.API;
+ * let Tagger = koalanlp.Tagger;
+ * let eunjeonTagger = new Tagger(API.EUNJEON);
+ * let promise = eunjeonTagger.tag("이렇게 사용하면 문단을 분석합니다. 간단하지 않나요?");
+ * // 분석 결과는 Promise 객체에 담겨있습니다.
+ * promise.then(console.log);
  */
 export class Tagger{
     /**
@@ -74,6 +99,13 @@ export class Tagger{
 
 /**
  * 의존구문분석기 Wrapper 클래스
+ * @example
+ * let API = koalanlp.API;
+ * let Parser = koalanlp.Parser;
+ * let kkmaParser = new Parser(API.KKMA);
+ * let promise = kkmaParser.parse("이렇게 사용하면 문단을 분석합니다. 간단하지 않나요?");
+ * // 분석 결과는 Promise 객체에 담겨있습니다.
+ * promise.then(console.log);
  */
 export class Parser{
     /**
@@ -159,6 +191,14 @@ export class Parser{
 
 /**
  * 문장분리기 클래스
+ *
+ * @example
+ * let API = koalanlp.API;
+ * let SentenceSplitter = koalanlp.SentenceSplitter;
+ * let splitter = new SentenceSplitter(API.HANNANUM);
+ * let promise = splitter.sentences("이렇게 사용하면 문단을 분리합니다. 간단하지 않나요?");
+ * // 분석 결과는 Promise 객체에 담겨있습니다.
+ * promise.then(console.log);
  */
 export class SentenceSplitter{
     /**
@@ -207,9 +247,16 @@ export class SentenceSplitter{
 
 /**
  * 품사 필터링 함수
- * @callback POSFilter
+ * @function POSFilter
  * @param {string} POS 품사
  * @return {boolean} 품사가 포함 되는지의 여부.
+ */
+
+/**
+ * (형태소, 품사) 묶음.
+ * @name MorphInterface
+ * @property {string} morph 형태소 표면형
+ * @property {string} tag 세종 품사 태그
  */
 
 /**
@@ -217,11 +264,20 @@ export class SentenceSplitter{
  *
  * @generator
  * @function MorphemeGenerator
- * @yields {{morph: string, tag: string}} (형태소, 품사) 객체.
+ * @yields {MorphInterface} (형태소, 품사) 객체.
  */
 
 /**
  * 사용자 정의 사전 클래스
+ *
+ * @example
+ * let API = koalanlp.API;
+ * let POS = koalanlp.POS;
+ * let Dictionary = koalanlp.Dictionary;
+ * let EDict = new Dicionary(API.EUNJEON);
+ * let promise = EDict.addUserDictionary("설빙",POS.NNP);
+ * // 삽입 결과는 Promise 객체에 담겨있습니다.
+ * promise.then(console.log);
  */
 export class Dictionary{
     /**
@@ -299,8 +355,8 @@ export class Dictionary{
      * 사전에 등재되어 있는지 확인하고, 사전에 없는단어만 반환합니다.
      *
      * @param {boolean} onlySystemDic 시스템 사전에서만 검색할지 결정합니다.
-     * @param {...{morph:string, tag:string}} word 확인할 (형태소, 품사)들.
-     * @return {Promise<{morph:string, tag:string}>} 사전에 없는 단어들을 담을 Promise.
+     * @param {...MorphInterface} word 확인할 (형태소, 품사)들.
+     * @return {Promise<MorphInterface>} 사전에 없는 단어들을 담을 Promise.
      */
     getNotExists(onlySystemDic, ...word){
         return new Promise((resolve, reject) => {
@@ -377,28 +433,33 @@ export class Dictionary{
 }
 
 /**
- * 초기화 Callback
- * @callback initCallback
- * @return *
+ * 초기화 Option
+ * @name InitOption
+ * @property {string[]} [packages=[API.EUNJEON,API.KKMA]] 사용할 분석기의 목록
+ * @property {string} [version="1.9.2"] 사용할 분석기의 KoalaNLP wrapper Version
+ * @property {string} [tempJsonName="koalanlp.json"] 사용중인 분석기 파일을 불러오기 위한 Json을 저장할 임시 경로 (임시폴더 내).
+ * @property {boolean} [debug=false] 분석기 적재 과정을 모두 출력할 것인지의 여부
+ * @property {string[]} [javaOptions=["-Xmx4g","-Dfile.encoding=utf-8"]] JVM 실행시 필요한 옵션 지정
+ * @property {boolean} [useIvy2=false] Maven local repository(.m2) 대신 Ivy local repository(.ivy2)를 사용할 지의 여부.
  */
 
 /**
  * 의존패키지 초기화 및 사전적재 함수
- * @param {{version: string|undefined, packages: string[]|undefined,
- * tempJsonName: string|undefined, debug: boolean|undefined, javaOptions: string[]|undefined,
- * useIvy2: boolean}} obj 설정 Object
+ *
+ * @function
+ * @param {InitOption} obj 설정 Object
  * @return {Promise<boolean>} 설정 완료되면 종료될 Promise
  */
 export let initialize = function(obj){
-    obj.version = obj.version || "1.9.0";
+    obj.version = obj.version || "1.9.2";
     obj.packages = obj.packages || [API.EUNJEON, API.KKMA];
     obj.tempJsonName = obj.tempJsonName || "koalanlp.json";
     obj.debug = obj.debug === true;
-    obj.javaOptions = obj.javaOptions || ["-Xmx4g"];
+    obj.javaOptions = obj.javaOptions || ["-Xmx4g", "-Dfile.encoding=utf-8"];
     obj.useIvy2 = obj.useIvy2 || false;
 
     return new Promise((resolve, reject) => {
-        require('./koalanlp/javainit').initializer(obj)
+        require('./javainit').initializer(obj)
             .catch(reject)
             .then(function(jvm){
                 java = jvm;

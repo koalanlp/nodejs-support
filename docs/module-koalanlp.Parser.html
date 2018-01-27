@@ -28,7 +28,8 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Parser<span class="signature">(parserType, taggerType<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-koalanlp.html">koalanlp</a>.</span>Parser<span class="signature">(parserType, taggerType<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
             <div class="class-description">의존구문분석기 Wrapper 클래스</div>
         
@@ -192,7 +193,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line78">line 78</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line110">line 110</a>
     </li></ul></dd>
     
 
@@ -217,6 +218,16 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let API = koalanlp.API;
+let Parser = koalanlp.Parser;
+let kkmaParser = new Parser(API.KKMA);
+let promise = kkmaParser.parse("이렇게 사용하면 문단을 분석합니다. 간단하지 않나요?");
+// 분석 결과는 Promise 객체에 담겨있습니다.
+promise.then(console.log);</code></pre>
 
 
 
@@ -246,7 +257,7 @@
     
 
     
-    <h4 class="name" id="parse"><span class="type-signature"></span>parse<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="Sentence.html">Sentence</a>>>}</span></h4>
+    <h4 class="name" id="parse"><span class="type-signature"></span>parse<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Sentence>>}</span></h4>
     
 
     
@@ -299,7 +310,7 @@
 <span class="param-type">string</span>
 |
 
-<span class="param-type">Array.&lt;<a href="Sentence.html">Sentence</a>></span>
+<span class="param-type">Array.&lt;Sentence></span>
 
 
             
@@ -350,7 +361,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line102">line 102</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line134">line 134</a>
     </li></ul></dd>
     
 
@@ -388,7 +399,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;Array.&lt;<a href="Sentence.html">Sentence</a>>></span>
+<span class="param-type">Promise.&lt;Array.&lt;Sentence>></span>
 
 
     </dd>
@@ -406,7 +417,7 @@
     
 
     
-    <h4 class="name" id="parseSentence"><span class="type-signature"></span>parseSentence<span class="signature">(sentence)</span><span class="type-signature"> &rarr; {Promise.&lt;<a href="Sentence.html">Sentence</a>>}</span></h4>
+    <h4 class="name" id="parseSentence"><span class="type-signature"></span>parseSentence<span class="signature">(sentence)</span><span class="type-signature"> &rarr; {Promise.&lt;Sentence>}</span></h4>
     
 
     
@@ -459,7 +470,7 @@
 <span class="param-type">string</span>
 |
 
-<span class="param-type"><a href="Sentence.html">Sentence</a></span>
+<span class="param-type">Sentence</span>
 
 
             
@@ -510,7 +521,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line136">line 136</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line168">line 168</a>
     </li></ul></dd>
     
 
@@ -548,7 +559,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;<a href="Sentence.html">Sentence</a>></span>
+<span class="param-type">Promise.&lt;Sentence></span>
 
 
     </dd>
@@ -576,13 +587,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-POS.html">POS</a></li></ul><h3>Classes</h3><ul><li><a href="Dictionary.html">Dictionary</a></li><li><a href="Morpheme.html">Morpheme</a></li><li><a href="Parser.html">Parser</a></li><li><a href="Relationship.html">Relationship</a></li><li><a href="Sentence.html">Sentence</a></li><li><a href="SentenceSplitter.html">SentenceSplitter</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API">API</a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#MorphemeGenerator">MorphemeGenerator</a></li><li><a href="global.html#POS">POS</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-koalanlp.html">koalanlp</a></li><li><a href="module-koalanlp_data.html">koalanlp/data</a></li><li><a href="module-koalanlp_POS.html">koalanlp/POS</a></li></ul><h3>Classes</h3><ul><li><a href="module-koalanlp.Dictionary.html">Dictionary</a></li><li><a href="module-koalanlp.Parser.html">Parser</a></li><li><a href="module-koalanlp.SentenceSplitter.html">SentenceSplitter</a></li><li><a href="module-koalanlp.Tagger.html">Tagger</a></li><li><a href="module-koalanlp_data.Morpheme.html">Morpheme</a></li><li><a href="module-koalanlp_data.Relationship.html">Relationship</a></li><li><a href="module-koalanlp_data.Sentence.html">Sentence</a></li><li><a href="module-koalanlp_data.Word.html">Word</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 10:12:35 GMT+0900 (KST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 11:06:58 GMT+0900 (KST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Tagger</title>
+    <title>JSDoc: Class: SentenceSplitter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Tagger</h1>
+    <h1 class="page-title">Class: SentenceSplitter</h1>
 
     
 
@@ -28,9 +28,10 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Tagger<span class="signature">(taggerType)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-koalanlp.html">koalanlp</a>.</span>SentenceSplitter<span class="signature">(splitterType)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">품사분석기 Wrapper 클래스</div>
+            <div class="class-description">문장분리기 클래스</div>
         
     
 </header>
@@ -45,7 +46,7 @@
     
 
     
-    <h4 class="name" id="Tagger"><span class="type-signature"></span>new Tagger<span class="signature">(taggerType)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="SentenceSplitter"><span class="type-signature"></span>new SentenceSplitter<span class="signature">(splitterType)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +54,7 @@
 
 
 <div class="description">
-    품사분석기를 생성합니다.
+    문장분리기를 생성합니다.
 </div>
 
 
@@ -89,7 +90,7 @@
 
         <tr>
             
-                <td class="name"><code>taggerType</code></td>
+                <td class="name"><code>splitterType</code></td>
             
 
             <td class="type">
@@ -105,7 +106,7 @@
 
             
 
-            <td class="description last">API 유형</td>
+            <td class="description last">문장분리기 API 패키지.</td>
         </tr>
 
     
@@ -146,7 +147,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line36">line 36</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line203">line 203</a>
     </li></ul></dd>
     
 
@@ -171,6 +172,16 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let API = koalanlp.API;
+let SentenceSplitter = koalanlp.SentenceSplitter;
+let splitter = new SentenceSplitter(API.HANNANUM);
+let promise = splitter.sentences("이렇게 사용하면 문단을 분리합니다. 간단하지 않나요?");
+// 분석 결과는 Promise 객체에 담겨있습니다.
+promise.then(console.log);</code></pre>
 
 
 
@@ -200,7 +211,7 @@
     
 
     
-    <h4 class="name" id="tag"><span class="type-signature"></span>tag<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="Sentence.html">Sentence</a>>>}</span></h4>
+    <h4 class="name" id=".sentences"><span class="type-signature">(static) </span>sentences<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Sentence>>}</span></h4>
     
 
     
@@ -208,7 +219,164 @@
 
 
 <div class="description">
-    문단단위 품사표기
+    KoalaNLP가 구현한 문장분리기를 사용하여, 문단을 문장으로 분리합니다.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>paragraph</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Sentence</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">분석할 문단. (품사표기가 되어있어야 합니다)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line235">line 235</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    분석 결과를 담은 Promise가 반환됨.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Sentence>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sentences"><span class="type-signature"></span>sentences<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;string>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    문단을 문장으로 분리합니다.
 </div>
 
 
@@ -260,7 +428,7 @@
 
             
 
-            <td class="description last">품사표기할 문단.</td>
+            <td class="description last">분석할 문단.</td>
         </tr>
 
     
@@ -301,7 +469,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line51">line 51</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line221">line 221</a>
     </li></ul></dd>
     
 
@@ -328,7 +496,7 @@
 
         
 <div class="param-desc">
-    품사표기 결과가 반환될, promise 객체
+    분석 결과를 담은 Promise가 반환됨.
 </div>
 
 
@@ -339,164 +507,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;Array.&lt;<a href="Sentence.html">Sentence</a>>></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="tagSentence"><span class="type-signature"></span>tagSentence<span class="signature">(sentence)</span><span class="type-signature"> &rarr; {Promise.&lt;<a href="Sentence.html">Sentence</a>>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    문장단위 품사표기
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>sentence</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">품사표기할 문장.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line65">line 65</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    품사표기 결과인 문장 1개를 담을 Promise가 반환됨.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;<a href="Sentence.html">Sentence</a>></span>
+<span class="param-type">Promise.&lt;Array.&lt;string>></span>
 
 
     </dd>
@@ -524,13 +535,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-POS.html">POS</a></li></ul><h3>Classes</h3><ul><li><a href="Dictionary.html">Dictionary</a></li><li><a href="Morpheme.html">Morpheme</a></li><li><a href="Parser.html">Parser</a></li><li><a href="Relationship.html">Relationship</a></li><li><a href="Sentence.html">Sentence</a></li><li><a href="SentenceSplitter.html">SentenceSplitter</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API">API</a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#MorphemeGenerator">MorphemeGenerator</a></li><li><a href="global.html#POS">POS</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-koalanlp.html">koalanlp</a></li><li><a href="module-koalanlp_data.html">koalanlp/data</a></li><li><a href="module-koalanlp_POS.html">koalanlp/POS</a></li></ul><h3>Classes</h3><ul><li><a href="module-koalanlp.Dictionary.html">Dictionary</a></li><li><a href="module-koalanlp.Parser.html">Parser</a></li><li><a href="module-koalanlp.SentenceSplitter.html">SentenceSplitter</a></li><li><a href="module-koalanlp.Tagger.html">Tagger</a></li><li><a href="module-koalanlp_data.Morpheme.html">Morpheme</a></li><li><a href="module-koalanlp_data.Relationship.html">Relationship</a></li><li><a href="module-koalanlp_data.Sentence.html">Sentence</a></li><li><a href="module-koalanlp_data.Word.html">Word</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 10:12:35 GMT+0900 (KST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 11:06:58 GMT+0900 (KST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Parser</title>
+    <title>JSDoc: Class: Tagger</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Parser</h1>
+    <h1 class="page-title">Class: Tagger</h1>
 
     
 
@@ -28,9 +28,10 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Parser<span class="signature">(parserType, taggerType<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-koalanlp.html">koalanlp</a>.</span>Tagger<span class="signature">(taggerType)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">의존구문분석기 Wrapper 클래스</div>
+            <div class="class-description">품사분석기 Wrapper 클래스</div>
         
     
 </header>
@@ -45,7 +46,7 @@
     
 
     
-    <h4 class="name" id="Parser"><span class="type-signature"></span>new Parser<span class="signature">(parserType, taggerType<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Tagger"><span class="type-signature"></span>new Tagger<span class="signature">(taggerType)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +54,7 @@
 
 
 <div class="description">
-    의존구문분석기를 생성합니다.
+    품사분석기를 생성합니다.
 </div>
 
 
@@ -77,8 +78,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -91,37 +90,6 @@
 
         <tr>
             
-                <td class="name"><code>parserType</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">의존구문분석기 API 패키지.</td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>taggerType</code></td>
             
 
@@ -129,29 +97,16 @@
             
                 
 <span class="param-type">string</span>
-|
-
-<span class="param-type">undefined</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last">품사분석기 API 패키지. 미지정시, 의존구문분석기 패키지 이용.</td>
+            <td class="description last">API 유형</td>
         </tr>
 
     
@@ -192,7 +147,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line78">line 78</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -217,6 +172,16 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let API = koalanlp.API;
+let Tagger = koalanlp.Tagger;
+let eunjeonTagger = new Tagger(API.EUNJEON);
+let promise = eunjeonTagger.tag("이렇게 사용하면 문단을 분석합니다. 간단하지 않나요?");
+// 분석 결과는 Promise 객체에 담겨있습니다.
+promise.then(console.log);</code></pre>
 
 
 
@@ -246,7 +211,7 @@
     
 
     
-    <h4 class="name" id="parse"><span class="type-signature"></span>parse<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="Sentence.html">Sentence</a>>>}</span></h4>
+    <h4 class="name" id="tag"><span class="type-signature"></span>tag<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Sentence>>}</span></h4>
     
 
     
@@ -254,7 +219,7 @@
 
 
 <div class="description">
-    문단단위 분석
+    문단단위 품사표기
 </div>
 
 
@@ -297,9 +262,6 @@
             
                 
 <span class="param-type">string</span>
-|
-
-<span class="param-type">Array.&lt;<a href="Sentence.html">Sentence</a>></span>
 
 
             
@@ -309,7 +271,7 @@
 
             
 
-            <td class="description last">분석할 문단.</td>
+            <td class="description last">품사표기할 문단.</td>
         </tr>
 
     
@@ -350,7 +312,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line102">line 102</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line76">line 76</a>
     </li></ul></dd>
     
 
@@ -377,7 +339,7 @@
 
         
 <div class="param-desc">
-    분석 결과(문장 배열)를 담을 Promise가 반환됨.
+    품사표기 결과가 반환될, promise 객체
 </div>
 
 
@@ -388,7 +350,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;Array.&lt;<a href="Sentence.html">Sentence</a>>></span>
+<span class="param-type">Promise.&lt;Array.&lt;Sentence>></span>
 
 
     </dd>
@@ -406,7 +368,7 @@
     
 
     
-    <h4 class="name" id="parseSentence"><span class="type-signature"></span>parseSentence<span class="signature">(sentence)</span><span class="type-signature"> &rarr; {Promise.&lt;<a href="Sentence.html">Sentence</a>>}</span></h4>
+    <h4 class="name" id="tagSentence"><span class="type-signature"></span>tagSentence<span class="signature">(sentence)</span><span class="type-signature"> &rarr; {Promise.&lt;Sentence>}</span></h4>
     
 
     
@@ -414,7 +376,7 @@
 
 
 <div class="description">
-    문장단위 분석
+    문장단위 품사표기
 </div>
 
 
@@ -457,9 +419,6 @@
             
                 
 <span class="param-type">string</span>
-|
-
-<span class="param-type"><a href="Sentence.html">Sentence</a></span>
 
 
             
@@ -469,7 +428,7 @@
 
             
 
-            <td class="description last">분석할 문장.</td>
+            <td class="description last">품사표기할 문장.</td>
         </tr>
 
     
@@ -510,7 +469,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">api.js</a>, <a href="api.js.html#line136">line 136</a>
+        <a href="api.js.html">api.js</a>, <a href="api.js.html#line90">line 90</a>
     </li></ul></dd>
     
 
@@ -537,7 +496,7 @@
 
         
 <div class="param-desc">
-    분석 결과(문장 1개)를 담은 Promise가 반환됨.
+    품사표기 결과인 문장 1개를 담을 Promise가 반환됨.
 </div>
 
 
@@ -548,7 +507,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;<a href="Sentence.html">Sentence</a>></span>
+<span class="param-type">Promise.&lt;Sentence></span>
 
 
     </dd>
@@ -576,13 +535,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-POS.html">POS</a></li></ul><h3>Classes</h3><ul><li><a href="Dictionary.html">Dictionary</a></li><li><a href="Morpheme.html">Morpheme</a></li><li><a href="Parser.html">Parser</a></li><li><a href="Relationship.html">Relationship</a></li><li><a href="Sentence.html">Sentence</a></li><li><a href="SentenceSplitter.html">SentenceSplitter</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API">API</a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#MorphemeGenerator">MorphemeGenerator</a></li><li><a href="global.html#POS">POS</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-koalanlp.html">koalanlp</a></li><li><a href="module-koalanlp_data.html">koalanlp/data</a></li><li><a href="module-koalanlp_POS.html">koalanlp/POS</a></li></ul><h3>Classes</h3><ul><li><a href="module-koalanlp.Dictionary.html">Dictionary</a></li><li><a href="module-koalanlp.Parser.html">Parser</a></li><li><a href="module-koalanlp.SentenceSplitter.html">SentenceSplitter</a></li><li><a href="module-koalanlp.Tagger.html">Tagger</a></li><li><a href="module-koalanlp_data.Morpheme.html">Morpheme</a></li><li><a href="module-koalanlp_data.Relationship.html">Relationship</a></li><li><a href="module-koalanlp_data.Sentence.html">Sentence</a></li><li><a href="module-koalanlp_data.Word.html">Word</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 10:12:35 GMT+0900 (KST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jan 27 2018 11:06:58 GMT+0900 (KST)
 </footer>
 
 <script> prettyPrint(); </script>
