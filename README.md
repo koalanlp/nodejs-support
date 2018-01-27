@@ -5,6 +5,7 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://nearbydelta.github.com/nodejs-koalanlp/docs/module-koalanlp.html)
 
+[![Build Status](https://img.shields.io/travis/nearbydelta/nodejs-koalanlp.svg?style=flat-square&branch=master)](https://travis-ci.org/nearbydelta/nodejs-koalanlp)
 [![scala-koalanlp](https://img.shields.io/badge/Scala-KoalaNLP-red.svg?style=flat-square)](https://nearbydelta.github.io/KoalaNLP)
 [![py-koalanlp](https://img.shields.io/badge/Python-KoalaNLP-blue.svg?style=flat-square)](https://nearbydelta.github.io/py-koalanlp)
 

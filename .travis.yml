@@ -1,13 +1,17 @@
 language: node_js
 jdk:
-- oraclejdk8
+  - oraclejdk8
+node_js:
+  - "lts/*"
 install:
-- npm install
+  - npm install
+  - npm run compile
 cache:
   directories:
   - $HOME/.m2
+  - ./mode_modules
 script:
-- ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/dictionary.js
-- ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/parser.js
-- ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/segmenter.js
-- ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/tagger.js
+  - ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/dictionary.js
+  - ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/parser.js
+  - ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/segmenter.js
+  - ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/tagger.js
