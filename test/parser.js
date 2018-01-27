@@ -6,7 +6,7 @@ describe('Parser', function () {
 
     before(function (done) {
         koalanlp.initialize({
-            packages: [API.KOMORAN, API.KKMA],
+            packages: [API.EUNJEON, API.KKMA],
             version: "1.9.2",
             debug: false
         }).catch(err => done(err))

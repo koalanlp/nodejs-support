@@ -14,7 +14,7 @@
   },
   "main": "./lib/api.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha -r should --no-timeouts --exit",
+    "test": "./test.sh",
     "compile": "./node_modules/babel-cli/bin/babel.js --presets=es2015 -d lib/ src/",
     "jsdoc": "./node_modules/jsdoc/jsdoc.js -d docs/ -r src/"
   },

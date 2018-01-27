@@ -1,0 +1,13 @@
+language: node_js
+jdk:
+- oraclejdk8
+install:
+- npm install
+cache:
+  directories:
+  - $HOME/.m2
+script:
+- ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/dictionary.js
+- ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/parser.js
+- ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/segmenter.js
+- ./node_modules/mocha/bin/mocha -r should --no-timeouts --exit test/tagger.js
