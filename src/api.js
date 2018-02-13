@@ -70,15 +70,24 @@ export class Tagger{
 
     /**
      * 문단단위 품사표기
-     * @param {string} paragraph 품사표기할 문단.
+     * @param {string|string[]} paragraph 품사표기할 문단(string) 또는 문장의 배열(string[])
      * @return {Promise<Sentence[]>} 품사표기 결과가 반환될, promise 객체
      */
     tag(paragraph){
         return new Promise((resolve, reject) => {
-            this.tagger.tag(paragraph, function (err, result) {
-                if (err) reject(err);
-                else resolve(converter(result));
-            });
+            if(Array.isArray(paragraph)) {
+                try {
+                    let result = paragraph.map(sent => this.tagger.tagSentenceSync(sent));
+                    resolve(result);
+                }catch(e){
+                    reject(e);
+                }
+            }else {
+                this.tagger.tag(paragraph, function (err, result) {
+                    if (err) reject(err);
+                    else resolve(converter(result));
+                });
+            }
         });
     }
 
@@ -128,34 +137,52 @@ export class Parser{
 
     /**
      * 문단단위 분석
-     * @param {string|Sentence[]} paragraph 분석할 문단.
-     * @return {Promise<Sentence[]>} 분석 결과(문장 배열)를 담을 Promise가 반환됨.
+     * @param {string|string[]|Sentence|Sentence[]} paragraph 분석할 문단(string, string[], Sentence[]) 또는 문장(Sentence).
+     * @return {Promise<Sentence>|Promise<Sentence[]>} 문장(Sentence)의 경우는 분석결과인 문장(Sentence)을, 문단인 경우는 분석 결과(문장 배열)를 담을 Promise가 반환됨.
      */
     parse(paragraph){
         return new Promise((resolve, reject) => {
-            let isSentences = Array.isArray(paragraph) && paragraph[0] instanceof Sentence;
+            let isList = Array.isArray(paragraph);
+            let isSentence = paragraph instanceof Sentence || paragraph[0] instanceof Sentence;
 
-            if(this.tagger && !isSentences) {
-                this.tagger.tag(paragraph, (taggerErr, result) => {
-                    if (taggerErr) reject(taggerErr);
-                    else this.parser.parse(result, function (err, parsed) {
-                        if (err) reject(err);
-                        else resolve(converter(parsed));
-                    });
-                });
-            }else{
-                let target = paragraph;
-                if (isSentences){
-                    target = [];
-                    for(let i = 0; i < paragraph.length; i ++){
-                        target.push(paragraph[i].reference);
-                    }
+            let target = undefined;
+            if(isSentence){
+                if(isList){
+                    target = paragraph.map(sent => sent.reference);
+                    target = java.callStaticMethodSync("scala.Predef", "genericArrayOps", target).toSeqSync();
+                }else{
+                    target = paragraph.reference;
                 }
-
                 this.parser.parse(target, function (err, parsed) {
                     if (err) reject(err);
                     else resolve(converter(parsed));
                 });
+            }else{
+                try {
+                    if(isList){
+                        target = [];
+                        if (this.tagger) {
+                            target = paragraph.map(sent => this.tagger.tagSync(sent));
+                        } else {
+                            target = paragraph;
+                        }
+
+                        resolve(target.map(sent => convertSentence(this.parser.parseSync(sent))));
+                    }else{
+                        if(this.tagger){
+                            target = this.tagger.tagSync(paragraph);
+                        }else{
+                            target = paragraph;
+                        }
+
+                        this.parser.parse(target, function (err, parsed) {
+                            if (err) reject(err);
+                            else resolve(converter(parsed));
+                        });
+                    }
+                }catch(e){
+                    reject(e)
+                }
             }
         });
     }
@@ -384,15 +411,23 @@ export class Dictionary{
      * 다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.
      *
      * @param {Dictionary} other 참조할 사전
-     * @param {POSFilter} filterFn 추가할 품사를 지정하는 함수.
+     * @param {string|string[]|POSFilter} filterFn 가져올 품사나, 품사의 리스트, 또는 해당 품사인지 판단하는 함수.
      * @param {boolean} fastAppend 선택된 사전에 존재하는지를 검사하지 않고 빠르게 추가하고자 할 때. (기본값 false)
      * @return {Promise<boolean>} 사전 import가 완료되었는지 여부를 담을, Promise.
      */
     importFrom(other, filterFn, fastAppend){
+        let tags = [];
+        if (typeof filterFn === 'string'){
+            tags = [filterFn];
+        }else if(Array.isArray(filterFn) && typeof filterFn[0] === 'string'){
+            tags = filterFn;
+        }else{
+            tags = POS.Tags.filter(filterFn);
+        }
+
         return new Promise((resolve, reject) => {
             fastAppend = fastAppend || false;
 
-            let tags = POS.Tags.filter(filterFn);
             let tagSet = java.callStaticMethodSync("scala.Predef", "genericArrayOps", tags).toSetSync();
 
             this.dict.importFrom(other.dict, tagSet, fastAppend, function(err){
@@ -405,14 +440,21 @@ export class Dictionary{
     /**
      * 원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)
      *
-     * @param {POSFilter} filterFn 가져올 품사인지 판단하는 함수.
+     * @param {string|string[]|POSFilter} filterFn 가져올 품사나, 품사의 리스트, 또는 해당 품사인지 판단하는 함수.
      * @return {Promise<MorphemeGenerator>} (형태소, 품사) generator를 담을 Promise.
      */
     baseEntriesOf(filterFn){
         filterFn = filterFn || POS.isNoun;
+        let tags = [];
+        if (typeof filterFn === 'string'){
+            tags = [filterFn];
+        }else if(Array.isArray(filterFn) && typeof filterFn[0] === 'string'){
+            tags = filterFn;
+        }else{
+            tags = POS.Tags.filter(filterFn);
+        }
 
         return new Promise((resolve, reject) => {
-            let tags = POS.Tags.filter(filterFn);
             let tagSet = java.callStaticMethodSync("scala.Predef", "genericArrayOps", tags).toSetSync();
 
             this.dict.baseEntriesOf(tagSet, function(err, entries){

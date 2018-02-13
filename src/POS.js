@@ -137,6 +137,14 @@ export const SO = "SO";
 /** 기타기호 **/
 export const SW = "SW";
 
+/** 외국어 **/
+export const SL = "SL";
+/** 한자어 **/
+export const SH = "SH";
+/** 숫자 **/
+export const SN = "SN";
+
+
 /** 명사 추정 범주 **/
 export const NF = "NF";
 /** 동사 추정 범주 **/
