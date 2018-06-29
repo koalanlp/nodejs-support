@@ -1,4 +1,5 @@
 var koalanlp = require('../lib/api');
+var _ = require('lodash');
 var API = koalanlp.API;
 
 describe('Parser', function () {
@@ -102,6 +103,44 @@ describe('Parser', function () {
                                     parsed1.should.be.deepEqual(parsed2);
                                 })
                         })
+                });
+        });
+    });
+
+    describe('#parseSync(string)', function(){
+        it('correctly parse a paragraph', function(){
+            return parser1.parse("안녕하세요. 눈이 오는 설날 아침입니다.")
+                .then(result => {
+                    let result2 = parser1.parseSync("안녕하세요. 눈이 오는 설날 아침입니다.");
+                    result[0].reference = null;
+                    result[1].reference = null;
+                    result2[0].reference = null;
+                    result2[1].reference = null;
+
+                    _.isEqual(result, result2).should.be.true()
+                });
+        });
+    });
+
+    describe('#parseSentenceSync(Relay)', function(){
+        it('correctly parse a sentence', function(){
+            return parser2.parseSentence("안녕하세요.")
+                .then(result => {
+                    let result2 = parser2.parseSentenceSync("안녕하세요.");
+                    result.reference = null;
+                    result2.reference = null;
+                    _.isEqual(result, result2).should.be.true()
+                });
+        });
+
+        it('handles paragraph as a single sentence', function(){
+            return parser2.parseSentence("안녕하세요. 눈이 오는 설날 아침입니다.")
+                .then(result => {
+                    let result2 = parser2.parseSentenceSync("안녕하세요. 눈이 오는 설날 아침입니다.");
+                    result.reference = null;
+                    result2.reference = null;
+
+                    _.isEqual(result, result2).should.be.true()
                 });
         });
     });

@@ -92,6 +92,19 @@ export class Tagger{
     }
 
     /**
+     * (Synchronized) 문단단위 품사표기
+     * @param {string|string[]} paragraph 품사표기할 문단(string) 또는 문장의 배열(string[])
+     * @return {Sentence[]} 품사표기 결과
+     */
+    tagSync(paragraph){
+        if(Array.isArray(paragraph)) {
+            return paragraph.map(sent => this.tagger.tagSentenceSync(sent));
+        }else {
+            return converter(this.tagger.tagSync(paragraph));
+        }
+    }
+
+    /**
      * 문장단위 품사표기
      * @param {string} sentence 품사표기할 문장.
      * @return {Promise<Sentence>} 품사표기 결과인 문장 1개를 담을 Promise가 반환됨.
@@ -103,6 +116,15 @@ export class Tagger{
                 else resolve(convertSentence(result));
             });
         });
+    }
+
+    /**
+     * (Synchronized) 문장단위 품사표기
+     * @param {string} sentence 품사표기할 문장.
+     * @return {Sentence} 품사표기 결과인 문장 1개
+     */
+    tagSentenceSync(sentence){
+        return convertSentence(this.tagger.tagSentenceSync(sentence));
     }
 }
 
@@ -214,6 +236,64 @@ export class Parser{
                 reject(new Error("A raw string cannot be parsed as a single sentence without a tagger!"))
         });
     }
+
+    /**
+     * (Synchronized) 문단단위 분석
+     * @param {string|string[]|Sentence|Sentence[]} paragraph 분석할 문단(string, string[], Sentence[]) 또는 문장(Sentence).
+     * @return {Sentence|Sentence[]} 문장(Sentence)의 경우는 분석결과인 문장(Sentence), 문단인 경우는 분석 결과(문장 배열)
+     */
+    parseSync(paragraph){
+        let isList = Array.isArray(paragraph);
+        let isSentence = paragraph instanceof Sentence || paragraph[0] instanceof Sentence;
+
+        let target = undefined;
+        if(isSentence){
+            if(isList){
+                target = paragraph.map(sent => sent.reference);
+                target = java.callStaticMethodSync("scala.Predef", "genericArrayOps", target).toSeqSync();
+            }else{
+                target = paragraph.reference;
+            }
+
+            return converter(this.parser.parseSync(target));
+        }else{
+            if(isList){
+                target = [];
+                if (this.tagger) {
+                    target = paragraph.map(sent => this.tagger.tagSync(sent));
+                } else {
+                    target = paragraph;
+                }
+
+                return target.map(sent => convertSentence(this.parser.parseSync(sent)));
+            }else{
+                if(this.tagger){
+                    target = this.tagger.tagSync(paragraph);
+                }else{
+                    target = paragraph;
+                }
+
+                return converter(this.parser.parseSync(target));
+            }
+        }
+    }
+
+    /**
+     * (Synchronized) 문장단위 분석
+     * @param {string|Sentence} sentence 분석할 문장.
+     * @return {Sentence} 분석 결과(문장 1개)
+     */
+    parseSentenceSync(sentence){
+        let isSentence = sentence instanceof Sentence;
+
+        if(this.tagger && !isSentence) {
+            return convertSentence(this.parser.parseSync(this.tagger.tagSentenceSync(sentence)));
+        }else if(isSentence){
+            let target = sentence.reference;
+            return convertSentence(this.parser.parseSync(target));
+        }else
+            throw new Error("A raw string cannot be parsed as a single sentence without a tagger!")
+    }
 }
 
 /**
@@ -255,6 +335,15 @@ export class SentenceSplitter{
     }
 
     /**
+     * (Synchronized) 문단을 문장으로 분리합니다.
+     * @param {string} paragraph 분석할 문단.
+     * @return {string[]} 분석 결과
+     */
+    sentencesSync(paragraph){
+        return convertSentenceStr(this.splitter.sentencesSync(paragraph));
+    }
+
+    /**
      * KoalaNLP가 구현한 문장분리기를 사용하여, 문단을 문장으로 분리합니다.
      * @param {Sentence} paragraph 분석할 문단. (품사표기가 되어있어야 합니다)
      * @return {Promise<Sentence[]>} 분석 결과를 담은 Promise가 반환됨.
@@ -269,6 +358,20 @@ export class SentenceSplitter{
                     else resolve(converter(parsed));
                 });
         });
+    }
+
+    /**
+     * (Synchronized) KoalaNLP가 구현한 문장분리기를 사용하여, 문단을 문장으로 분리합니다.
+     * @param {Sentence} paragraph 분석할 문단. (품사표기가 되어있어야 합니다)
+     * @return {Sentence[]} 분석 결과
+     */
+    static sentencesSync(paragraph){
+        assert(paragraph instanceof Sentence);
+
+        return converter(
+            java.callStaticMethodSync("kr.bydelta.koala.util.SentenceSplitter", "apply",
+                paragraph.reference)
+        );
     }
 }
 
@@ -353,6 +456,38 @@ export class Dictionary{
                 });
             }
         });
+    }
+
+    /**
+     * (Synchronized) 사용자 사전에, 표면형과 그 품사를 추가.
+     *
+     * @param {string|string[]} morph 표면형.
+     * @param {string|string[]} tag   세종 품사.
+     * @return {boolean} 정상적으로 완료되었는지 여부
+     */
+    addUserDictionarySync(morph, tag){
+        let isMArray = Array.isArray(morph);
+        let isTArray = Array.isArray(tag);
+
+        assert(isMArray == isTArray,
+            "형태소와 품사는 둘 다 같은 길이의 배열이거나 둘 다 string이어야 합니다.");
+
+        if(isMArray){
+            assert(morph.length == tag.length,
+                "형태소와 품사는 둘 다 같은 길이의 배열이어야 합니다.");
+            let tuples = [];
+            for(let i = 0; i < morph.length; i ++){
+                tuples.push(morphToTuple(morph[i], tag[i]));
+            }
+            tuples = java.callStaticMethodSync("scala.Predef", "genericArrayOps", tuples).toSeqSync();
+
+            this.dict.addUserDictionarySync(tuples);
+            return true;
+        }else {
+            let posTag = java.callStaticMethodSync("kr.bydelta.koala.POS", "withName", tag);
+            this.dict.addUserDictionarySync(morph, posTag);
+            return true;
+        }
     }
 
     /**

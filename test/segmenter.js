@@ -1,4 +1,5 @@
 var koalanlp = require('../lib/api');
+var _ = require('lodash');
 var API = koalanlp.API;
 
 describe('SentenceSplitter', function () {
@@ -64,6 +65,35 @@ describe('SentenceSplitter', function () {
                             result[1].get(3).surface.should.equal("아침입니다");
                             result[1].get(3).get(2).surface.should.equal("ᄇ니다");
                             result[1].get(3).get(2).tag.should.equal("EF");
+                        });
+                });
+        });
+    });
+
+
+    describe('#sentencesSync()', function(){
+        it('correctly preserves a single sentence', function(){
+            return segmenter.sentences("안녕하세요.")
+                .then(result => {
+                    _.isEqual(result, segmenter.sentencesSync("안녕하세요.")).should.be.true();
+                });
+        });
+
+        it('correctly segments sentences', function(){
+            return segmenter.sentences("안녕하세요. 눈이 오는 설날 아침입니다.")
+                .then(result => {
+                    _.isEqual(result, segmenter.sentencesSync("안녕하세요. 눈이 오는 설날 아침입니다.")).should.be.true();
+                });
+        });
+    });
+
+    describe('.sentences()', function(){
+        it('correctly segments Sentence object', function(){
+            return tagger.tagSentence("안녕하세요. 눈이 오는 설날 아침입니다.")
+                .then(res => {
+                    koalanlp.SentenceSplitter.sentences(res)
+                        .then(result => {
+                            _.isEqual(result, koalanlp.SentenceSplitter.sentencesSync("안녕하세요. 눈이 오는 설날 아침입니다.")).should.be.true();
                         });
                 });
         });

@@ -1,4 +1,5 @@
 var koalanlp = require('../lib/api');
+var _ = require('lodash');
 var API = koalanlp.API;
 
 describe('Tagger', function () {
@@ -65,6 +66,45 @@ describe('Tagger', function () {
                     result[1].get(3).surface.should.equal("아침입니다");
                     result[1].get(3).get(2).surface.should.equal("ᄇ니다");
                     result[1].get(3).get(2).tag.should.equal("EF");
+                });
+        });
+    });
+
+    describe('#tagSentenceSync()', function(){
+        it('correctly tag a sentence', function(){
+            return tagger.tagSentence("안녕하세요.")
+                .then(result => {
+                    let result2 = tagger.tagSentenceSync("안녕하세요.");
+                    result.reference = null;
+                    result2.reference = null;
+
+                    _.isEqual(result, result2).should.be.true();
+                });
+        });
+
+        it('handles paragraph as a single sentence', function(){
+            return tagger.tagSentence("안녕하세요. 눈이 오는 설날 아침입니다.")
+                .then(result => {
+                    let result2 = tagger.tagSentenceSync("안녕하세요. 눈이 오는 설날 아침입니다.");
+                    result.reference = null;
+                    result2.reference = null;
+
+                    _.isEqual(result, result2).should.be.true();
+                });
+        });
+    });
+
+    describe('#tagSync()', function(){
+        it('correctly tag a paragraph', function(){
+            return tagger.tag("안녕하세요. 눈이 오는 설날 아침입니다.")
+                .then(result => {
+                    let result2 = tagger.tagSync("안녕하세요. 눈이 오는 설날 아침입니다.");
+                    result[0].reference = null;
+                    result2[0].reference = null;
+                    result[1].reference = null;
+                    result2[1].reference = null;
+
+                    _.isEqual(result, result2).should.be.true();
                 });
         });
     });
