@@ -3,14 +3,14 @@
   "version": "1.3.4",
   "description": "Node.js wrapper for KoalaNLP (An integrated API for processing Korean in with Scala/Java)",
   "author": {
-    "name": "nearbydelta"
+    "name": "koalanlp"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/nearbydelta/nodejs-koalanlp.git"
+    "url": "git://github.com/koalanlp/nodejs-koalanlp.git"
   },
   "bugs": {
-    "url": "http://github.com/nearbydelta/nodejs-koalanlp/issues"
+    "url": "http://github.com/koalanlp/nodejs-koalanlp/issues"
   },
   "main": "./lib/api.js",
   "scripts": {
