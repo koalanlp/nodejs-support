@@ -34,8 +34,7 @@
   ],
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "java": "0.9.1",
-    "lodash": "4.17.5",
+    "java": "0.11.0",
     "node-java-maven": "^0.1.1"
   },
   "devDependencies": {
@@ -45,8 +44,5 @@
     "jsdoc": "^3.5.5",
     "mocha": "^5.0.0",
     "should": "^13.2.1"
-  },
-  "resolutions": {
-    "lodash": "4.17.5"
   }
 }

@@ -8,10 +8,9 @@ describe('Tagger', function () {
     before(function (done) {
         koalanlp.initialize({
             packages: [API.EUNJEON],
-            version: "1.9.2",
+            version: "1.9.4",
             debug: false
-        }).catch(err => done(err))
-            .then(() => done());
+        }).then(() => done());
     });
 
     describe('#constructor()', function(){

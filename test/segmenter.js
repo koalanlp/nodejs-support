@@ -8,10 +8,9 @@ describe('SentenceSplitter', function () {
     before(function (done) {
         koalanlp.initialize({
             packages: [API.TWITTER, API.EUNJEON],
-            version: "1.9.2",
+            version: "1.9.4",
             debug: false
-        }).catch(err => done(err))
-            .then(() => done());
+        }).then(() => done());
     });
 
     describe('#constructor()', function(){
@@ -93,7 +92,7 @@ describe('SentenceSplitter', function () {
                 .then(res => {
                     koalanlp.SentenceSplitter.sentences(res)
                         .then(result => {
-                            _.isEqual(result, koalanlp.SentenceSplitter.sentencesSync("안녕하세요. 눈이 오는 설날 아침입니다.")).should.be.true();
+                            _.isEqual(result, koalanlp.SentenceSplitter.sentencesSync(res)).should.be.true();
                         });
                 });
         });

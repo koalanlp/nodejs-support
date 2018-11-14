@@ -8,7 +8,7 @@ describe('Parser', function () {
     before(function (done) {
         koalanlp.initialize({
             packages: [API.EUNJEON, API.KKMA],
-            version: "1.9.2",
+            version: "1.9.4",
             debug: false
         }).catch(err => done(err))
             .then(() => done());
@@ -19,7 +19,7 @@ describe('Parser', function () {
             (function(){
                 parser1 = new koalanlp.Parser(API.KKMA);
             }).should.not.throw();
-        })
+        });
         it('is initializable also with tagger name', function(){
             (function(){
                 tagger = new koalanlp.Tagger(API.EUNJEON);
@@ -96,7 +96,7 @@ describe('Parser', function () {
         it('must be same with the result of tagger-parser', function(){
             return tagger.tagSentence("안녕하세요. 눈이 오는 설날 아침입니다.")
                 .then(tagged => {
-                    parser1.parseSentence(tagged.reference)
+                    parser1.parseSentence(tagged)
                         .then(parsed1 => {
                             parser2.parseSentence("안녕하세요. 눈이 오는 설날 아침입니다.")
                                 .then(parsed2 => {

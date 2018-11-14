@@ -32,6 +32,12 @@ let makeDependencyItem = function(type, version){
             break;
     }
 
+    if(version >= "2.0.0"){
+        throw new Error(
+            `Nodejs-Koalanlp 1.3.x는 Java KoalaNLP 2.x에서 변경된 API를 따르지 않기 때문에, ${version}은 사용하실 수 없습니다. ` +
+            "상세한 사항은 https://github.com/koalanlp/nodejs-koalanlp 에서 확인해주세요.");
+    }
+
     let obj = {
         "groupId": "kr.bydelta",
         "artifactId": `koalanlp-${artifactName}_2.12`,
