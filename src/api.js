@@ -9,33 +9,6 @@ import {Sentence, Word, Morpheme, Relationship} from './data';
  */
 let java = {};
 
-/**
- * Assert method
- *
- * @private
- * @param cond Condition to be checked.
- * @param msg Message to be thrown if condition check is failed.
- * @param reject Function if assert is using inside of a Promise.
- */
-let assert = function(cond, msg, reject){
-    if(!cond) {
-        if (!reject) throw new Error(msg ? msg : "Assertion failed!");
-        else reject(new Error(msg ? msg : "Assertion failed!"));
-    }
-};
-
-/**
- * 분석기 API 목록.
- * @readonly
- * @property {string} HANNANUM 한나눔 분석기.
- * @property {string} EUNJEON 은전한닢(Mecab) 분석기.
- * @property {string} KOMORAN 코모란 분석기.
- * @property {string} KKMA 꼬꼬마 분석기.
- * @property {string} TWITTER 트위터(OpenKoreanText) 분석기.
- * @property {string} ARIRANG 아리랑 분석기.
- * @property {string} RHINO 라이노 분석기.
- */
-export const API = require('./const').API;
 
 /**
  * 품사분석을 위한 도구. (Shortcut)

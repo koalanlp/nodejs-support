@@ -1,16 +1,16 @@
 {
   "name": "koalanlp",
-  "version": "1.3.4",
-  "description": "Node.js wrapper for KoalaNLP (An integrated API for processing Korean in with Scala/Java)",
+  "version": "2.0.0",
+  "description": "Node.js wrapper for KoalaNLP (An integrated API for processing Korean in with Kotlin/Java/Scala)",
   "author": {
     "name": "koalanlp"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/koalanlp/nodejs-koalanlp.git"
+    "url": "git://github.com/koalanlp/nodejs-support.git"
   },
   "bugs": {
-    "url": "http://github.com/koalanlp/nodejs-koalanlp/issues"
+    "url": "http://github.com/koalanlp/nodejs-support/issues"
   },
   "main": "./lib/api.js",
   "scripts": {
@@ -28,9 +28,14 @@
     "korean",
     "koalanlp",
     "natural language processing",
-    "sentence",
-    "tagger",
-    "parser"
+    "한국어 분석",
+    "한국어 처리",
+    "자연어 처리",
+    "형태소",
+    "구문분석",
+    "의존구문",
+    "개체명",
+    "의미역"
   ],
   "dependencies": {
     "babel-polyfill": "^6.26.0",

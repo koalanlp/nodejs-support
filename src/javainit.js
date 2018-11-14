@@ -1,40 +1,13 @@
 let API = require('./const').API;
 
 let makeDependencyItem = function(type, version){
-    let artifactName = "";
-    let isAssembly = false;
-    switch (type){
-        case API.HANNANUM:
-            artifactName = "hannanum";
-            isAssembly = true;
-            break;
-        case API.KOMORAN:
-            artifactName = "komoran";
-            break;
-        case API.KKMA:
-            artifactName = "kkma";
-            isAssembly = true;
-            break;
-        case API.EUNJEON:
-            artifactName = "eunjeon";
-            break;
-        case API.ARIRANG:
-            artifactName = "arirang";
-            isAssembly = true;
-            break;
-        case API.RHINO:
-            artifactName = "rhino";
-            isAssembly = true;
-            break;
-        case API.TWITTER:
-            artifactName = "twitter";
-            isAssembly = false;
-            break;
-    }
+    let artifactName = type;
+    let isAssembly = type in [API.HANNANUM, API.KKMA, API.ARIRANG, API.RHINO, API.DAON];
+    assert();
 
     let obj = {
         "groupId": "kr.bydelta",
-        "artifactId": `koalanlp-${artifactName}_2.12`,
+        "artifactId": `koalanlp-${artifactName}`,
         "version": version
     };
     if(isAssembly){
