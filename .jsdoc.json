@@ -1,0 +1,67 @@
+{
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "sourceType": "module",
+  "source": {
+    "include": ["src/", "README.md"],
+    "exclude": ["src/jvm.js"]
+  },
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": true
+  },
+  "opts": {
+    "template": "node_modules/docdash",
+    "encoding": "utf8",
+    "destination": "docs/",
+    "recurse": true,
+    "verbose": true
+  },
+  "docdash": {
+    "sort": false,
+    "sectionOrder": [
+      "Modules",
+      "Classes",
+      "Externals",
+      "Events",
+      "Namespaces",
+      "Mixins",
+      "Tutorials",
+      "Interfaces"
+    ],
+    "search": true,
+    "collapse": true,
+    "typedefs": false,
+    "menu": {
+      "사용법 안내": {
+        "href": "https://koalanlp.github.io/koalanlp/usage",
+        "target":"_blank",
+        "class":"menu-item",
+        "id":"website_link"
+      },
+      "참고: Java/Kotlin API": {
+        "href": "https://koalanlp.github.io/koalanlp",
+        "target":"_blank",
+        "class":"menu-item",
+        "id":"website_link"
+      },
+      "참고: Scala API": {
+        "href": "https://koalanlp.github.io/scala-support",
+        "target":"_blank",
+        "class":"menu-item",
+        "id":"website_link"
+      },
+      "참고: Python3 API": {
+        "href": "https://koalanlp.github.io/python-support",
+        "target":"_blank",
+        "class":"menu-item",
+        "id":"website_link"
+      }
+    }
+  }
+}

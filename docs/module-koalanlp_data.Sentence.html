@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Class: Sentence</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Sentence - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Class: Sentence</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://koalanlp.github.io/koalanlp/usage" target="_blank" class="menu-item" id="website_link" >사용법 안내</a></h2><h2><a href="https://koalanlp.github.io/koalanlp" target="_blank" class="menu-item" id="website_link" >참고: Java/Kotlin API</a></h2><h2><a href="https://koalanlp.github.io/scala-support" target="_blank" class="menu-item" id="website_link" >참고: Scala API</a></h2><h2><a href="https://koalanlp.github.io/python-support" target="_blank" class="menu-item" id="website_link" >참고: Python3 API</a></h2><h3>Modules</h3><ul><li><a href="module-koalanlp_API.html">koalanlp/API</a></li><li><a href="module-koalanlp_ExtUtil.html">koalanlp/ExtUtil</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.alphaToHangul">alphaToHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.hangulToAlpha">hangulToAlpha</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isAlphaPronounced">isAlphaPronounced</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isHanja">isHanja</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isCJKHanja">isCJKHanja</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.hanjaToHangul">hanjaToHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isCompleteHangul">isCompleteHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isIncompleteHangul">isIncompleteHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isHangul">isHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isHangulEnding">isHangulEnding</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isChosungJamo">isChosungJamo</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isJungsungJamo">isJungsungJamo</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isJongsungJamo">isJongsungJamo</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isJongsungEnding">isJongsungEnding</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.getChosung">getChosung</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.getJungsung">getJungsung</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.getJongsung">getJongsung</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.dissembleHangul">dissembleHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.assembleHangulTriple">assembleHangulTriple</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.assembleHangul">assembleHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.correctVerbApply">correctVerbApply</a></li></ul></li><li><a href="module-koalanlp_Util.html">koalanlp/Util</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_Util.html#.initialize">initialize</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_Util.html#.contains">contains</a></li></ul></li><li><a href="module-koalanlp_data.html">koalanlp/data</a></li><li><a href="module-koalanlp_proc.html">koalanlp/proc</a></li><li><a href="module-koalanlp_types.html">koalanlp/types</a></li></ul><h3>Classes</h3><ul><li><a href="module-koalanlp_data.Entity.html">Entity</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getSurface">getSurface</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getLabel">getLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getFineLabel">getFineLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getCorefGroup">getCorefGroup</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getOriginalLabel">getOriginalLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#equals">equals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.CoreferenceGroup.html">CoreferenceGroup</a></li><li><a href="module-koalanlp_data.Tree.html">Tree</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getLabel">getLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getTerminal">getTerminal</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#isRoot">isRoot</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#hasNonTerminals">hasNonTerminals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getTreeString">getTreeString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getParent">getParent</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getNonTerminals">getNonTerminals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#equals">equals</a></li></ul></li><li><a href="module-koalanlp_data.SyntaxTree.html">SyntaxTree</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.SyntaxTree.html#getOriginalLabel">getOriginalLabel</a></li></ul></li><li><a href="module-koalanlp_data.DAGEdge.html">DAGEdge</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#getSrc">getSrc</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#getDest">getDest</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#getLabel">getLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#equals">equals</a></li></ul></li><li><a href="module-koalanlp_data.DepEdge.html">DepEdge</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getGovernor">getGovernor</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getDependent">getDependent</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getDepType">getDepType</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getType">getType</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getOriginalLabel">getOriginalLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#equals">equals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.RoleEdge.html">RoleEdge</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getPredicate">getPredicate</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getArgument">getArgument</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getModifiers">getModifiers</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getOriginalLabel">getOriginalLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.Morpheme.html">Morpheme</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getSurface">getSurface</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getTag">getTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getOriginalTag">getOriginalTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getId">getId</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getWordSense">getWordSense</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getEntities">getEntities</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getWord">getWord</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isNoun">isNoun</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isPredicate">isPredicate</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isModifier">isModifier</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isJosa">isJosa</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#hasTag">hasTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#hasTagOneOf">hasTagOneOf</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#hasOriginalTag">hasOriginalTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#equals">equals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.Word.html">Word</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getSurface">getSurface</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getId">getId</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getEntities">getEntities</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getPhrase">getPhrase</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getDependentEdges">getDependentEdges</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getGovernorEdge">getGovernorEdge</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getArgumentRoles">getArgumentRoles</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getPredicateRoles">getPredicateRoles</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#singleLineString">singleLineString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#equals">equals</a></li></ul></li><li><a href="module-koalanlp_data.Sentence.html">Sentence</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getSyntaxTree">getSyntaxTree</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getDependencies">getDependencies</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getRoles">getRoles</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getEntities">getEntities</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getCorefGroups">getCorefGroups</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getNouns">getNouns</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getVerbs">getVerbs</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getModifiers">getModifiers</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#surfaceString">surfaceString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#singleLineString">singleLineString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#.fromJava">fromJava</a></li></ul></li><li><a href="module-koalanlp_proc.SentenceSplitter.html">SentenceSplitter</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.SentenceSplitter.html#sentences">sentences</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.SentenceSplitter.html#.sentences">sentences</a></li></ul></li><li><a href="module-koalanlp_proc.Tagger.html">Tagger</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Tagger.html#tag">tag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Tagger.html#tagSentence">tagSentence</a></li></ul></li><li><a href="module-koalanlp_proc.Parser.html">Parser</a></li><li><a href="module-koalanlp_proc.EntityRecognizer.html">EntityRecognizer</a></li><li><a href="module-koalanlp_proc.RoleLabeler.html">RoleLabeler</a></li><li><a href="module-koalanlp_proc.Dictionary.html">Dictionary</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#addUserDictionary">addUserDictionary</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#contains">contains</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#importFrom">importFrom</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#getBaseEntries">getBaseEntries</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#getItems">getItems</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#getNotExists">getNotExists</a></li></ul></li><li><a href="module-koalanlp_types.POS.html">POS</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#.withName">withName</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isNoun">isNoun</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isPredicate">isPredicate</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isModifier">isModifier</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isPostPosition">isPostPosition</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isEnding">isEnding</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isAffix">isAffix</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isSuffix">isSuffix</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isSymbol">isSymbol</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isUnknown">isUnknown</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#startsWith">startsWith</a></li></ul></li><li><a href="module-koalanlp_types.PhraseTag.html">PhraseTag</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.PhraseTag.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.PhraseTag.html#.withName">withName</a></li></ul></li><li><a href="module-koalanlp_types.DependencyTag.html">DependencyTag</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.DependencyTag.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.DependencyTag.html#.withName">withName</a></li></ul></li><li><a href="module-koalanlp_types.RoleType.html">RoleType</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.RoleType.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.RoleType.html#.withName">withName</a></li></ul></li><li><a href="module-koalanlp_types.CoarseEntityType.html">CoarseEntityType</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.CoarseEntityType.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.CoarseEntityType.html#.withName">withName</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Sentence</h1>
+    
 
     
 
@@ -28,115 +45,30 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="module-koalanlp_data.html">koalanlp/data</a>.</span>Sentence<span class="signature">(words, reference)</span><span class="type-signature"></span></h2>
+        <h2>
+            <span class="ancestors"><a href="module-koalanlp_data.html">koalanlp/data</a>.</span>
         
-            <div class="class-description">문장.</div>
+        Sentence
+        </h2>
+        
+            <div class="class-description"><p>문장을 저장하는 Class 입니다.</p></div>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
+            
 
     
     <h2>Constructor</h2>
     
 
-    
-    <h4 class="name" id="Sentence"><span class="type-signature"></span>new Sentence<span class="signature">(words, reference)</span><span class="type-signature"></span></h4>
-    
+    <h4 class="name" id="Sentence"><span class="type-signature"></span>new Sentence<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
-
-
-
-<div class="description">
-    문장 객체 생성.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>words</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Word></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">문장에 포함될 어절 목록.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>reference</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">KoalaNLP(Java) 분석결과.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
 
 
 
@@ -144,34 +76,34 @@
 <dl class="details">
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line338">line 338</a>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1752">line 1752</a>
     </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     
@@ -198,8 +130,50 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
     
-    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="syntaxTree"><span class="type-signature"></span>syntaxTree<span class="type-signature"> :SyntaxTree</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1778">line 1778</a>
+    </li></ul></dd>
+    
 
     
 
@@ -213,6 +187,653 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>구문분석을 했다면, 최상위 구구조(Phrase)를 돌려줍니다.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>구문구조 분석</strong> 은 문장의 구성요소들(어절, 구, 절)이 이루는 문법적 구조를 분석하는 방법입니다.</p>
+<p>예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는 2개의 절이 있습니다</p>
+<ul>
+<li>나는 밥을 먹었고</li>
+<li>영희는 짐을 쌌다</li>
+</ul>
+<p>각 절은 3개의 구를 포함합니다</p>
+<ul>
+<li>나는, 밥을, 영희는, 짐을: 체언구</li>
+<li>먹었고, 쌌다: 용언구</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.Parser.html"><code>Parser</code></a> 구문구조 분석을 수행하는 interface.</li>
+<li><a href="module-koalanlp_data.Word.html#phrase"><code>Word#phrase</code></a> 어절의 직속 상위 [SyntaxTree]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.SyntaxTree.html"><code>SyntaxTree</code></a> 구문구조를 저장하는 형태</li>
+<li><a href="module-koalanlp_types.PhraseTag.html"><code>PhraseTag</code></a> 구구조의 형태 분류를 갖는 Enum 값</li>
+</ul>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">SyntaxTree</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="dependencies"><span class="type-signature"></span>dependencies<span class="type-signature"> :Array.&lt;DepEdge></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1807">line 1807</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>의존구문분석을 했다면, 문장에 포함된 모든 의존구조의 목록을 돌려줍니다.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>의존구조 분석</strong> 은 문장의 구성 어절들이 의존 또는 기능하는 관계를 분석하는 방법입니다.</p>
+<p>예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는</p>
+<p>가장 마지막 단어인 '쌌다'가 핵심 어구가 되며,</p>
+<ul>
+<li>'먹었고'가 '쌌다'와 대등하게 연결되고</li>
+<li>'나는'은 '먹었고'의 주어로 기능하며</li>
+<li>'밥을'은 '먹었고'의 목적어로 기능합니다.</li>
+<li>'영희는'은 '쌌다'의 주어로 기능하고,</li>
+<li>'짐을'은 '쌌다'의 목적어로 기능합니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.Parser.html"><code>Parser</code></a> 의존구조 분석을 수행하는 interface.</li>
+<li><a href="module-koalanlp_data.Word.html#governorEdge"><code>Word#governorEdge</code></a> 어절이 지배당하는 상위 의존구조 [DepEdge]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Word.html#dependentEdges"><code>Word#dependentEdges</code></a> 어절이 직접 지배하는 하위 의존구조 [DepEdge]의 목록를 가져오는 API</li>
+<li><a href="module-koalanlp_types.PhraseTag.html"><code>PhraseTag</code></a> 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)</li>
+<li><a href="module-koalanlp_types.DependencyTag.html"><code>DependencyTag</code></a> 의존구조의 기능 분류를 갖는 Enum 값</li>
+<li><a href="module-koalanlp_data.DepEdge.html"><code>DepEdge</code></a> 의존구문구조의 저장형태</li>
+</ul>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;DepEdge></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="roles"><span class="type-signature"></span>roles<span class="type-signature"> :Array.&lt;RoleEdge></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1834">line 1834</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>의미역 분석을 했다면, 문장에 포함된 의미역 구조의 목록을 돌려줌.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>의미역 결정</strong> 은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.</p>
+<p>예) '나는 밥을 어제 집에서 먹었다'라는 문장에는</p>
+<p>동사 '먹었다'를 중심으로</p>
+<ul>
+<li>'나는'은 동작의 주체를,</li>
+<li>'밥을'은 동작의 대상을,</li>
+<li>'어제'는 동작의 시점을</li>
+<li>'집에서'는 동작의 장소를 나타냅니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.RoleLabeler.html"><code>RoleLabeler</code></a> 의미역 분석을 수행하는 interface.</li>
+<li><a href="module-koalanlp_data.Word.html#predicateRoles"><code>Word#predicateRoles</code></a> 어절이 논항인 [RoleEdge]의 술어를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Word.html#argumentRoles"><code>Word#argumentRoles</code></a> 어절이 술어인 [RoleEdge]의 논항들을 가져오는 API</li>
+<li><a href="module-koalanlp_data.RoleEdge.html"><code>RoleEdge</code></a> 의미역 구조를 저장하는 형태</li>
+<li><a href="module-koalanlp_types.RoleType.html"><code>RoleType</code></a> 의미역 분류를 갖는 Enum 값</li>
+</ul>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;RoleEdge></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="entities"><span class="type-signature"></span>entities<span class="type-signature"> :Array.&lt;Entity></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1859">line 1859</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>개체명 분석을 했다면, 문장의 모든 개체명 목록을 돌려줍니다.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>개체명 인식</strong> 은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.</p>
+<p>예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.</p>
+<ul>
+<li>'트럼프': 인물</li>
+<li>'미국' : 국가</li>
+<li>'대통령' : 직위</li>
+<li>'사우디' : 국가</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.EntityRecognizer.html"><code>EntityRecognizer</code></a> 개체명 인식기 interface</li>
+<li><a href="module-koalanlp_data.Morpheme.html#entities"><code>Morpheme#entities</code></a> 형태소를 포함하는 모든 [Entity]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Word.html#entities"><code>Word#entities</code></a> 해당 어절을 포함하는 [Entity]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Entity.html"><code>Entity</code></a> 개체명을 저장하는 형태</li>
+<li><a href="module-koalanlp_types.CoarseEntityType.html"><code>CoarseEntityType</code></a> [Entity]의 대분류 개체명 분류구조 Enum 값</li>
+</ul>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;Entity></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="corefGroups"><span class="type-signature"></span>corefGroups<span class="type-signature"> :Array.&lt;CoreferenceGroup></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1885">line 1885</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>문장 내에 포함된 공통 지시어 또는 대용어들의 묶음을 제공합니다.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>공지시어 해소</strong> 는 문장 내 또는 문장 간에 같은 대상을 지칭하는 어구를 찾아 묶는 분석과정입니다.</p>
+<p>예) '삼성그룹의 계열사인 삼성물산은 같은 그룹의 계열사인 삼성생명과 함께'라는 문장에서</p>
+<ul>
+<li>'삼성그룹'과 '같은 그룹'을 찾아 묶는 것을 말합니다.</li>
+</ul>
+<p><strong>영형대용어 분석</strong> 은 문장에서 생략된 기능어를 찾아 문장 내 또는 문장 간에 언급되어 있는 어구와 묶는 분석과정입니다.</p>
+<p>예) '나는 밥을 먹었고, 영희도 먹었다'라는 문장에서,</p>
+<ul>
+<li>'먹었다'의 목적어인 '밥을'이 생략되어 있음을 찾는 것을 말합니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><code>CorefResolver</code> 공지시어 해소, 대용어 분석기 interface</li>
+<li><a href="module-koalanlp_data.Entity.html#corefGroup"><code>Entity#corefGroup</code></a> 해당 개체명이 포함된 개체명 묶음 [CoreferenceGroup]을 반환하는 API</li>
+<li><a href="module-koalanlp_data.CoreferenceGroup.html"><code>CoreferenceGroup</code></a> 동일한 대상을 지칭하는 개체명을 묶는 API</li>
+</ul>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;CoreferenceGroup></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="nouns"><span class="type-signature"></span>nouns<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2209">line 2209</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>체언(명사, 수사, 대명사) 및 체언 성격의 어휘를 포함하는 어절들을 가져옵니다.</p>
+<ul>
+<li>포함: 체언, 명사형 전성어미 [POS.ETN], 명사 파생 접미사 [POS.XSN]</li>
+<li>제외: 관형형 전성어미 [POS.ETM], 동사/형용사/부사 파생 접미사 [POS.XSV], [POS.XSA], [POS.XSM]</li>
+<li>가장 마지막에 적용되는 어미/접미사를 기준으로 판정함</li>
+</ul>
+<p><strong>[참고]</strong></p>
+<p><strong>전성어미</strong> 는 용언 따위에 붙어 다른 품사의 기능을 수행하도록 변경하는 어미입니다.
+예) '멋지게 살다'를 '멋지게 삶'으로 바꾸는 명사형 전성어미 '-ㅁ'이 있습니다. 원 기능은 동사이므로 부사의 수식을 받고 있습니다.</p>
+<p><strong>파생접미사</strong> 는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
+예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="verbs"><span class="type-signature"></span>verbs<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2261">line 2261</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>용언(동사, 형용사) 및 용언 성격의 어휘를 포함하는 어절들을 가져옵니다.</p>
+<ul>
+<li>포함: 용언, 동사 파생 접미사 [POS.XSV]</li>
+<li>제외: 명사형/관형형 전성어미 [POS.ETN], [POS.ETM], 명사/형용사/부사 파생 접미사 [POS.XSN], [POS.XSA], [POS.XSM]</li>
+<li>가장 마지막에 적용되는 어미/접미사를 기준으로 판정함</li>
+</ul>
+<p><strong>[참고]</strong></p>
+<p><strong>전성어미</strong> 는 용언 따위에 붙어 다른 품사의 기능을 수행하도록 변경하는 어미입니다.
+예) '멋지게 살다'를 '멋지게 삶'으로 바꾸는 명사형 전성어미 '-ㅁ'이 있습니다. 원 기능은 동사이므로 부사의 수식을 받고 있습니다.</p>
+<p><strong>파생접미사</strong> 는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
+예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="modifiers"><span class="type-signature"></span>modifiers<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2313">line 2313</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>수식언(관형사, 부사) 및 수식언 성격의 어휘를 포함하는 어절들을 가져옵니다.</p>
+<ul>
+<li>포함: 수식언, 관형형 전성어미 [POS.ETM], 형용사/부사 파생 접미사 [POS.XSA], [POS.XSM]</li>
+<li>제외: 명사형 전성어미 [POS.ETN], 명사/동사 파생 접미사 [POS.XSN], [POS.XSV]</li>
+<li>가장 마지막에 적용되는 어미/접미사를 기준으로 판정함</li>
+</ul>
+<p><strong>[참고]</strong></p>
+<p><strong>전성어미</strong> 는 용언 따위에 붙어 다른 품사의 기능을 수행하도록 변경하는 어미입니다.
+예) '멋지게 살다'를 '멋지게 삶'으로 바꾸는 명사형 전성어미 '-ㅁ'이 있습니다. 원 기능은 동사이므로 부사의 수식을 받고 있습니다.</p>
+<p><strong>파생접미사</strong> 는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
+예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.</p>
+</div>
+
+
+
+
+
+
+
+
+        
     
 
     
@@ -223,16 +844,78 @@
 
     
 
+    <h4 class="name" id="getSyntaxTree"><span class="type-signature"></span>getSyntaxTree<span class="signature">()</span><span class="type-signature"> &rarr; {SyntaxTree}</span></h4>
+
     
-    <h4 class="name" id="exists"><span class="type-signature"></span>exists<span class="signature">(fn)</span><span class="type-signature"> &rarr; {Word|undefined}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2070">line 2070</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    주어진 어절/조건을 만족하는 어절이 있는지 확인.
+    <p>구문분석을 했다면, 최상위 구구조(Phrase)를 돌려줍니다.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>구문구조 분석</strong> 은 문장의 구성요소들(어절, 구, 절)이 이루는 문법적 구조를 분석하는 방법입니다.</p>
+<p>예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는 2개의 절이 있습니다</p>
+<ul>
+<li>나는 밥을 먹었고</li>
+<li>영희는 짐을 쌌다</li>
+</ul>
+<p>각 절은 3개의 구를 포함합니다</p>
+<ul>
+<li>나는, 밥을, 영희는, 짐을: 체언구</li>
+<li>먹었고, 쌌다: 용언구</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.Parser.html"><code>Parser</code></a> 구문구조 분석을 수행하는 interface.</li>
+<li><a href="module-koalanlp_data.Word.html#phrase"><code>Word#phrase</code></a> 어절의 직속 상위 [SyntaxTree]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.SyntaxTree.html"><code>SyntaxTree</code></a> 구문구조를 저장하는 형태</li>
+<li><a href="module-koalanlp_types.PhraseTag.html"><code>PhraseTag</code></a> 구구조의 형태 분류를 갖는 Enum 값</li>
+</ul>
 </div>
 
 
@@ -243,101 +926,7 @@
 
 
 
-    <h5>Parameters:</h5>
-    
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>fn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Word</span>
-|
-
-<span class="param-type">wordMatcher</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">확인할 어절 또는 조건.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line394">line 394</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -355,21 +944,18 @@
 
         
 <div class="param-desc">
-    만족하는 어절이 있으면 true.
+    <p>최상위 구구조 [SyntaxTree]. 분석 결과가 없으면 undefined.</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
-<span class="param-type">Word</span>
-|
-
-<span class="param-type">undefined</span>
+<span class="param-type">SyntaxTree</span>
 
 
     </dd>
@@ -378,24 +964,84 @@
     
 
 
-
-
-
         
             
 
     
 
+    <h4 class="name" id="getDependencies"><span class="type-signature"></span>getDependencies<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;DepEdge>}</span></h4>
+
     
-    <h4 class="name" id="find"><span class="type-signature"></span>find<span class="signature">(fn)</span><span class="type-signature"> &rarr; {Word|undefined}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2101">line 2101</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    주어진 어절/조건을 만족하는 어절 반환.
+    <p>의존구문분석을 했다면, 문장에 포함된 모든 의존구조의 목록을 돌려줍니다.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>의존구조 분석</strong> 은 문장의 구성 어절들이 의존 또는 기능하는 관계를 분석하는 방법입니다.</p>
+<p>예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는</p>
+<p>가장 마지막 단어인 '쌌다'가 핵심 어구가 되며,</p>
+<ul>
+<li>'먹었고'가 '쌌다'와 대등하게 연결되고</li>
+<li>'나는'은 '먹었고'의 주어로 기능하며</li>
+<li>'밥을'은 '먹었고'의 목적어로 기능합니다.</li>
+<li>'영희는'은 '쌌다'의 주어로 기능하고,</li>
+<li>'짐을'은 '쌌다'의 목적어로 기능합니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.Parser.html"><code>Parser</code></a> 의존구조 분석을 수행하는 interface.</li>
+<li><a href="module-koalanlp_data.Word.html#governorEdge"><code>Word#governorEdge</code></a> 어절이 지배당하는 상위 의존구조 [DepEdge]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Word.html#dependentEdges"><code>Word#dependentEdges</code></a> 어절이 직접 지배하는 하위 의존구조 [DepEdge]의 목록를 가져오는 API</li>
+<li><a href="module-koalanlp_types.PhraseTag.html"><code>PhraseTag</code></a> 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)</li>
+<li><a href="module-koalanlp_types.DependencyTag.html"><code>DependencyTag</code></a> 의존구조의 기능 분류를 갖는 Enum 값</li>
+<li><a href="module-koalanlp_data.DepEdge.html"><code>DepEdge</code></a> 의존구문구조의 저장형태</li>
+</ul>
 </div>
 
 
@@ -406,101 +1052,7 @@
 
 
 
-    <h5>Parameters:</h5>
-    
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>fn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Word</span>
-|
-
-<span class="param-type">wordMatcher</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">확인할 어절 또는 조건.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line380">line 380</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -518,21 +1070,18 @@
 
         
 <div class="param-desc">
-    만족하는 어절.
+    <p>문장 내 모든 의존구문구조 [DepEdge]의 목록. 분석 결과가 없으면 빈 리스트.</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
-<span class="param-type">Word</span>
-|
-
-<span class="param-type">undefined</span>
+<span class="param-type">Array.&lt;DepEdge></span>
 
 
     </dd>
@@ -541,24 +1090,82 @@
     
 
 
-
-
-
         
             
 
     
 
+    <h4 class="name" id="getRoles"><span class="type-signature"></span>getRoles<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;RoleEdge>}</span></h4>
+
     
-    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(idx)</span><span class="type-signature"> &rarr; {Word}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2131">line 2131</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    주어진 위치의 어절 반환.
+    <p>의미역 분석을 했다면, 문장에 포함된 의미역 구조의 목록을 돌려줌.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>의미역 결정</strong> 은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.</p>
+<p>예) '나는 밥을 어제 집에서 먹었다'라는 문장에는</p>
+<p>동사 '먹었다'를 중심으로</p>
+<ul>
+<li>'나는'은 동작의 주체를,</li>
+<li>'밥을'은 동작의 대상을,</li>
+<li>'어제'는 동작의 시점을</li>
+<li>'집에서'는 동작의 장소를 나타냅니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.RoleLabeler.html"><code>RoleLabeler</code></a> 의미역 분석을 수행하는 interface.</li>
+<li><a href="module-koalanlp_data.Word.html#predicateRoles"><code>Word#predicateRoles</code></a> 어절이 논항인 [RoleEdge]의 술어를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Word.html#argumentRoles"><code>Word#argumentRoles</code></a> 어절이 술어인 [RoleEdge]의 논항들을 가져오는 API</li>
+<li><a href="module-koalanlp_data.RoleEdge.html"><code>RoleEdge</code></a> 의미역 구조를 저장하는 형태</li>
+<li><a href="module-koalanlp_types.RoleType.html"><code>RoleType</code></a> 의미역 분류를 갖는 Enum 값</li>
+</ul>
 </div>
 
 
@@ -569,98 +1176,7 @@
 
 
 
-    <h5>Parameters:</h5>
-    
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>idx</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">어절을 찾을 위치.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line428">line 428</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -678,18 +1194,18 @@
 
         
 <div class="param-desc">
-    해당하는 어절.
+    <p>문장 속의 모든 의미역 구조 [RoleEdge]의 목록. 분석 결과가 없으면 빈 리스트.</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
-<span class="param-type">Word</span>
+<span class="param-type">Array.&lt;RoleEdge></span>
 
 
     </dd>
@@ -698,24 +1214,81 @@
     
 
 
-
-
-
         
             
 
     
 
+    <h4 class="name" id="getEntities"><span class="type-signature"></span>getEntities<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Entity>}</span></h4>
+
     
-    <h4 class="name" id="length"><span class="type-signature"></span>length<span class="signature">()</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2159">line 2159</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    문장 내 어절의 수
+    <p>개체명 분석을 했다면, 문장의 모든 개체명 목록을 돌려줍니다.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>개체명 인식</strong> 은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.</p>
+<p>예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.</p>
+<ul>
+<li>'트럼프': 인물</li>
+<li>'미국' : 국가</li>
+<li>'대통령' : 직위</li>
+<li>'사우디' : 국가</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.EntityRecognizer.html"><code>EntityRecognizer</code></a> 개체명 인식기 interface</li>
+<li><a href="module-koalanlp_data.Morpheme.html#entities"><code>Morpheme#entities</code></a> 형태소를 포함하는 모든 [Entity]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Word.html#entities"><code>Word#entities</code></a> 해당 어절을 포함하는 [Entity]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Entity.html"><code>Entity</code></a> 개체명을 저장하는 형태</li>
+<li><a href="module-koalanlp_types.CoarseEntityType.html"><code>CoarseEntityType</code></a> [Entity]의 대분류 개체명 분류구조 Enum 값</li>
+</ul>
 </div>
 
 
@@ -727,48 +1300,6 @@
 
 
 
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line436">line 436</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -786,18 +1317,18 @@
 
         
 <div class="param-desc">
-    어절의 수.
+    <p>문장에 포함된 모든 [Entity]의 목록입니다.</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
-<span class="param-type">Number</span>
+<span class="param-type">Array.&lt;Entity></span>
 
 
     </dd>
@@ -806,24 +1337,81 @@
     
 
 
-
-
-
         
             
 
     
 
+    <h4 class="name" id="getCorefGroups"><span class="type-signature"></span>getCorefGroups<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;CoreferenceGroup>}</span></h4>
+
     
-    <h4 class="name" id="matches"><span class="type-signature"></span>matches<span class="signature">(tag)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2188">line 2188</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    주어진 형태소 형태를 포함하는지 확인.
+    <p>문장 내에 포함된 공통 지시어 또는 대용어들의 묶음을 제공합니다.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>공지시어 해소</strong> 는 문장 내 또는 문장 간에 같은 대상을 지칭하는 어구를 찾아 묶는 분석과정입니다.</p>
+<p>예) '삼성그룹의 계열사인 삼성물산은 같은 그룹의 계열사인 삼성생명과 함께'라는 문장에서</p>
+<ul>
+<li>'삼성그룹'과 '같은 그룹'을 찾아 묶는 것을 말합니다.</li>
+</ul>
+<p><strong>영형대용어 분석</strong> 은 문장에서 생략된 기능어를 찾아 문장 내 또는 문장 간에 언급되어 있는 어구와 묶는 분석과정입니다.</p>
+<p>예) '나는 밥을 먹었고, 영희도 먹었다'라는 문장에서,</p>
+<ul>
+<li>'먹었다'의 목적어인 '밥을'이 생략되어 있음을 찾는 것을 말합니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><code>CorefResolver</code> 공지시어 해소, 대용어 분석기 interface</li>
+<li><a href="module-koalanlp_data.Entity.html#corefGroup"><code>Entity#corefGroup</code></a> 해당 개체명이 포함된 개체명 묶음 [CoreferenceGroup]을 반환하는 API</li>
+<li><a href="module-koalanlp_data.CoreferenceGroup.html"><code>CoreferenceGroup</code></a> 동일한 대상을 지칭하는 개체명을 묶는 API</li>
+</ul>
 </div>
 
 
@@ -834,98 +1422,7 @@
 
 
 
-    <h5>Parameters:</h5>
-    
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>tag</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Array.&lt;string>></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">확인할 형태소 순서. 형태소의 묶음(어절단위)의 묶음.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line357">line 357</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -943,18 +1440,18 @@
 
         
 <div class="param-desc">
-    주어진 순서대로 어절에 포함되어 있다면 true. (연속할 필요는 없음)
+    <p>공통된 대상을 묶은 [CoreferenceGroup]의 목록. 없다면 빈 리스트.</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type">Array.&lt;CoreferenceGroup></span>
 
 
     </dd>
@@ -963,24 +1460,74 @@
     
 
 
-
-
-
         
             
 
     
 
+    <h4 class="name" id="getNouns"><span class="type-signature"></span>getNouns<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Word>}</span></h4>
+
     
-    <h4 class="name" id="modifiers"><span class="type-signature"></span>modifiers<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Word>}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2240">line 2240</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    문장 내 수식언(관형사,부사)을 포함한 어절의 목록.
+    <p>체언(명사, 수사, 대명사) 및 체언 성격의 어휘를 포함하는 어절들을 가져옵니다.</p>
+<ul>
+<li>포함: 체언, 명사형 전성어미 [POS.ETN], 명사 파생 접미사 [POS.XSN]</li>
+<li>제외: 관형형 전성어미 [POS.ETM], 동사/형용사/부사 파생 접미사 [POS.XSV], [POS.XSA], [POS.XSM]</li>
+<li>가장 마지막에 적용되는 어미/접미사를 기준으로 판정함</li>
+</ul>
+<p><strong>[참고]</strong></p>
+<p><strong>전성어미</strong> 는 용언 따위에 붙어 다른 품사의 기능을 수행하도록 변경하는 어미입니다.
+예) '멋지게 살다'를 '멋지게 삶'으로 바꾸는 명사형 전성어미 '-ㅁ'이 있습니다. 원 기능은 동사이므로 부사의 수식을 받고 있습니다.</p>
+<p><strong>파생접미사</strong> 는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
+예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.</p>
 </div>
 
 
@@ -992,48 +1539,6 @@
 
 
 
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line419">line 419</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -1051,12 +1556,12 @@
 
         
 <div class="param-desc">
-    수식언 목록
+    <p>체언 또는 체언 성격의 어휘를 포함하는 어절의 목록</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -1071,24 +1576,74 @@
     
 
 
-
-
-
         
             
 
     
 
+    <h4 class="name" id="getVerbs"><span class="type-signature"></span>getVerbs<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Word>}</span></h4>
+
     
-    <h4 class="name" id="nouns"><span class="type-signature"></span>nouns<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Word>}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2292">line 2292</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    문장 내 체언(명사,대명사,의존명사,수사)을 포함한 어절의 목록.
+    <p>용언(동사, 형용사) 및 용언 성격의 어휘를 포함하는 어절들을 가져옵니다.</p>
+<ul>
+<li>포함: 용언, 동사 파생 접미사 [POS.XSV]</li>
+<li>제외: 명사형/관형형 전성어미 [POS.ETN], [POS.ETM], 명사/형용사/부사 파생 접미사 [POS.XSN], [POS.XSA], [POS.XSM]</li>
+<li>가장 마지막에 적용되는 어미/접미사를 기준으로 판정함</li>
+</ul>
+<p><strong>[참고]</strong></p>
+<p><strong>전성어미</strong> 는 용언 따위에 붙어 다른 품사의 기능을 수행하도록 변경하는 어미입니다.
+예) '멋지게 살다'를 '멋지게 삶'으로 바꾸는 명사형 전성어미 '-ㅁ'이 있습니다. 원 기능은 동사이므로 부사의 수식을 받고 있습니다.</p>
+<p><strong>파생접미사</strong> 는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
+예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.</p>
 </div>
 
 
@@ -1100,48 +1655,6 @@
 
 
 
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line403">line 403</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -1159,12 +1672,12 @@
 
         
 <div class="param-desc">
-    체언 목록
+    <p>용언 또는 용언 성격의 어휘를 포함하는 어절의 목록</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -1179,24 +1692,74 @@
     
 
 
-
-
-
         
             
 
     
 
+    <h4 class="name" id="getModifiers"><span class="type-signature"></span>getModifiers<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Word>}</span></h4>
+
     
-    <h4 class="name" id="singleLineString"><span class="type-signature"></span>singleLineString<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2344">line 2344</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    한 줄짜리 형태소분석 결과.
+    <p>수식언(관형사, 부사) 및 수식언 성격의 어휘를 포함하는 어절들을 가져옵니다.</p>
+<ul>
+<li>포함: 수식언, 관형형 전성어미 [POS.ETM], 형용사/부사 파생 접미사 [POS.XSA], [POS.XSM]</li>
+<li>제외: 명사형 전성어미 [POS.ETN], 명사/동사 파생 접미사 [POS.XSN], [POS.XSV]</li>
+<li>가장 마지막에 적용되는 어미/접미사를 기준으로 판정함</li>
+</ul>
+<p><strong>[참고]</strong></p>
+<p><strong>전성어미</strong> 는 용언 따위에 붙어 다른 품사의 기능을 수행하도록 변경하는 어미입니다.
+예) '멋지게 살다'를 '멋지게 삶'으로 바꾸는 명사형 전성어미 '-ㅁ'이 있습니다. 원 기능은 동사이므로 부사의 수식을 받고 있습니다.</p>
+<p><strong>파생접미사</strong> 는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
+예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.</p>
 </div>
 
 
@@ -1208,48 +1771,6 @@
 
 
 
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line471">line 471</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -1267,18 +1788,18 @@
 
         
 <div class="param-desc">
-    "형태소1/품사1+형태소2/품사2..." 형태의 어절이 띄어쓰기로 분리된 문장.
+    <p>수식언 또는 수식언 성격의 어휘를 포함하는 어절의 목록</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
-<span class="param-type">string</span>
+<span class="param-type">Array.&lt;Word></span>
 
 
     </dd>
@@ -1287,25 +1808,67 @@
     
 
 
-
-
-
         
             
 
     
 
+    <h4 class="name" id="surfaceString"><span class="type-signature"></span>surfaceString<span class="signature">(delimiter<span class="signature-attributes">opt, non-null</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
     
-    <h4 class="name" id="surfaceString"><span class="type-signature"></span>surfaceString<span class="signature">(delimiter<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2353">line 2353</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    표면형 문자열.
+    <p>어절의 표면형을 이어붙이되, 지정된 [delimiter]로 띄어쓰기 된 문장을 반환합니다.</p>
 </div>
+
+
 
 
 
@@ -1371,12 +1934,12 @@
             
                 <td class="default">
                 
-                    space
+                    <code>' '</code>
                 
                 </td>
             
 
-            <td class="description last">어절을 구분할 구분자.</td>
+            <td class="description last"><p>어절 사이의 띄어쓰기 방식. 기본값 = 공백(&quot; &quot;)</p></td>
         </tr>
 
     
@@ -1388,50 +1951,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line462">line 462</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
 
 
 
@@ -1444,12 +1963,12 @@
 
         
 <div class="param-desc">
-    구분자로 어절이 구분된 문자열.
+    <p>띄어쓰기 된 문장입니다.</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -1464,24 +1983,64 @@
     
 
 
-
-
-
         
             
 
     
 
+    <h4 class="name" id="singleLineString"><span class="type-signature"></span>singleLineString<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+
     
-    <h4 class="name" id="toJson"><span class="type-signature"></span>toJson<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2361">line 2361</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    문장의 JSON 객체.
+    <p>품사분석 결과를, 1행짜리 String으로 변환합니다.</p>
 </div>
 
 
@@ -1493,48 +2052,6 @@
 
 
 
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line479">line 479</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -1552,120 +2069,12 @@
 
         
 <div class="param-desc">
-    어절과 root를 포함한 Json Object.
+    <p>품사분석 결과를 담은 1행짜리 String.</p>
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    문자열로 변환.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line444">line 444</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    변환된 문자열.
-</div>
-
-
-
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -1680,34 +2089,14 @@
     
 
 
-
-
-
         
             
 
     
 
-    
-    <h4 class="name" id="verbs"><span class="type-signature"></span>verbs<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Word>}</span></h4>
-    
+    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
-
-
-
-<div class="description">
-    문장 내 용언(동사,형용사)을 포함한 어절의 목록.
-</div>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1715,33 +2104,9 @@
 <dl class="details">
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line411">line 411</a>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2368">line 2368</a>
     </li></ul></dd>
     
 
@@ -1750,7 +2115,169 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fromJava"><span class="type-signature">(static) </span>fromJava<span class="signature">(ref)</span><span class="type-signature"> &rarr; {Sentence}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line2376">line 2376</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ref</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Java Sentence 객체</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
 
 
 
@@ -1768,27 +2295,24 @@
 
         
 <div class="param-desc">
-    용언 목록
+    <p>Java 객체로부터 새 Sentence 구성</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;Word></span>
+<span class="param-type">Sentence</span>
 
 
     </dd>
 </dl>
 
     
-
-
-
 
 
         
@@ -1804,19 +2328,27 @@
 
 
 
+    
+    
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-koalanlp.html">koalanlp</a></li><li><a href="module-koalanlp_data.html">koalanlp/data</a></li><li><a href="module-koalanlp_POS.html">koalanlp/POS</a></li></ul><h3>Classes</h3><ul><li><a href="module-koalanlp.Dictionary.html">Dictionary</a></li><li><a href="module-koalanlp.Parser.html">Parser</a></li><li><a href="module-koalanlp.SentenceSplitter.html">SentenceSplitter</a></li><li><a href="module-koalanlp.Tagger.html">Tagger</a></li><li><a href="module-koalanlp_data.Morpheme.html">Morpheme</a></li><li><a href="module-koalanlp_data.Relationship.html">Relationship</a></li><li><a href="module-koalanlp_data.Sentence.html">Sentence</a></li><li><a href="module-koalanlp_data.Word.html">Word</a></li></ul>
-</nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jun 30 2018 00:30:39 GMT+0900 (KST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Dec 03 2018 01:43:17 GMT+0900 (GMT+09:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/jquery-3.1.1.min.js"></script>
+
+<script src="scripts/search.js"></script>
+
+
+<script src="scripts/collapse.js"></script>
+
+
+
 </body>
 </html>

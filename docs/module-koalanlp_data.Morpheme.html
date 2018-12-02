@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Class: Morpheme</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Morpheme - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Class: Morpheme</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://koalanlp.github.io/koalanlp/usage" target="_blank" class="menu-item" id="website_link" >사용법 안내</a></h2><h2><a href="https://koalanlp.github.io/koalanlp" target="_blank" class="menu-item" id="website_link" >참고: Java/Kotlin API</a></h2><h2><a href="https://koalanlp.github.io/scala-support" target="_blank" class="menu-item" id="website_link" >참고: Scala API</a></h2><h2><a href="https://koalanlp.github.io/python-support" target="_blank" class="menu-item" id="website_link" >참고: Python3 API</a></h2><h3>Modules</h3><ul><li><a href="module-koalanlp_API.html">koalanlp/API</a></li><li><a href="module-koalanlp_ExtUtil.html">koalanlp/ExtUtil</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.alphaToHangul">alphaToHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.hangulToAlpha">hangulToAlpha</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isAlphaPronounced">isAlphaPronounced</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isHanja">isHanja</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isCJKHanja">isCJKHanja</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.hanjaToHangul">hanjaToHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isCompleteHangul">isCompleteHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isIncompleteHangul">isIncompleteHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isHangul">isHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isHangulEnding">isHangulEnding</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isChosungJamo">isChosungJamo</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isJungsungJamo">isJungsungJamo</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isJongsungJamo">isJongsungJamo</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isJongsungEnding">isJongsungEnding</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.getChosung">getChosung</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.getJungsung">getJungsung</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.getJongsung">getJongsung</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.dissembleHangul">dissembleHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.assembleHangulTriple">assembleHangulTriple</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.assembleHangul">assembleHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.correctVerbApply">correctVerbApply</a></li></ul></li><li><a href="module-koalanlp_Util.html">koalanlp/Util</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_Util.html#.initialize">initialize</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_Util.html#.contains">contains</a></li></ul></li><li><a href="module-koalanlp_data.html">koalanlp/data</a></li><li><a href="module-koalanlp_proc.html">koalanlp/proc</a></li><li><a href="module-koalanlp_types.html">koalanlp/types</a></li></ul><h3>Classes</h3><ul><li><a href="module-koalanlp_data.Entity.html">Entity</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getSurface">getSurface</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getLabel">getLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getFineLabel">getFineLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getCorefGroup">getCorefGroup</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getOriginalLabel">getOriginalLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#equals">equals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.CoreferenceGroup.html">CoreferenceGroup</a></li><li><a href="module-koalanlp_data.Tree.html">Tree</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getLabel">getLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getTerminal">getTerminal</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#isRoot">isRoot</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#hasNonTerminals">hasNonTerminals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getTreeString">getTreeString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getParent">getParent</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getNonTerminals">getNonTerminals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#equals">equals</a></li></ul></li><li><a href="module-koalanlp_data.SyntaxTree.html">SyntaxTree</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.SyntaxTree.html#getOriginalLabel">getOriginalLabel</a></li></ul></li><li><a href="module-koalanlp_data.DAGEdge.html">DAGEdge</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#getSrc">getSrc</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#getDest">getDest</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#getLabel">getLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#equals">equals</a></li></ul></li><li><a href="module-koalanlp_data.DepEdge.html">DepEdge</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getGovernor">getGovernor</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getDependent">getDependent</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getDepType">getDepType</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getType">getType</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getOriginalLabel">getOriginalLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#equals">equals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.RoleEdge.html">RoleEdge</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getPredicate">getPredicate</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getArgument">getArgument</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getModifiers">getModifiers</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getOriginalLabel">getOriginalLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.Morpheme.html">Morpheme</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getSurface">getSurface</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getTag">getTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getOriginalTag">getOriginalTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getId">getId</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getWordSense">getWordSense</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getEntities">getEntities</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getWord">getWord</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isNoun">isNoun</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isPredicate">isPredicate</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isModifier">isModifier</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isJosa">isJosa</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#hasTag">hasTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#hasTagOneOf">hasTagOneOf</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#hasOriginalTag">hasOriginalTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#equals">equals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.Word.html">Word</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getSurface">getSurface</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getId">getId</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getEntities">getEntities</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getPhrase">getPhrase</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getDependentEdges">getDependentEdges</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getGovernorEdge">getGovernorEdge</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getArgumentRoles">getArgumentRoles</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getPredicateRoles">getPredicateRoles</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#singleLineString">singleLineString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#equals">equals</a></li></ul></li><li><a href="module-koalanlp_data.Sentence.html">Sentence</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getSyntaxTree">getSyntaxTree</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getDependencies">getDependencies</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getRoles">getRoles</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getEntities">getEntities</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getCorefGroups">getCorefGroups</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getNouns">getNouns</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getVerbs">getVerbs</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getModifiers">getModifiers</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#surfaceString">surfaceString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#singleLineString">singleLineString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#.fromJava">fromJava</a></li></ul></li><li><a href="module-koalanlp_proc.SentenceSplitter.html">SentenceSplitter</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.SentenceSplitter.html#sentences">sentences</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.SentenceSplitter.html#.sentences">sentences</a></li></ul></li><li><a href="module-koalanlp_proc.Tagger.html">Tagger</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Tagger.html#tag">tag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Tagger.html#tagSentence">tagSentence</a></li></ul></li><li><a href="module-koalanlp_proc.Parser.html">Parser</a></li><li><a href="module-koalanlp_proc.EntityRecognizer.html">EntityRecognizer</a></li><li><a href="module-koalanlp_proc.RoleLabeler.html">RoleLabeler</a></li><li><a href="module-koalanlp_proc.Dictionary.html">Dictionary</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#addUserDictionary">addUserDictionary</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#contains">contains</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#importFrom">importFrom</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#getBaseEntries">getBaseEntries</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#getItems">getItems</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#getNotExists">getNotExists</a></li></ul></li><li><a href="module-koalanlp_types.POS.html">POS</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#.withName">withName</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isNoun">isNoun</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isPredicate">isPredicate</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isModifier">isModifier</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isPostPosition">isPostPosition</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isEnding">isEnding</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isAffix">isAffix</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isSuffix">isSuffix</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isSymbol">isSymbol</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isUnknown">isUnknown</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#startsWith">startsWith</a></li></ul></li><li><a href="module-koalanlp_types.PhraseTag.html">PhraseTag</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.PhraseTag.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.PhraseTag.html#.withName">withName</a></li></ul></li><li><a href="module-koalanlp_types.DependencyTag.html">DependencyTag</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.DependencyTag.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.DependencyTag.html#.withName">withName</a></li></ul></li><li><a href="module-koalanlp_types.RoleType.html">RoleType</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.RoleType.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.RoleType.html#.withName">withName</a></li></ul></li><li><a href="module-koalanlp_types.CoarseEntityType.html">CoarseEntityType</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.CoarseEntityType.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.CoarseEntityType.html#.withName">withName</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Morpheme</h1>
+    
 
     
 
@@ -28,34 +45,97 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="module-koalanlp_data.html">koalanlp/data</a>.</span>Morpheme<span class="signature">(surface, tag, rawTag, id)</span><span class="type-signature"></span></h2>
+        <h2>
+            <span class="ancestors"><a href="module-koalanlp_data.html">koalanlp/data</a>.</span>
         
-            <div class="class-description">형태소</div>
+        Morpheme
+        </h2>
+        
+            <div class="class-description"><p>형태소를 저장하는 [Property] class입니다.</p>
+<h2>참고</h2><p><strong>형태소</strong> 는 의미를 가지는 요소로서는 더 이상 분석할 수 없는 가장 작은 말의 단위로 정의됩니다.</p>
+<p><strong>형태소 분석</strong> 은 문장을 형태소의 단위로 나누는 작업을 의미합니다.</p>
+<p>예) '문장을 형태소로 나눠봅시다'의 경우,</p>
+<ul>
+<li>문장/일반명사, -을/조사,</li>
+<li>형태소/일반명사, -로/조사,</li>
+<li>나누-(다)/동사, -어-/어미, 보-(다)/동사, -ㅂ시다/어미</li>
+</ul>
+<p>로 대략 나눌 수 있습니다.</p>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.Tagger.html"><code>Tagger</code></a> 형태소 분석기의 최상위 Interface</li>
+<li><a href="module-koalanlp_types.POS.html"><code>POS</code></a> 형태소의 분류를 담은 Enum class</li>
+</ul></div>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
+            
 
     
     <h2>Constructor</h2>
     
 
+    <h4 class="name" id="Morpheme"><span class="type-signature"></span>new Morpheme<span class="signature">(surface, tag, originalTag<span class="signature-attributes">opt</span>, reference<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
     
-    <h4 class="name" id="Morpheme"><span class="type-signature"></span>new Morpheme<span class="signature">(surface, tag, rawTag, id)</span><span class="type-signature"></span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1006">line 1006</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    형태소 생성자.
+    <p>형태소를 생성합니다.</p>
 </div>
+
+
 
 
 
@@ -77,6 +157,8 @@
 
         <th>Type</th>
 
+        
+        <th>Attributes</th>
         
 
         
@@ -103,10 +185,18 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last">형태소 표면형.</td>
+            <td class="description last"><p>형태소 표면형</p></td>
         </tr>
 
     
@@ -126,17 +216,25 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last">세종 품사</td>
+            <td class="description last"><p>형태소 품사 태그</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>rawTag</code></td>
+                <td class="name"><code>originalTag</code></td>
             
 
             <td class="type">
@@ -149,33 +247,53 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last">원본 품사</td>
+            <td class="description last"><p>형태소 품사 원본 표기</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>reference</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type">Object</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last">어절 내 위치.</td>
+            <td class="description last"><p>Java 형태소 객체</p></td>
         </tr>
 
     
@@ -187,37 +305,381 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="id"><span class="type-signature"></span>id<span class="type-signature"> :number</span></h4>
+
+
+
+
+
 <dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line16">line 16</a>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1014">line 1014</a>
     </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>형태소의 어절 내 위치</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="word"><span class="type-signature"></span>word<span class="type-signature"> :Word</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1019">line 1019</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>형태소의 상위 어절.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Word</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="wordSense"><span class="type-signature"></span>wordSense<span class="type-signature"> :number</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1024">line 1024</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>형태소의 의미 어깨번호.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="entities"><span class="type-signature"></span>entities<span class="type-signature"> :Array.&lt;Entity></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1049">line 1049</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>개체명 분석을 했다면, 현재 형태소가 속한 개체명 값을 돌려줍니다.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>개체명 인식</strong> 은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.</p>
+<p>예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.</p>
+<ul>
+<li>'트럼프': 인물</li>
+<li>'미국' : 국가</li>
+<li>'대통령' : 직위</li>
+<li>'사우디' : 국가</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.EntityRecognizer.html"><code>EntityRecognizer</code></a> 개체명 인식기 interface</li>
+<li><a href="module-koalanlp_data.Word.html#entities"><code>Word#entities</code></a> 어절에 연관된 모든 [Entity]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Sentence.html#entities"><code>Sentence#entities</code></a> 문장에 포함된 모든 [Entity]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Entity.html"><code>Entity</code></a> 개체명을 저장하는 형태</li>
+<li><a href="module-koalanlp_types.CoarseEntityType.html"><code>CoarseEntityType</code></a> [Entity]의 대분류 개체명 분류구조 Enum 값</li>
+</ul>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;Entity></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="surface"><span class="type-signature"></span>surface<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1084">line 1084</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     
@@ -238,27 +700,125 @@
 
 
 
+        
+            
+<h4 class="name" id="tag"><span class="type-signature"></span>tag<span class="type-signature"></span></h4>
 
 
 
 
 
-
-    
-    </div>
-
-    
-
-    
+<dl class="details">
 
     
-
-    
-
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1098">line 1098</a>
+    </li></ul></dd>
     
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="originalTag"><span class="type-signature"></span>originalTag<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1112">line 1112</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     
@@ -269,75 +829,9 @@
 
     
 
-    
-    <h4 class="name" id="equals"><span class="type-signature"></span>equals<span class="signature">(morph)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
+    <h4 class="name" id="getSurface"><span class="type-signature"></span>getSurface<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
 
     
-
-
-
-<div class="description">
-    두 형태소가 같은지 확인.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>morph</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Morpheme</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">확인할 형태소.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
 
 
 
@@ -345,33 +839,9 @@
 <dl class="details">
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line79">line 79</a>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1091">line 1091</a>
     </li></ul></dd>
     
 
@@ -380,7 +850,45 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -398,18 +906,18 @@
 
         
 <div class="param-desc">
-    표면형과 품사가 모두 같으면 true.
+    <p>형태소 표면형 String</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type">string</span>
 
 
     </dd>
@@ -418,83 +926,14 @@
     
 
 
-
-
-
         
             
 
     
 
-    
-    <h4 class="name" id="equalsWithoutTag"><span class="type-signature"></span>equalsWithoutTag<span class="signature">(morph)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
+    <h4 class="name" id="getTag"><span class="type-signature"></span>getTag<span class="signature">()</span><span class="type-signature"> &rarr; {POS}</span></h4>
 
     
-
-
-
-<div class="description">
-    두 형태소의 표면형이 같은지 확인.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>morph</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Morpheme</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">확인할 형태소.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
 
 
 
@@ -502,33 +941,9 @@
 <dl class="details">
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line91">line 91</a>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1105">line 1105</a>
     </li></ul></dd>
     
 
@@ -537,7 +952,45 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -555,12 +1008,654 @@
 
         
 <div class="param-desc">
-    표면형이 같으면 true.
+    <p>세종 품사표기</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">POS</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getOriginalTag"><span class="type-signature"></span>getOriginalTag<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1119">line 1119</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>원본 형태소 분석기의 품사 String (없으면 undefined)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getId"><span class="type-signature"></span>getId<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1126">line 1126</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>형태소의 어절 내 위치입니다.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getWordSense"><span class="type-signature"></span>getWordSense<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1137">line 1137</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>다의어 분석 결과인, 이 형태소의 사전 속 의미/어깨번호 값을 돌려줍니다.</p>
+<p>다의어 분석을 한 적이 없다면 undefined를 돌려줍니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>의미/어깨번호 값</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getEntities"><span class="type-signature"></span>getEntities<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Entity>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1165">line 1165</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>개체명 분석을 했다면, 현재 형태소가 속한 개체명 값을 돌려줍니다.</p>
+<p><strong>[참고]</strong></p>
+<p><strong>개체명 인식</strong> 은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.</p>
+<p>예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.</p>
+<ul>
+<li>'트럼프': 인물</li>
+<li>'미국' : 국가</li>
+<li>'대통령' : 직위</li>
+<li>'사우디' : 국가</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.EntityRecognizer.html"><code>EntityRecognizer</code></a> 개체명 인식기 interface</li>
+<li><a href="module-koalanlp_data.Word.html#entities"><code>Word#entities</code></a> 어절에 연관된 모든 [Entity]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Sentence.html#entities"><code>Sentence#entities</code></a> 문장에 포함된 모든 [Entity]를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Entity.html"><code>Entity</code></a> 개체명을 저장하는 형태</li>
+<li><a href="module-koalanlp_types.CoarseEntityType.html"><code>CoarseEntityType</code></a> [Entity]의 대분류 개체명 분류구조 Enum 값</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>[Entity]의 목록입니다. 분석 결과가 없으면 빈 리스트</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;Entity></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getWord"><span class="type-signature"></span>getWord<span class="signature">()</span><span class="type-signature"> &rarr; {Word}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1172">line 1172</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>이 형태소를 포함하는 단어를 돌려줍니다.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Word</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isNoun"><span class="type-signature"></span>isNoun<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1180">line 1180</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>체언(명사, 수사, 대명사) 형태소인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>체언이라면 true</p>
+</div>
+
+
+
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -575,7 +1670,110 @@
     
 
 
+        
+            
 
+    
+
+    <h4 class="name" id="isPredicate"><span class="type-signature"></span>isPredicate<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1188">line 1188</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>용언(동사, 형용사) 형태소인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>용언이라면 true</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
         
@@ -583,17 +1781,287 @@
 
     
 
+    <h4 class="name" id="isModifier"><span class="type-signature"></span>isModifier<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
     
-    <h4 class="name" id="hasRawTag"><span class="type-signature"></span>hasRawTag<span class="signature">(tag)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1196">line 1196</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    지정된 tag와 형태소가 일치하는지 확인.
+    <p>수식언(관형사, 부사) 형태소인지 확인합니다.</p>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>수식언이라면 true</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isJosa"><span class="type-signature"></span>isJosa<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1204">line 1204</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>관계언(조사) 형태소인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>관계언이라면 true</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="hasTag"><span class="type-signature"></span>hasTag<span class="signature">(partialTag<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1229">line 1229</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>세종 품사 [tag]가 주어진 품사 표기 [partialTag] 묶음에 포함되는지 확인합니다.</p>
+<p>예) &quot;N&quot;은 체언인지 확인하고, &quot;NP&quot;는 대명사인지 확인</p>
+<h2>단축명령</h2><ul>
+<li>체언(명사, 수사, 대명사) <a href="module-koalanlp_data.Morpheme.html#isNoun"><code>Morpheme#isNoun</code></a></li>
+<li>용언(동사, 형용사)는 <a href="module-koalanlp_data.Morpheme.html#isPredicate"><code>Morpheme#isPredicate</code></a></li>
+<li>수식언(관형사, 부사)는 <a href="module-koalanlp_data.Morpheme.html#isModifier"><code>Morpheme#isModifier</code></a></li>
+<li>관계언(조사)는 <a href="module-koalanlp_data.Morpheme.html#isJosa"><code>Morpheme#isJosa</code></a></li>
+</ul>
+<p><strong>[참고]</strong></p>
+<ul>
+<li>분석불능범주(NA, NV, NF)는 체언(N) 범주에 포함되지 않습니다.</li>
+<li>세종 품사표기는 <a href="https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala/-p-o-s/index.html">POS</a> 를 참고하세요.</li>
+<li>품사 표기는 <a href="https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing">비교표</a> 에서 확인가능합니다.</li>
+</ul>
+</div>
+
+
 
 
 
@@ -628,7 +2096,7 @@
 
         <tr>
             
-                <td class="name"><code>tag</code></td>
+                <td class="name"><code>partialTag</code></td>
             
 
             <td class="type">
@@ -644,57 +2112,13 @@
 
             
 
-            <td class="description last">확인할 원본품사.</td>
+            <td class="description last"><p>포함 여부를 확인할 상위 형태소 분류 품사표기</p></td>
         </tr>
 
     
     </tbody>
 </table>
 
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line62">line 62</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -712,12 +2136,12 @@
 
         
 <div class="param-desc">
-    일치하거나, 지정된 tag에 포함되는 경우, true.
+    <p>포함되는 경우 True.</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -732,7 +2156,184 @@
     
 
 
+        
+            
 
+    
+
+    <h4 class="name" id="hasTagOneOf"><span class="type-signature"></span>hasTagOneOf<span class="signature">(&hellip;tags)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1254">line 1254</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>세종 품사 [tag]가 주어진 품사 표기들 [tags] 묶음들 중 하나에 포함되는지 확인합니다.</p>
+<p>예) hasTagOneOf(&quot;N&quot;, &quot;MM&quot;)의 경우, 체언 또는 관형사인지 확인합니다.</p>
+<h2>단축명령</h2><ul>
+<li>체언(명사, 수사, 대명사) <a href="module-koalanlp_data.Morpheme.html#isNoun"><code>Morpheme#isNoun</code></a></li>
+<li>용언(동사, 형용사)는 <a href="module-koalanlp_data.Morpheme.html#isPredicate"><code>Morpheme#isPredicate</code></a></li>
+<li>수식언(관형사, 부사)는 <a href="module-koalanlp_data.Morpheme.html#isModifier"><code>Morpheme#isModifier</code></a></li>
+<li>관계언(조사)는 <a href="module-koalanlp_data.Morpheme.html#isJosa"><code>Morpheme#isJosa</code></a></li>
+</ul>
+<p><strong>[참고]</strong></p>
+<ul>
+<li>분석불능범주(NA, NV, NF)는 체언(N) 범주에 포함되지 않습니다.</li>
+<li>세종 품사표기는 <a href="https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala/-p-o-s/index.html">POS</a> 를 참고하세요.</li>
+<li>품사 표기는 <a href="https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing">비교표</a> 에서 확인가능합니다.</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tags</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>포함 여부를 확인할 상위 형태소 분류 품사표기들 (가변인자)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>하나라도 포함되는 경우 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
         
@@ -740,17 +2341,75 @@
 
     
 
+    <h4 class="name" id="hasOriginalTag"><span class="type-signature"></span>hasOriginalTag<span class="signature">(partialTag<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
     
-    <h4 class="name" id="hasTag"><span class="type-signature"></span>hasTag<span class="signature">(tag)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1279">line 1279</a>
+    </li></ul></dd>
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 <div class="description">
-    지정된 tag와 형태소가 일치하는지 확인.
+    <p>원본 품사 [originalTag]가 주어진 품사 표기 [partialTag] 묶음에 포함되는지 확인합니다.</p>
+<p>예) 지정된 원본 품사가 없으면 (즉, None이면) false를 반환합니다.</p>
+<h2>단축명령</h2><ul>
+<li>체언(명사, 수사, 대명사) <a href="module-koalanlp_data.Morpheme.html#isNoun"><code>Morpheme#isNoun</code></a></li>
+<li>용언(동사, 형용사)는 <a href="module-koalanlp_data.Morpheme.html#isPredicate"><code>Morpheme#isPredicate</code></a></li>
+<li>수식언(관형사, 부사)는 <a href="module-koalanlp_data.Morpheme.html#isModifier"><code>Morpheme#isModifier</code></a></li>
+<li>관계언(조사)는 <a href="module-koalanlp_data.Morpheme.html#isJosa"><code>Morpheme#isJosa</code></a></li>
+</ul>
+<p><strong>[참고]</strong></p>
+<ul>
+<li>분석불능범주(NA, NV, NF)는 체언(N) 범주에 포함되지 않습니다.</li>
+<li>세종 품사표기는 <a href="https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala/-p-o-s/index.html">POS</a> 를 참고하세요.</li>
+<li>품사 표기는 <a href="https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing">비교표</a> 에서 확인가능합니다.</li>
+</ul>
 </div>
+
+
 
 
 
@@ -785,7 +2444,7 @@
 
         <tr>
             
-                <td class="name"><code>tag</code></td>
+                <td class="name"><code>partialTag</code></td>
             
 
             <td class="type">
@@ -801,57 +2460,13 @@
 
             
 
-            <td class="description last">확인할 세종품사.</td>
+            <td class="description last"><p>포함 여부를 확인할 상위 형태소 분류 품사표기</p></td>
         </tr>
 
     
     </tbody>
 </table>
 
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line45">line 45</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -869,12 +2484,12 @@
 
         
 <div class="param-desc">
-    일치하거나, 지정된 tag에 포함되는 경우, true.
+    <p>포함되는 경우 True.</p>
 </div>
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -889,34 +2504,14 @@
     
 
 
-
-
-
         
             
 
     
 
-    
-    <h4 class="name" id="toJson"><span class="type-signature"></span>toJson<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
-    
+    <h4 class="name" id="equals"><span class="type-signature"></span>equals<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
-
-
-
-<div class="description">
-    JSON으로 변환.
-</div>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -924,33 +2519,9 @@
 <dl class="details">
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line110">line 110</a>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1298">line 1298</a>
     </li></ul></dd>
     
 
@@ -959,42 +2530,55 @@
     
 
     
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    표면형, 세종품사, 원본품사를 담고있는 Json Object.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1005,26 +2589,9 @@
 
     
 
-    
-    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
+    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
-
-
-
-<div class="description">
-    문자열로 변환.
-</div>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1032,33 +2599,9 @@
 <dl class="details">
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line102">line 102</a>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1305">line 1305</a>
     </li></ul></dd>
     
 
@@ -1067,42 +2610,55 @@
     
 
     
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    표면형/세종(원본) 형태의 문자열.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1121,19 +2677,27 @@
 
 
 
+    
+    
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-koalanlp.html">koalanlp</a></li><li><a href="module-koalanlp_data.html">koalanlp/data</a></li><li><a href="module-koalanlp_POS.html">koalanlp/POS</a></li></ul><h3>Classes</h3><ul><li><a href="module-koalanlp.Dictionary.html">Dictionary</a></li><li><a href="module-koalanlp.Parser.html">Parser</a></li><li><a href="module-koalanlp.SentenceSplitter.html">SentenceSplitter</a></li><li><a href="module-koalanlp.Tagger.html">Tagger</a></li><li><a href="module-koalanlp_data.Morpheme.html">Morpheme</a></li><li><a href="module-koalanlp_data.Relationship.html">Relationship</a></li><li><a href="module-koalanlp_data.Sentence.html">Sentence</a></li><li><a href="module-koalanlp_data.Word.html">Word</a></li></ul>
-</nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jun 30 2018 00:30:39 GMT+0900 (KST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Dec 03 2018 01:43:17 GMT+0900 (GMT+09:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/jquery-3.1.1.min.js"></script>
+
+<script src="scripts/search.js"></script>
+
+
+<script src="scripts/collapse.js"></script>
+
+
+
 </body>
 </html>

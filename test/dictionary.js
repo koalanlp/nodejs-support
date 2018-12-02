@@ -1,3 +1,5 @@
+
+
 var koalanlp = require('../lib/api');
 var API = koalanlp.API;
 var POS = koalanlp.POS;

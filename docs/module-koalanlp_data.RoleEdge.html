@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>RoleEdge - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -33,221 +33,1102 @@
 
 <div id="main">
     
+    <h1 class="page-title">RoleEdge</h1>
+    
 
     
 
 
 
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="module-koalanlp_data.html">koalanlp/data</a>.</span>
+        
+        RoleEdge
+        </h2>
+        
+            <div class="class-description"><p>의미역 구조 분석의 결과.</p>
+<h2>참고</h2><p><strong>의미역 결정</strong> 은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.</p>
+<p>예) '나는 밥을 어제 집에서 먹었다'라는 문장에는</p>
+<p>동사 '먹었다'를 중심으로</p>
+<ul>
+<li>'나는'은 동작의 주체를,</li>
+<li>'밥을'은 동작의 대상을,</li>
+<li>'어제'는 동작의 시점을</li>
+<li>'집에서'는 동작의 장소를 나타냅니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+<li><a href="module-koalanlp_proc.RoleLabeler.html"><code>RoleLabeler</code></a> 의미역 분석을 수행하는 interface.</li>
+<li><a href="module-koalanlp_data.Word.html#argumentRoles"><code>Word#argumentRoles</code></a> 어절이 술어인 논항들의 [RoleEdge] 목록을 가져오는 API</li>
+<li><a href="module-koalanlp_data.Word.html#predicateRoles"><code>Word#predicateRoles</code></a> 어절이 논항인 [RoleEdge]의 술어를 가져오는 API</li>
+<li><a href="module-koalanlp_data.Sentence.html#roles"><code>Sentence#roles</code></a> 전체 문장을 분석한 의미역 구조 [RoleEdge]를 가져오는 API</li>
+<li><a href="module-koalanlp_types.RoleType.html"><code>RoleType</code></a> 의미역 분류를 갖는 Enum 값</li>
+</ul></div>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="RoleEdge"><span class="type-signature"></span>new RoleEdge<span class="signature">(predicate<span class="signature-attributes">non-null</span>, argument<span class="signature-attributes">non-null</span>, label<span class="signature-attributes">non-null</span>, modifiers, originalLabel)</span><span class="type-signature"></span></h4>
+
     
 
 
 
 
+<dl class="details">
 
-
-
-
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line872">line 872</a>
+    </li></ul></dd>
+    
 
     
 
+    
 
-    <section class="readme">
-        <article><h1>NodeJS-KoalaNLP</h1><p><a href="https://github.com/koalanlp/nodejs-koalanlp"><img src="https://img.shields.io/npm/v/koalanlp.svg?style=flat-square" alt="NPM Version"></a>
-<a href="https://tldrlegal.com/license/mit-license"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat-square" alt="MIT License"></a>
-<a href="https://koalanlp.github.com/nodejs-koalanlp/docs/module-koalanlp.html"><img src="https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square" alt="JS Doc"></a></p>
-<p><a href="https://travis-ci.org/koalanlp/nodejs-koalanlp"><img src="https://img.shields.io/travis/koalanlp/nodejs-support.svg?style=flat-square&amp;branch=master" alt="Build Status"></a>
-<a href="https://snyk.io/test/github/koalanlp/nodejs-support"><img src="https://snyk.io/test/github/koalanlp/nodejs-support/badge.svg?style=flat-square" alt="Known Vulnerabilities"></a></p>
-<p><a href="https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing"><img src="https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square" alt="분석기별 품사비교표"></a>
-<a href="https://koalanlp.github.io/koalanlp"><img src="https://img.shields.io/badge/Java-KoalaNLP-blue.svg?style=flat-square" alt="KoalaNLP"></a>
-<a href="https://koalanlp.github.io/python-support"><img src="https://img.shields.io/badge/Python-Supprt-blue.svg?style=flat-square" alt="python"></a>
-<a href="https://koalanlp.github.io/scala-support"><img src="https://img.shields.io/badge/Scala-Support-blue.svg?style=flat-square" alt="scala"></a></p>
-<h1>소개</h1><p>이 프로젝트는 <strong>서로 다른 형태의 형태소 분석기를</strong> 모아,
-<strong>동일한 인터페이스</strong> 아래에서 사용할 수 있도록 하는 것이 목적입니다.</p>
-<ul>
-<li>KAIST의 <a href="http://kldp.net/projects/hannanum/">한나눔 형태소 분석기</a>와 <a href="http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB">NLP_HUB 구문분석기</a></li>
-<li>서울대의 <a href="http://kkma.snu.ac.kr/documents/index.jsp">꼬꼬마 형태소/구문 분석기 v2.1</a></li>
-<li>Shineware의 <a href="https://github.com/shin285/KOMORAN">코모란 v3.3.4</a></li>
-<li>OpenKoreanText의 <a href="http://openkoreantext.org">오픈 소스 한국어 처리기 v2.2.0</a> (구 Twitter 한국어 분석기)</li>
-<li>은전한닢 프로젝트의 <a href="https://bitbucket.org/eunjeon/seunjeon">SEunjeon(S은전)</a> (Mecab-ko의 Scala/Java 판본)</li>
-<li>이수명님의 <a href="http://cafe.naver.com/korlucene">Arirang Morpheme Analyzer</a> <sup>1-1</sup></li>
-<li>최석재님의 <a href="https://github.com/SukjaeChoi/RHINO">RHINO v2.5.4</a></li>
-<li>김상준님의 <a href="https://github.com/rasoio/daon/tree/master/daon-core">Daon 분석기</a></li>
-<li>ETRI의 <a href="http://aiopen.etri.re.kr/doc_language.php">공공 인공지능 Open API</a></li>
-</ul>
-<blockquote>
-<p><sup>주1-1</sup> Arirang 분석기의 출력을 형태소분석에 적합하게 조금 다듬었으므로, 원본과 약간 다른 결과를 낼 수도 있습니다.</p>
-</blockquote>
-<p>분석기의 개선이나 추가 등을 하고 싶으시다면,</p>
-<ul>
-<li>개발이 직접 가능하시다면 pull request를 보내주세요. 테스트 후 반영할 수 있도록 하겠습니다.</li>
-<li>개발이 어렵다면 issue tracker에 등록해주세요. 검토 후 답변해드리겠습니다.</li>
-</ul>
-<h2>특징</h2><p>KoalaNLP는 다음과 같은 특징을 가지고 있습니다.</p>
-<ol>
-<li><p>복잡한 설정이 필요없는 텍스트 분석:</p>
-<p>모델은 자동으로 Maven으로 배포되기 때문에, 각 모델을 별도로 설치할 필요가 없습니다.</p>
-</li>
-<li><p>코드 2~3 줄로 수행하는 텍스트 처리:</p>
-<p>모델마다 다른 복잡한 설정 과정, 초기화 과정은 필요하지 않습니다. Dependency에 추가하고, 객체를 생성하고, 분석 메소드를 호출하는 3줄이면 끝납니다.</p>
-</li>
-<li><p>모델에 상관 없는 동일한 코드, 동일한 결과:</p>
-<p>모델마다 실행 방법, 실행 결과를 표현하는 형태가 다릅니다. KoalaNLP는 이를 정부 및 관계기관의 표준안에 따라 표준화합니다. 따라서 모델에 독립적으로 응용 프로그램 개발이 가능합니다.</p>
-</li>
-<li><p><a href="https://koalanlp.github.io/koalanlp">Java, Kotlin</a>, <a href="https://koalanlp.github.io/scala-support">Scala</a>, <a href="https://koalanlp.github.io/python-support">Python 3</a>, <a href="https://koalanlp.github.io/nodejs-support">NodeJS</a>에서 크게 다르지 않은 코드:</p>
-<p>KoalaNLP는 여러 프로그래밍 언어에서 사용할 수 있습니다. 어디서 개발을 하더라도 크게 코드가 다르지 않습니다. </p>
-</li>
-</ol>
-<h1>License 조항</h1><p>KoalaNLP의 프로젝트와 인터페이스 통합을 위한 코드는
-소스코드에 저작권 귀속에 대한 별도 지시사항이 없는 한 <a href="https://tldrlegal.com/license/mit-license"><em>MIT License</em></a>을 따르며,
-원본 분석기의 License와 저작권은 각 저작권자가 지정한 바를 따릅니다.</p>
-<p>단, GPL의 저작권 조항에 따라, GPL 하에서 이용이 허가되는 패키지들의 저작권은 해당 저작권 규정을 따릅니다.</p>
-<ul>
-<li>Hannanum 및 NLP_HUB: <a href="https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3">GPL v3</a>)</li>
-<li>KKMA: <a href="https://tldrlegal.com/license/gnu-general-public-license-v2">GPL v2</a> (GPL v2를 따르지 않더라도, 상업적 이용시 별도 협의 가능)</li>
-<li>KOMORAN 3.x: <a href="https://tldrlegal.com/license/apache-license-2.0-(apache-2.0">Apache License 2.0</a>)</li>
-<li>Open Korean Text: <a href="https://tldrlegal.com/license/apache-license-2.0-(apache-2.0">Apache License 2.0</a>)</li>
-<li>SEunjeon: <a href="https://tldrlegal.com/license/apache-license-2.0-(apache-2.0">Apache License 2.0</a>)</li>
-<li>아리랑: <a href="https://tldrlegal.com/license/apache-license-2.0-(apache-2.0">Apache License 2.0</a>)</li>
-<li>RHINO: <a href="https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3">GPL v3</a>) (참고: 다운로드 위치별로 조항 상이함)</li>
-<li>Daon: 지정된 조항 없음</li>
-<li>ETRI: 별도 API 키 발급 동의 필요</li>
-</ul>
-<h1>사용법</h1><p>상세한 사항은 <a href="https://koalanlp.github.io/koalanlp/usage/">Usage</a> 또는 <a href="https://koalanlp.github.com/nodejs-koalanlp/docs/"><img src="https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square" alt="JS Doc"></a>을 참고하십시오.</p>
-<h2>Dependency 추가</h2><p>우선 Java 8 및 NodeJS 8 이상을 설치하고, <code>JAVA_HOME</code>을 환경변수에 등록해주십시오.
-그런 다음, 아래와 같이 설치하십시오. (현재 nodejs-koalanlp 버전은 <a href="https://github.com/koalanlp/nodejs-koalanlp"><img src="https://img.shields.io/npm/v/koalanlp.svg?style=flat-square" alt="NPM Version"></a>입니다.)</p>
-<pre class="prettyprint source lang-bash"><code>$ npm install koalanlp --save </code></pre><h3>Packages</h3><p>각 형태소 분석기는 별도의 패키지로 나뉘어 있습니다.</p>
-<table>
-<thead>
-<tr>
-<th>패키지명</th>
-<th>설명</th>
-<th>사용 가능 버전</th>
-<th>License (원본)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>API.KMR</td>
-<td>코모란 Wrapper, 분석범위: 형태소</td>
-<td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kmr%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kmr.svg?style=flat-square&amp;label=r" alt="Ver-KMR"></a></td>
-<td>Apache 2.0</td>
-</tr>
-<tr>
-<td>API.EUNJEON</td>
-<td>은전한닢 Wrapper, 분석범위: 형태소</td>
-<td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon.svg?style=flat-square&amp;label=r" alt="Ver-EJN"></a></td>
-<td>Apache 2.0</td>
-</tr>
-<tr>
-<td>API.ARIRANG</td>
-<td>아리랑 Wrapper, 분석범위: 형태소</td>
-<td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-arirang%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-arirang.svg?style=flat-square&amp;label=r" alt="Ver-ARR"></a></td>
-<td>Apache 2.0</td>
-</tr>
-<tr>
-<td>API.RHINO</td>
-<td>RHINO Wrapper, 분석범위: 형태소</td>
-<td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-rhino%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-rhino.svg?style=flat-square&amp;label=r" alt="Ver-RHI"></a></td>
-<td>GPL v3</td>
-</tr>
-<tr>
-<td>API.DAON</td>
-<td>Daon Wrapper, 분석범위: 형태소</td>
-<td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-daon%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-daon.svg?style=flat-square&amp;label=r" alt="Ver-DAN"></a></td>
-<td>MIT(별도 지정 없음)</td>
-</tr>
-<tr>
-<td>API.OKT</td>
-<td>Open Korean Text Wrapper, 분석범위: 문장분리, 형태소</td>
-<td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-okt%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-okt.svg?style=flat-square&amp;label=r" alt="Ver-OKT"></a></td>
-<td>Apache 2.0</td>
-</tr>
-<tr>
-<td>API.KKMA</td>
-<td>꼬꼬마 Wrapper, 분석범위: 형태소, 의존구문</td>
-<td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma.svg?style=flat-square&amp;label=r" alt="Ver-KKM"></a></td>
-<td>GPL v2</td>
-</tr>
-<tr>
-<td>API.HNN</td>
-<td>한나눔 Wrapper, 분석범위: 문장분리, 형태소, 구문분석, 의존구문</td>
-<td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hnn%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hnn.svg?style=flat-square&amp;label=r" alt="Ver-HNN"></a></td>
-<td>GPL v3</td>
-</tr>
-<tr>
-<td>API.ETRI</td>
-<td>ETRI Open API Wrapper, 분석범위: 형태소, 구문분석, 의존구문, 개체명, 의미역</td>
-<td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-etri%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-etri.svg?style=flat-square&amp;label=r" alt="Ver-ETR"></a></td>
-<td>MIT<sup>2-2</sup></td>
-</tr>
-</tbody>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>의미역 구조를 생성합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>predicate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Word</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>의미역 구조의 술어</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>argument</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Word</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>의미역 구조의 논항</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>label</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>의미역 구조의 표지자</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>modifiers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Word></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>논항의 수식어구들</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>originalLabel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>의미역 구조 표지자의 원본분석기 표기</p></td>
+        </tr>
+
+    
+    </tbody>
 </table>
-<blockquote>
-<p><sup>주2-2</sup> ETRI의 경우 Open API를 접근하기 위한 코드 부분은 KoalaNLP의 License 정책에 귀속되지만, Open API 접근 이후의 사용권에 관한 조항은 ETRI에서 별도로 정한 바를 따릅니다.
-따라서, ETRI의 사용권 조항에 동의하시고 키를 발급하셔야 하며, 다음 위치에서 발급을 신청할 수 있습니다: <a href="http://aiopen.etri.re.kr/key_main.php">키 발급 신청</a></p>
-</blockquote>
-<h2>간단한 예시</h2><p><code>koalanlp</code>는, <code>node-java</code> 및 <code>node-java-maven</code> 패키지의 도움을 받아, 필요한 java dependency를 자동으로 가져옵니다.</p>
-<blockquote>
-<p>[참고] 최초 사용시 또는, 최신 패키지로 업데이트 되는 경우, dependency를 찾아오는 데 시간이 소요될 수 있습니다.
-다운로드 진행 중에 취소하시면 다운로드 된 패키지가 corrupt 될 수 있습니다.
-이 경우, Maven repository 저장 공간인 (<code>~/.m2</code>) 폴더에서 오류가 나는 패키지를 삭제하시고 다시 시작하십시오.</p>
-</blockquote>
-<p>다음과 같이 사용합니다. (Node &gt; 8, ECMAScript2017 기준)</p>
-<h3>Async/Await 방식으로 사용할 때 (권장)</h3><p>ㅌ</p>
-<pre class="prettyprint source lang-js"><code>const {KMR, KKMA} = require('koalanlp/API');
-const {initialize} = require('koalanlp/Util');
-const {Tagger, Parser} = require('koalanlp/proc');
-
-async function executor(){
-    await initialize({packages: {KMR: '2.0.4', KKMA: '2.0.4'}, verbose: true});
-
-    let tagger = new Tagger(KMR);
-    let tagged = await tagger(&quot;안녕하세요. 눈이 오는 설날 아침입니다.&quot;);
-    for(const sent of tagged) {
-        console.log(sent.toString());
-    }
-
-    let parser = new Parser(KKMA);
-    let parsed = await parser(&quot;안녕하세요. 눈이 오는 설날 아침입니다.&quot;);
-    for(const sent of parsed){
-        console.log(sent.toString());
-        for(const dep of sent.dependencies){
-            console.log(dep.toString());
-        }
-    }
-}
-
-executor().then(
-    () => console.log('finished!'), 
-    (error) => console.error('Error Occurred!', error)
-);</code></pre><h3>Promise 방식으로 사용할 때</h3><pre class="prettyprint source lang-js"><code>const {KMR, KKMA} = require('koalanlp/API');
-const {initialize} = require('koalanlp/Util');
-const {Tagger, Parser} = require('koalanlp/proc');
-
-initialize({packages: {KMR: '2.0.4', KKMA: '2.0.4'}, verbose: true})
-    .then(() => {
-        let tagger = new Tagger(KMR);
-        tagger(&quot;안녕하세요. 눈이 오는 설날 아침입니다.&quot;).then((tagged) => {
-            for (const sent of tagged) {
-                console.log(sent.toString());
-            }
-        }, (error) => console.error('Error Occurred', error));
-
-        let parser = new Parser(KKMA);
-        parser(&quot;안녕하세요. 눈이 오는 설날 아침입니다.&quot;).then((parsed) => {
-            for (const sent of parsed) {
-                console.log(sent.toString());
-                for (const dep of sent.dependencies) {
-                    console.log(dep.toString());
-                }
-            }
-        }, (error) => console.error('Error Occurred', error));
-
-        console.log('finished!');
-    }, (error) => console.error('Error Occurred!', error));</code></pre><h1>결과 비교</h1><p><a href="https://koalanlp.github.io/sample/comparison">Sample:결과비교</a>를 참조해주세요.</p></article>
-    </section>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>DAGEdge</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="predicate"><span class="type-signature"></span>predicate<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line915">line 915</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="argument"><span class="type-signature"></span>argument<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line929">line 929</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="label"><span class="type-signature"></span>label<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line944">line 944</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="modifiers"><span class="type-signature"></span>modifiers<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line951">line 951</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="originalLabel"><span class="type-signature"></span>originalLabel<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line965">line 965</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="getPredicate"><span class="type-signature"></span>getPredicate<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {Word}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line922">line 922</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>의미역 구조에서 표현하는 동사 [Word]</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Word</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getArgument"><span class="type-signature"></span>getArgument<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {Word}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line936">line 936</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>의미역 구조에서 서술된 논항 [Word]</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Word</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getModifiers"><span class="type-signature"></span>getModifiers<span class="signature">()</span><span class="type-signature"> &rarr; {ReadonlyArray.&lt;Word>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line958">line 958</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>논항의 수식어구들</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ReadonlyArray.&lt;Word></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getOriginalLabel"><span class="type-signature"></span>getOriginalLabel<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line972">line 972</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>원본 분석기의 표지자 String 값. 기본값은 undefined.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data.js.html">data.js</a>, <a href="data.js.html#line979">line 979</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

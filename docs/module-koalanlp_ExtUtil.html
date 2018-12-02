@@ -1,0 +1,4092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>koalanlp/ExtUtil - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://koalanlp.github.io/koalanlp/usage" target="_blank" class="menu-item" id="website_link" >사용법 안내</a></h2><h2><a href="https://koalanlp.github.io/koalanlp" target="_blank" class="menu-item" id="website_link" >참고: Java/Kotlin API</a></h2><h2><a href="https://koalanlp.github.io/scala-support" target="_blank" class="menu-item" id="website_link" >참고: Scala API</a></h2><h2><a href="https://koalanlp.github.io/python-support" target="_blank" class="menu-item" id="website_link" >참고: Python3 API</a></h2><h3>Modules</h3><ul><li><a href="module-koalanlp_API.html">koalanlp/API</a></li><li><a href="module-koalanlp_ExtUtil.html">koalanlp/ExtUtil</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.alphaToHangul">alphaToHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.hangulToAlpha">hangulToAlpha</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isAlphaPronounced">isAlphaPronounced</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isHanja">isHanja</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isCJKHanja">isCJKHanja</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.hanjaToHangul">hanjaToHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isCompleteHangul">isCompleteHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isIncompleteHangul">isIncompleteHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isHangul">isHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isHangulEnding">isHangulEnding</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isChosungJamo">isChosungJamo</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isJungsungJamo">isJungsungJamo</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isJongsungJamo">isJongsungJamo</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.isJongsungEnding">isJongsungEnding</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.getChosung">getChosung</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.getJungsung">getJungsung</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.getJongsung">getJongsung</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.dissembleHangul">dissembleHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.assembleHangulTriple">assembleHangulTriple</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.assembleHangul">assembleHangul</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_ExtUtil.html#.correctVerbApply">correctVerbApply</a></li></ul></li><li><a href="module-koalanlp_Util.html">koalanlp/Util</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_Util.html#.initialize">initialize</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_Util.html#.contains">contains</a></li></ul></li><li><a href="module-koalanlp_data.html">koalanlp/data</a></li><li><a href="module-koalanlp_proc.html">koalanlp/proc</a></li><li><a href="module-koalanlp_types.html">koalanlp/types</a></li></ul><h3>Classes</h3><ul><li><a href="module-koalanlp_data.Entity.html">Entity</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getSurface">getSurface</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getLabel">getLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getFineLabel">getFineLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getCorefGroup">getCorefGroup</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#getOriginalLabel">getOriginalLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#equals">equals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Entity.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.CoreferenceGroup.html">CoreferenceGroup</a></li><li><a href="module-koalanlp_data.Tree.html">Tree</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getLabel">getLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getTerminal">getTerminal</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#isRoot">isRoot</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#hasNonTerminals">hasNonTerminals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getTreeString">getTreeString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getParent">getParent</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#getNonTerminals">getNonTerminals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Tree.html#equals">equals</a></li></ul></li><li><a href="module-koalanlp_data.SyntaxTree.html">SyntaxTree</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.SyntaxTree.html#getOriginalLabel">getOriginalLabel</a></li></ul></li><li><a href="module-koalanlp_data.DAGEdge.html">DAGEdge</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#getSrc">getSrc</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#getDest">getDest</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#getLabel">getLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DAGEdge.html#equals">equals</a></li></ul></li><li><a href="module-koalanlp_data.DepEdge.html">DepEdge</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getGovernor">getGovernor</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getDependent">getDependent</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getDepType">getDepType</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getType">getType</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#getOriginalLabel">getOriginalLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#equals">equals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.DepEdge.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.RoleEdge.html">RoleEdge</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getPredicate">getPredicate</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getArgument">getArgument</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getModifiers">getModifiers</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#getOriginalLabel">getOriginalLabel</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.RoleEdge.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.Morpheme.html">Morpheme</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getSurface">getSurface</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getTag">getTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getOriginalTag">getOriginalTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getId">getId</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getWordSense">getWordSense</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getEntities">getEntities</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#getWord">getWord</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isNoun">isNoun</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isPredicate">isPredicate</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isModifier">isModifier</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#isJosa">isJosa</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#hasTag">hasTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#hasTagOneOf">hasTagOneOf</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#hasOriginalTag">hasOriginalTag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#equals">equals</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Morpheme.html#toString">toString</a></li></ul></li><li><a href="module-koalanlp_data.Word.html">Word</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getSurface">getSurface</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getId">getId</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getEntities">getEntities</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getPhrase">getPhrase</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getDependentEdges">getDependentEdges</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getGovernorEdge">getGovernorEdge</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getArgumentRoles">getArgumentRoles</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#getPredicateRoles">getPredicateRoles</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#singleLineString">singleLineString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Word.html#equals">equals</a></li></ul></li><li><a href="module-koalanlp_data.Sentence.html">Sentence</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getSyntaxTree">getSyntaxTree</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getDependencies">getDependencies</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getRoles">getRoles</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getEntities">getEntities</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getCorefGroups">getCorefGroups</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getNouns">getNouns</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getVerbs">getVerbs</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#getModifiers">getModifiers</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#surfaceString">surfaceString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#singleLineString">singleLineString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#toString">toString</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_data.Sentence.html#.fromJava">fromJava</a></li></ul></li><li><a href="module-koalanlp_proc.SentenceSplitter.html">SentenceSplitter</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.SentenceSplitter.html#sentences">sentences</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.SentenceSplitter.html#.sentences">sentences</a></li></ul></li><li><a href="module-koalanlp_proc.Tagger.html">Tagger</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Tagger.html#tag">tag</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Tagger.html#tagSentence">tagSentence</a></li></ul></li><li><a href="module-koalanlp_proc.Parser.html">Parser</a></li><li><a href="module-koalanlp_proc.EntityRecognizer.html">EntityRecognizer</a></li><li><a href="module-koalanlp_proc.RoleLabeler.html">RoleLabeler</a></li><li><a href="module-koalanlp_proc.Dictionary.html">Dictionary</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#addUserDictionary">addUserDictionary</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#contains">contains</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#importFrom">importFrom</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#getBaseEntries">getBaseEntries</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#getItems">getItems</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_proc.Dictionary.html#getNotExists">getNotExists</a></li></ul></li><li><a href="module-koalanlp_types.POS.html">POS</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#.withName">withName</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isNoun">isNoun</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isPredicate">isPredicate</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isModifier">isModifier</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isPostPosition">isPostPosition</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isEnding">isEnding</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isAffix">isAffix</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isSuffix">isSuffix</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isSymbol">isSymbol</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#isUnknown">isUnknown</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.POS.html#startsWith">startsWith</a></li></ul></li><li><a href="module-koalanlp_types.PhraseTag.html">PhraseTag</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.PhraseTag.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.PhraseTag.html#.withName">withName</a></li></ul></li><li><a href="module-koalanlp_types.DependencyTag.html">DependencyTag</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.DependencyTag.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.DependencyTag.html#.withName">withName</a></li></ul></li><li><a href="module-koalanlp_types.RoleType.html">RoleType</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.RoleType.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.RoleType.html#.withName">withName</a></li></ul></li><li><a href="module-koalanlp_types.CoarseEntityType.html">CoarseEntityType</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-koalanlp_types.CoarseEntityType.html#.values">values</a></li><li data-type='method' style='display: none;'><a href="module-koalanlp_types.CoarseEntityType.html#.withName">withName</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">koalanlp/ExtUtil</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description"><p>여러 편의기능을 모아놓은 Module입니다.</p></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".HanFirstList"><span class="type-signature">(static, constant) </span>HanFirstList<span class="type-signature"> :ReadonlyArray.&lt;string></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>초성 조합형 문자열 리스트 (UNICODE 순서)</p>
+<p>'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">ReadonlyArray.&lt;string></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.HanFirstList[0]);</code></pre>
+
+
+
+        
+            
+<h4 class="name" id=".HanSecondList"><span class="type-signature">(static, constant) </span>HanSecondList<span class="type-signature"> :ReadonlyArray.&lt;string></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>중성 조합형 문자열 리스트 (UNICODE 순서)</p>
+<p>'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">ReadonlyArray.&lt;string></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.HanSecondList[0]);</code></pre>
+
+
+
+        
+            
+<h4 class="name" id=".HanLastList"><span class="type-signature">(static, constant) </span>HanLastList<span class="type-signature"> :ReadonlyArray.&lt;string></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>종성 조합형 문자열 리스트 (UNICODE 순서). 가장 첫번째는 null (받침 없음)</p>
+<p>undefined, 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ',
+'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">ReadonlyArray.&lt;string></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.HanLastList[0]);</code></pre>
+
+
+
+        
+            
+<h4 class="name" id=".ChoToJong"><span class="type-signature">(static, constant) </span>ChoToJong<span class="type-signature"> :Readonly.&lt;Map.&lt;string, string>></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line59">line 59</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>초성 문자를 종성 조합형 문자로 변경할 수 있는 map</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Readonly.&lt;Map.&lt;string, string>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.ChoToJong.get('ㄵ'));</code></pre>
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".alphaToHangul"><span class="type-signature">(static) </span>alphaToHangul<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>주어진 문자열에서 알파벳이 발음되는 대로 국문 문자열로 표기하여 값으로 돌려줍니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.alphaToHangul("갤럭시S"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>알파벳을 발음할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>국문 발음 표기된 문자열</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".hangulToAlpha"><span class="type-signature">(static) </span>hangulToAlpha<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line129">line 129</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>주어진 문자열에 적힌 알파벳 발음을 알파벳으로 변환하여 문자열로 반환합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.hangulToAlpah("갤럭시에스"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>국문 발음 표기된 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>영문 변환된 문자열</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isAlphaPronounced"><span class="type-signature">(static) </span>isAlphaPronounced<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line142">line 142</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>주어진 문자열이 알파벳이 발음되는 대로 표기된 문자열인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isAlphaPronounced("갤럭시에스"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>영문 발음으로만 구성되었다면 true</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isHanja"><span class="type-signature">(static) </span>isHanja<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;boolean>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line169">line 169</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>문자열의 각 문자가 한자 범위인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isHanja("貝波通水"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>문자열 문자의 위치마다 한자인지 아닌지를 표기한 리스트. 한자라면 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;boolean></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isCJKHanja"><span class="type-signature">(static) </span>isCJKHanja<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;boolean>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line184">line 184</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자가 한중일 통합한자, 통합한자 확장 - A, 호환용 한자 범위인지 확인합니다.
+(국사편찬위원회 한자음가사전은 해당 범위에서만 정의되어 있어, 별도 확인합니다.)</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isCJKHanja("貝波通水"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>문자열 문자의 위치마다 한자인지 아닌지를 표기한 리스트. 한자라면 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;boolean></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".hanjaToHangul"><span class="type-signature">(static) </span>hanjaToHangul<span class="signature">(text<span class="signature-attributes">non-null</span>, headCorrection<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line207">line 207</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>국사편찬위원회 한자음가사전에 따라 한자 표기된 내용을 국문 표기로 전환합니다.</p>
+<p>참고:</p>
+<ul>
+<li>[headCorrection] 값이 true인 경우, whitespace에 따라오는 문자에 두음법칙을 자동 적용함. (기본값 true)</li>
+<li>단, 다음 의존명사는 예외: 냥(兩), 년(年), 리(里), 리(理), 량(輛)</li>
+<li>다음 두음법칙은 사전을 조회하지 않기 때문에 적용되지 않음에 유의<ul>
+<li>한자 파생어나 합성어에서 원 단어의 두음법칙: 예) &quot;신여성&quot;이 옳은 표기이나 &quot;신녀성&quot;으로 표기됨</li>
+<li>외자가 아닌 이름: 예) &quot;허난설헌&quot;이 옳은 표기이나 &quot;허란설헌&quot;으로 표기됨</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.hanjaToHangul("貝波通水"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>국문 표기로 전환할 문자열</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>headCorrection</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>true</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>두음법칙 적용 여부</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>국문 표기로 전환된 문자열</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isCompleteHangul"><span class="type-signature">(static) </span>isCompleteHangul<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;boolean>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line221">line 221</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자가 초성, 중성, 종성(선택적)을 다 갖춘 문자인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isCompleteHangul("Sing! 노래하라"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>문자열 문자의 위치마다 확인여부를 표기한 리스트. 맞다면 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;boolean></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isIncompleteHangul"><span class="type-signature">(static) </span>isIncompleteHangul<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;boolean>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line235">line 235</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자가 불완전한 한글 문자인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isIncompleteHangul("Sing! 노래하라"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>문자열 문자의 위치마다 확인여부를 표기한 리스트. 맞다면 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;boolean></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isHangul"><span class="type-signature">(static) </span>isHangul<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;boolean>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line249">line 249</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자가 한글 완성형 또는 조합용 문자인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isHangul("Sing! 노래하라"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>문자열 문자의 위치마다 확인여부를 표기한 리스트. 맞다면 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;boolean></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isHangulEnding"><span class="type-signature">(static) </span>isHangulEnding<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line263">line 263</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자열이 한글 (완성/조합)로 끝나는지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isHangulEnding("Sing! 노래하라"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>맞다면 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isChosungJamo"><span class="type-signature">(static) </span>isChosungJamo<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;boolean>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line277">line 277</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자가 현대 한글 초성 자음 문자인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isChosungJamo("\u1100"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>문자열 문자의 위치마다 확인여부를 표기한 리스트. 맞다면 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;boolean></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isJungsungJamo"><span class="type-signature">(static) </span>isJungsungJamo<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;boolean>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line291">line 291</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자가 현대 한글 중성 모음 문자인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isJungsungJamo("\u1161"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>문자열 문자의 위치마다 확인여부를 표기한 리스트. 맞다면 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;boolean></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isJongsungJamo"><span class="type-signature">(static) </span>isJongsungJamo<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;boolean>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line305">line 305</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자가 현대 한글 종성 자음 문자인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isJungsungJamo("\u11A8"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>문자열 문자의 위치마다 확인여부를 표기한 리스트. 맞다면 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;boolean></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isJongsungEnding"><span class="type-signature">(static) </span>isJongsungEnding<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line319">line 319</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자열이 종성으로 끝인지 확인합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.isJongsungEnding("Sing! 노래하라"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>확인할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>맞다면 True.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getChosung"><span class="type-signature">(static) </span>getChosung<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line332">line 332</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자에서 초성 자음문자를 분리합니다. 초성이 없으면 None.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.getChosung("제주도의 푸른 밤"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>분리할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>분리된 각 초성이 들어간 리스트.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getJungsung"><span class="type-signature">(static) </span>getJungsung<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line345">line 345</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자에서 중성 모음문자를 분리합니다. 중성이 없으면 None.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.getJungsung("제주도의 푸른 밤"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>분리할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>분리된 각 중성이 들어간 리스트.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getJongsung"><span class="type-signature">(static) </span>getJongsung<span class="signature">(text<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line358">line 358</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자에서 종성 자음문자를 분리합니다. 종성이 없으면 None.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.getJongsung("제주도의 푸른 밤"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>분리할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>분리된 각 종성이 들어간 리스트.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".dissembleHangul"><span class="type-signature">(static) </span>dissembleHangul<span class="signature">(text)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line371">line 371</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>현재 문자열을 초성, 중성, 종성 자음문자로 분리하여 새 문자열을 만듭니다. 종성이 없으면 종성은 쓰지 않습니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.dissembleHangul("제주도의 푸른 밤"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>분해할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>분해된 문자열</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".assembleHangulTriple"><span class="type-signature">(static) </span>assembleHangulTriple<span class="signature">(cho<span class="signature-attributes">opt</span>, jung<span class="signature-attributes">opt</span>, jong<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line387">line 387</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>초성을 [cho] 문자로, 중성을 [jung] 문자로, 종성을 [jong] 문자로 갖는 한글 문자를 재구성합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.assembleHangulTriple('\u1100', '\u1161', '\u11A8'));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cho</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>초성 문자. (0x1100-1112) 기본값 ㅇ 자모</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>jung</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>중성 문자, (0x1161-1175) 기본값 ㅡ 자모</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>jong</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>종성 문자, (0x11a8-11c2) 기본값 종성 없음</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>초성, 중성, 종성을 조합하여 문자를 만듭니다.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".assembleHangul"><span class="type-signature">(static) </span>assembleHangul<span class="signature">(text)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line401">line 401</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>주어진 문자열에서 초성, 중성, 종성이 연달아 나오는 경우 이를 조합하여 한글 문자를 재구성합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.assembleHangul("제주도의 푸른 밤인 \u1100\u1161\u11A8"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>조합할 문자열</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>조합형 문자들이 조합된 문자열. 조합이 불가능한 문자는 그대로 남습니다.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".correctVerbApply"><span class="type-signature">(static) </span>correctVerbApply<span class="signature">(verb, isVerb, rest)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExtUtil.js.html">ExtUtil.js</a>, <a href="ExtUtil.js.html#line417">line 417</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>주어진 용언의 원형 [verb]이 뒷 부분 [rest]와 같이 어미가 붙어 활용될 때, 불규칙 활용 용언과 모음조화를 교정합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import * as ExtUtil from 'koalanlp/ExtUtil';
+console.log(ExtUtil.correctVerbApply("밀리",true,"어"));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>verb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>용언 원형인 어근을 표현한 String. '-다.' 와 같은 어미는 없는 어근 상태입니다.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isVerb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>동사인지 형용사인지 나타내는 지시자. 동사이면 true.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rest</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>어근에 붙일 어미를 표현한 String.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>모음조화나 불규칙 활용이 교정된 원형+어미 결합</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Dec 03 2018 01:43:17 GMT+0900 (GMT+09:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/jquery-3.1.1.min.js"></script>
+
+<script src="scripts/search.js"></script>
+
+
+<script src="scripts/collapse.js"></script>
+
+
+
+</body>
+</html>

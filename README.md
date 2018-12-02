@@ -70,17 +70,35 @@ KoalaNLP의 프로젝트와 인터페이스 통합을 위한 코드는
 * Daon: 지정된 조항 없음
 * ETRI: 별도 API 키 발급 동의 필요
 
-# Dependency 추가
-* `Java` 8 이상이 설치되어 있어야 합니다. 
+# 사용법
 
-아래와 같이 `koalanlp`를 추가해주세요.
-```shell
+상세한 사항은 [Usage](https://koalanlp.github.io/koalanlp/usage/) 또는 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.com/nodejs-koalanlp/docs/)을 참고하십시오.
+
+## Dependency 추가
+우선 Java 8 및 NodeJS 8 이상을 설치하고, `JAVA_HOME`을 환경변수에 등록해주십시오.
+그런 다음, 아래와 같이 설치하십시오. (현재 nodejs-koalanlp 버전은 [![NPM Version](https://img.shields.io/npm/v/koalanlp.svg?style=flat-square)](https://github.com/koalanlp/nodejs-koalanlp)입니다.)
+
+```bash
 $ npm install koalanlp --save 
 ```
 
-# 사용법
+### Packages
+각 형태소 분석기는 별도의 패키지로 나뉘어 있습니다.
 
-상세한 사항은 [Usage](https://koalanlp.github.io/koalanlp/usage/) 또는 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.com/nodejs-koalanlp/docs/module-koalanlp.html)을 참고하십시오.
+| 패키지명            | 설명                                                                 |  사용 가능 버전    | License (원본)     |
+| ------------------ | ------------------------------------------------------------------ | ---------------- | ----------------- |
+| API.KMR          | 코모란 Wrapper, 분석범위: 형태소                                       | [![Ver-KMR](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kmr.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kmr%22)         | Apache 2.0 |
+| API.EUNJEON      | 은전한닢 Wrapper, 분석범위: 형태소                                     | [![Ver-EJN](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon%22) | Apache 2.0 |
+| API.ARIRANG      | 아리랑 Wrapper, 분석범위: 형태소                                       | [![Ver-ARR](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-arirang.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-arirang%22) | Apache 2.0 |
+| API.RHINO        | RHINO Wrapper, 분석범위: 형태소                                       | [![Ver-RHI](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-rhino.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-rhino%22)     | GPL v3 |
+| API.DAON         | Daon Wrapper, 분석범위: 형태소                                        | [![Ver-DAN](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-daon.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-daon%22)       | MIT(별도 지정 없음) |
+| API.OKT          | Open Korean Text Wrapper, 분석범위: 문장분리, 형태소                    | [![Ver-OKT](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-okt.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-okt%22)        | Apache 2.0  |
+| API.KKMA         | 꼬꼬마 Wrapper, 분석범위: 형태소, 의존구문                               | [![Ver-KKM](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma%22)       | GPL v2    |
+| API.HNN          | 한나눔 Wrapper, 분석범위: 문장분리, 형태소, 구문분석, 의존구문               | [![Ver-HNN](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hnn.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hnn%22)        | GPL v3    |
+| API.ETRI         | ETRI Open API Wrapper, 분석범위: 형태소, 구문분석, 의존구문, 개체명, 의미역 | [![Ver-ETR](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-etri.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-etri%22)      | MIT<sup>2-2</sup> |
+
+> <sup>주2-2</sup> ETRI의 경우 Open API를 접근하기 위한 코드 부분은 KoalaNLP의 License 정책에 귀속되지만, Open API 접근 이후의 사용권에 관한 조항은 ETRI에서 별도로 정한 바를 따릅니다.
+> 따라서, ETRI의 사용권 조항에 동의하시고 키를 발급하셔야 하며, 다음 위치에서 발급을 신청할 수 있습니다: [키 발급 신청](http://aiopen.etri.re.kr/key_main.php)
 
 ## 간단한 예시
 `koalanlp`는, `node-java` 및 `node-java-maven` 패키지의 도움을 받아, 필요한 java dependency를 자동으로 가져옵니다.
@@ -89,69 +107,69 @@ $ npm install koalanlp --save
 > 다운로드 진행 중에 취소하시면 다운로드 된 패키지가 corrupt 될 수 있습니다.
 > 이 경우, Maven repository 저장 공간인 (`~/.m2`) 폴더에서 오류가 나는 패키지를 삭제하시고 다시 시작하십시오.
 
-다음과 같이 사용합니다. (ES2015 기준으로 작성되었으나, ES5 에서도 유사하게 작성하실 수 있습니다.)
+다음과 같이 사용합니다. (Node > 8, ECMAScript2017 기준)
+
+### Async/Await 방식으로 사용할 때 (권장)
+ㅌ
 ```js
-let koalanlp = require('koalanlp'); // Import
-let API = koalanlp.API; // Tagger/Parser Package 지정을 위한 목록
-let POS = koalanlp.POS; // 품사 관련 utility
+const {KMR, KKMA} = require('koalanlp/API');
+const {initialize} = require('koalanlp/Util');
+const {Tagger, Parser} = require('koalanlp/proc');
 
-koalanlp.initialize({
-    packages: [API.EUNJEON, // 품사분석(POS Tagging)을 위해서, 은전한닢 사용
-               API.KKMA], // 의존구문분석(Dependency Parsing)을 위해서, 꼬꼬마 사용
-    version: "2.0.0", // 사용하는 KoalaNLP 버전 (2.0.0 사용)
-    javaOptions: ["-Xmx4g"],
-    debug: true // Debug output 출력여부
-}).then(function(){
-    // 품사분석기 이용법
-    let tagger = new koalanlp.Tagger(API.EUNJEON);
+async function executor(){
+    await initialize({packages: {KMR: '2.0.4', KKMA: '2.0.4'}, verbose: true});
 
-    // POS Tagging
-    tagger.tag("안녕하세요. 눈이 오는 설날 아침입니다.")
-        .catch(function(error){
-            console.error(error);            
-        }).then(function(taggedAsync){
-            console.log("Async", taggedAsync.result.map(s => s.toString()).join("\n"));
-        });
+    let tagger = new Tagger(KMR);
+    let tagged = await tagger("안녕하세요. 눈이 오는 설날 아침입니다.");
+    for(const sent of tagged) {
+        console.log(sent.toString());
+    }
 
-    // 의존구문분석기 이용법
-    let parser = new koalanlp.Parser(API.KKMA, API.EUNJEON);
+    let parser = new Parser(KKMA);
+    let parsed = await parser("안녕하세요. 눈이 오는 설날 아침입니다.");
+    for(const sent of parsed){
+        console.log(sent.toString());
+        for(const dep of sent.dependencies){
+            console.log(dep.toString());
+        }
+    }
+}
 
-    // Dependency Parsing
-    parser.parse("안녕하세요. 눈이 오는 설날 아침입니다."
-        .catch(function(error){
-            console.error(error);            
-        }).then(function(parsed){
-            console.log("Async", parsed.result.map(s => s.toString()).join("\n"));
-            
-            // Data classes
-            let sentence = parsed[1]; // 두번째 문장인, "눈이 오는 설날 아침입니다."를 선택합니다.
-        
-            let wordAt0 = sentence.get(0); // 첫번째 어절을 선택해봅니다.
-            console.log(wordAt0.exists(m => POS.isPredicate(m.tag))); // 첫번째 어절에, 용언(동사/형용사)을 포함한 형태소가 있는지 확인합니다.
-            console.log(sentence.exists(w => w.exists(m => POS.isNoun(m.tag)))); // 문장 전체에 체언(명사 등)을 포함한 어절이 있는지 확인합니다.
-            console.log(sentence.nouns()); // 문장에서 체언만 추출합니다.
-            console.log(sentence.verbs()); // 문장에서 용언만 추출합니다.
-        });
-});
+executor().then(
+    () => console.log('finished!'), 
+    (error) => console.error('Error Occurred!', error)
+);
 ```
 
-## 사용가능한 패키지 목록
+### Promise 방식으로 사용할 때
 
-|         | 은전한닢(`EUNJEON`) | 꼬꼬마(`KKMA`) | 코모란(`KOMORAN`) | 한나눔(`HANNANUM`) | 오픈한글(`TWITTER`) | 아리랑(`ARIRANG`) | 라이노(`RHINO`) |
-|---------|-------------------|---------------|-----------------|------------------|--------------------|-----------------|---------------|
-| 품사분석    | v1.4.0 | v2  | v3.3.3 | v1  | v2.1.2 | v1.1.3 | v2.5.4 |
-| 의존구문분석 | 지원안함 | 가능 | 지원안함 | 가능 | 지원안함 | 지원안함 | 지원안함 |
+```js
+const {KMR, KKMA} = require('koalanlp/API');
+const {initialize} = require('koalanlp/Util');
+const {Tagger, Parser} = require('koalanlp/proc');
 
-# License 조항
-이 프로젝트 자체(nodejs-KoalaNLP)와 인터페이스 통합을 위한 Java/Scala 코드는 [*MIT License*](https://tldrlegal.com/license/mit-license)을 따르며,
-각 분석기의 License와 저작권은 각 프로젝트에서 지정한 바를 따릅니다.
-* Hannanum: [GPL v3](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3))
-* KKMA: [GPL v2](https://tldrlegal.com/license/gnu-general-public-license-v2) (GPL v2를 따르지 않더라도, 상업적 이용시 별도 협의 가능)
-* KOMORAN: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
-* Twitter: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
-* Eunjeon: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
-* Arirang: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
-* RHINO: 비상업적 용도 사용가능.
+initialize({packages: {KMR: '2.0.4', KKMA: '2.0.4'}, verbose: true})
+    .then(() => {
+        let tagger = new Tagger(KMR);
+        tagger("안녕하세요. 눈이 오는 설날 아침입니다.").then((tagged) => {
+            for (const sent of tagged) {
+                console.log(sent.toString());
+            }
+        }, (error) => console.error('Error Occurred', error));
+
+        let parser = new Parser(KKMA);
+        parser("안녕하세요. 눈이 오는 설날 아침입니다.").then((parsed) => {
+            for (const sent of parsed) {
+                console.log(sent.toString());
+                for (const dep of sent.dependencies) {
+                    console.log(dep.toString());
+                }
+            }
+        }, (error) => console.error('Error Occurred', error));
+
+        console.log('finished!');
+    }, (error) => console.error('Error Occurred!', error));
+```
 
 # 결과 비교
-[Java/Scala Version KoalaNLP의 Wiki:결과비교](https://github.com/koalanlp/KoalaNLP-core/wiki/4.-결과-비교)를 참조해주세요.
+[Sample:결과비교](https://koalanlp.github.io/sample/comparison)를 참조해주세요.
