@@ -445,7 +445,7 @@ export class Tree extends ImmutableArray {
     }
 
     getTerminals() {
-        let leaves = this.flatMap((child) => child.getTerminals());
+        let leaves = this.reduce((acc, child) => acc.concat(child.getTerminals()), []);
         if (this.terminal !== undefined) {
             leaves.push(this.terminal);
         }
@@ -1202,7 +1202,7 @@ export class Morpheme extends JavaWrappable {
      * @return {boolean} 관계언이라면 true
      */
     isJosa() {
-        return this.tag.isJosa();
+        return this.tag.isPostPosition();
     }
 
     /**
@@ -1950,7 +1950,7 @@ export class Sentence extends ImmutableArray {
         }
 
         if (jtree.hasNonTerminals()) {
-            nonTerms = JVM.toJsArray(jtree, this._reconSyntaxTree);
+            nonTerms = JVM.toJsArray(jtree, (x) => this._reconSyntaxTree(x));
         }
 
         let tree = new SyntaxTree(
@@ -1982,7 +1982,7 @@ export class Sentence extends ImmutableArray {
             this._getWord(e.getPredicate()),
             this._getWord(e.getArgument()),
             e.getLabel().name(),
-            JVM.toJsArray(e.getModifiers(), this._getWord),
+            JVM.toJsArray(e.getModifiers(), (x) => this._getWord(x)),
             getOrUndefined(e.getOriginalLabel())
         );
         edge.reference = e;
@@ -1995,7 +1995,7 @@ export class Sentence extends ImmutableArray {
             e.getSurface(),
             e.getLabel().name(),
             e.getFineLabel(),
-            JVM.toJsArray(e, this._getMorph),
+            JVM.toJsArray(e, (x) => this._getMorph(x)),
             getOrUndefined(e.getOriginalLabel())
         );
         enty.reference = e;

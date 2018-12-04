@@ -64,7 +64,7 @@ export class SentenceSplitter extends Function {
      */
     constructor(api) {
         super();
-        this._api = API.query(api, this.constructor.name);
+        this._api = API.query(api, this.constructor.name)();
 
         return assignProxy(this, 'sentences');
     }
@@ -77,8 +77,15 @@ export class SentenceSplitter extends Function {
     async sentences(...text) {
         let result = [];
         for (let paragraph of text) {
-            let promiseResult = await this._api.sentencesPromise(paragraph);
-            result.push(...JVM.toJsArray(promiseResult));
+            if (Array.isArray(paragraph)) {
+                result.push(...await this.sentences(...paragraph));
+            }else {
+                if (paragraph.trim().length == 0)
+                    continue;
+
+                let promiseResult = await this._api.sentencesPromise(paragraph);
+                result.push(...JVM.toJsArray(promiseResult));
+            }
         }
         return result;
     }
@@ -172,6 +179,9 @@ export class Tagger extends Function {
                 promiseResult = await this.tag(...paragraph);
                 result.push(...promiseResult);
             }else {
+                if (paragraph.trim().length == 0)
+                    continue;
+
                 promiseResult = await this._api.tagPromise(paragraph);
                 result.push(...JVM.toJsArray(promiseResult, Sentence.fromJava));
             }
@@ -182,18 +192,21 @@ export class Tagger extends Function {
     /**
      * 문장을 품사분석합니다. 각 인자 하나를 하나의 문장으로 간주합니다.
      *
-     * @param {...!string} sentence 분석할 문장(들). (가변인자)
+     * @param {...!string} text 분석할 문장(들). (가변인자)
      * @returns {Sentence[]} 분석된 결과.
      */
-    async tagSentence(...sentence) {
+    async tagSentence(...text) {
         let result = [];
-        for (let paragraph of text) {
+        for (let sentence of text) {
             let promiseResult;
-            if(Array.isArray(paragraph)) {
-                promiseResult = await this.tagSentence(...paragraph);
+            if(Array.isArray(sentence)) {
+                promiseResult = await this.tagSentence(...sentence);
                 result.push(...promiseResult);
             }else {
-                promiseResult = await this._api.tagSentencePromise(paragraph);
+                if (sentence.trim().length == 0)
+                    continue;
+
+                promiseResult = await this._api.tagSentencePromise(sentence);
                 result.push(Sentence.fromJava(promiseResult));
             }
         }
@@ -244,13 +257,16 @@ class CanAnalyzeProperty extends Function {
         let result = [];
         for (let paragraph of text) {
             let promiseResult;
-            if (Array.isArray(paragraph)) {
+            if (paragraph instanceof Sentence) {
+                promiseResult = await this._api.analyzePromise(paragraph.reference);
+                result.push(Sentence.fromJava(promiseResult));
+            } else if (Array.isArray(paragraph)) {
                 promiseResult = await this.analyze(...paragraph);
                 result.push(...promiseResult);
-            } else if (paragraph instanceof Sentence) {
-                promiseResult = await this._api.analyzePromise(paragraph.getReference());
-                result.push(Sentence.fromJava(promiseResult));
             } else {
+                if (paragraph.trim().length == 0)
+                    continue;
+
                 promiseResult = await this._api.analyzePromise(paragraph);
                 result.push(...JVM.toJsArray(promiseResult, Sentence.fromJava));
             }
@@ -449,7 +465,7 @@ export class Dictionary {
      * @param {!API} api 사용자 정의 사전을 연결할 API 패키지.
      */
     constructor(api) {
-        self._api = API.query(api, 'Dictionary').INSTANCE;
+        this._api = API.query(api, 'Dictionary').INSTANCE;
     }
 
     /**
@@ -498,11 +514,11 @@ export class Dictionary {
         let tags = [];
         if (filter instanceof Function) {
             for (let tag of POS.values()) {
-                if (filter(tag)) tags.append(tag.name);
+                if (filter(tag)) tags.push(tag.tagname);
             }
         } else {
             for (let tag of filter) {
-                tags.append(tag.name);
+                tags.push(tag.tagname);
             }
         }
 
@@ -519,20 +535,20 @@ export class Dictionary {
         let tags = [];
         if (filter instanceof Function) {
             for (let tag of POS.values()) {
-                if (filter(tag)) tags.append(tag.name);
+                if (filter(tag)) tags.push(tag.tagname);
             }
         } else {
             for (let tag of filter) {
-                tags.append(tag.name);
+                tags.push(tag.tagname);
             }
         }
 
         let entries = await this._api.getBaseEntriesPromise(JVM.posFilter(tags));
-        return function* () {
+        return (function* () {
             while (entries.hasNext()) {
                 yield readDicEntry(entries.next());
             }
-        };
+        })();
     }
 
     /**

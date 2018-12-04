@@ -6,6 +6,7 @@
  **/
 
 import {JVM} from './jvm';
+import _ from 'underscore';
 
 /**
  * 자바 Enum 표현
@@ -16,7 +17,7 @@ class JavaEnum{
      * Enum 명칭
      * @type {string}
      */
-    keyname = '';
+    tagname = '';
     /**
      * Enum 순서 번호
      * @type {number}
@@ -30,8 +31,8 @@ class JavaEnum{
 
     constructor(reference){
         this.reference = reference;
-        this.keyname = reference.name_;
-        this.ordinal = reference.ordinal;
+        this.tagname = reference.name();
+        this.ordinal = reference.ordinal();
         this.classType = reference.getClass().getName();
     }
 
@@ -40,7 +41,7 @@ class JavaEnum{
      * @returns {string} 이 값을 표현하는 문자열
      */
     toString(){
-        return this.keyname;
+        return this.tagname;
     }
 
     /**
@@ -83,13 +84,26 @@ export class POS extends JavaEnum{
      * @returns {POS[]} POS값들의 array
      */
     static values(){
-        if (POS._values.length() === 0){
+        if (_.isEmpty(POS._values)){
             JavaEnum.getAllOf('POS').forEach(it => {
-                POS._values[it.name] = new POS(it);
+                let value = new POS(it);
+                POS._values[value.tagname] = value;
+
+                Object.defineProperty(POS, value.tagname, {
+                    value: value,
+                    writable: false,
+                    configurable: false
+                });
+            });
+
+            Object.defineProperty(POS, '_values', {
+                value: Object.freeze(POS._values),
+                writable: false,
+                configurable: false
             });
         }
 
-        return POS._values.values();
+        return _.values(POS._values)
     }
 
     /**
@@ -201,13 +215,26 @@ export class PhraseTag extends JavaEnum{
      * @returns {PhraseTag[]} PhraseTag값들의 array
      */
     static values(){
-        if (PhraseTag._values.length() === 0){
+        if (_.isEmpty(PhraseTag._values)){
             JavaEnum.getAllOf('PhraseTag').forEach(it => {
-                PhraseTag._values[it.name] = new PhraseTag(it);
+                let value = new PhraseTag(it);
+                PhraseTag._values[value.tagname] = value;
+
+                Object.defineProperty(PhraseTag, value.tagname, {
+                    value: value,
+                    writable: false,
+                    configurable: false
+                });
+            });
+
+            Object.defineProperty(PhraseTag, '_values', {
+                value: Object.freeze(PhraseTag._values),
+                writable: false,
+                configurable: false
             });
         }
 
-        return PhraseTag._values.values();
+        return _.values(PhraseTag._values);
     }
 
     /**
@@ -238,13 +265,26 @@ export class DependencyTag extends JavaEnum{
      * @returns {DependencyTag[]} DependencyTag값들의 array
      */
     static values(){
-        if (DependencyTag._values.length() === 0){
+        if (_.isEmpty(DependencyTag._values)){
             JavaEnum.getAllOf('DependencyTag').forEach(it => {
-                DependencyTag._values[it.name] = new DependencyTag(it);
+                let value = new DependencyTag(it);
+                DependencyTag._values[value.tagname] = value;
+
+                Object.defineProperty(DependencyTag, value.tagname, {
+                    value: value,
+                    writable: false,
+                    configurable: false
+                });
+            });
+
+            Object.defineProperty(DependencyTag, '_values', {
+                value: Object.freeze(DependencyTag._values),
+                writable: false,
+                configurable: false
             });
         }
 
-        return DependencyTag._values.values();
+        return _.values(DependencyTag._values)
     }
 
     /**
@@ -275,13 +315,26 @@ export class RoleType extends JavaEnum{
      * @returns {RoleType[]} RoleType값들의 array
      */
     static values(){
-        if (RoleType._values.length() === 0){
+        if (_.isEmpty(RoleType._values)){
             JavaEnum.getAllOf('RoleType').forEach(it => {
-                RoleType._values[it.name] = new RoleType(it);
+                let value = new RoleType(it);
+                RoleType._values[value.tagname] = value;
+
+                Object.defineProperty(RoleType, value.tagname, {
+                    value: value,
+                    writable: false,
+                    configurable: false
+                });
+            });
+
+            Object.defineProperty(RoleType, '_values', {
+                value: Object.freeze(RoleType._values),
+                writable: false,
+                configurable: false
             });
         }
 
-        return RoleType._values.values();
+        return _.values(RoleType._values)
     }
 
     /**
@@ -312,13 +365,26 @@ export class CoarseEntityType extends JavaEnum{
      * @returns {CoarseEntityType[]} CoarseEntityType값들의 array
      */
     static values(){
-        if (CoarseEntityType._values.length() === 0){
+        if (_.isEmpty(CoarseEntityType._values)){
             JavaEnum.getAllOf('CoarseEntityType').forEach(it => {
-                CoarseEntityType._values[it.name] = new CoarseEntityType(it);
+                let value = new CoarseEntityType(it);
+                CoarseEntityType._values[value.tagname] = value;
+
+                Object.defineProperty(CoarseEntityType, value.tagname, {
+                    value: value,
+                    writable: false,
+                    configurable: false
+                });
+            });
+
+            Object.defineProperty(CoarseEntityType, '_values', {
+                value: Object.freeze(CoarseEntityType._values),
+                writable: false,
+                configurable: false
             });
         }
 
-        return CoarseEntityType._values.values();
+        return _.values(CoarseEntityType._values)
     }
 
     /**

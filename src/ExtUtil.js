@@ -114,7 +114,7 @@ export const ChoToJong = Object.freeze(new Map([
  * console.log(ExtUtil.alphaToHangul("갤럭시S"));
  */
 export function alphaToHangul(text) {
-    return JVM.koalaClassOf('ExtUtil').alphaToHangul(text);
+    return JVM.koalaClassOf('ExtUtil').alphaToHangul(text).toString();
 }
 
 
@@ -127,7 +127,7 @@ export function alphaToHangul(text) {
  * console.log(ExtUtil.hangulToAlpah("갤럭시에스"));
  */
 export function hangulToAlpha(text) {
-    return JVM.koalaClassOf('ExtUtil').hangulToAlpha(text);
+    return JVM.koalaClassOf('ExtUtil').hangulToAlpha(text).toString();
 }
 
 
@@ -153,7 +153,10 @@ export function isAlphaPronounced(text) {
 function stringRepeat(text, charFunction) {
     let result = [];
     for (let ch of text) {
-        result.push(charFunction(JVM.char(ch)))
+        let res = charFunction(JVM.char(ch));
+        res = (res === null) ? undefined : res;
+
+        result.push(res);
     }
     return result;
 }
@@ -205,7 +208,7 @@ export function isCJKHanja(text) {
  * console.log(ExtUtil.hanjaToHangul("貝波通水"));
  */
 export function hanjaToHangul(text, headCorrection = true) {
-    return JVM.koalaClassOf('ExtUtil').hanjaToHangul(text, headCorrection);
+    return JVM.koalaClassOf('ExtUtil').hanjaToHangul(text, headCorrection).toString();
 }
 
 
@@ -369,7 +372,7 @@ export function getJongsung(text) {
  * console.log(ExtUtil.dissembleHangul("제주도의 푸른 밤"));
  */
 export function dissembleHangul(text) {
-    return JVM.koalaClassOf('ExtUtil').dissembleHangul(text);
+    return JVM.koalaClassOf('ExtUtil').dissembleHangul(text).toString();
 }
 
 
@@ -399,7 +402,7 @@ export function assembleHangulTriple(cho = undefined, jung = undefined, jong = u
  * console.log(ExtUtil.assembleHangul("제주도의 푸른 밤인 \u1100\u1161\u11A8"));
  */
 export function assembleHangul(text) {
-    return JVM.koalaClassOf('ExtUtil').assembleHangulString(text)
+    return JVM.koalaClassOf('ExtUtil').assembleHangulString(text).toString()
 }
 
 

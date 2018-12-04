@@ -11,7 +11,6 @@ cache:
   - $HOME/.m2
   - ./node_modules
 script:
-  - ./node_modules/mocha/bin/mocha -r should -r assert --no-timeouts --exit test/dictionary.js
-  - ./node_modules/mocha/bin/mocha -r should -r assert --no-timeouts --exit test/parser.js
-  - ./node_modules/mocha/bin/mocha -r should -r assert --no-timeouts --exit test/segmenter.js
-  - ./node_modules/mocha/bin/mocha -r should -r assert --no-timeouts --exit test/tagger.js
+  - ./test.sh
+after_success:
+  - ./node_modules/.bin/codecov

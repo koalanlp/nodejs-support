@@ -1,5 +1,1226 @@
 "use strict";
 
+var cov_1n5k1xjv7q = function () {
+  var path = "/home/bydelta/WebstormProjects/nodejs-support/src/ExtUtil.js",
+      hash = "62cf98ec26843f2570b766a29e6e399cd9d78aa0",
+      Function = function () {}.constructor,
+      global = new Function('return this')(),
+      gcv = "__coverage__",
+      coverageData = {
+    path: "/home/bydelta/WebstormProjects/nodejs-support/src/ExtUtil.js",
+    statementMap: {
+      "0": {
+        start: {
+          line: 22,
+          column: 28
+        },
+        end: {
+          line: 22,
+          column: 105
+        }
+      },
+      "1": {
+        start: {
+          line: 22,
+          column: 81
+        },
+        end: {
+          line: 22,
+          column: 103
+        }
+      },
+      "2": {
+        start: {
+          line: 34,
+          column: 29
+        },
+        end: {
+          line: 34,
+          column: 106
+        }
+      },
+      "3": {
+        start: {
+          line: 34,
+          column: 82
+        },
+        end: {
+          line: 34,
+          column: 104
+        }
+      },
+      "4": {
+        start: {
+          line: 47,
+          column: 27
+        },
+        end: {
+          line: 50,
+          column: 3
+        }
+      },
+      "5": {
+        start: {
+          line: 48,
+          column: 4
+        },
+        end: {
+          line: 49,
+          column: 39
+        }
+      },
+      "6": {
+        start: {
+          line: 48,
+          column: 22
+        },
+        end: {
+          line: 48,
+          column: 39
+        }
+      },
+      "7": {
+        start: {
+          line: 49,
+          column: 9
+        },
+        end: {
+          line: 49,
+          column: 39
+        }
+      },
+      "8": {
+        start: {
+          line: 59,
+          column: 25
+        },
+        end: {
+          line: 104,
+          column: 3
+        }
+      },
+      "9": {
+        start: {
+          line: 117,
+          column: 4
+        },
+        end: {
+          line: 117,
+          column: 70
+        }
+      },
+      "10": {
+        start: {
+          line: 130,
+          column: 4
+        },
+        end: {
+          line: 130,
+          column: 70
+        }
+      },
+      "11": {
+        start: {
+          line: 143,
+          column: 4
+        },
+        end: {
+          line: 143,
+          column: 63
+        }
+      },
+      "12": {
+        start: {
+          line: 154,
+          column: 17
+        },
+        end: {
+          line: 154,
+          column: 19
+        }
+      },
+      "13": {
+        start: {
+          line: 155,
+          column: 4
+        },
+        end: {
+          line: 160,
+          column: 5
+        }
+      },
+      "14": {
+        start: {
+          line: 156,
+          column: 18
+        },
+        end: {
+          line: 156,
+          column: 44
+        }
+      },
+      "15": {
+        start: {
+          line: 157,
+          column: 8
+        },
+        end: {
+          line: 157,
+          column: 47
+        }
+      },
+      "16": {
+        start: {
+          line: 159,
+          column: 8
+        },
+        end: {
+          line: 159,
+          column: 25
+        }
+      },
+      "17": {
+        start: {
+          line: 161,
+          column: 4
+        },
+        end: {
+          line: 161,
+          column: 18
+        }
+      },
+      "18": {
+        start: {
+          line: 173,
+          column: 4
+        },
+        end: {
+          line: 173,
+          column: 67
+        }
+      },
+      "19": {
+        start: {
+          line: 188,
+          column: 4
+        },
+        end: {
+          line: 188,
+          column: 70
+        }
+      },
+      "20": {
+        start: {
+          line: 211,
+          column: 4
+        },
+        end: {
+          line: 211,
+          column: 86
+        }
+      },
+      "21": {
+        start: {
+          line: 225,
+          column: 4
+        },
+        end: {
+          line: 225,
+          column: 76
+        }
+      },
+      "22": {
+        start: {
+          line: 239,
+          column: 4
+        },
+        end: {
+          line: 239,
+          column: 78
+        }
+      },
+      "23": {
+        start: {
+          line: 253,
+          column: 4
+        },
+        end: {
+          line: 253,
+          column: 68
+        }
+      },
+      "24": {
+        start: {
+          line: 267,
+          column: 4
+        },
+        end: {
+          line: 267,
+          column: 60
+        }
+      },
+      "25": {
+        start: {
+          line: 281,
+          column: 4
+        },
+        end: {
+          line: 281,
+          column: 73
+        }
+      },
+      "26": {
+        start: {
+          line: 295,
+          column: 4
+        },
+        end: {
+          line: 295,
+          column: 74
+        }
+      },
+      "27": {
+        start: {
+          line: 309,
+          column: 4
+        },
+        end: {
+          line: 309,
+          column: 74
+        }
+      },
+      "28": {
+        start: {
+          line: 323,
+          column: 4
+        },
+        end: {
+          line: 323,
+          column: 62
+        }
+      },
+      "29": {
+        start: {
+          line: 336,
+          column: 4
+        },
+        end: {
+          line: 336,
+          column: 70
+        }
+      },
+      "30": {
+        start: {
+          line: 349,
+          column: 4
+        },
+        end: {
+          line: 349,
+          column: 71
+        }
+      },
+      "31": {
+        start: {
+          line: 362,
+          column: 4
+        },
+        end: {
+          line: 362,
+          column: 71
+        }
+      },
+      "32": {
+        start: {
+          line: 375,
+          column: 4
+        },
+        end: {
+          line: 375,
+          column: 72
+        }
+      },
+      "33": {
+        start: {
+          line: 391,
+          column: 4
+        },
+        end: {
+          line: 391,
+          column: 101
+        }
+      },
+      "34": {
+        start: {
+          line: 405,
+          column: 4
+        },
+        end: {
+          line: 405,
+          column: 76
+        }
+      },
+      "35": {
+        start: {
+          line: 421,
+          column: 4
+        },
+        end: {
+          line: 421,
+          column: 76
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 22,
+            column: 74
+          },
+          end: {
+            line: 22,
+            column: 75
+          }
+        },
+        loc: {
+          start: {
+            line: 22,
+            column: 81
+          },
+          end: {
+            line: 22,
+            column: 103
+          }
+        },
+        line: 22
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 34,
+            column: 75
+          },
+          end: {
+            line: 34,
+            column: 76
+          }
+        },
+        loc: {
+          start: {
+            line: 34,
+            column: 82
+          },
+          end: {
+            line: 34,
+            column: 104
+          }
+        },
+        line: 34
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 47,
+            column: 73
+          },
+          end: {
+            line: 47,
+            column: 74
+          }
+        },
+        loc: {
+          start: {
+            line: 47,
+            column: 80
+          },
+          end: {
+            line: 50,
+            column: 1
+          }
+        },
+        line: 47
+      },
+      "3": {
+        name: "alphaToHangul",
+        decl: {
+          start: {
+            line: 116,
+            column: 16
+          },
+          end: {
+            line: 116,
+            column: 29
+          }
+        },
+        loc: {
+          start: {
+            line: 116,
+            column: 36
+          },
+          end: {
+            line: 118,
+            column: 1
+          }
+        },
+        line: 116
+      },
+      "4": {
+        name: "hangulToAlpha",
+        decl: {
+          start: {
+            line: 129,
+            column: 16
+          },
+          end: {
+            line: 129,
+            column: 29
+          }
+        },
+        loc: {
+          start: {
+            line: 129,
+            column: 36
+          },
+          end: {
+            line: 131,
+            column: 1
+          }
+        },
+        line: 129
+      },
+      "5": {
+        name: "isAlphaPronounced",
+        decl: {
+          start: {
+            line: 142,
+            column: 16
+          },
+          end: {
+            line: 142,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 142,
+            column: 40
+          },
+          end: {
+            line: 144,
+            column: 1
+          }
+        },
+        line: 142
+      },
+      "6": {
+        name: "stringRepeat",
+        decl: {
+          start: {
+            line: 153,
+            column: 9
+          },
+          end: {
+            line: 153,
+            column: 21
+          }
+        },
+        loc: {
+          start: {
+            line: 153,
+            column: 42
+          },
+          end: {
+            line: 162,
+            column: 1
+          }
+        },
+        line: 153
+      },
+      "7": {
+        name: "isHanja",
+        decl: {
+          start: {
+            line: 172,
+            column: 16
+          },
+          end: {
+            line: 172,
+            column: 23
+          }
+        },
+        loc: {
+          start: {
+            line: 172,
+            column: 30
+          },
+          end: {
+            line: 174,
+            column: 1
+          }
+        },
+        line: 172
+      },
+      "8": {
+        name: "isCJKHanja",
+        decl: {
+          start: {
+            line: 187,
+            column: 16
+          },
+          end: {
+            line: 187,
+            column: 26
+          }
+        },
+        loc: {
+          start: {
+            line: 187,
+            column: 33
+          },
+          end: {
+            line: 189,
+            column: 1
+          }
+        },
+        line: 187
+      },
+      "9": {
+        name: "hanjaToHangul",
+        decl: {
+          start: {
+            line: 210,
+            column: 16
+          },
+          end: {
+            line: 210,
+            column: 29
+          }
+        },
+        loc: {
+          start: {
+            line: 210,
+            column: 59
+          },
+          end: {
+            line: 212,
+            column: 1
+          }
+        },
+        line: 210
+      },
+      "10": {
+        name: "isCompleteHangul",
+        decl: {
+          start: {
+            line: 224,
+            column: 16
+          },
+          end: {
+            line: 224,
+            column: 32
+          }
+        },
+        loc: {
+          start: {
+            line: 224,
+            column: 39
+          },
+          end: {
+            line: 226,
+            column: 1
+          }
+        },
+        line: 224
+      },
+      "11": {
+        name: "isIncompleteHangul",
+        decl: {
+          start: {
+            line: 238,
+            column: 16
+          },
+          end: {
+            line: 238,
+            column: 34
+          }
+        },
+        loc: {
+          start: {
+            line: 238,
+            column: 41
+          },
+          end: {
+            line: 240,
+            column: 1
+          }
+        },
+        line: 238
+      },
+      "12": {
+        name: "isHangul",
+        decl: {
+          start: {
+            line: 252,
+            column: 16
+          },
+          end: {
+            line: 252,
+            column: 24
+          }
+        },
+        loc: {
+          start: {
+            line: 252,
+            column: 31
+          },
+          end: {
+            line: 254,
+            column: 1
+          }
+        },
+        line: 252
+      },
+      "13": {
+        name: "isHangulEnding",
+        decl: {
+          start: {
+            line: 266,
+            column: 16
+          },
+          end: {
+            line: 266,
+            column: 30
+          }
+        },
+        loc: {
+          start: {
+            line: 266,
+            column: 37
+          },
+          end: {
+            line: 268,
+            column: 1
+          }
+        },
+        line: 266
+      },
+      "14": {
+        name: "isChosungJamo",
+        decl: {
+          start: {
+            line: 280,
+            column: 16
+          },
+          end: {
+            line: 280,
+            column: 29
+          }
+        },
+        loc: {
+          start: {
+            line: 280,
+            column: 36
+          },
+          end: {
+            line: 282,
+            column: 1
+          }
+        },
+        line: 280
+      },
+      "15": {
+        name: "isJungsungJamo",
+        decl: {
+          start: {
+            line: 294,
+            column: 16
+          },
+          end: {
+            line: 294,
+            column: 30
+          }
+        },
+        loc: {
+          start: {
+            line: 294,
+            column: 37
+          },
+          end: {
+            line: 296,
+            column: 1
+          }
+        },
+        line: 294
+      },
+      "16": {
+        name: "isJongsungJamo",
+        decl: {
+          start: {
+            line: 308,
+            column: 16
+          },
+          end: {
+            line: 308,
+            column: 30
+          }
+        },
+        loc: {
+          start: {
+            line: 308,
+            column: 37
+          },
+          end: {
+            line: 310,
+            column: 1
+          }
+        },
+        line: 308
+      },
+      "17": {
+        name: "isJongsungEnding",
+        decl: {
+          start: {
+            line: 322,
+            column: 16
+          },
+          end: {
+            line: 322,
+            column: 32
+          }
+        },
+        loc: {
+          start: {
+            line: 322,
+            column: 39
+          },
+          end: {
+            line: 324,
+            column: 1
+          }
+        },
+        line: 322
+      },
+      "18": {
+        name: "getChosung",
+        decl: {
+          start: {
+            line: 335,
+            column: 16
+          },
+          end: {
+            line: 335,
+            column: 26
+          }
+        },
+        loc: {
+          start: {
+            line: 335,
+            column: 33
+          },
+          end: {
+            line: 337,
+            column: 1
+          }
+        },
+        line: 335
+      },
+      "19": {
+        name: "getJungsung",
+        decl: {
+          start: {
+            line: 348,
+            column: 16
+          },
+          end: {
+            line: 348,
+            column: 27
+          }
+        },
+        loc: {
+          start: {
+            line: 348,
+            column: 34
+          },
+          end: {
+            line: 350,
+            column: 1
+          }
+        },
+        line: 348
+      },
+      "20": {
+        name: "getJongsung",
+        decl: {
+          start: {
+            line: 361,
+            column: 16
+          },
+          end: {
+            line: 361,
+            column: 27
+          }
+        },
+        loc: {
+          start: {
+            line: 361,
+            column: 34
+          },
+          end: {
+            line: 363,
+            column: 1
+          }
+        },
+        line: 361
+      },
+      "21": {
+        name: "dissembleHangul",
+        decl: {
+          start: {
+            line: 374,
+            column: 16
+          },
+          end: {
+            line: 374,
+            column: 31
+          }
+        },
+        loc: {
+          start: {
+            line: 374,
+            column: 38
+          },
+          end: {
+            line: 376,
+            column: 1
+          }
+        },
+        line: 374
+      },
+      "22": {
+        name: "assembleHangulTriple",
+        decl: {
+          start: {
+            line: 390,
+            column: 16
+          },
+          end: {
+            line: 390,
+            column: 36
+          }
+        },
+        loc: {
+          start: {
+            line: 390,
+            column: 90
+          },
+          end: {
+            line: 392,
+            column: 1
+          }
+        },
+        line: 390
+      },
+      "23": {
+        name: "assembleHangul",
+        decl: {
+          start: {
+            line: 404,
+            column: 16
+          },
+          end: {
+            line: 404,
+            column: 30
+          }
+        },
+        loc: {
+          start: {
+            line: 404,
+            column: 37
+          },
+          end: {
+            line: 406,
+            column: 1
+          }
+        },
+        line: 404
+      },
+      "24": {
+        name: "correctVerbApply",
+        decl: {
+          start: {
+            line: 420,
+            column: 16
+          },
+          end: {
+            line: 420,
+            column: 32
+          }
+        },
+        loc: {
+          start: {
+            line: 420,
+            column: 53
+          },
+          end: {
+            line: 422,
+            column: 1
+          }
+        },
+        line: 420
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 48,
+            column: 4
+          },
+          end: {
+            line: 49,
+            column: 39
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 48,
+            column: 4
+          },
+          end: {
+            line: 49,
+            column: 39
+          }
+        }, {
+          start: {
+            line: 48,
+            column: 4
+          },
+          end: {
+            line: 49,
+            column: 39
+          }
+        }],
+        line: 48
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 157,
+            column: 14
+          },
+          end: {
+            line: 157,
+            column: 46
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 157,
+            column: 31
+          },
+          end: {
+            line: 157,
+            column: 40
+          }
+        }, {
+          start: {
+            line: 157,
+            column: 43
+          },
+          end: {
+            line: 157,
+            column: 46
+          }
+        }],
+        line: 157
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 210,
+            column: 36
+          },
+          end: {
+            line: 210,
+            column: 57
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 210,
+            column: 53
+          },
+          end: {
+            line: 210,
+            column: 57
+          }
+        }],
+        line: 210
+      },
+      "3": {
+        loc: {
+          start: {
+            line: 390,
+            column: 37
+          },
+          end: {
+            line: 390,
+            column: 52
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 390,
+            column: 43
+          },
+          end: {
+            line: 390,
+            column: 52
+          }
+        }],
+        line: 390
+      },
+      "4": {
+        loc: {
+          start: {
+            line: 390,
+            column: 54
+          },
+          end: {
+            line: 390,
+            column: 70
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 390,
+            column: 61
+          },
+          end: {
+            line: 390,
+            column: 70
+          }
+        }],
+        line: 390
+      },
+      "5": {
+        loc: {
+          start: {
+            line: 390,
+            column: 72
+          },
+          end: {
+            line: 390,
+            column: 88
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 390,
+            column: 79
+          },
+          end: {
+            line: 390,
+            column: 88
+          }
+        }],
+        line: 390
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0,
+      "21": 0,
+      "22": 0,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0,
+      "27": 0,
+      "28": 0,
+      "29": 0,
+      "30": 0,
+      "31": 0,
+      "32": 0,
+      "33": 0,
+      "34": 0,
+      "35": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0,
+      "21": 0,
+      "22": 0,
+      "23": 0,
+      "24": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0],
+      "2": [0],
+      "3": [0],
+      "4": [0],
+      "5": [0]
+    },
+    _coverageSchema: "43e27e138ebf9cfc5966b082cf9a028302ed4184"
+  },
+      coverage = global[gcv] || (global[gcv] = {});
+
+  if (coverage[path] && coverage[path].hash === hash) {
+    return coverage[path];
+  }
+
+  coverageData.hash = hash;
+  return coverage[path] = coverageData;
+}();
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -33,13 +1254,6 @@ var _underscore = _interopRequireDefault(require("underscore"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * 여러 편의기능을 모아놓은 Module입니다.
- * @module koalanlp/ExtUtil
- * @example
- * import * as ExtUtil from 'koalanlp/ExtUtil';
- **/
-
-/**
  * 초성 조합형 문자열 리스트 (UNICODE 순서)
  *
  * 'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
@@ -49,7 +1263,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * import * as ExtUtil from 'koalanlp/ExtUtil';
  * console.log(ExtUtil.HanFirstList[0]);
  */
-const HanFirstList = Object.freeze(_underscore.default.range(0x1100, 0x1112 + 1).map(x => String.fromCharCode(x)));
+const HanFirstList = (cov_1n5k1xjv7q.s[0]++, Object.freeze(_underscore.default.range(0x1100, 0x1112 + 1).map(x => {
+  cov_1n5k1xjv7q.f[0]++;
+  cov_1n5k1xjv7q.s[1]++;
+  return String.fromCharCode(x);
+})));
 /**
  * 중성 조합형 문자열 리스트 (UNICODE 순서)
  *
@@ -62,7 +1280,11 @@ const HanFirstList = Object.freeze(_underscore.default.range(0x1100, 0x1112 + 1)
  */
 
 exports.HanFirstList = HanFirstList;
-const HanSecondList = Object.freeze(_underscore.default.range(0x1161, 0x1175 + 1).map(x => String.fromCharCode(x)));
+const HanSecondList = (cov_1n5k1xjv7q.s[2]++, Object.freeze(_underscore.default.range(0x1161, 0x1175 + 1).map(x => {
+  cov_1n5k1xjv7q.f[1]++;
+  cov_1n5k1xjv7q.s[3]++;
+  return String.fromCharCode(x);
+})));
 /**
  * 종성 조합형 문자열 리스트 (UNICODE 순서). 가장 첫번째는 null (받침 없음)
  *
@@ -76,9 +1298,20 @@ const HanSecondList = Object.freeze(_underscore.default.range(0x1161, 0x1175 + 1
  */
 
 exports.HanSecondList = HanSecondList;
-const HanLastList = Object.freeze(_underscore.default.range(0x11A7, 0x11C2 + 1).map(x => {
-  if (x === 0x11A7) return undefined;else return String.fromCharCode(x);
-}));
+const HanLastList = (cov_1n5k1xjv7q.s[4]++, Object.freeze(_underscore.default.range(0x11A7, 0x11C2 + 1).map(x => {
+  cov_1n5k1xjv7q.f[2]++;
+  cov_1n5k1xjv7q.s[5]++;
+
+  if (x === 0x11A7) {
+    cov_1n5k1xjv7q.b[0][0]++;
+    cov_1n5k1xjv7q.s[6]++;
+    return undefined;
+  } else {
+    cov_1n5k1xjv7q.b[0][1]++;
+    cov_1n5k1xjv7q.s[7]++;
+    return String.fromCharCode(x);
+  }
+})));
 /**
  * 초성 문자를 종성 조합형 문자로 변경할 수 있는 map
  * @type {Readonly<Map<string, string>>}
@@ -88,7 +1321,7 @@ const HanLastList = Object.freeze(_underscore.default.range(0x11A7, 0x11C2 + 1).
  */
 
 exports.HanLastList = HanLastList;
-const ChoToJong = Object.freeze(new Map([['\u1100', '\u11A8'], // ㄱ
+const ChoToJong = (cov_1n5k1xjv7q.s[8]++, Object.freeze(new Map([['\u1100', '\u11A8'], // ㄱ
 ['\u1101', '\u11A9'], // ㄲ
 ['\u1102', '\u11AB'], // ㄴ
 ['\u1103', '\u11AE'], // ㄷ
@@ -120,7 +1353,7 @@ const ChoToJong = Object.freeze(new Map([['\u1100', '\u11A8'], // ㄱ
 ['ㅌ', '\u11C0'], // ㅌ
 ['ㅍ', '\u11C1'], // ㅍ
 ['ㅎ', '\u11C2'] // ㅎ
-]));
+])));
 /**
  * 주어진 문자열에서 알파벳이 발음되는 대로 국문 문자열로 표기하여 값으로 돌려줍니다.
  *
@@ -134,7 +1367,9 @@ const ChoToJong = Object.freeze(new Map([['\u1100', '\u11A8'], // ㄱ
 exports.ChoToJong = ChoToJong;
 
 function alphaToHangul(text) {
-  return _jvm.JVM.koalaClassOf('ExtUtil').alphaToHangul(text);
+  cov_1n5k1xjv7q.f[3]++;
+  cov_1n5k1xjv7q.s[9]++;
+  return _jvm.JVM.koalaClassOf('ExtUtil').alphaToHangul(text).toString();
 }
 /**
  * 주어진 문자열에 적힌 알파벳 발음을 알파벳으로 변환하여 문자열로 반환합니다.
@@ -147,7 +1382,9 @@ function alphaToHangul(text) {
 
 
 function hangulToAlpha(text) {
-  return _jvm.JVM.koalaClassOf('ExtUtil').hangulToAlpha(text);
+  cov_1n5k1xjv7q.f[4]++;
+  cov_1n5k1xjv7q.s[10]++;
+  return _jvm.JVM.koalaClassOf('ExtUtil').hangulToAlpha(text).toString();
 }
 /**
  * 주어진 문자열이 알파벳이 발음되는 대로 표기된 문자열인지 확인합니다.
@@ -160,6 +1397,8 @@ function hangulToAlpha(text) {
 
 
 function isAlphaPronounced(text) {
+  cov_1n5k1xjv7q.f[5]++;
+  cov_1n5k1xjv7q.s[11]++;
   return _jvm.JVM.koalaClassOf('ExtUtil').isAlphaPronounced(text);
 }
 /**
@@ -172,12 +1411,19 @@ function isAlphaPronounced(text) {
 
 
 function stringRepeat(text, charFunction) {
-  let result = [];
+  cov_1n5k1xjv7q.f[6]++;
+  let result = (cov_1n5k1xjv7q.s[12]++, []);
+  cov_1n5k1xjv7q.s[13]++;
 
   for (let ch of text) {
-    result.push(charFunction(_jvm.JVM.char(ch)));
+    let res = (cov_1n5k1xjv7q.s[14]++, charFunction(_jvm.JVM.char(ch)));
+    cov_1n5k1xjv7q.s[15]++;
+    res = res === null ? (cov_1n5k1xjv7q.b[1][0]++, undefined) : (cov_1n5k1xjv7q.b[1][1]++, res);
+    cov_1n5k1xjv7q.s[16]++;
+    result.push(res);
   }
 
+  cov_1n5k1xjv7q.s[17]++;
   return result;
 }
 /**
@@ -191,6 +1437,8 @@ function stringRepeat(text, charFunction) {
 
 
 function isHanja(text) {
+  cov_1n5k1xjv7q.f[7]++;
+  cov_1n5k1xjv7q.s[18]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').isHanja);
 }
 /**
@@ -206,6 +1454,8 @@ function isHanja(text) {
 
 
 function isCJKHanja(text) {
+  cov_1n5k1xjv7q.f[8]++;
+  cov_1n5k1xjv7q.s[19]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').isCJKHanja);
 }
 /**
@@ -228,8 +1478,10 @@ function isCJKHanja(text) {
  */
 
 
-function hanjaToHangul(text, headCorrection = true) {
-  return _jvm.JVM.koalaClassOf('ExtUtil').hanjaToHangul(text, headCorrection);
+function hanjaToHangul(text, headCorrection = (cov_1n5k1xjv7q.b[2][0]++, true)) {
+  cov_1n5k1xjv7q.f[9]++;
+  cov_1n5k1xjv7q.s[20]++;
+  return _jvm.JVM.koalaClassOf('ExtUtil').hanjaToHangul(text, headCorrection).toString();
 }
 /**
  * 현재 문자가 초성, 중성, 종성(선택적)을 다 갖춘 문자인지 확인합니다.
@@ -243,6 +1495,8 @@ function hanjaToHangul(text, headCorrection = true) {
 
 
 function isCompleteHangul(text) {
+  cov_1n5k1xjv7q.f[10]++;
+  cov_1n5k1xjv7q.s[21]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').isCompleteHangul);
 }
 /**
@@ -257,6 +1511,8 @@ function isCompleteHangul(text) {
 
 
 function isIncompleteHangul(text) {
+  cov_1n5k1xjv7q.f[11]++;
+  cov_1n5k1xjv7q.s[22]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').isIncompleteHangul);
 }
 /**
@@ -271,6 +1527,8 @@ function isIncompleteHangul(text) {
 
 
 function isHangul(text) {
+  cov_1n5k1xjv7q.f[12]++;
+  cov_1n5k1xjv7q.s[23]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').isHangul);
 }
 /**
@@ -285,6 +1543,8 @@ function isHangul(text) {
 
 
 function isHangulEnding(text) {
+  cov_1n5k1xjv7q.f[13]++;
+  cov_1n5k1xjv7q.s[24]++;
   return _jvm.JVM.koalaClassOf('ExtUtil').isHangulEnding(text);
 }
 /**
@@ -299,6 +1559,8 @@ function isHangulEnding(text) {
 
 
 function isChosungJamo(text) {
+  cov_1n5k1xjv7q.f[14]++;
+  cov_1n5k1xjv7q.s[25]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').isChosungJamo);
 }
 /**
@@ -313,6 +1575,8 @@ function isChosungJamo(text) {
 
 
 function isJungsungJamo(text) {
+  cov_1n5k1xjv7q.f[15]++;
+  cov_1n5k1xjv7q.s[26]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').isJungsungJamo);
 }
 /**
@@ -327,6 +1591,8 @@ function isJungsungJamo(text) {
 
 
 function isJongsungJamo(text) {
+  cov_1n5k1xjv7q.f[16]++;
+  cov_1n5k1xjv7q.s[27]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').isJongsungJamo);
 }
 /**
@@ -341,6 +1607,8 @@ function isJongsungJamo(text) {
 
 
 function isJongsungEnding(text) {
+  cov_1n5k1xjv7q.f[17]++;
+  cov_1n5k1xjv7q.s[28]++;
   return _jvm.JVM.koalaClassOf('ExtUtil').isJongsungEnding(text);
 }
 /**
@@ -354,6 +1622,8 @@ function isJongsungEnding(text) {
 
 
 function getChosung(text) {
+  cov_1n5k1xjv7q.f[18]++;
+  cov_1n5k1xjv7q.s[29]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').getChosung);
 }
 /**
@@ -367,6 +1637,8 @@ function getChosung(text) {
 
 
 function getJungsung(text) {
+  cov_1n5k1xjv7q.f[19]++;
+  cov_1n5k1xjv7q.s[30]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').getJungsung);
 }
 /**
@@ -380,6 +1652,8 @@ function getJungsung(text) {
 
 
 function getJongsung(text) {
+  cov_1n5k1xjv7q.f[20]++;
+  cov_1n5k1xjv7q.s[31]++;
   return stringRepeat(text, _jvm.JVM.koalaClassOf('ExtUtil').getJongsung);
 }
 /**
@@ -393,7 +1667,9 @@ function getJongsung(text) {
 
 
 function dissembleHangul(text) {
-  return _jvm.JVM.koalaClassOf('ExtUtil').dissembleHangul(text);
+  cov_1n5k1xjv7q.f[21]++;
+  cov_1n5k1xjv7q.s[32]++;
+  return _jvm.JVM.koalaClassOf('ExtUtil').dissembleHangul(text).toString();
 }
 /**
  * 초성을 [cho] 문자로, 중성을 [jung] 문자로, 종성을 [jong] 문자로 갖는 한글 문자를 재구성합니다.
@@ -408,7 +1684,9 @@ function dissembleHangul(text) {
  */
 
 
-function assembleHangulTriple(cho = undefined, jung = undefined, jong = undefined) {
+function assembleHangulTriple(cho = (cov_1n5k1xjv7q.b[3][0]++, undefined), jung = (cov_1n5k1xjv7q.b[4][0]++, undefined), jong = (cov_1n5k1xjv7q.b[5][0]++, undefined)) {
+  cov_1n5k1xjv7q.f[22]++;
+  cov_1n5k1xjv7q.s[33]++;
   return _jvm.JVM.koalaClassOf('ExtUtil').assembleHangul(_jvm.JVM.char(cho), _jvm.JVM.char(jung), _jvm.JVM.char(jong));
 }
 /**
@@ -423,7 +1701,9 @@ function assembleHangulTriple(cho = undefined, jung = undefined, jong = undefine
 
 
 function assembleHangul(text) {
-  return _jvm.JVM.koalaClassOf('ExtUtil').assembleHangulString(text);
+  cov_1n5k1xjv7q.f[23]++;
+  cov_1n5k1xjv7q.s[34]++;
+  return _jvm.JVM.koalaClassOf('ExtUtil').assembleHangulString(text).toString();
 }
 /**
  * 주어진 용언의 원형 [verb]이 뒷 부분 [rest]와 같이 어미가 붙어 활용될 때, 불규칙 활용 용언과 모음조화를 교정합니다.
@@ -439,5 +1719,7 @@ function assembleHangul(text) {
 
 
 function correctVerbApply(verb, isVerb, rest) {
+  cov_1n5k1xjv7q.f[24]++;
+  cov_1n5k1xjv7q.s[35]++;
   return _jvm.JVM.koalaClassOf('ExtUtil').correctVerbApply(verb, isVerb, rest);
 }

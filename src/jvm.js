@@ -78,8 +78,10 @@ export class JVM{
      * @returns {Array}
      */
     static toJsArray(array, itemConverter=(x) => x){
-        if(typeof array === "undefined" || array == null)
+        if(typeof array === "undefined" || array === null)
             return [];
+        if(Array.isArray(array))
+            return array.map(itemConverter);
 
         let result = [];
         let it = array.iterator();
@@ -117,7 +119,7 @@ export class JVM{
     static listOf(array){
         let list = new (JVM.classOf('java.util.ArrayList'))();
 
-        for(item of array)
+        for(const item of array)
             list.add(item);
 
         return list;
@@ -139,7 +141,7 @@ export class JVM{
      */
     static char(ch){
         if (ch !== null && typeof ch !== 'undefined')
-            return JVM.INSTANCE.java.newChar(ch);
+            return JVM.INSTANCE.java.newChar(ch.charCodeAt(0));
         else return null;
     }
 
@@ -151,7 +153,7 @@ export class JVM{
     static setOf(array){
         let list = new (JVM.classOf('java.util.HashSet'))();
 
-        for(item of array)
+        for(const item of array)
             list.add(item);
 
         return list;
@@ -159,7 +161,7 @@ export class JVM{
     static posFilter(posSet){
         return JVM.INSTANCE.java.newProxy('kotlin.jvm.functions.Function1', {
             'invoke': function(tag){
-                return posSet.includes(tag.name_);
+                return posSet.includes(tag.name());
             }
         });
     }

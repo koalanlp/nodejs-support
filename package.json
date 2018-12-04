@@ -13,7 +13,7 @@
     "url": "http://github.com/koalanlp/nodejs-support/issues"
   },
   "scripts": {
-    "test": "./test.sh",
+    "test": "jest",
     "compile": "./node_modules/.bin/babel -d ./ src/",
     "jsdoc": "./node_modules/jsdoc/jsdoc.js -c .jsdoc.json"
   },
@@ -43,8 +43,10 @@
   ],
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "global": "^4.3.2",
     "java": "0.11.0",
     "node-java-maven": "^0.1.1",
+    "request": "^2.88.0",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
@@ -52,9 +54,13 @@
     "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.6",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "codecov": "^3.1.0",
     "docdash": "^1.0.1",
+    "jest": "^23.6.0",
     "jsdoc": "^3.5.5",
-    "mocha": "^5.0.0",
+    "regenerator-runtime": "^0.13.1",
     "should": "^13.2.1"
   }
 }
