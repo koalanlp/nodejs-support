@@ -920,7 +920,7 @@ export class RoleEdge extends DAGEdge {
      * @return {!Word} 의미역 구조에서 표현하는 동사 [Word]
      */
     getPredicate() {
-        return this.governor;
+        return this.predicate;
     }
 
     /**
@@ -934,7 +934,7 @@ export class RoleEdge extends DAGEdge {
      * @return {!Word} 의미역 구조에서 서술된 논항 [Word]
      */
     getArgument() {
-        return this.dependent;
+        return this.argument;
     }
 
     /**
@@ -977,7 +977,7 @@ export class RoleEdge extends DAGEdge {
      * @inheritDoc
      */
     toString() {
-        return `${this._label}('${(isDefined(this.src)) ? this.src.surface : 'ROOT'}' → '${this.dest.surface}/${this.modifiers.map((w) => w.surface).join(' ')})`;
+        return `${this._label}('${(isDefined(this.src)) ? this.src.surface : 'ROOT'}' → '${this.dest.surface}/${this.modifiers.map((w) => w.surface).join(' ')}')`;
     }
 }
 
@@ -1494,6 +1494,7 @@ export class Word extends ImmutableArray {
     constructor(surface, morphemes, reference = undefined) {
         console.assert(isDefined(surface) && isDefined(morphemes) && morphemes.length > 0,
             "morphemes는 list여야 하고, surface는 undefined일 수 없습니다.");
+        console.assert(isDefined(reference));
         super(morphemes);
         writeonlyonce(this, 'id', 'phrase', 'governorEdge');
 

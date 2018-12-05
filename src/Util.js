@@ -162,6 +162,10 @@ export async function initialize(options) {
     /***** 자바 초기화 ******/
     let java = require('java');
 
+    if (!JVM.canLoadPackages(packages)){
+        throw Error(`JVM은 두번 이상 초기화될 수 없습니다. ${packages}를 불러오려고 시도했지만 이미 ${JVM.PACKAGES}를 불러온 상태입니다.`);
+    }
+
     java.options.push(...javaOptions);
     java.asyncOptions = {
         asyncSuffix: undefined,   // Async Callback 무력화
@@ -231,7 +235,7 @@ export async function initialize(options) {
                     java.classpath.push(path.resolve(dependency.path));
                 }
 
-                JVM.init(java);
+                JVM.init(java, packages);
 
                 // Enum 초기화.
                 POS.values();

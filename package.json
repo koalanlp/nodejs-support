@@ -12,10 +12,11 @@
   "bugs": {
     "url": "http://github.com/koalanlp/nodejs-support/issues"
   },
+  "main": "./index.js",
   "scripts": {
     "test": "jest",
     "compile": "./node_modules/.bin/babel -d ./ src/",
-    "jsdoc": "./node_modules/jsdoc/jsdoc.js -c .jsdoc.json"
+    "jsdoc": "rm -rf docs/* && ./node_modules/jsdoc/jsdoc.js -c .jsdoc.json && git add docs/*"
   },
   "licenses": [
     {

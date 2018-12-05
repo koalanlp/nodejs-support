@@ -110,7 +110,7 @@ $ npm install koalanlp --save
 다음과 같이 사용합니다. (Node > 8, ECMAScript2017 기준)
 
 ### Async/Await 방식으로 사용할 때 (권장)
-ㅌ
+
 ```js
 const {KMR, KKMA} = require('koalanlp/API');
 const {initialize} = require('koalanlp/Util');

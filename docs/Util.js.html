@@ -53,7 +53,32 @@
 
 import * as API from './API';
 import {JVM} from './jvm';
-import {CoarseEntityType, DependencyTag, PhraseTag, RoleType} from "./types";
+import {POS, CoarseEntityType, DependencyTag, PhraseTag, RoleType} from "./types";
+import _ from 'underscore';
+
+/**
+ * @private
+ * @param api
+ */
+async function queryVersion(api){
+    const request = require('request');
+
+    let url = `https://oss.sonatype.org/content/repositories/public/kr/bydelta/koalanlp-${api}`;
+    let result = await new Promise((resolve, reject) => {
+        request(url,
+            (error, res, body) => {
+                if(error) reject(error);
+                else resolve(body);
+        });
+    });
+
+    let matches = result.match(new RegExp(`${url}/(\\d+\\.\\d+\\.\\d+)/`, 'g'));
+    matches = matches.map((line) => line.split('/').reverse()[1]);
+
+    let version = matches.sort().reverse()[0];
+    console.info(`[INFO] Latest version of kr.bydelta:koalanlp-${api} (${version}) will be used`);
+    return version;
+}
 
 /**
  * API와 버전을 받아 Artifact 객체 구성
@@ -62,9 +87,11 @@ import {CoarseEntityType, DependencyTag, PhraseTag, RoleType} from "./types";
  * @return {{groupId: string, artifactId: string, version: string}} Artifact 객체
  * @private
  */
-function makeDependencyItem(api, version){
+async function makeDependencyItem(api, version){
     let isAssembly = API.PACKAGE_REQUIRE_ASSEMBLY.includes(api);
-    version = version ? version : "[2.0.0,)";
+    if(typeof version === 'undefined' || version.toUpperCase() === 'LATEST'){
+        version = await queryVersion(api)
+    }
 
     let obj = {
         "groupId": "kr.bydelta",
@@ -104,8 +131,51 @@ let remoteRepos = [
     {
         id: 'maven-central-2',
         url: 'http://central.maven.org/maven2/'
+    },
+    {
+        id: 'kotlin-dev',
+        url: 'https://dl.bintray.com/kotlin/kotlin-dev/'
     }
 ];
+
+/** @private */
+function isDefined(value) {
+    return typeof value !== 'undefined' &amp;&amp; value !== null;
+}
+
+function versionSplit(ver){
+    let dashAt = ver.indexOf('-');
+
+    if (dashAt !== -1){
+        let semver = ver.substr(0, dashAt).split('\\.');
+        let tag = ver.substr(dashAt+1);
+
+        semver = semver.map(parseInt);
+        semver.push(tag);
+        return semver;
+    }else{
+        let semver = ver.split('\\.');
+        return semver.map(parseInt);
+    }
+}
+
+/** @private */
+function isRightNewer(ver1, ver2){
+    let semver1 = versionSplit(ver1);
+    let semver2 = versionSplit(ver2);
+
+    let length = Math.max(semver1.length, semver2.length);
+    for(let i of _.range(length)){
+        let comp1 = semver1[i];
+        let comp2 = semver2[i];
+
+        if(!isDefined(comp2)) return true; // 왼쪽은 Tag가 있지만 오른쪽은 없는 상태. (오른쪽이 더 최신)
+        if(!isDefined(comp1)) return false; // 반대: 왼쪽이 더 최신
+        if(comp1 !== comp2) return comp1 &lt; comp2; // comp2 가 더 높으면 최신.
+    }
+
+    return false;
+}
 
 /**
  * 자바 및 의존패키지를 Maven Repository에서 다운받고, 자바 환경을 실행합니다.
@@ -130,12 +200,16 @@ let remoteRepos = [
 export async function initialize(options) {
     console.assert(options.packages, "packages는 설정되어야 하는 값입니다.");
     let packages = options.packages;
-    let verbose = options.verbose || true;
+    let verbose = (isDefined(options.verbose)) ? options.verbose : true;
     let javaOptions = options.javaOptions || ["-Xmx4g", "-Dfile.encoding=utf-8"];
     let tempJsonName = options.tempJsonName || 'koalanlp.json';
 
     /***** 자바 초기화 ******/
     let java = require('java');
+
+    if (!JVM.canLoadPackages(packages)){
+        throw Error(`JVM은 두번 이상 초기화될 수 없습니다. ${packages}를 불러오려고 시도했지만 이미 ${JVM.PACKAGES}를 불러온 상태입니다.`);
+    }
 
     java.options.push(...javaOptions);
     java.asyncOptions = {
@@ -152,10 +226,8 @@ export async function initialize(options) {
     const mvn = require('node-java-maven');
 
     // 의존 패키지 목록을 JSON으로 작성하기
-    let dependencies = [];
-    for(let pack of Object.keys(packages)){
-        dependencies.push(makeDependencyItem(API.getPackage(pack), packages[pack]))
-    }
+    let dependencies = await Promise.all(Object.keys(packages)
+        .map((pack) => makeDependencyItem(API.getPackage(pack), packages[pack])));
 
     // 저장하기
     let packPath = path.join(os.tmpdir(), tempJsonName);
@@ -171,23 +243,53 @@ export async function initialize(options) {
         }
     }));
 
+    let threads = require('os').cpus().length;
+    threads = Math.max(threads - 1, 1);
     let promise = new Promise((resolve, reject) => {
         mvn({
             packageJsonPath: packPath,
             debug: verbose,
-            repositories: remoteRepos
+            repositories: remoteRepos,
+            concurrency: threads
         }, function(err, mvnResults) {
             if (err) {
                 console.error('필요한 의존패키지를 전부 다 가져오지는 못했습니다.');
                 reject(err);
             }else {
-                mvnResults.classpath.forEach(function (c) {
-                    if (verbose)
-                        console.debug('Classpath에 ' + c + ' 추가');
-                    java.classpath.push(path.resolve(c));
-                });
+                let cleanClasspath = {};
 
-                resolve(JVM.init(java));
+                for(const dependency of Object.values(mvnResults.dependencies)){
+                    let group = dependency.groupId;
+                    let artifact = dependency.artifactId;
+                    let version = dependency.version;
+                    let key = `${group}:${artifact}`;
+
+                    if(!isDefined(cleanClasspath[key]) || isRightNewer(cleanClasspath[key].version, version)){
+                        cleanClasspath[key] = {
+                            version: version,
+                            path: dependency.jarPath
+                        };
+                    }
+                }
+
+                for(const dependency of Object.values(cleanClasspath)){
+                    if (!isDefined(dependency.path))
+                        continue;
+                    if (verbose)
+                        console.debug(`Classpath에 ${dependency.path} 추가`);
+                    java.classpath.push(path.resolve(dependency.path));
+                }
+
+                JVM.init(java, packages);
+
+                // Enum 초기화.
+                POS.values();
+                PhraseTag.values();
+                DependencyTag.values();
+                RoleType.values();
+                CoarseEntityType.values();
+
+                resolve();
             }
         });
     });
@@ -225,7 +327,7 @@ export function contains(stringList, tag) {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Dec 03 2018 01:43:17 GMT+0900 (GMT+09:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 05 2018 14:42:36 GMT+0900 (GMT+09:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
