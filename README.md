@@ -2,7 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/koalanlp.svg?style=flat-square)](https://github.com/koalanlp/nodejs-koalanlp)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
-[![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support/docs/)
+[![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support/)
 
 [![Build Status](https://img.shields.io/travis/koalanlp/nodejs-support.svg?style=flat-square&branch=master)](https://travis-ci.org/koalanlp/nodejs-koalanlp)
 [![Known Vulnerabilities](https://snyk.io/test/github/koalanlp/nodejs-support/badge.svg?style=flat-square)](https://snyk.io/test/github/koalanlp/nodejs-support)
@@ -74,7 +74,7 @@ KoalaNLP의 프로젝트와 인터페이스 통합을 위한 코드는
 
 # 사용법
 
-상세한 사항은 [Usage](https://koalanlp.github.io/koalanlp/usage/) 또는 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.com/nodejs-koalanlp/docs/)을 참고하십시오.
+상세한 사항은 [Usage](https://koalanlp.github.io/koalanlp/usage/) 또는 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.com/nodejs-koalanlp/)을 참고하십시오.
 
 ## Dependency 추가
 우선 Java 8 및 NodeJS 8 이상을 설치하고, `JAVA_HOME`을 환경변수에 등록해주십시오.
