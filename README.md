@@ -33,10 +33,9 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 API 문서는 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support/docs/module-koalanlp.html)에서, 간단한 사용법은 [Wiki](https://github.com/koalanlp/nodejs-support/wiki)에서 확인하시면 됩니다.
 
 ## 참고 (@ 2018.11.14)
-현재 KoalaNLP 프로젝트는 사용 가능한 분석 영역과 분석기의 종류를 확장하기 위해서 2.x 버전을 개발중입니다.
-1.x에서 2.x로 판올림하면서 API가 다소 변경되어 각 분석기의 2.0.0 버전을 현재 NodeJS 용 KoalaNLP에서는 사용하실 수 없습니다.
+1.x에서 2.x로 판올림하면서 API가 다소 변경되어 각 분석기의 2.x 버전을 현재 NodeJS 용 KoalaNLP에서는 사용하실 수 없습니다.
 NodeJS KoalaNLP의 1.3.x 버전을 이용하시는 경우, 분석기의 버전은 마지막 1.x버전인 '1.9.4'까지만 지원합니다.
-기능들이 안정화 되는 대로 다시 알려드리겠습니다.
+2.x를 사용하기 위해서는 NodeJS용 KoalaNLP 2.0.0 이상이 필요합니다.
 
 ## Dependency 추가
 * `Java` 8 이상이 설치되어 있어야 합니다. 
