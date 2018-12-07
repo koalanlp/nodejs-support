@@ -10,6 +10,7 @@ import * as API from './API';
 import {JVM} from './jvm';
 import {POS, CoarseEntityType, DependencyTag, PhraseTag, RoleType} from "./types";
 import _ from 'underscore';
+import {assert, isDefined} from './common';
 
 /**
  * @private
@@ -93,11 +94,6 @@ let remoteRepos = [
     }
 ];
 
-/** @private */
-function isDefined(value) {
-    return typeof value !== 'undefined' && value !== null;
-}
-
 function versionSplit(ver){
     let dashAt = ver.indexOf('-');
 
@@ -153,9 +149,9 @@ function isRightNewer(ver1, ver2){
  * ...
  */
 export async function initialize(options) {
-    console.assert(options.packages, "packages는 설정되어야 하는 값입니다.");
+    assert(options.packages, "packages는 설정되어야 하는 값입니다.");
     let packages = options.packages;
-    let verbose = (isDefined(options.verbose)) ? options.verbose : true;
+    let verbose = (isDefined(options.verbose)) ? options.verbose : false;
     let javaOptions = options.javaOptions || ["-Xmx4g", "-Dfile.encoding=utf-8"];
     let tempJsonName = options.tempJsonName || 'koalanlp.json';
 
@@ -183,6 +179,11 @@ export async function initialize(options) {
     // 의존 패키지 목록을 JSON으로 작성하기
     let dependencies = await Promise.all(Object.keys(packages)
         .map((pack) => makeDependencyItem(API.getPackage(pack), packages[pack])));
+
+    // Package 버전 업데이트 (Compatiblity check 위함)
+    for(const pack of dependencies){
+        packages[pack.artifactId.replace('koalanlp-','').toUpperCase()] = pack.version;
+    }
 
     // 저장하기
     let packPath = path.join(os.tmpdir(), tempJsonName);

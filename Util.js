@@ -16,6 +16,8 @@ var _types = require("./types");
 
 var _underscore = _interopRequireDefault(require("underscore"));
 
+var _common = require("./common");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -101,11 +103,6 @@ let remoteRepos = [{
   id: 'kotlin-dev',
   url: 'https://dl.bintray.com/kotlin/kotlin-dev/'
 }];
-/** @private */
-
-function isDefined(value) {
-  return typeof value !== 'undefined' && value !== null;
-}
 
 function versionSplit(ver) {
   let dashAt = ver.indexOf('-');
@@ -132,9 +129,9 @@ function isRightNewer(ver1, ver2) {
   for (let i of _underscore.default.range(length)) {
     let comp1 = semver1[i];
     let comp2 = semver2[i];
-    if (!isDefined(comp2)) return true; // 왼쪽은 Tag가 있지만 오른쪽은 없는 상태. (오른쪽이 더 최신)
+    if (!(0, _common.isDefined)(comp2)) return true; // 왼쪽은 Tag가 있지만 오른쪽은 없는 상태. (오른쪽이 더 최신)
 
-    if (!isDefined(comp1)) return false; // 반대: 왼쪽이 더 최신
+    if (!(0, _common.isDefined)(comp1)) return false; // 반대: 왼쪽이 더 최신
 
     if (comp1 !== comp2) return comp1 < comp2; // comp2 가 더 높으면 최신.
   }
@@ -164,9 +161,9 @@ function isRightNewer(ver1, ver2) {
 
 
 async function initialize(options) {
-  console.assert(options.packages, "packages는 설정되어야 하는 값입니다.");
+  (0, _common.assert)(options.packages, "packages는 설정되어야 하는 값입니다.");
   let packages = options.packages;
-  let verbose = isDefined(options.verbose) ? options.verbose : true;
+  let verbose = (0, _common.isDefined)(options.verbose) ? options.verbose : false;
   let javaOptions = options.javaOptions || ["-Xmx4g", "-Dfile.encoding=utf-8"];
   let tempJsonName = options.tempJsonName || 'koalanlp.json';
   /***** 자바 초기화 ******/
@@ -198,7 +195,12 @@ async function initialize(options) {
   const mvn = require('node-java-maven'); // 의존 패키지 목록을 JSON으로 작성하기
 
 
-  let dependencies = await Promise.all(Object.keys(packages).map(pack => makeDependencyItem(API.getPackage(pack), packages[pack]))); // 저장하기
+  let dependencies = await Promise.all(Object.keys(packages).map(pack => makeDependencyItem(API.getPackage(pack), packages[pack]))); // Package 버전 업데이트 (Compatiblity check 위함)
+
+  for (const pack of dependencies) {
+    packages[pack.artifactId.replace('koalanlp-', '').toUpperCase()] = pack.version;
+  } // 저장하기
+
 
   let packPath = path.join(os.tmpdir(), tempJsonName);
   fs.writeFileSync(packPath, JSON.stringify({
@@ -233,7 +235,7 @@ async function initialize(options) {
           let version = dependency.version;
           let key = `${group}:${artifact}`;
 
-          if (!isDefined(cleanClasspath[key]) || isRightNewer(cleanClasspath[key].version, version)) {
+          if (!(0, _common.isDefined)(cleanClasspath[key]) || isRightNewer(cleanClasspath[key].version, version)) {
             cleanClasspath[key] = {
               version: version,
               path: dependency.jarPath
@@ -242,7 +244,7 @@ async function initialize(options) {
         }
 
         for (const dependency of Object.values(cleanClasspath)) {
-          if (!isDefined(dependency.path)) continue;
+          if (!(0, _common.isDefined)(dependency.path)) continue;
           if (verbose) console.debug(`Classpath에 ${dependency.path} 추가`);
           java.classpath.push(path.resolve(dependency.path));
         }

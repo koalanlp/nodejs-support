@@ -61,9 +61,16 @@ export default function () {
 
         describe('#importFrom()', () => {
             it('can import from other dict', async() => {
-                let itemSizePrev = (await dict2.getItems()).length;
+                let itemsPrev = await dict2.getItems();
+                let itemSizePrev = itemsPrev.length;
+                let itemSizeNounPrev = itemsPrev.filter((t) => t.tag.isNoun()).length;
                 await dict2.importFrom(dict1, true, (t) => t.isNoun());
-                expect(itemSizePrev).toBeLessThan((await dict2.getItems()).length);
+                let itemsAfter = await dict2.getItems();
+                let itemSizeAfter= itemsAfter.length;
+                let itemSizeNounAfter = itemsAfter.filter((t) => t.tag.isNoun()).length;
+
+                expect(itemSizePrev).toBeLessThan(itemSizeAfter);
+                expect(itemSizeAfter - itemSizePrev).toEqual(itemSizeNounAfter - itemSizeNounPrev);
             });
         });
     });

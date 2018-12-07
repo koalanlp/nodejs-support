@@ -9,15 +9,23 @@
 import _ from 'underscore';
 import {CoarseEntityType, DependencyTag, PhraseTag, POS, RoleType} from "./types";
 import {JVM} from "./jvm";
+import {assert, getOrUndefined, isDefined, typeCheck} from './common';
 
 /** @private */
-function writeonlyonce(target, ...properties) {
+function writeonlyonce(target, defValue, ...properties) {
     for (const property of properties) {
         let value = undefined;
         let descriptor = {};
-        descriptor.get = () => value;
+        descriptor.get = () => {
+            return (!isDefined(value)) ? defValue : value
+        };
         descriptor.set = (newValue) => {
-            console.assert(!isDefined(value), `${property} 변수는 1회 초기화된 이후에는 변경할 수 없습니다. (현재 값 ${value}, 새 값 ${newValue})`);
+            if(value === newValue)
+                return;
+
+            if(isDefined(value))
+                throw TypeError(`${property} 변수는 1회 초기화된 이후에는 변경할 수 없습니다. (현재 값 ${value.toString()}, 새 값 ${newValue.toString()})`);
+
             value = newValue;
         };
         Object.defineProperty(target, property, descriptor);
@@ -32,31 +40,33 @@ function replaceableifempty(target, ...properties) {
         let descriptor = {};
         descriptor.get = () => value;
         descriptor.set = (newValue) => {
-            console.assert(value.length === 0, `${property} 변수는 1회 초기화된 이후에는 변경할 수 없습니다. (현재 값 ${value}, 새 값 ${newValue})`);
+            if(value === newValue)
+                return;
+
+            if(value.length > 0)
+                throw TypeError(`${property} 변수는 1회 초기화된 이후에는 변경할 수 없습니다. (현재 값 ${value}, 새 값 ${newValue})`);
+
             value = Object.freeze(newValue);
         };
         Object.defineProperty(target, property, descriptor);
     }
 }
 
-/** @private */
-function isDefined(value) {
-    return typeof value !== 'undefined' && value !== null;
-}
-
-/** @private */
-function getOrUndefined(value) {
-    return isDefined(value) ? value : undefined;
-}
-
-/** @private */
-let JavaMixin = (BaseClass) => class extends BaseClass {
+/**
+ * JavaWrapper class
+ * @private
+ */
+class JavaWrappable {
     /**
      * @private
      */
     _reference;
 
     _initReference() {
+        throw Error("구현이 필요합니다!");
+    }
+
+    equals(other){
         throw Error("구현이 필요합니다!");
     }
 
@@ -73,62 +83,283 @@ let JavaMixin = (BaseClass) => class extends BaseClass {
 
         this._reference = value;
     }
-};
-
-/**
- * JavaWrapper class
- * @private
- */
-class JavaWrappable extends JavaMixin(Object) {
 }
 
+/* istanbul ignore next */
 /**
  * Immutable Array.
  * @private
+ * @template {T}
  */
-class ImmutableArray extends JavaMixin(Array) {
+class ImmutableArray extends JavaWrappable {
+    /**
+     * Items.
+     * @private
+     * @type {Array.<T>}
+     */
+    _items;
+
     /**
      * Immutable Array 생성.
-     * @param {Object[]} items
+     * @param {Array.<T>} items
+     * @param {*} type
+     * @return {ImmutableArray.<T>}
+     * @template {T}
      */
-    constructor(items) {
-        super(...items);
+    constructor(items, ...type) {
+        super();
+        typeCheck(items, ...type);
+        
+        Object.defineProperty(this, '_items', {
+            value: Object.freeze(items),
+            writable: false,
+            configurable: false
+        });
+
+        return new Proxy(this, {
+            get: function(target, name){
+                if(isDefined(target[name]))
+                    return target[name];
+                else if(typeof name !== 'symbol' && !isNaN(name)) {
+                    name = parseInt(name);
+                    if (name >= 0) return target._items[name];
+                    else return target._items[target.length + name];
+                }else
+                    return undefined;
+            },
+            set: function(target, name, value){
+                if(typeof name !== 'symbol' && !isNaN(name))
+                    return false;
+                else
+                    return Reflect.set(...arguments);
+            }
+        });
+    }
+
+    /**
+     * The length of array
+     * @returns {Number}
+     */
+    get length(){
+        return this._items.length;
+    }
+
+    /**
+     * @returns {Iterator.<T>} Iterator를 반환합니다
+     */
+    [Symbol.iterator](){
+        return this._items[Symbol.iterator]();
     }
 
     /**
      * 두 대상이 Java KoalaNLP 조건에서 같은지 확인합니다.
      * (Javascript는 == 또는 === 연산자를 override할 수 없어 별도로 제공합니다.)
      *
-     * @param other 확인할 다른 대상.
+     * @param {T} other 확인할 다른 대상.
      * @return {boolean} 같다면 true.
      */
     equals(other) {
-        return typeof(other) === typeof(this) && _.isEqual(this, other)
+        if (typeof(other) === typeof(this) && other.length === this.length){
+            for (const [a, b] of _.zip(this._items, other)){
+                if (!a.equals(b)) return false;
+            }
+            return true;
+        }else return false;
     }
 
-
-    copyWithin(target, start, end) {
-        throw Error("지원하지 않습니다.");
+    /**
+     * @see Array#indexOf
+     * @param value 찾을 값
+     * @returns {number}
+     */
+    indexOf(value){
+        return this._items.indexOf(value);
+    }
+    
+    /**
+     * [equals] 함수를 사용하여 주어진 값과 값이 동일한 첫 index를 찾습니다.
+     *
+     * ** (참고) ** Javascript의 indexOf 함수는 strict equality를 사용하여 값이 같은 경우가 아닌 reference가 같은 경우를 조회합니다.
+     *
+     * @param {T} value 찾을 값.
+     * @returns {number} 찾은 첫번째 값의 index. 없으면 -1
+     */
+    indexOfValue(value){
+        return this.findIndex((x) => x.equals(value));
     }
 
-
-    pop() {
-        throw Error("지원하지 않습니다.");
+    /**
+     * @see Array#lastIndexOf
+     * @param value 찾을 값
+     * @returns {number}
+     */
+    lastIndexOf(value){
+        return this._items.indexOf(value);
     }
 
-
-    push(...items) {
-        throw Error("지원하지 않습니다.");
+    /**
+     * [equals] 함수를 사용하여 주어진 값과 값이 동일한 마지막 index를 찾습니다.
+     *
+     * ** (참고) ** Javascript의 indexOf 함수는 strict equality를 사용하여 값이 같은 경우가 아닌 reference가 같은 경우를 조회합니다.
+     *
+     * @param {T} value 찾을 값.
+     * @returns {number} 찾은 마지막 값의 index. 없으면 -1
+     */
+    lastIndexOfValue(value){
+        return this.findLastIndex((x) => x.equals(value));
     }
 
-
-    sort(compareFn) {
-        throw Error("지원하지 않습니다.");
+    /**
+     * @see Array#includes
+     * @param value 찾을 값
+     * @returns {boolean}
+     */
+    includes(value){
+        return this._items.includes(value);
     }
 
+    /**
+     * [equals] 함수를 사용하여 주어진 값과 동일한 값이 있는지 확인합니다.
+     *
+     * ** (참고) ** Javascript의 includes 함수는 Same Value Zero를 사용하여 값이 같은 두 object라도 reference가 다르면 다르다고 판단합니다.
+     *
+     * @param {T} value 찾을 값.
+     * @returns {boolean} 값이 있으면 true
+     */
+    includesValue(value){
+        return this.indexOfValue(value) !== -1;
+    }
 
-    fill(value, start, end) {
-        throw Error("지원하지 않습니다.");
+    /**
+     * @see Array#entries
+     * @returns {Iterator.<T>}
+     */
+    entries(){
+        return this._items.entries();
+    }
+
+    /**
+     * @see Array#every
+     * @param callback
+     * @param thisArg
+     * @returns {boolean}
+     */
+    every(callback, thisArg){
+        return this._items.every(callback, thisArg);
+    }
+
+    /**
+     * @see Array#filter
+     * @param callback
+     * @param thisArg
+     * @returns {Array.<T>}
+     */
+    filter(callback, thisArg){
+        return this._items.filter(callback, thisArg);
+    }
+
+    /**
+     * @see Array#find
+     * @param predicate
+     * @param thisArg
+     * @returns {T}
+     */
+    find(predicate, thisArg){
+        return this._items.find(predicate, thisArg);
+    }
+
+    /**
+     * @see Array#findIndex
+     * @param predicate
+     * @param thisArg
+     * @returns {number}
+     */
+    findIndex(predicate, thisArg){
+        return this._items.findIndex(predicate, thisArg);
+    }
+
+    /**
+     * 주어진 조건을 만족하는 마지막 값의 index를 찾습니다.
+     * @param predicate
+     * @returns {number}
+     */
+    findLastIndex(predicate){
+        return _.findLastIndex(this._items, predicate);
+    }
+
+    /**
+     * @see Array#forEach
+     * @param callback
+     * @param thisArg
+     */
+    forEach(callback, thisArg){
+        return this._items.forEach(callback, thisArg);
+    }
+
+    /**
+     * @see Array#map
+     * @param callback
+     * @param thisArg
+     * @returns {Array}
+     */
+    map(callback, thisArg){
+        return this._items.map(callback, thisArg);
+    }
+
+    /**
+     * @see Array#reduce
+     * @param callback
+     * @param initialValue
+     * @returns {*}
+     */
+    reduce(callback, initialValue){
+        return this._items.reduce(callback, initialValue);
+    }
+
+    /**
+     * @see Array#reduceRight
+     * @param callback
+     * @param initialValue
+     * @returns {*}
+     */
+    reduceRight(callback, initialValue){
+        return this._items.reduceRight(callback, initialValue);
+    }
+
+    /**
+     * @see Array#slice
+     * @param start
+     * @param end
+     * @returns {Array.<T>}
+     */
+    slice(start, end){
+        return this._items.slice(start, end);
+    }
+
+    /**
+     * @see Array#some
+     * @param callback
+     * @param thisArg
+     * @returns {boolean}
+     */
+    some(callback, thisArg){
+        return this._items.some(callback, thisArg);
+    }
+
+    /**
+     * @see Array#values
+     * @returns {Iterator.<T>}
+     */
+    values(){
+        return this._items.values();
+    }
+
+    /**
+     * Javascript Array로 변환합니다. (변경불가능 상태)
+     * @returns {Array.<T>}
+     */
+    toArray(){
+        return this._items;
     }
 }
 
@@ -154,6 +385,8 @@ class ImmutableArray extends JavaMixin(Array) {
  * * {@link module:koalanlp/data.Word#entities|Word#entities} 어절에 연관된 모든 [Entity]를 가져오는 API
  * * {@link module:koalanlp/data.Sentence#entities|Sentence#entities} 문장에 포함된 모든 [Entity]를 가져오는 API
  * * {@link module:koalanlp/types.CoarseEntityType|CoarseEntityType} [Entity]의 대분류 개체명 분류구조 Enum 값
+ *
+ * @augments ImmutableArray.<Morpheme>
  */
 export class Entity extends ImmutableArray {
 
@@ -194,22 +427,25 @@ export class Entity extends ImmutableArray {
 
     /**
      * 개체명 분석 결과를 저장합니다.
-     * @param {!string} surface 개체명의 표면형 문자열.
-     * @param {!string} label 개체명 대분류 값, [CoarseEntityType]에 기록된 개체명 중 하나의 name.
-     * @param {!string} fineLabel 개체명 세분류 값으로, [label]으로 시작하는 문자열.
-     * @param {!Morpheme[]} morphemes 개체명을 이루는 형태소의 목록
-     * @param {string} [originalLabel=undefined] 원본 분석기가 제시한 개체명 분류의 값.
+     * @param {!Object} value 개체명 분석 결과 객체
+     * @param {!string} value.surface 개체명의 표면형 문자열.
+     * @param {!string} value.label 개체명 대분류 값, [CoarseEntityType]에 기록된 개체명 중 하나의 name.
+     * @param {!string} value.fineLabel 개체명 세분류 값으로, [label]으로 시작하는 문자열.
+     * @param {!Morpheme[]} value.morphemes 개체명을 이루는 형태소의 목록
+     * @param {string} [value.originalLabel=undefined] 원본 분석기가 제시한 개체명 분류의 값.
      */
-    constructor(surface, label, fineLabel, morphemes, originalLabel = undefined) {
-        console.assert(isDefined(surface) && isDefined(label) && isDefined(fineLabel) && isDefined(morphemes),
-            "[surface, label, fineLabel, morphemes] 값은 undefined일 수 없습니다.");
-        super(morphemes);
-        writeonlyonce(this, 'corefGroup');
+    constructor(value) {
+        typeCheck([value.surface, value.fineLabel], 'string');
+        typeCheck([value.label], 'string', 'CoarseEntityType');
+        typeCheck([value.originalLabel], 'undefined', 'string');
+        
+        super(value.morphemes, 'Morpheme');
+        writeonlyonce(this, undefined, 'corefGroup');
 
-        this._surface = surface;
-        this._label = label;
-        this._fineLabel = fineLabel;
-        this._originalLabel = originalLabel;
+        this._surface = value.surface;
+        this._label = (value.label instanceof CoarseEntityType) ? value.label.tagname : value.label;
+        this._fineLabel = value.fineLabel;
+        this._originalLabel = value.originalLabel;
 
         for (const morph of this) {
             morph.entities.push(this);
@@ -217,7 +453,8 @@ export class Entity extends ImmutableArray {
     }
 
     /**
-     * @return {!string} 개체명의 표면형 문자열.
+     * 개체명의 표면형 문자열.
+     * @type !string
      */
     get surface() {
         return this._surface;
@@ -231,7 +468,8 @@ export class Entity extends ImmutableArray {
     }
 
     /**
-     * @return {!CoarseEntityType} 개체명 대분류 값, [CoarseEntityType]에 기록된 개체명 중 하나.
+     * 개체명 대분류 값, [CoarseEntityType]에 기록된 개체명 중 하나.
+     * @type !CoarseEntityType
      */
     get label() {
         return CoarseEntityType.withName(this._label);
@@ -245,7 +483,8 @@ export class Entity extends ImmutableArray {
     }
 
     /**
-     * @return {!string} 개체명 세분류 값으로, [label]으로 시작하는 문자열.
+     * 개체명 세분류 값으로, [label]으로 시작하는 문자열.
+     * @type !string
      */
     get fineLabel() {
         return this._fineLabel;
@@ -259,7 +498,8 @@ export class Entity extends ImmutableArray {
     }
 
     /**
-     * @return {string} 원본 분석기가 제시한 개체명 분류의 값. 기본값은 null.
+     * 원본 분석기가 제시한 개체명 분류의 값. 기본값은 null.
+     * @type string
      */
     get originalLabel() {
         return this._originalLabel;
@@ -307,7 +547,7 @@ export class Entity extends ImmutableArray {
             this.surface,
             JVM.koalaEnumOf('CoarseEntityType', this._label),
             this.fineLabel,
-            JVM.listOf(_.map(this, (m) => m.reference)),
+            JVM.listOf(this.map((m) => m.reference)),
             this.originalLabel
         );
     }
@@ -350,6 +590,8 @@ export class Entity extends ImmutableArray {
  * * {@link module:koalanlp/proc.CorefResolver|CorefResolver} 공지시어 해소, 대용어 분석기 interface
  * * {@link module:koalanlp/data.Sentence#corefGroups|Sentence#corefGroups} 문장 내에 포함된 개체명 묶음 [CoreferenceGroup]들의 목록을 반환하는 API
  * * {@link module:koalanlp/data.Entity#corefGroup|Entity#corefGroup} 각 개체명을 묶어 같은 지시 대상을 갖는 묶음인 [CoreferenceGroup]를 가져오는 API
+ *
+ * @augments ImmutableArray.<Entity>
  */
 export class CoreferenceGroup extends ImmutableArray {
     /**
@@ -357,7 +599,7 @@ export class CoreferenceGroup extends ImmutableArray {
      * @param {Entity[]} entities 묶음에 포함되는 개체명들의 목록
      */
     constructor(entities) {
-        super(entities);
+        super(entities, 'Entity');
 
         for (const entity of this) {
             entity.corefGroup = this;
@@ -367,13 +609,15 @@ export class CoreferenceGroup extends ImmutableArray {
 
     _initReference() {
         return JVM.koalaClassOf('data', 'CoreferenceGroup')(
-            JVM.listOf(_.map(this, (e) => e.reference))
+            JVM.listOf(this.map((e) => e.reference))
         );
     }
 }
 
 /**
  * 트리 구조를 저장할 [Property]입니다. {@link module:koalanlp/data.Word|Word}를 묶어서 표현하는 구조에 적용됩니다.
+ *
+ * @augments ImmutableArray.<Tree>
  */
 export class Tree extends ImmutableArray {
 
@@ -390,16 +634,19 @@ export class Tree extends ImmutableArray {
 
     /**
      * 트리 형태의 구조를 저장합니다.
-     * @param {!string} label 트리에 붙어있는 표지자입니다. null일 수 없습니다.
-     * @param {Word} terminal 트리의 노드에서 연결되는 [Word]
-     * @param {Tree[]} children 트리/DAG의 자식 노드들
+     * @param {!Object} value Tree 값 객체
+     * @param {!string} value.label 트리에 붙어있는 표지자입니다. null일 수 없습니다.
+     * @param {Word} value.terminal 트리의 노드에서 연결되는 [Word]
+     * @param {Tree[]} value.children 트리/DAG의 자식 노드들
      */
-    constructor(label, terminal, children) {
-        super(children);
-        writeonlyonce(this, 'parent');
+    constructor(value) {
+        typeCheck([value.label], 'string');
+        typeCheck([value.terminal], 'undefined', 'Word');
+        super(value.children, 'SyntaxTree', 'Tree');
+        writeonlyonce(this, undefined, 'parent');
 
-        this._label = label;
-        this._terminal = terminal;
+        this._label = value.label;
+        this._terminal = value.terminal;
     }
 
     get label() {
@@ -414,7 +661,8 @@ export class Tree extends ImmutableArray {
     }
 
     /**
-     * @return {Word} 트리의 노드에서 연결되는 [Word] 또는 null
+     * 트리의 노드에서 연결되는 [Word] 또는 null
+     * @type Word
      */
     get terminal() {
         return this._terminal
@@ -444,6 +692,11 @@ export class Tree extends ImmutableArray {
         return this.length > 0;
     }
 
+    /**
+     * 이 노드에서 출발하는 말단 노드를 모두 반환합니다.
+     * * 구문분석 구조에서 말단 노드는 [Word]가 됩니다.
+     * @returns {Array.<Word>}
+     */
     getTerminals() {
         let leaves = this.reduce((acc, child) => acc.concat(child.getTerminals()), []);
         if (this.terminal !== undefined) {
@@ -490,7 +743,7 @@ export class Tree extends ImmutableArray {
      * @return {Tree[]} Non-terminal 자식노드들.
      */
     getNonTerminals() {
-        return this;
+        return this.toArray();
     }
 
     /**
@@ -534,7 +787,7 @@ export class Tree extends ImmutableArray {
  * * {@link module:koalanlp/data.Word#phrase|Word#phrase} 어절이 직접 속하는 가장 작은 구구조 [SyntaxTree]를 가져오는 API
  * * {@link module:koalanlp/data.Sentence#syntaxTree|Sentence#syntaxTree} 전체 문장을 분석한 [SyntaxTree]를 가져오는 API
  * * {@link module:koalanlp/types.PhraseTag|PhraseTag} 구구조의 형태 분류를 갖는 Enum 값
- * @extends Tree
+ * @augments Tree
  */
 export class SyntaxTree extends Tree {
 
@@ -542,16 +795,22 @@ export class SyntaxTree extends Tree {
 
     /**
      * 구문구조 분석의 결과를 생성합니다.
-     * @param {string} label 구구조 표지자입니다. [PhraseTag] Enum의 name 값.
-     * @param {Word} [terminal=undefined] 현재 구구조에 직접 속하는 [Word]들. 중간 구문구조인 경우 leaf를 직접 포함하지 않으므로 undefined.
-     * @param {Tree[]} [children=undefined] 현재 구구조에 속하는 하위 구구조 [SyntaxTree]
-     * @param {string} [originalLabel=undefined] 원본 분석기의 표지자 String 값.
+     * @param {!Object} value SyntaxTree 값 객체
+     * @param {string|PhraseTag} value.label 구구조 표지자입니다. [PhraseTag] Enum의 name 값.
+     * @param {Word} [value.terminal=undefined] 현재 구구조에 직접 속하는 [Word]들. 중간 구문구조인 경우 leaf를 직접 포함하지 않으므로 undefined.
+     * @param {Tree[]} [value.children=undefined] 현재 구구조에 속하는 하위 구구조 [SyntaxTree]
+     * @param {string} [value.originalLabel=undefined] 원본 분석기의 표지자 String 값.
      */
-    constructor(label, terminal = undefined, children = undefined, originalLabel = undefined) {
-        children = children || [];
-        super(label, terminal, children);
+    constructor(value) {
+        typeCheck([value.label], 'string', 'PhraseTag');
+        typeCheck([value.originalLabel], 'undefined', 'string');
 
-        this._originalLabel = originalLabel;
+        value.children = value.children || [];
+        value.label = (value.label instanceof PhraseTag) ? value.label.tagname : value.label;
+        
+        super(value);
+
+        this._originalLabel = value.originalLabel;
 
         let term = this.terminal;
         if (term !== undefined) {
@@ -567,14 +826,14 @@ export class SyntaxTree extends Tree {
         return JVM.koalaClassOf('data', 'SyntaxTree')(
             JVM.koalaEnumOf('PhraseTag', this._label),
             (this.terminal) ? this.terminal.reference : null,
-            JVM.listOf(_.map(this, (t) => t.reference)),
+            JVM.listOf(this.map((t) => t.reference)),
             this.originalLabel
         );
     }
 
     /**
      * 원본 분석기의 표지자 String 값. 기본값은 undefined.
-     * @return {string} 원본 분석기의 표지자 String 값.
+     * @type string
      */
     get originalLabel() {
         return this._originalLabel;
@@ -589,7 +848,8 @@ export class SyntaxTree extends Tree {
     }
 
     /**
-     * @return {PhraseTag} 구문구조 표지자
+     * 구문구조 표지자
+     * @type PhraseTag
      */
     get label() {
         return PhraseTag.withName(this._label);
@@ -610,21 +870,25 @@ export class DAGEdge extends JavaWrappable {
 
     /**
      * DAG Edge를 구성합니다.
-     * @param {Word} src 시점
-     * @param {!Word} dest 종점
-     * @param {string} label 관계
+     * @param {!Object} value DAG Edge 값 객체
+     * @param {Word} value.src 시점
+     * @param {!Word} value.dest 종점
+     * @param {string} value.label 관계
      */
-    constructor(src, dest, label) {
+    constructor(value) {
+        typeCheck([value.src], 'undefined', 'Word');
+        typeCheck([value.dest], 'Word');
+        typeCheck([value.label], 'undefined', 'string');
         super();
-        console.assert(isDefined(dest), "[dest]는 undefined일 수 없습니다.");
 
-        this._src = src;
-        this._dest = dest;
-        this._label = label;
+        this._src = value.src;
+        this._dest = value.dest;
+        this._label = value.label;
     }
 
     /**
-     * @return {Word} Edge의 시작점. 의존구문분석인 경우 지배소, 의미역인 경우 동사.
+     * Edge의 시작점. 의존구문분석인 경우 지배소, 의미역인 경우 동사.
+     * @type Word
      */
     get src() {
         return this._src;
@@ -638,7 +902,8 @@ export class DAGEdge extends JavaWrappable {
     }
 
     /**
-     * @return {Word} Edge의 종점. 의존구문분석인 경우 피지배소, 의미역인 경우 논항.
+     * Edge의 종점. 의존구문분석인 경우 피지배소, 의미역인 경우 논항.
+     * @type Word
      */
     get dest() {
         return this._dest;
@@ -709,7 +974,7 @@ export class DAGEdge extends JavaWrappable {
  * * {@link module:koalanlp/data.Sentence#dependencies|Sentence#dependencies} 전체 문장을 분석한 의존구조 [DepEdge]의 목록을 가져오는 API
  * * {@link module:koalanlp/types.PhraseTag|PhraseTag} 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)
  * * {@link module:koalanlp/types.DependencyTag|DependencyTag} 의존구조의 기능 분류를 갖는 Enum 값
- * @extends DAGEdge
+ * @augments DAGEdge
  */
 export class DepEdge extends DAGEdge {
     _originalLabel;
@@ -717,18 +982,28 @@ export class DepEdge extends DAGEdge {
 
     /**
      * 의존구문 구조를 생성합니다.
-     * @param {Word} governor 의존구문구조의 지배소
-     * @param {!Word} dependent 의존구문구조의 피지배소
-     * @param {!string} type 구문분석 표지자
-     * @param {string} depType 의존구문구조 표지자
-     * @param {string} originalLabel 의존구문구조 표지자의 원본분석기 표기
+     * @param {!Object} value DepEdge 값을 나타내는 객체.
+     * @param {Word} value.governor 의존구문구조의 지배소
+     * @param {!Word} value.dependent 의존구문구조의 피지배소
+     * @param {!string|PhraseTag} value.type 구문분석 표지자
+     * @param {string|DependencyTag} [value.depType=undefined] 의존구문구조 표지자
+     * @param {string} [value.originalLabel=undefined] 의존구문구조 표지자의 원본분석기 표기
      */
-    constructor(governor, dependent, type, depType, originalLabel) {
-        console.assert(isDefined(type), 'type은 undefined일 수 없습니다.');
-        super(governor, dependent, depType);
+    constructor(value) {
+        typeCheck([value.type], 'string', 'PhraseTag');
+        typeCheck([value.depType], 'undefined', 'string', 'DependencyTag');
+        typeCheck([value.originalLabel], 'undefined', 'string');
+        
+        value.type = (value.type instanceof PhraseTag) ? value.type.tagname : value.type;
+        value.depType = (value.depType instanceof DependencyTag) ? value.depType.tagname : value.depType;
 
-        this._type = type;
-        this._originalLabel = originalLabel;
+        value.src = value.governor;
+        value.dest = value.dependent;
+        value.label = value.depType;
+        super(value);
+
+        this._type = value.type;
+        this._originalLabel = value.originalLabel;
 
         if (isDefined(this.dest)) {
             this.dest.governorEdge = this;
@@ -751,7 +1026,8 @@ export class DepEdge extends DAGEdge {
     }
 
     /**
-     * @return {Word} 의존구조의 지배소 [Word]. 문장의 Root에 해당하는 경우 None.
+     * 의존구조의 지배소 [Word]. 문장의 Root에 해당하는 경우 None.
+     * @type Word
      */
     get governor() {
         return this.src;
@@ -765,7 +1041,8 @@ export class DepEdge extends DAGEdge {
     }
 
     /**
-     * @return {Word} 의존구조의 피지배소 [Word]
+     * 의존구조의 피지배소 [Word]
+     * @type Word
      */
     get dependent() {
         return this.dest;
@@ -780,14 +1057,15 @@ export class DepEdge extends DAGEdge {
 
     /**
      * @inheritDoc
-     * @return {DependencyTag}
+     * @type {DependencyTag}
      */
     get label() {
         return DependencyTag.withName(this._label);
     }
 
     /**
-     * @return {DependencyTag} 의존기능 표지자, [DependencyTag] Enum 값. 별도의 기능이 지정되지 않으면 undefined. (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)
+     * 의존기능 표지자, [DependencyTag] Enum 값. 별도의 기능이 지정되지 않으면 undefined. (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)
+     * @type DependencyTag
      */
     get depType() {
         return this.label;
@@ -801,7 +1079,8 @@ export class DepEdge extends DAGEdge {
     }
 
     /**
-     * @return {PhraseTag} 구구조 표지자, [PhraseTag] Enum 값 (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)
+     * 구구조 표지자, [PhraseTag] Enum 값 (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)
+     * @type PhraseTag
      */
     get type() {
         return PhraseTag.withName(this._type);
@@ -815,7 +1094,8 @@ export class DepEdge extends DAGEdge {
     }
 
     /**
-     * @return {string} 원본 분석기의 표지자 String 값. 기본값은 undefined.
+     * 원본 분석기의 표지자 String 값. 기본값은 undefined.
+     * @type string
      */
     get originalLabel() {
         return this._originalLabel;
@@ -867,7 +1147,7 @@ export class DepEdge extends DAGEdge {
  * * {@link module:koalanlp/data.Word#predicateRoles|Word#predicateRoles} 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
  * * {@link module:koalanlp/data.Sentence#roles|Sentence#roles} 전체 문장을 분석한 의미역 구조 [RoleEdge]를 가져오는 API
  * * {@link module:koalanlp/types.RoleType|RoleType} 의미역 분류를 갖는 Enum 값
- * @extends DAGEdge
+ * @augments DAGEdge
  */
 export class RoleEdge extends DAGEdge {
     _originalLabel;
@@ -875,19 +1155,30 @@ export class RoleEdge extends DAGEdge {
 
     /**
      * 의미역 구조를 생성합니다.
-     * @param {!Word} predicate 의미역 구조의 술어
-     * @param {!Word} argument 의미역 구조의 논항
-     * @param {!string} label 의미역 구조의 표지자
-     * @param {Word[]} modifiers 논항의 수식어구들
-     * @param {string} originalLabel 의미역 구조 표지자의 원본분석기 표기
+     * @param {!Object} value RoleEdge의 값을 나타내는 객체.
+     * @param {!Word} value.predicate 의미역 구조의 술어
+     * @param {!Word} value.argument 의미역 구조의 논항
+     * @param {!string|RoleType} value.label 의미역 구조의 표지자
+     * @param {Word[]} [value.modifiers=undefined] 논항의 수식어구들
+     * @param {string} [value.originalLabel=undefined] 의미역 구조 표지자의 원본분석기 표기
      */
-    constructor(predicate, argument, label, modifiers, originalLabel) {
-        console.assert(isDefined(predicate) && isDefined(label),
-            '[predicate, label]은 undefined일 수 없습니다.');
-        super(predicate, argument, label);
+    constructor(value) {
+        typeCheck([value.label], 'string', 'RoleType');
+        typeCheck([value.originalLabel], 'undefined', 'string');
+        
+        value.modifiers = value.modifiers || [];
+        typeCheck(value.modifiers, 'Word');
 
-        this._modifiers = modifiers;
-        this._originalLabel = originalLabel;
+        assert(isDefined(value.predicate),
+            '[value.predicate]은 undefined일 수 없습니다.');
+        value.label = (value.label instanceof RoleType) ? value.label.tagname : value.label;
+
+        value.src = value.predicate;
+        value.dest = value.argument;
+        super(value);
+
+        this._modifiers = value.modifiers;
+        this._originalLabel = value.originalLabel;
 
         if (isDefined(this.dest)) {
             this.dest.predicateRoles.push(this);
@@ -910,7 +1201,8 @@ export class RoleEdge extends DAGEdge {
     }
 
     /**
-     * @return {!Word} 의미역 구조에서 표현하는 동사 [Word]
+     * 의미역 구조에서 표현하는 동사 [Word]
+     * @type !Word
      */
     get predicate() {
         return this.src;
@@ -924,7 +1216,8 @@ export class RoleEdge extends DAGEdge {
     }
 
     /**
-     * @return {!Word} 의미역 구조에서 서술된 논항 [Word]
+     * 의미역 구조에서 서술된 논항 [Word]
+     * @type !Word
      */
     get argument() {
         return this.dest;
@@ -939,14 +1232,15 @@ export class RoleEdge extends DAGEdge {
 
     /**
      * @inheritDoc
-     * @return {RoleType}
+     * @type {RoleType}
      */
     get label() {
         return RoleType.withName(this._label);
     }
 
     /**
-     * @return {ReadonlyArray<Word>} 논항의 수식어구들
+     * 논항의 수식어구들
+     * @type ReadonlyArray<Word>
      */
     get modifiers() {
         return Object.freeze(this._modifiers);
@@ -960,7 +1254,8 @@ export class RoleEdge extends DAGEdge {
     }
 
     /**
-     * @return {string} 원본 분석기의 표지자 String 값. 기본값은 undefined.
+     * 원본 분석기의 표지자 String 값. 기본값은 undefined.
+     * @type string
      */
     get originalLabel() {
         return this._originalLabel;
@@ -1050,21 +1345,27 @@ export class Morpheme extends JavaWrappable {
 
     /**
      * 형태소를 생성합니다.
-     * @param {string} surface 형태소 표면형
-     * @param {string} tag 형태소 품사 태그
-     * @param {string} [originalTag=undefined] 형태소 품사 원본 표기
-     * @param {Object} [reference=undefined] Java 형태소 객체
+     * @param {!Object} value 형태소 값 객체
+     * @param {!string} value.surface 형태소 표면형
+     * @param {!string|POS} value.tag 형태소 품사 태그
+     * @param {string} [value.originalTag=undefined] 형태소 품사 원본 표기
+     * @param {Object} [value.reference=undefined] Java 형태소 객체
      */
-    constructor(surface, tag, originalTag = undefined, reference = undefined) {
+    constructor(value) {
+        typeCheck([value.surface], 'string');
+        typeCheck([value.tag], 'string', 'POS');
+        typeCheck([value.originalTag], 'undefined', 'string');
         super();
-        writeonlyonce(this, 'id', 'word', 'wordsense');
 
-        this._surface = surface;
-        this._tag = tag;
-        this._originalTag = originalTag;
-        this.reference = reference;
+        writeonlyonce(this, -1, 'id');
+        writeonlyonce(this, undefined, 'word', 'wordsense');
 
-        if (isDefined(this.reference)) {
+        this._surface = value.surface;
+        this._tag = (value.tag instanceof POS) ? value.tag.tagname : value.tag;
+        this._originalTag = value.originalTag;
+        this.reference = value.reference;
+
+        if (isDefined(value.reference)) {
             this.wordSense = getOrUndefined(this.reference.getWordSense());
         }
     }
@@ -1079,7 +1380,8 @@ export class Morpheme extends JavaWrappable {
     }
 
     /**
-     * @return {string} 형태소 표면형 String
+     * 형태소 표면형 String
+     * @type string
      */
     get surface() {
         return this._surface;
@@ -1093,7 +1395,8 @@ export class Morpheme extends JavaWrappable {
     }
 
     /**
-     * @return {POS} 세종 품사표기
+     * 세종 품사표기
+     * @type POS
      */
     get tag() {
         return POS.withName(this._tag);
@@ -1107,7 +1410,8 @@ export class Morpheme extends JavaWrappable {
     }
 
     /**
-     * @return {string} 원본 형태소 분석기의 품사 String (없으면 undefined)
+     * 원본 형태소 분석기의 품사 String (없으면 undefined)
+     * @type string
      */
     get originalTag() {
         return this._originalTag;
@@ -1313,39 +1617,21 @@ export class Morpheme extends JavaWrappable {
 
 /**
  * 어절을 저장합니다.
+ *
+ * @augments ImmutableArray.<Morpheme>
  */
 export class Word extends ImmutableArray {
+    /**
+     * 표면형
+     * @private
+     * @type {string}
+     */
     _surface;
     /**
      * 어절의 문장 내 위치입니다.
      * @type {number}
      */
     id;
-    /**
-     * 개체명 분석을 했다면, 현재 어절이 속한 개체명 값을 돌려줍니다.
-     *
-     * **[참고]**
-     *
-     * **개체명 인식** 은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.
-     *
-     * 예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.
-     *
-     * * '트럼프': 인물
-     * * '미국' : 국가
-     * * '대통령' : 직위
-     * * '사우디' : 국가
-     *
-     * 아래를 참고해보세요.
-     *
-     * * {@link module:koalanlp/proc.EntityRecognizer|EntityRecognizer} 개체명 인식기 interface
-     * * {@link module:koalanlp/data.Morpheme#entities|Morpheme#entities} 형태소를 포함하는 모든 [Entity]를 가져오는 API
-     * * {@link module:koalanlp/data.Sentence#entities|Sentence#entities} 문장에 포함된 모든 [Entity]를 가져오는 API
-     * * {@link module:koalanlp/data.Entity|Entity} 개체명을 저장하는 형태
-     * * {@link module:koalanlp/types.CoarseEntityType|CoarseEntityType} [Entity]의 대분류 개체명 분류구조 Enum 값
-     *
-     * @type {Entity[]}
-     */
-    entities = [];
     /**
      * 구문분석을 했다면, 현재 어절이 속한 직속 상위 구구조(Phrase)를 돌려줍니다.
      *
@@ -1487,19 +1773,19 @@ export class Word extends ImmutableArray {
 
     /**
      * 어절을 생성합니다.
-     * @param {string} surface 어절의 표면형
-     * @param {Morpheme[]} morphemes 어절에 포함되는 형태소의 목록
-     * @param {*} [reference=undefined] Java 어절 객체
+     * @param {!Object} value 어절 값 객체
+     * @param {!string} value.surface 어절의 표면형
+     * @param {!Morpheme[]} value.morphemes 어절에 포함되는 형태소의 목록
+     * @param {*} [value.reference=undefined] Java 어절 객체
      */
-    constructor(surface, morphemes, reference = undefined) {
-        console.assert(isDefined(surface) && isDefined(morphemes) && morphemes.length > 0,
-            "morphemes는 list여야 하고, surface는 undefined일 수 없습니다.");
-        console.assert(isDefined(reference));
-        super(morphemes);
-        writeonlyonce(this, 'id', 'phrase', 'governorEdge');
+    constructor(value) {
+        typeCheck([value.surface], 'string');
+        super(value.morphemes, 'Morpheme');
+        writeonlyonce(this, -1, 'id');
+        writeonlyonce(this, undefined, 'phrase', 'governorEdge');
 
-        this._surface = surface;
-        this.reference = reference;
+        this._surface = value.surface;
+        this.reference = value.reference;
 
         for (const [i, morph] of this.entries()) {
             morph.word = this;
@@ -1511,12 +1797,13 @@ export class Word extends ImmutableArray {
     _initReference() {
         return JVM.koalaClassOf('data', 'Word')(
             this.surface,
-            JVM.listOf(_.map(this, (m) => m.reference))
+            JVM.listOf(this.map((m) => m.reference))
         )
     }
 
     /**
-     * @return {string} 어절의 표면형 String.
+     * 어절의 표면형 String.
+     * @type string
      */
     get surface() {
         return this._surface;
@@ -1535,6 +1822,42 @@ export class Word extends ImmutableArray {
     getId() {
         return this.id;
     }
+
+    /**
+     * 개체명 분석을 했다면, 현재 어절이 속한 개체명 값을 돌려줍니다.
+     *
+     * **[참고]**
+     *
+     * **개체명 인식** 은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.
+     *
+     * 예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.
+     *
+     * * '트럼프': 인물
+     * * '미국' : 국가
+     * * '대통령' : 직위
+     * * '사우디' : 국가
+     *
+     * 아래를 참고해보세요.
+     *
+     * * {@link module:koalanlp/proc.EntityRecognizer|EntityRecognizer} 개체명 인식기 interface
+     * * {@link module:koalanlp/data.Morpheme#entities|Morpheme#entities} 형태소를 포함하는 모든 [Entity]를 가져오는 API
+     * * {@link module:koalanlp/data.Sentence#entities|Sentence#entities} 문장에 포함된 모든 [Entity]를 가져오는 API
+     * * {@link module:koalanlp/data.Entity|Entity} 개체명을 저장하는 형태
+     * * {@link module:koalanlp/types.CoarseEntityType|CoarseEntityType} [Entity]의 대분류 개체명 분류구조 Enum 값
+     *
+     * @type {Entity[]}
+     */
+    get entities(){
+        let result = [];
+        for(const morpheme of this){
+            for(const entity of morpheme.entities){
+                if(!result.includes(entity)) {
+                    result.push(entity);
+                }
+            }
+        }
+        return result;
+    };
 
     /**
      * 개체명 분석을 했다면, 현재 어절이 속한 개체명 값을 돌려줍니다.
@@ -1729,7 +2052,7 @@ export class Word extends ImmutableArray {
      * @return {string} 각 형태소별로 "표면형/품사" 형태로 기록하고 이를 +로 이어붙인 문자열.
      */
     singleLineString() {
-        return _.map(this, (m) => `${m.surface}/${m._tag}`).join('+')
+        return this.map((m) => `${m.surface}/${m._tag}`).join('+')
     }
 
     /**
@@ -1745,10 +2068,21 @@ export class Word extends ImmutableArray {
     equals(other) {
         return super.equals(other) && this.surface === other.surface;
     }
+
+    /***
+     * 타 어절 객체 [other]와 표면형이 같은지 비교합니다.
+     * @param {Word} other 표면형을 비교할 어절
+     * @return {boolean} 표면형이 같으면 True
+     */
+    equalsWithoutTag(other) {
+        return this.surface === other.surface;
+    }
 }
 
 /**
  * 문장을 저장하는 Class 입니다.
+ *
+ * @augments ImmutableArray.<Word>
  */
 export class Sentence extends ImmutableArray {
     /**
@@ -1885,35 +2219,36 @@ export class Sentence extends ImmutableArray {
      */
     corefGroups = [];
 
-    constructor(words = undefined, reference = undefined) {
-        console.assert((isDefined(words) && Array.isArray(words)) || isDefined(reference),
-            `words가 list이거나 reference가 undefined가 아니어야 합니다. 현재 값 words=${words}, reference=${reference}`);
-
-        if (isDefined(reference)) {
-            words = JVM.toJsArray(reference,
-                (w) => new Word(
-                    w.getSurface(),
-                    JVM.toJsArray(w, (m) => new Morpheme(
-                        m.getSurface(),
-                        m.getTag().name(),
-                        m.getOriginalTag(),
-                        m
-                    )),
-                    w
-                )
+    /**
+     * 문장을 만듭니다.
+     * @param {!Object|Word[]} value 자바 문장 객체 또는 어절의 Array.
+     */
+    constructor(value) {
+        if (!Array.isArray(value)) {
+            let words = JVM.toJsArray(value,
+                (w) => new Word({
+                    surface: w.getSurface(),
+                    morphemes: JVM.toJsArray(w, (m) => new Morpheme({
+                        surface: m.getSurface(),
+                        tag: m.getTag().name(),
+                        originalTag: m.getOriginalTag(),
+                        reference: m
+                    })),
+                    reference: w
+                })
             );
-            super(words);
-            writeonlyonce(this, 'syntaxTree');
+            super(words, 'Word');
+            writeonlyonce(this, undefined, 'syntaxTree');
             replaceableifempty(this, 'dependencies', 'roles', 'entities', 'corefGroups');
 
-            this.syntaxTree = this._reconSyntaxTree(reference.getSyntaxTree());
-            this.dependencies = JVM.toJsArray(reference.getDependencies(), (x) => this._getDepEdge(x));
-            this.roles = JVM.toJsArray(reference.getRoles(), (x) => this._getRole(x));
-            this.entities = JVM.toJsArray(reference.getEntities(), (x) => this._getEntity(x));
-            this.corefGroups = JVM.toJsArray(reference.getCorefGroups(), (x) => this._getCorefGroup(x));
-            this.reference = reference;
+            this.syntaxTree = this._reconSyntaxTree(value.getSyntaxTree());
+            this.dependencies = JVM.toJsArray(value.getDependencies(), (x) => this._getDepEdge(x));
+            this.roles = JVM.toJsArray(value.getRoles(), (x) => this._getRole(x));
+            this.entities = JVM.toJsArray(value.getEntities(), (x) => this._getEntity(x));
+            this.corefGroups = JVM.toJsArray(value.getCorefGroups(), (x) => this._getCorefGroup(x));
+            this.reference = value;
         } else {
-            super(words);
+            super(value, 'Word');
             writeonlyonce(this, 'syntaxTree');
             replaceableifempty(this, 'dependencies', 'roles', 'entities', 'corefGroups');
         }
@@ -1954,51 +2289,54 @@ export class Sentence extends ImmutableArray {
             nonTerms = JVM.toJsArray(jtree, (x) => this._reconSyntaxTree(x));
         }
 
-        let tree = new SyntaxTree(
-            jtree.getLabel().name(),
-            term,
-            nonTerms,
-            getOrUndefined(jtree.getOriginalLabel())
-        );
+        let tree = new SyntaxTree({
+            label: jtree.getLabel().name(),
+            terminal: term,
+            children: nonTerms,
+            originalLabel: getOrUndefined(jtree.getOriginalLabel())
+        });
         tree.reference = jtree;
 
         return tree;
     }
 
     _getDepEdge(e) {
-        let edge = new DepEdge(
-            this._getWord(e.getGovernor()),
-            this._getWord(e.getDependent()),
-            e.getType().name(),
-            getOrUndefined(e.getDepType()),
-            getOrUndefined(e.getOriginalLabel())
-        );
+        let deptype = getOrUndefined(e.getDepType());
+        deptype = (isDefined(deptype)) ? deptype.name() : deptype;
+
+        let edge = new DepEdge({
+            governor: this._getWord(e.getGovernor()),
+            dependent: this._getWord(e.getDependent()),
+            type: e.getType().name(),
+            depType: deptype,
+            originalLabel: getOrUndefined(e.getOriginalLabel())
+        });
         edge.reference = e;
 
         return edge;
     }
 
     _getRole(e) {
-        let edge = new RoleEdge(
-            this._getWord(e.getPredicate()),
-            this._getWord(e.getArgument()),
-            e.getLabel().name(),
-            JVM.toJsArray(e.getModifiers(), (x) => this._getWord(x)),
-            getOrUndefined(e.getOriginalLabel())
-        );
+        let edge = new RoleEdge({
+            predicate: this._getWord(e.getPredicate()),
+            argument: this._getWord(e.getArgument()),
+            label: e.getLabel().name(),
+            modifiers: JVM.toJsArray(e.getModifiers(), (x) => this._getWord(x)),
+            originalLabel: getOrUndefined(e.getOriginalLabel())
+        });
         edge.reference = e;
 
         return edge;
     }
 
     _getEntity(e) {
-        let enty = new Entity(
-            e.getSurface(),
-            e.getLabel().name(),
-            e.getFineLabel(),
-            JVM.toJsArray(e, (x) => this._getMorph(x)),
-            getOrUndefined(e.getOriginalLabel())
-        );
+        let enty = new Entity({
+            surface: e.getSurface(),
+            label: e.getLabel().name(),
+            fineLabel: e.getFineLabel(),
+            morphemes: JVM.toJsArray(e, (x) => this._getMorph(x)),
+            originalLabel: getOrUndefined(e.getOriginalLabel())
+        });
         enty.reference = e;
 
         return enty;
@@ -2008,7 +2346,7 @@ export class Sentence extends ImmutableArray {
         let coref = new CoreferenceGroup(
             JVM.toJsArray(c, (e) => {
                 let referenced = this._getEntity(e);
-                return this.entities.find((enty) => enty.equals(e));
+                return this.entities.find((enty) => enty.equals(referenced));
             })
         );
 
@@ -2017,7 +2355,7 @@ export class Sentence extends ImmutableArray {
     }
 
     _initReference() {
-        let jsent = JVM.koalaClassOf('data', 'Sentence')(JVM.listOf(_.map(this, (w) => w.reference)));
+        let jsent = JVM.koalaClassOf('data', 'Sentence')(JVM.listOf(this.map((w) => w.reference)));
 
         if (isDefined(this.syntaxTree)) {
             jsent.setSyntaxTree(this.syntaxTree.reference);
@@ -2205,13 +2543,13 @@ export class Sentence extends ImmutableArray {
      * **파생접미사** 는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
      * 예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.
      *
-     * @return {Word[]} 체언 또는 체언 성격의 어휘를 포함하는 어절의 목록
+     * @type {Word[]}
      */
     get nouns() {
         let result = [];
         for (const word of this) {
-            const inclusion = _.findIndex(word, (m) => m.isNoun() || m.hasTagOneOf('ETN', 'XSN'));
-            const exclusion = _.findLastIndex(word, (m) => m.hasTagOneOf('XSV', 'XSA', 'XSM'));
+            const inclusion = word.findIndex((m) => m.isNoun() || m.hasTagOneOf('ETN', 'XSN'));
+            const exclusion = word.findLastIndex((m) => m.hasTagOneOf('XSV', 'XSA', 'XSM'));
 
             if (inclusion !== -1 && inclusion > exclusion) {
                 result.push(word);
@@ -2257,13 +2595,13 @@ export class Sentence extends ImmutableArray {
      * **파생접미사** 는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
      * 예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.
      *
-     * @return {Word[]} 용언 또는 용언 성격의 어휘를 포함하는 어절의 목록
+     * @type {Word[]}
      */
     get verbs() {
         let result = [];
         for (const word of this) {
-            const inclusion = _.findIndex(word, (m) => m.isPredicate() || m.tag.equals(POS.XSV));
-            const exclusion = _.findLastIndex(word, (m) => m.hasTagOneOf('ETN', 'ETM', 'XSN', 'XSA', 'XSM'));
+            const inclusion = word.findIndex((m) => m.isPredicate() || m.tag.equals(POS.XSV));
+            const exclusion = word.findLastIndex((m) => m.hasTagOneOf('ETN', 'ETM', 'XSN', 'XSA', 'XSM'));
 
             if (inclusion !== -1 && inclusion > exclusion) {
                 result.push(word);
@@ -2309,13 +2647,13 @@ export class Sentence extends ImmutableArray {
      * **파생접미사** 는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
      * 예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.
      *
-     * @return {Word[]} 수식언 또는 수식언 성격의 어휘를 포함하는 어절의 목록
+     * @type {Word[]}
      */
     get modifiers() {
         let result = [];
         for (const word of this) {
-            const inclusion = _.findIndex(word, (m) => m.isPredicate() || m.hasTagOneOf("ETM", "XSA", "XSM"));
-            const exclusion = _.findLastIndex(word, (m) => m.hasTagOneOf("ETN", "XSN", "XSV"));
+            const inclusion = word.findIndex((m) => m.isPredicate() || m.hasTagOneOf("ETM", "XSA", "XSM"));
+            const exclusion = word.findLastIndex((m) => m.hasTagOneOf("ETN", "XSN", "XSV"));
 
             if (inclusion !== -1 && inclusion > exclusion) {
                 result.push(word);
@@ -2352,7 +2690,7 @@ export class Sentence extends ImmutableArray {
      * @return {string} 띄어쓰기 된 문장입니다.
      */
     surfaceString(delimiter = ' ') {
-        return _.map(this, (w) => w.surface).join(delimiter);
+        return this.map((w) => w.surface).join(delimiter);
     }
 
     /**
@@ -2360,7 +2698,7 @@ export class Sentence extends ImmutableArray {
      * @return {string} 품사분석 결과를 담은 1행짜리 String.
      */
     singleLineString() {
-        return _.map(this, (w) => w.singleLineString()).join(' ')
+        return this.map((w) => w.singleLineString()).join(' ')
     }
 
     /**
@@ -2368,13 +2706,5 @@ export class Sentence extends ImmutableArray {
      */
     toString() {
         return this.surfaceString();
-    }
-
-    /**
-     * @param ref Java Sentence 객체
-     * @return {Sentence} Java 객체로부터 새 Sentence 구성
-     */
-    static fromJava(ref) {
-        return new Sentence(undefined, ref);
     }
 }

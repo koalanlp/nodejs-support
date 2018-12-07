@@ -122,6 +122,7 @@ function compareMorphemes(jsmorph, opts){
     expect(jsmorph.getOriginalTag()).toBe(jsmorph.originalTag);
     expect(jsmorph.getSurface()).toBe(jsmorph.surface);
     expect(jsmorph.getWord()).toBe(jsmorph.word);
+    expect(jsmorph.getWord().equals(jsmorph.word)).toBe(true);
 
     if(opts.NER && isDefined(jsmorph.reference.getEntities())){
         let jsents = jsmorph.getEntities().map((e) => e.reference);
@@ -460,6 +461,7 @@ export default function () {
         describe('SentenceSplitter', () => {
             it('can handle empty sentence', async() => {
                 expect(await splitter('')).toHaveLength(0);
+                expect(splitter.sentencesSync('')).toHaveLength(0);
             });
 
             it('can convert Java output correctly', async() => {
@@ -468,8 +470,14 @@ export default function () {
                     expect(res).toBeInstanceOf(Array);
                     expect(res[0]).toEqual(expect.arrayContaining([]));
 
+                    let resSync = splitter.sentencesSync(line);
+                    expect(res).toEqual(resSync);
+
                     let res2 = await splitter([line]);
                     expect(res).toEqual(res2);
+
+                    let resSync2 = splitter.sentencesSync([line]);
+                    expect(res2).toEqual(resSync2);
                 }
             });
         });
@@ -477,6 +485,7 @@ export default function () {
         describe('Tagger', () => {
             it('can handle empty sentence', async() => {
                 expect(await tagger('')).toHaveLength(0);
+                expect(tagger.tagSync('')).toHaveLength(0);
             });
 
             it('can convert Java output correctly', async() => {
@@ -487,12 +496,21 @@ export default function () {
                     for (const sent of para)
                         compareSentence(sent);
 
+                    let paraSync = tagger.tagSync(line);
+                    expect(_.zip(para, paraSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
+
                     let single = await tagger.tagSentence(line);
                     expect(single).toBeInstanceOf(Array);
                     expect(single).toHaveLength(1);
 
+                    let singleSync = tagger.tagSentenceSync(line);
+                    expect(_.zip(single, singleSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
+
                     let singles = await tagger.tagSentence(para.map((x) => x.surfaceString()));
-                    expect(para).toEqual(singles);
+                    expect(para).toHaveLength(singles.length);
+
+                    let singlesSync = tagger.tagSentenceSync(para.map((x) => x.surfaceString()));
+                    expect(_.zip(singles, singlesSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
                 }
             });
         });
@@ -500,6 +518,7 @@ export default function () {
         describe('Parser', () => {
             it('can handle empty sentence', async() => {
                 expect(await parser('')).toHaveLength(0);
+                expect(parser.analyzeSync('')).toHaveLength(0);
             });
 
             it('can convert Java output correctly', async() => {
@@ -510,8 +529,14 @@ export default function () {
                     for (const sent of para)
                         compareSentence(sent, {SYN: true, DEP: true});
 
+                    let paraSync = parser.analyzeSync(line);
+                    expect(_.zip(para, paraSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
+
                     let singles = await parser(...para.map((x) => x.surfaceString()));
                     expect(para).toHaveLength(singles.length);
+
+                    let singlesSync = parser.analyzeSync(...para.map((x) => x.surfaceString()));
+                    expect(_.zip(singles, singlesSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
                 }
             });
 
@@ -522,8 +547,14 @@ export default function () {
                     let tagged = await tagger.tagSentence(splits);
                     expect(tagged).toHaveLength(splits.length);
 
+                    let taggedSync = tagger.tagSentenceSync(splits);
+                    expect(_.zip(tagged, taggedSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
+
                     let para = await parser(tagged);
                     expect(para).toHaveLength(tagged.length);
+
+                    let paraSync = parser.analyzeSync(tagged);
+                    expect(_.zip(para, paraSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
 
                     expect(para).toBeInstanceOf(Array);
                     for (const sent of para)
@@ -535,6 +566,7 @@ export default function () {
         describe('RoleLabeler', () => {
             it('can handle empty sentence', async() => {
                 expect(await roleLabeler('')).toHaveLength(0);
+                expect(roleLabeler.analyzeSync('')).toHaveLength(0);
             });
 
             it('can convert Java output correctly', async() => {
@@ -546,8 +578,14 @@ export default function () {
                     for (const sent of para)
                         compareSentence(sent, {SRL: true, DEP: true, NER: true, WSD: true});
 
+                    let paraSync = roleLabeler.analyzeSync(line);
+                    expect(_.zip(para, paraSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
+
                     let singles = await roleLabeler(...para.map((x) => x.surfaceString()));
                     expect(para).toHaveLength(singles.length);
+
+                    let singlesSync = roleLabeler.analyzeSync(...para.map((x) => x.surfaceString()));
+                    expect(_.zip(singles, singlesSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
                 }
             });
         });
@@ -566,8 +604,14 @@ export default function () {
                     for (const sent of para)
                         compareSentence(sent, {NER: true, WSD: true});
 
+                    let paraSync = entityRecog.analyzeSync(line);
+                    expect(_.zip(para, paraSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
+
                     let singles = await entityRecog(...para.map((x) => x.surfaceString()));
                     expect(para).toHaveLength(singles.length);
+
+                    let singlesSync = entityRecog.analyzeSync(...para.map((x) => x.surfaceString()));
+                    expect(_.zip(singles, singlesSync).every((tuple) => tuple[0].equals(tuple[1]))).toBe(true);
                 }
             });
         });

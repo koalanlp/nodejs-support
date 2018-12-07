@@ -106,6 +106,21 @@ export const ETRI = 'etri';
 
 
 /**
+ * Kakao Khaiii (Experimental)
+ * 현재 <img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-khaiii.svg?style=flat-square&label=r"/> 버전이 최신입니다.
+ *
+ * **(참고)**
+ * - 이 기능은 현재 실험적인 기능입니다.
+ * - Khaiii는 C++로 개발되어 별도 설치가 필요합니다. [Khaiii](https://github.com/kakao/khaiii) 공식 홈페이지에서 설치법을 확인하시고, 설치하시면 됩니다.
+ *
+ * @type API
+ * @example
+ * import {KHAIII} from 'koalanlp/API';
+ */
+export const KHAIII = 'khaiii';
+
+
+/**
  * 분석기 Interface 정의 라이브러리.
  * 현재 <img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core.svg?style=flat-square&label=r"/> 버전이 최신입니다. 편의기능을 제공하며 타 분석기 참조시 함께 참조됩니다.
  * @type API
@@ -133,7 +148,7 @@ export function query(api, type) {
     try {
         return JVM.koalaClassOf(api, type);
     } catch (e) {
-        throw Error(`API.${api}는 ${type}을 지원하지 않습니다! Cause: ${e}`);
+        throw Error(`API.${api}에서 ${type}을 불러오는 데 실패했습니다! ${type}이 없거나, 다운로드가 완전하지 않았을 수 있습니다. Cause: ${e}`);
     }
 }
 

@@ -9,7 +9,7 @@ import {JVM} from './jvm';
 import * as API from './API';
 import {POS} from './types';
 import {Sentence} from './data';
-
+import {isDefined} from './common';
 
 /**
  * POSFilter 함수
@@ -33,11 +33,18 @@ import {Sentence} from './data';
  * @private
  */
 function assignProxy(thisObj, method) {
-    return new Proxy(thisObj, {
-        apply: async function (target, thisArg, argArray) {
-            return await target[method](...argArray);
-        }
-    })
+    if (method.endsWith('Sync'))
+        return new Proxy(thisObj, {
+            apply: function (target, thisArg, argArray) {
+                return target[method](...argArray);
+            }
+        });
+    else
+        return new Proxy(thisObj, {
+            apply: async function (target, thisArg, argArray) {
+                return await target[method](...argArray);
+            }
+        });
 }
 
 /**
@@ -61,16 +68,19 @@ export class SentenceSplitter extends Function {
      * 문장분리기를 생성합니다.
      *
      * @param {!API} api 문장분리기 API 패키지.
+     * @param {Object} [options={}] 기타 설정
+     * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
      */
-    constructor(api) {
+    constructor(api, options = {}) {
         super();
         this._api = API.query(api, this.constructor.name)();
+        options.isAsyncDefault = isDefined(options.isAsyncDefault) ? options.isAsyncDefault : true;
 
-        return assignProxy(this, 'sentences');
+        return assignProxy(this, (options.isAsyncDefault) ? 'sentences' : 'sentencesSync');
     }
 
     /**
-     * 문단을 문장으로 분리합니다.
+     * 문단을 문장으로 분리합니다. (Asynchronous)
      * @param {...!string} text 분석할 문단들 (가변인자)
      * @returns {string[]} 분리한 문장들.
      */
@@ -79,7 +89,7 @@ export class SentenceSplitter extends Function {
         for (let paragraph of text) {
             if (Array.isArray(paragraph)) {
                 result.push(...await this.sentences(...paragraph));
-            }else {
+            } else {
                 if (paragraph.trim().length == 0)
                     continue;
 
@@ -91,7 +101,27 @@ export class SentenceSplitter extends Function {
     }
 
     /**
-     * KoalaNLP가 구현한 문장분리기를 사용하여, 문단을 문장으로 분리합니다.
+     * 문단을 문장으로 분리합니다. (Synchronous)
+     * @param {...!string} text 분석할 문단들 (가변인자)
+     * @returns {string[]} 분리한 문장들.
+     */
+    sentencesSync(...text) {
+        let result = [];
+        for (let paragraph of text) {
+            if (Array.isArray(paragraph)) {
+                result.push(...this.sentencesSync(...paragraph));
+            } else {
+                if (paragraph.trim().length == 0)
+                    continue;
+
+                result.push(...JVM.toJsArray(this._api.sentences(paragraph)));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * KoalaNLP가 구현한 문장분리기를 사용하여, 문단을 문장으로 분리합니다. (Asynchronous)
      * @param {Word[]} paragraph 분석할 문단. (품사표기가 되어있어야 합니다)
      * @returns {Sentence} 분리된 문장
      */
@@ -102,7 +132,21 @@ export class SentenceSplitter extends Function {
         }
 
         let promiseResult = await JVM.koalaClassOf('proc', 'SentenceSplitter').INSTANCE.sentencesPromise(sent);
-        return JVM.toJsArray(promiseResult, Sentence.fromJava);
+        return JVM.toJsArray(promiseResult, (x) => new Sentence(x));
+    }
+
+    /**
+     * KoalaNLP가 구현한 문장분리기를 사용하여, 문단을 문장으로 분리합니다. (Synchronous)
+     * @param {Word[]} paragraph 분석할 문단. (품사표기가 되어있어야 합니다)
+     * @returns {Sentence} 분리된 문장
+     */
+    static sentencesSync(paragraph) {
+        let sent = [];
+        for (let word of paragraph) {
+            sent.push(word.getReference());
+        }
+
+        return JVM.toJsArray(JVM.koalaClassOf('proc', 'SentenceSplitter').INSTANCE.sentences(sent), (x) => new Sentence(x));
     }
 }
 
@@ -150,8 +194,9 @@ export class Tagger extends Function {
      * @param {Object} [options={}]
      * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
      * @param {boolean} [options.useLightTagger=false] 코모란(KMR) 분석기의 경우, 경량 분석기를 사용할 것인지의 여부.
+     * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
      */
-    constructor(api, options={}) {
+    constructor(api, options = {}) {
         super();
         if (api === API.ETRI) {
             let apiKey = options.apiKey;
@@ -163,11 +208,12 @@ export class Tagger extends Function {
             this._api = API.query(api, this.constructor.name)()
         }
 
-        return assignProxy(this, 'tag');
+        options.isAsyncDefault = isDefined(options.isAsyncDefault) ? options.isAsyncDefault : true;
+        return assignProxy(this, (options.isAsyncDefault) ? 'tag' : 'tagSync');
     }
 
     /**
-     * 문단(들)을 품사분석합니다.
+     * 문단(들)을 품사분석합니다. (Asynchronous)
      * @param {...(string|string[])} text 분석할 문단들. 텍스트와 string 리스트 혼용 가능. (가변인자)
      * @returns {Sentence[]} 분석된 결과 (Flattened list)
      */
@@ -175,22 +221,42 @@ export class Tagger extends Function {
         let result = [];
         for (let paragraph of text) {
             let promiseResult;
-            if(Array.isArray(paragraph)) {
+            if (Array.isArray(paragraph)) {
                 promiseResult = await this.tag(...paragraph);
                 result.push(...promiseResult);
-            }else {
+            } else {
                 if (paragraph.trim().length == 0)
                     continue;
 
                 promiseResult = await this._api.tagPromise(paragraph);
-                result.push(...JVM.toJsArray(promiseResult, Sentence.fromJava));
+                result.push(...JVM.toJsArray(promiseResult, (x) => new Sentence(x)));
             }
         }
         return result;
     }
 
     /**
-     * 문장을 품사분석합니다. 각 인자 하나를 하나의 문장으로 간주합니다.
+     * 문단(들)을 품사분석합니다. (Synchronous)
+     * @param {...(string|string[])} text 분석할 문단들. 텍스트와 string 리스트 혼용 가능. (가변인자)
+     * @returns {Sentence[]} 분석된 결과 (Flattened list)
+     */
+    tagSync(...text) {
+        let result = [];
+        for (let paragraph of text) {
+            if (Array.isArray(paragraph)) {
+                result.push(...this.tagSync(...paragraph));
+            } else {
+                if (paragraph.trim().length == 0)
+                    continue;
+
+                result.push(...JVM.toJsArray(this._api.tag(paragraph), (x) => new Sentence(x)));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 문장을 품사분석합니다. 각 인자 하나를 하나의 문장으로 간주합니다. (Asynchronous)
      *
      * @param {...!string} text 분석할 문장(들). (가변인자)
      * @returns {Sentence[]} 분석된 결과.
@@ -199,15 +265,36 @@ export class Tagger extends Function {
         let result = [];
         for (let sentence of text) {
             let promiseResult;
-            if(Array.isArray(sentence)) {
+            if (Array.isArray(sentence)) {
                 promiseResult = await this.tagSentence(...sentence);
                 result.push(...promiseResult);
-            }else {
+            } else {
                 if (sentence.trim().length == 0)
                     continue;
 
                 promiseResult = await this._api.tagSentencePromise(sentence);
-                result.push(Sentence.fromJava(promiseResult));
+                result.push(new Sentence(promiseResult));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 문장을 품사분석합니다. 각 인자 하나를 하나의 문장으로 간주합니다. (Synchronous)
+     *
+     * @param {...!string} text 분석할 문장(들). (가변인자)
+     * @returns {Sentence[]} 분석된 결과.
+     */
+    tagSentenceSync(...text) {
+        let result = [];
+        for (let sentence of text) {
+            if (Array.isArray(sentence)) {
+                result.push(...this.tagSentenceSync(...sentence));
+            } else {
+                if (sentence.trim().length == 0)
+                    continue;
+
+                result.push(new Sentence(this._api.tagSentence(sentence)));
             }
         }
         return result;
@@ -234,8 +321,9 @@ class CanAnalyzeProperty extends Function {
      * @param {!string} cls 사용할 클래스 유형.
      * @param {Object=} options
      * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
+     * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
      */
-    constructor(api, cls, options) {
+    constructor(api, cls, options = {}) {
         super();
 
         if (api === API.ETRI) {
@@ -244,10 +332,13 @@ class CanAnalyzeProperty extends Function {
         } else {
             this._api = API.query(api, cls)();
         }
+
+        options.isAsyncDefault = isDefined(options.isAsyncDefault) ? options.isAsyncDefault : true;
+        return assignProxy(this, (options.isAsyncDefault) ? 'analyze' : 'analyzeSync');
     }
 
     /**
-     * 문단(들)을 분석합니다.
+     * 문단(들)을 분석합니다. (Asynchronous)
      *
      * @param {...(string|Sentence|string[]|Sentence[])} text 분석할 문단(들).
      * 각 인자는 텍스트(str), 문장 객체(Sentence), 텍스트의 리스트, 문장 객체의 리스트 혼용 가능 (가변인자)
@@ -259,7 +350,7 @@ class CanAnalyzeProperty extends Function {
             let promiseResult;
             if (paragraph instanceof Sentence) {
                 promiseResult = await this._api.analyzePromise(paragraph.reference);
-                result.push(Sentence.fromJava(promiseResult));
+                result.push(new Sentence(promiseResult));
             } else if (Array.isArray(paragraph)) {
                 promiseResult = await this.analyze(...paragraph);
                 result.push(...promiseResult);
@@ -268,7 +359,32 @@ class CanAnalyzeProperty extends Function {
                     continue;
 
                 promiseResult = await this._api.analyzePromise(paragraph);
-                result.push(...JVM.toJsArray(promiseResult, Sentence.fromJava));
+                result.push(...JVM.toJsArray(promiseResult, (x) => new Sentence(x)));
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 문단(들)을 분석합니다. (Synchronous)
+     *
+     * @param {...(string|Sentence|string[]|Sentence[])} text 분석할 문단(들).
+     * 각 인자는 텍스트(str), 문장 객체(Sentence), 텍스트의 리스트, 문장 객체의 리스트 혼용 가능 (가변인자)
+     * @returns {Sentence[]} 분석된 결과 (Flattened list)
+     */
+    analyzeSync(...text) {
+        let result = [];
+        for (let paragraph of text) {
+            if (paragraph instanceof Sentence) {
+                result.push(new Sentence(this._api.analyze(paragraph.reference)));
+            } else if (Array.isArray(paragraph)) {
+                result.push(...this.analyzeSync(...paragraph));
+            } else {
+                if (paragraph.trim().length == 0)
+                    continue;
+
+                result.push(...JVM.toJsArray(this._api.analyze(paragraph), (x) => new Sentence(x)));
             }
         }
 
@@ -332,10 +448,10 @@ export class Parser extends CanAnalyzeProperty {
      * @param {!API} api 사용할 분석기의 유형.
      * @param {Object=} options
      * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
+     * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
      */
-    constructor(api, options) {
+    constructor(api, options = {}) {
         super(api, 'Parser', options);
-        return assignProxy(this, 'analyze');
     }
 }
 
@@ -376,8 +492,9 @@ export class EntityRecognizer extends CanAnalyzeProperty {
      * @param {!API} api 사용할 분석기의 유형.
      * @param {Object=} options
      * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
+     * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
      */
-    constructor(api, options) {
+    constructor(api, options = {}) {
         super(api, 'EntityRecognizer', options);
         return assignProxy(this, 'analyze');
     }
@@ -422,8 +539,9 @@ export class RoleLabeler extends CanAnalyzeProperty {
      * @param {!API} api 사용할 분석기의 유형.
      * @param {Object=} options
      * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
+     * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
      */
-    constructor(api, options) {
+    constructor(api, options = {}) {
         super(api, 'RoleLabeler', options);
         return assignProxy(this, 'analyze');
     }
@@ -529,7 +647,7 @@ export class Dictionary {
      * 원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)
      *
      * @param {POSFilter} [filter=(x) => x.isNoun()] 가져올 품사나, 품사의 리스트, 또는 해당 품사인지 판단하는 함수.
-     * @return {IterableIterator.<DicEntry>} {'surface':형태소, 'tag':품사}의 generator
+     * @return {Iterator.<DicEntry>} {'surface':형태소, 'tag':품사}의 generator
      */
     async getBaseEntries(filter = (x) => x.isNoun()) {
         let tags = [];
@@ -544,7 +662,7 @@ export class Dictionary {
         }
 
         let entries = await this._api.getBaseEntriesPromise(JVM.posFilter(tags));
-        return (function* () {
+        return (function*() {
             while (entries.hasNext()) {
                 yield readDicEntry(entries.next());
             }

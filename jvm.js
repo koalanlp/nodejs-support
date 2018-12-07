@@ -90,26 +90,6 @@ class JVM {
     return result;
   }
   /**
-   * Java Map -> JSON Object
-   * @param {Object} obj
-   * @param keyConverter
-   * @param valueConverter
-   * @return {Object}
-   */
-
-
-  static toJSON(obj, keyConverter = x => x, valueConverter = x => x) {
-    let result = {};
-    let keys = obj.entrySet().iterator();
-
-    while (keys.hasNext()) {
-      let entry = keys.next();
-      result[keyConverter(entry.getKey())] = valueConverter(entry.getValue());
-    }
-
-    return result;
-  }
-  /**
    * JSON Array -> Java List
    * @param {Object[]} array
    */
@@ -165,17 +145,25 @@ class JVM {
     });
   }
   /**
-   * Check whether these packages are loadable.
-   * @param packages
+   * Check whether these packages are compatible.
+   * @param {Object.<string, string>} packages
    */
 
 
   static canLoadPackages(packages) {
+    let result = {};
+
     if (JVM.java && JVM.java.isJvmCreated()) {
-      return Object.entries(packages).map(entry => JVM.PACKAGES.hasOwnProperty(entry[0]) && (entry[1].toUpperCase() === 'LATEST' || JVM.PACKAGES[entry[0]] === entry[1]));
+      for (let [pack, ver] of Object.entries(packages)) {
+        result[pack] = JVM.PACKAGES.hasOwnProperty(pack) && (ver.toUpperCase() === 'LATEST' || JVM.PACKAGES[pack] >= ver);
+      }
     } else {
-      return true;
+      for (let pack of Object.keys(packages)) {
+        result[pack] = true;
+      }
     }
+
+    return result;
   }
 
 }

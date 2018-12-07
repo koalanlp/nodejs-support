@@ -241,7 +241,7 @@ class PhraseTag extends JavaEnum {
    */
   static values() {
     if (_underscore.default.isEmpty(PhraseTag._values)) {
-      JavaEnum.getAllOf('PhraseTag').forEach(it => {
+      for (const it of JavaEnum.getAllOf('PhraseTag')) {
         let value = new PhraseTag(it);
         PhraseTag._values[value.tagname] = value;
         Object.defineProperty(PhraseTag, value.tagname, {
@@ -249,7 +249,8 @@ class PhraseTag extends JavaEnum {
           writable: false,
           configurable: false
         });
-      });
+      }
+
       Object.defineProperty(PhraseTag, '_values', {
         value: Object.freeze(PhraseTag._values),
         writable: false,
@@ -267,7 +268,7 @@ class PhraseTag extends JavaEnum {
 
 
   static withName(name) {
-    return PhraseTag._values[name];
+    return PhraseTag[name];
   }
 
 }

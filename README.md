@@ -25,6 +25,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * 최석재님의 [RHINO v2.5.4](https://github.com/SukjaeChoi/RHINO)
 * 김상준님의 [Daon 분석기](https://github.com/rasoio/daon/tree/master/daon-core)
 * ETRI의 [공공 인공지능 Open API](http://aiopen.etri.re.kr/doc_language.php)
+* Kakao의 [Khaiii 형태소 분석기](https://github.com/kakao/khaiii)
 
 > <sup>주1-1</sup> Arirang 분석기의 출력을 형태소분석에 적합하게 조금 다듬었으므로, 원본과 약간 다른 결과를 낼 수도 있습니다.
 
@@ -69,6 +70,7 @@ KoalaNLP의 프로젝트와 인터페이스 통합을 위한 코드는
 * RHINO: [GPL v3](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)) (참고: 다운로드 위치별로 조항 상이함)
 * Daon: 지정된 조항 없음
 * ETRI: 별도 API 키 발급 동의 필요
+* Khaiii: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
 
 # 사용법
 
@@ -92,6 +94,7 @@ $ npm install koalanlp --save
 | API.ARIRANG      | 아리랑 Wrapper, 분석범위: 형태소                                       | [![Ver-ARR](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-arirang.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-arirang%22) | Apache 2.0 |
 | API.RHINO        | RHINO Wrapper, 분석범위: 형태소                                       | [![Ver-RHI](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-rhino.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-rhino%22)     | GPL v3 |
 | API.DAON         | Daon Wrapper, 분석범위: 형태소                                        | [![Ver-DAN](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-daon.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-daon%22)       | MIT(별도 지정 없음) |
+| API.KHAIII       | Khaiii Wrapper, 분석범위: 형태소 <sup>주2-3</sup>                                      | [![Ver-KHA](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-khaiii.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-khaiii%22)       | Apache 2.0 |
 | API.OKT          | Open Korean Text Wrapper, 분석범위: 문장분리, 형태소                    | [![Ver-OKT](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-okt.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-okt%22)        | Apache 2.0  |
 | API.KKMA         | 꼬꼬마 Wrapper, 분석범위: 형태소, 의존구문                               | [![Ver-KKM](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma%22)       | GPL v2    |
 | API.HNN          | 한나눔 Wrapper, 분석범위: 문장분리, 형태소, 구문분석, 의존구문               | [![Ver-HNN](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hnn.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hnn%22)        | GPL v3    |
@@ -99,6 +102,8 @@ $ npm install koalanlp --save
 
 > <sup>주2-2</sup> ETRI의 경우 Open API를 접근하기 위한 코드 부분은 KoalaNLP의 License 정책에 귀속되지만, Open API 접근 이후의 사용권에 관한 조항은 ETRI에서 별도로 정한 바를 따릅니다.
 > 따라서, ETRI의 사용권 조항에 동의하시고 키를 발급하셔야 하며, 다음 위치에서 발급을 신청할 수 있습니다: [키 발급 신청](http://aiopen.etri.re.kr/key_main.php)
+>
+> <sup>주2-3</sup> Khaiii 분석기의 경우는 Java가 아닌 C++로 구현되어 사용 전 분석기의 설치가 필요합니다. Python3.6 및 CMake 3.10+만 설치되어 있다면 설치 자체가 복잡한 편은 아니니 [여기](https://github.com/kakao/khaiii/blob/v0.1/doc/setup.md)를 참조하여 설치해보세요. (단, v0.1에서는 빌드시 'python3' 호출시 'python3.6'이 연결되어야 합니다.) 참고로, KoalaNLP가 Travis CI에서 패키지를 자동 테스트하기 위해 구현된 bash script는 [여기](https://github.com/koalanlp/koalanlp/blob/master/khaiii/install.sh)에 있습니다.
 
 ## 간단한 예시
 `koalanlp`는, `node-java` 및 `node-java-maven` 패키지의 도움을 받아, 필요한 java dependency를 자동으로 가져옵니다.
@@ -169,6 +174,33 @@ initialize({packages: {KMR: '2.0.4', KKMA: '2.0.4'}, verbose: true})
 
         console.log('finished!');
     }, (error) => console.error('Error Occurred!', error));
+```
+
+### Synchronous 방식으로 사용할 때
+
+```js
+const {KMR, KKMA} = require('koalanlp/API');
+const {initialize} = require('koalanlp/Util');
+const {Tagger, Parser} = require('koalanlp/proc');
+
+// initialize 함수는 asynchronous만 지원합니다.
+initialize({packages: {KMR: '2.0.4', KKMA: '2.0.4'}, verbose: true})
+  .then(() => {
+    let tagger = new Tagger(KMR);
+    let tagged = tagger.tagSync("안녕하세요. 눈이 오는 설날 아침입니다.");
+    for(const sent of tagged) {
+        console.log(sent.toString());
+    }
+
+    let parser = new Parser(KKMA);
+    let parsed = parser.analyzeSync("안녕하세요. 눈이 오는 설날 아침입니다.");
+    for(const sent of parsed){
+        console.log(sent.toString());
+        for(const dep of sent.dependencies){
+            console.log(dep.toString());
+        }
+    }
+  });
 ```
 
 # 결과 비교
