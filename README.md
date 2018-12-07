@@ -2,7 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/koalanlp.svg?style=flat-square)](https://github.com/koalanlp/nodejs-koalanlp)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
-[![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.com/nodejs-koalanlp/docs/module-koalanlp.html)
+[![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support/docs/)
 
 [![Build Status](https://img.shields.io/travis/koalanlp/nodejs-support.svg?style=flat-square&branch=master)](https://travis-ci.org/koalanlp/nodejs-koalanlp)
 [![Known Vulnerabilities](https://snyk.io/test/github/koalanlp/nodejs-support/badge.svg?style=flat-square)](https://snyk.io/test/github/koalanlp/nodejs-support)
