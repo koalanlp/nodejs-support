@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Util.js - Documentation</title>
+    <title>SentenceSplitter - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -33,291 +33,825 @@
 
 <div id="main">
     
-    <h1 class="page-title">Util.js</h1>
+    <h1 class="page-title">SentenceSplitter</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * 초기화 및 기타 작업에 필요한 함수를 제공합니다.
- *
- * @module koalanlp/Util
- * @example
- * import * as Util from 'koalanlp/Util';
- */
+        <h2>
+            <span class="ancestors"><a href="module-koalanlp.html">koalanlp</a>.</span>
+        
+        SentenceSplitter
+        </h2>
+        
+            <div class="class-description"><p>문장분리기 클래스</p></div>
+        
+    
+</header>
 
-import * as API from './API';
-import {JVM} from './jvm';
-import {POS, CoarseEntityType, DependencyTag, PhraseTag, RoleType} from "./types";
-import _ from 'underscore';
-import {assert, isDefined} from './common';
+<article>
+    
+        <div class="container-overview">
+        
+            
 
-/**
- * @private
- * @param api
- */
-async function queryVersion(api){
-    const request = require('request');
+    
+    <h2>Constructor</h2>
+    
 
-    let url = `https://oss.sonatype.org/content/repositories/public/kr/bydelta/koalanlp-${api}`;
-    let result = await new Promise((resolve, reject) => {
-        request(url,
-            (error, res, body) => {
-                if(error) reject(error);
-                else resolve(body);
-        });
-    });
+    <h4 class="name" id="SentenceSplitter"><span class="type-signature"></span>new SentenceSplitter<span class="signature">(splitterType)</span><span class="type-signature"></span></h4>
 
-    let matches = result.match(new RegExp(`${url}/(\\d+\\.\\d+\\.\\d+)/`, 'g'));
-    matches = matches.map((line) => line.split('/').reverse()[1]);
+    
 
-    let version = matches.sort().reverse()[0];
-    console.info(`[INFO] Latest version of kr.bydelta:koalanlp-${api} (${version}) will be used`);
-    return version;
-}
 
-/**
- * API와 버전을 받아 Artifact 객체 구성
- * @param {API} api 분석기 패키지 이름
- * @param {!string} version 버전 또는 LATEST
- * @return {{groupId: string, artifactId: string, version: string}} Artifact 객체
- * @private
- */
-async function makeDependencyItem(api, version){
-    let isAssembly = API.PACKAGE_REQUIRE_ASSEMBLY.includes(api);
-    if(typeof version === 'undefined' || version.toUpperCase() === 'LATEST'){
-        version = await queryVersion(api)
-    }
 
-    let obj = {
-        "groupId": "kr.bydelta",
-        "artifactId": `koalanlp-${api}`,
-        "version": version
-    };
 
-    if(isAssembly){
-        obj.classifier = "assembly"
-    }
+<dl class="details">
 
-    return obj;
-}
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api.js_.html">api.js</a>, <a href="api.js_.html#line310">line 310</a>
+    </li></ul></dd>
+    
 
-/**
- * Remote Maven Repository list
- * @type {Object[]}
- * @private
- */
-let remoteRepos = [
-    {
-        id: 'sonatype',
-        url: 'https://oss.sonatype.org/content/repositories/public/'
-    },
-    {
-        id: "jitpack.io",
-        url: "https://jitpack.io/"
-    },
-    {
-        id: 'jcenter',
-        url: 'http://jcenter.bintray.com/'
-    },
-    {
-        id: 'maven-central-1',
-        url: 'http://repo1.maven.org/maven2/'
-    },
-    {
-        id: 'maven-central-2',
-        url: 'http://central.maven.org/maven2/'
-    },
-    {
-        id: 'kotlin-dev',
-        url: 'https://dl.bintray.com/kotlin/kotlin-dev/'
-    }
-];
+    
 
-function versionSplit(ver){
-    let dashAt = ver.indexOf('-');
+    
 
-    if (dashAt !== -1){
-        let semver = ver.substr(0, dashAt).split('\\.');
-        let tag = ver.substr(dashAt+1);
+    
 
-        semver = semver.map(parseInt);
-        semver.push(tag);
-        return semver;
-    }else{
-        let semver = ver.split('\\.');
-        return semver.map(parseInt);
-    }
-}
+    
 
-/** @private */
-function isRightNewer(ver1, ver2){
-    let semver1 = versionSplit(ver1);
-    let semver2 = versionSplit(ver2);
+    
 
-    let length = Math.max(semver1.length, semver2.length);
-    for(let i of _.range(length)){
-        let comp1 = semver1[i];
-        let comp2 = semver2[i];
+    
 
-        if(!isDefined(comp2)) return true; // 왼쪽은 Tag가 있지만 오른쪽은 없는 상태. (오른쪽이 더 최신)
-        if(!isDefined(comp1)) return false; // 반대: 왼쪽이 더 최신
-        if(comp1 !== comp2) return comp1 &lt; comp2; // comp2 가 더 높으면 최신.
-    }
+    
 
-    return false;
-}
+    
 
-/**
- * 자바 및 의존패키지를 Maven Repository에서 다운받고, 자바 환경을 실행합니다.
- *
- * @param {Object} options
- * @param {Object.&lt;string, string>} options.packages 사용할 패키지와 그 버전들.
- * @param {string[]} [options.javaOptions=["-Xmx4g", "-Dfile.encoding=utf-8"]] JVM 초기화 조건
- * @param {boolean} [options.verbose=true] 더 상세히 초기화 과정을 보여줄 것인지의 여부.
- * @param {!string} [options.tempJsonName='koalanlp.json'] Maven 실행을 위해 임시로 작성할 파일의 이름.
- * @example
- * import {initialize} from 'koalanlp/Util';
- * import {ETRI} from 'koalanlp/API';
- *
- * // Promise 방식
- * let promise = initialize({'packages': {ETRI: '2.0.4'}});
- * promise.then(...);
- *
- * // Async/Await 방식 (async function 내부에서)
- * await initialize({ETRI: '2.0.4'});
- * ...
- */
-export async function initialize(options) {
-    assert(options.packages, "packages는 설정되어야 하는 값입니다.");
-    let packages = options.packages;
-    let verbose = (isDefined(options.verbose)) ? options.verbose : false;
-    let javaOptions = options.javaOptions || ["-Xmx4g", "-Dfile.encoding=utf-8"];
-    let tempJsonName = options.tempJsonName || 'koalanlp.json';
+    
 
-    /***** 자바 초기화 ******/
-    let java = require('java');
+    
 
-    if (!JVM.canLoadPackages(packages)){
-        throw Error(`JVM은 두번 이상 초기화될 수 없습니다. ${packages}를 불러오려고 시도했지만 이미 ${JVM.PACKAGES}를 불러온 상태입니다.`);
-    }
+    
 
-    java.options.push(...javaOptions);
-    java.asyncOptions = {
-        asyncSuffix: undefined,   // Async Callback 무력화
-        syncSuffix: '',           // Synchronized call은 접미사 없음
-        promiseSuffix: 'Promise', // Promise Callback 설정
-        promisify: require('util').promisify
-    };
+    
 
-    /***** Maven 설정 *****/
-    const os = require('os');
-    const fs = require('fs');
-    const path = require('path');
-    const mvn = require('node-java-maven');
+    
 
-    // 의존 패키지 목록을 JSON으로 작성하기
-    let dependencies = await Promise.all(Object.keys(packages)
-        .map((pack) => makeDependencyItem(API.getPackage(pack), packages[pack])));
+    
 
-    // Package 버전 업데이트 (Compatiblity check 위함)
-    for(const pack of dependencies){
-        packages[pack.artifactId.replace('koalanlp-','').toUpperCase()] = pack.version;
-    }
+    
+</dl>
 
-    // 저장하기
-    let packPath = path.join(os.tmpdir(), tempJsonName);
-    fs.writeFileSync(packPath, JSON.stringify({
-        java: {
-            dependencies: dependencies,
-            exclusions: [
-                {
-                    groupId: "com.jsuereth",
-                    artifactId: "sbt-pgp"
-                }
-            ]
-        }
-    }));
 
-    let threads = require('os').cpus().length;
-    threads = Math.max(threads - 1, 1);
-    let promise = new Promise((resolve, reject) => {
-        mvn({
-            packageJsonPath: packPath,
-            debug: verbose,
-            repositories: remoteRepos,
-            concurrency: threads
-        }, function(err, mvnResults) {
-            if (err) {
-                console.error('필요한 의존패키지를 전부 다 가져오지는 못했습니다.');
-                reject(err);
-            }else {
-                let cleanClasspath = {};
 
-                for(const dependency of Object.values(mvnResults.dependencies)){
-                    let group = dependency.groupId;
-                    let artifact = dependency.artifactId;
-                    let version = dependency.version;
-                    let key = `${group}:${artifact}`;
 
-                    if(!isDefined(cleanClasspath[key]) || isRightNewer(cleanClasspath[key].version, version)){
-                        cleanClasspath[key] = {
-                            version: version,
-                            path: dependency.jarPath
-                        };
-                    }
-                }
 
-                for(const dependency of Object.values(cleanClasspath)){
-                    if (!isDefined(dependency.path))
-                        continue;
-                    if (verbose)
-                        console.debug(`Classpath에 ${dependency.path} 추가`);
-                    java.classpath.push(path.resolve(dependency.path));
-                }
+<div class="description">
+    <p>문장분리기를 생성합니다.</p>
+</div>
 
-                JVM.init(java, packages);
 
-                // Enum 초기화.
-                POS.values();
-                PhraseTag.values();
-                DependencyTag.values();
-                RoleType.values();
-                CoarseEntityType.values();
 
-                resolve();
-            }
-        });
-    });
 
-    return await promise;
-}
 
-/**
- * 주어진 문자열 리스트에 구문분석 표지자/의존구문 표지자/의미역 표지/개체명 분류가 포함되는지 확인합니다.
- * @param {string[]} stringList 분류가 포함되는지 확인할 문자열 목록
- * @param {(POS|PhraseTag|DependencyTag|CoarseEntityType|RoleType)} tag 포함되는지 확인할 구문분석 표지자/의존구문 표지자/의미역 표지/개체명 분류
- * @return {boolean} 포함되면 true.
- * @example
- * import { contains } from 'koalanlp/Util';
- * contains(['S', 'NP'], PhraseTag.NP);
- */
-export function contains(stringList, tag) {
-    if(tag instanceof POS || tag instanceof PhraseTag ||
-       tag instanceof DependencyTag || tag instanceof RoleType || tag instanceof CoarseEntityType){
-        return JVM.koalaClassOf('Util').contains(JVM.listOf(stringList), tag.reference);
-    }else{
-        return false;
-    }
-}
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let API = koalanlp.API;
+let SentenceSplitter = koalanlp.SentenceSplitter;
+let splitter = new SentenceSplitter(API.HANNANUM);
+let promise = splitter.sentences("이렇게 사용하면 문단을 분리합니다. 간단하지 않나요?");
+// 분석 결과는 Promise 객체에 담겨있습니다.
+promise.then(console.log);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>splitterType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>문장분리기 API 패키지.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="sentences"><span class="type-signature"></span>sentences<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;string>>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api.js_.html">api.js</a>, <a href="api.js_.html#line328">line 328</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>문단을 문장으로 분리합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>paragraph</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>분석할 문단.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>분석 결과를 담은 Promise가 반환됨.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;string>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="sentencesSync"><span class="type-signature"></span>sentencesSync<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api.js_.html">api.js</a>, <a href="api.js_.html#line342">line 342</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>(Synchronized) 문단을 문장으로 분리합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>paragraph</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>분석할 문단.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>분석 결과</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".sentences"><span class="type-signature">(static) </span>sentences<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Sentence>>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api.js_.html">api.js</a>, <a href="api.js_.html#line351">line 351</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>KoalaNLP가 구현한 문장분리기를 사용하여, 문단을 문장으로 분리합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>paragraph</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Sentence</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>분석할 문단. (품사표기가 되어있어야 합니다)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>분석 결과를 담은 Promise가 반환됨.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Sentence>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".sentencesSync"><span class="type-signature">(static) </span>sentencesSync<span class="signature">(paragraph)</span><span class="type-signature"> &rarr; {Array.&lt;Sentence>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api.js_.html">api.js</a>, <a href="api.js_.html#line368">line 368</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>(Synchronized) KoalaNLP가 구현한 문장분리기를 사용하여, 문단을 문장으로 분리합니다.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>paragraph</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Sentence</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>분석할 문단. (품사표기가 되어있어야 합니다)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>분석 결과</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;Sentence></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
