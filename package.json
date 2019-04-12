@@ -1,6 +1,6 @@
 {
   "name": "koalanlp",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Node.js wrapper for KoalaNLP (An integrated API for processing Korean in with Kotlin/Java/Scala)",
   "author": {
     "name": "koalanlp"
