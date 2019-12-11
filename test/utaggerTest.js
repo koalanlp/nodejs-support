@@ -3,6 +3,7 @@ import {UTAGGER} from '../src/API';
 import _ from 'underscore';
 import * as os from 'os';
 import * as path from 'path';
+import * as fs from 'fs';
 import {compareSentence, EXAMPLES} from "./proc_common";
 
 
@@ -17,6 +18,11 @@ export default function () {
 
             let configPath = path.join(utaggerPath, "Hlxcfg.txt");
             UTagger.setPath(libPath, configPath);
+
+            let lines = fs.readFileSync(configPath, {encoding:'euc-kr'}).split('\n');
+            lines = lines.map(it => it.replace("HLX_DIR ../", `HLX_DIR ${utaggerPath}/`));
+            lines = lines.join('\n');
+            fs.writeFileSync(configPath, lines, {encoding: 'euc-kr'});
 
             tagger = new Tagger(UTAGGER);
         });
