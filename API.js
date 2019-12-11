@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.query = query;
 exports.getPackage = getPackage;
-exports.PACKAGE_REQUIRE_ASSEMBLY = exports.CORE = exports.KHAIII = exports.ETRI = exports.DAON = exports.OKT = exports.RHINO = exports.ARIRANG = exports.EUNJEON = exports.KKMA = exports.KMR = exports.HNN = void 0;
+exports.PACKAGE_REQUIRE_ASSEMBLY = exports.CORE = exports.UTAGGER = exports.KHAIII = exports.ETRI = exports.DAON = exports.OKT = exports.RHINO = exports.ARIRANG = exports.EUNJEON = exports.KKMA = exports.KMR = exports.HNN = void 0;
 
 var _jvm = require("./jvm");
 
@@ -128,6 +128,21 @@ const ETRI = 'etri';
 exports.ETRI = ETRI;
 const KHAIII = 'khaiii';
 /**
+ * UTagger (Experimental)
+ * 현재 <img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-utagger.svg?style=flat-square&label=r"/> 버전이 최신입니다.
+ *
+ * **(참고)**
+ * - 이 기능은 현재 실험적인 기능입니다.
+ * - UTagger는 C로 개발되어 별도 설치가 필요합니다. [UTagger install](https://koalanlp.github.io/usage/Install-UTagger.md)에서 설치법을 확인하시고, 설치하시면 됩니다.
+ *
+ * @type API
+ * @example
+ * import {UTAGGER} from 'koalanlp/API';
+ */
+
+exports.KHAIII = KHAIII;
+const UTAGGER = 'utagger';
+/**
  * 분석기 Interface 정의 라이브러리.
  * 현재 <img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core.svg?style=flat-square&label=r"/> 버전이 최신입니다. 편의기능을 제공하며 타 분석기 참조시 함께 참조됩니다.
  * @type API
@@ -135,7 +150,7 @@ const KHAIII = 'khaiii';
  * import {CORE} from 'koalanlp/API';
  */
 
-exports.KHAIII = KHAIII;
+exports.UTAGGER = UTAGGER;
 const CORE = 'core';
 /**
  * 'assembly' classifier 필요 여부

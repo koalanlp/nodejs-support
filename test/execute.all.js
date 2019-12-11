@@ -5,11 +5,15 @@ import typetest from './type';
 import exttest from './extension';
 import proctest from './proc';
 import datatest from './datacheck';
+import khaiiitest from './khaiiiTest';
+import utaggertest from './utaggerTest';
 
 import {JVM} from '../src/jvm';
 
 beforeAll(async () => {
-    await initialize({packages: {OKT: 'LATEST', HNN: 'LATEST', ETRI: 'LATEST', KKMA: 'LATEST'}});
+    await initialize({packages: {OKT: 'LATEST', HNN: 'LATEST',
+            ETRI: 'LATEST', KKMA: 'LATEST',
+            KHAIII: 'LATEST', UTAGGER: 'LATEST'}});
 });
 
 describe('JVM', () => {
@@ -30,3 +34,5 @@ typetest();
 exttest();
 proctest();
 datatest();
+khaiiitest();
+utaggertest();

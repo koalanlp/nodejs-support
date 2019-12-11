@@ -19,7 +19,7 @@ export function typeCheck(values, ...types){
     types = new Set(types);
 
     new Set(values.map((x) => {
-        let t = typeof x
+        let t = typeof x;
         if (t === 'object') 
             t = x.constructor.name;
         

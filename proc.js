@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Dictionary = exports.RoleLabeler = exports.EntityRecognizer = exports.Parser = exports.Tagger = exports.SentenceSplitter = void 0;
+exports.UTagger = exports.Dictionary = exports.RoleLabeler = exports.EntityRecognizer = exports.Parser = exports.Tagger = exports.SentenceSplitter = void 0;
 
 var _jvm = require("./jvm");
 
@@ -208,8 +208,14 @@ class Tagger extends Function {
    *
    * @param {!API} api 사용할 품사분석기의 유형.
    * @param {Object} [options={}]
-   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
-   * @param {boolean} [options.useLightTagger=false] 코모란(KMR) 분석기의 경우, 경량 분석기를 사용할 것인지의 여부.
+   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key (2.2.0에서 삭제 예정)
+   * @param {string} options.etriKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
+   * @param {boolean} [options.useLightTagger=false] 코모란(KMR) 분석기의 경우, 경량 분석기를 사용할 것인지의 여부. (2.2.0에서 삭제 예정)
+   * @param {boolean} [options.kmrLight=false] 코모란(KMR) 분석기의 경우, 경량 분석기를 사용할 것인지의 여부.
+   * @param {string} options.khaResource Khaiii 분석기의 경우, 리소스 파일이 위치한 폴더.
+   * @param {string} [options.khaPreanal=true] Khaiii 분석기의 경우, 기분석 사전을 사용할지의 여부.
+   * @param {string} [options.khaErrorpatch=true] Khaiii 분석기의 경우, 오분석 사전 사용 여부
+   * @param {string} [options.khaRestore=true] Khaiii 분석기의 경우, 형태소 재구성 여부
    * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
    */
   constructor(api, options = {}) {
@@ -218,11 +224,25 @@ class Tagger extends Function {
     _defineProperty(this, "_api", null);
 
     if (api === API.ETRI) {
-      let apiKey = options.apiKey;
-      this._api = API.query(api, this.constructor.name)(apiKey);
+      if (options.apiKey) {
+        console.warn(`2.2.0부터 ${this.constructor.name}의 키워드 인자 "apiKey"가 삭제될 예정입니다. 2.1.0부터 추가된 인자인 "etriKey"를 사용해주세요.`);
+        options.etriKey = options.apiKey;
+      }
+
+      let etriKey = options.etriKey;
+      this._api = API.query(api, this.constructor.name)(etriKey);
     } else if (api === API.KMR) {
-      let useLightTagger = options.useLightTagger || false;
+      if (options.useLightTagger) {
+        console.warn(`2.2.0부터 ${this.constructor.name}의 키워드 인자 "useLightTagger"가 삭제될 예정입니다. 2.1.0부터 추가된 인자인 "kmrLight"를 사용해주세요.`);
+        options.kmrLight = options.useLightTagger;
+      }
+
+      let useLightTagger = options.kmrLight || false;
       this._api = API.query(api, this.constructor.name)(useLightTagger);
+    } else if (api === API.KHAIII) {
+      let config = _jvm.JVM.koalaClassOf('khaiii', 'KhaiiiConfig')(options.khaPreanal || true, options.khaErrorpatch || true, options.khaRestore || true);
+
+      this._api = API.query(api, this.constructor.name)(options.khaResource, config);
     } else {
       this._api = API.query(api, this.constructor.name)();
     }
@@ -347,7 +367,8 @@ class CanAnalyzeProperty extends Function {
    * @param {!API} api 사용할 분석기의 유형.
    * @param {!string} cls 사용할 클래스 유형.
    * @param {Object=} options
-   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
+   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key (2.2.0에서 삭제 예정)
+   * @param {string} options.etriKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
    * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
    */
   constructor(api, cls, options = {}) {
@@ -356,8 +377,13 @@ class CanAnalyzeProperty extends Function {
     _defineProperty(this, "_api", null);
 
     if (api === API.ETRI) {
-      let apiKey = options.apiKey;
-      this._api = API.query(api, cls)(apiKey);
+      if (options.apiKey) {
+        console.warn(`2.2.0부터 ${this.constructor.name}의 키워드 인자 "apiKey"가 삭제될 예정입니다. 2.1.0부터 추가된 인자인 "etriKey"를 사용해주세요.`);
+        options.etriKey = options.apiKey;
+      }
+
+      let etriKey = options.etriKey;
+      this._api = API.query(api, cls)(etriKey);
     } else {
       this._api = API.query(api, cls)();
     }
@@ -479,7 +505,8 @@ class Parser extends CanAnalyzeProperty {
    *
    * @param {!API} api 사용할 분석기의 유형.
    * @param {Object=} options
-   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
+   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key (2.2.0에서 삭제 예정)
+   * @param {string} options.etriKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
    * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
    */
   constructor(api, options = {}) {
@@ -527,7 +554,8 @@ class EntityRecognizer extends CanAnalyzeProperty {
    *
    * @param {!API} api 사용할 분석기의 유형.
    * @param {Object=} options
-   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
+   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key (2.2.0에서 삭제 예정)
+   * @param {string} options.etriKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
    * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
    */
   constructor(api, options = {}) {
@@ -578,7 +606,8 @@ class RoleLabeler extends CanAnalyzeProperty {
    *
    * @param {!API} api 사용할 분석기의 유형.
    * @param {Object=} options
-   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
+   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key (2.2.0에서 삭제 예정)
+   * @param {string} options.etriKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
    * @param {boolean} [options.isAsyncDefault=true] 객체를 함수처럼 사용할 때, 즉 processor("문장")과 같이 사용할 때, 기본 호출을 async로 할 지 선택합니다. 기본값은 Asynchronous 호출입니다.
    */
   constructor(api, options = {}) {
@@ -743,5 +772,24 @@ class Dictionary {
   }
 
 }
+/**
+ * 울산대 UTagger 라이브러리 연결용 Static class
+ */
+
 
 exports.Dictionary = Dictionary;
+
+class UTagger {
+  /**
+   * UTagger의 라이브러리와 설정파일의 위치를 지정합니다.
+   *
+   * @param libPath 라이브러리 파일의 위치
+   * @param confPath 설정 파일의 위치
+   */
+  static setPath(libPath, confPath) {
+    _jvm.JVM.koalaClassOf('utagger', 'UTagger').setPath(libPath, confPath);
+  }
+
+}
+
+exports.UTagger = UTagger;

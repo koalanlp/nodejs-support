@@ -163,15 +163,15 @@ export default function () {
         // getWordSense, setProperty(T), setProperty(K, T),
         it('can save WordSense property', () => {
             expect(() => {
-                dummy1.wordSense = 1;
+                dummy1.wordSense = "1";
             }).not.toThrowError();
             expect(() => {
-                dummy2.wordSense = 2;
+                dummy2.wordSense = "2";
             }).not.toThrowError();
 
             expect(sent2[0][0].getWordSense()).toBeUndefined();
-            expect(dummy1.getWordSense()).toEqual(1);
-            expect(dummy2.getWordSense()).toEqual(2);
+            expect(dummy1.getWordSense()).toEqual("1");
+            expect(dummy2.getWordSense()).toEqual("2");
         });
 
         // isNoun, isPredicate, isModifier, isJosa,

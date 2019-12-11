@@ -28,7 +28,7 @@ async function queryVersion(api){
         });
     });
 
-    let matches = result.match(new RegExp(`${url}/(\\d+\\.\\d+\\.\\d+)/`, 'g'));
+    let matches = result.match(new RegExp(`${url}/(\\d+\\.\\d+\\.\\d+(-[A-Za-z]+(\\.\\d+)?)?)/`, 'g'));
     matches = matches.map((line) => line.split('/').reverse()[1]);
 
     let version = matches.sort().reverse()[0];
