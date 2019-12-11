@@ -9,7 +9,7 @@ cache:
     - $HOME/.hunter
     - ./node_modules
 script:
-  - yarn run test
+  - npm run test
 after_success:
   - ./node_modules/.bin/codecov
 install:

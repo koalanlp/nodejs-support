@@ -1,4 +1,4 @@
-jest.setTimeout(1000000);
+jest.setTimeout(5000000);
 import {initialize} from '../src/Util';
 import dictest from './dictionary';
 import typetest from './type';

@@ -2790,6 +2790,7 @@ istanbul-reports@^2.2.6:
 java@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/java/-/java-0.12.0.tgz#772d4175e66be884bbaf6b6573847e4b6cdf44eb"
+  integrity sha512-CfHhxo5ZDgsgF47DgQ5ggmgq9gMirEYVtNB475/3f+ezzDTdfBhx2leqTRLcABZoAWYD9G9buAEsVpyyavWXFQ==
   dependencies:
     async "2.6.1"
     find-java-home "0.2.0"
