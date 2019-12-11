@@ -11,7 +11,7 @@ export default function () {
     describe('utagger Module', () => {
         let tagger;
 
-        beforeAll(async (done) => {
+        beforeAll((done) => {
             let utaggerPath = path.normalize(path.join(process.env['HOME'], 'utagger'));
             let binPath = path.join(utaggerPath, 'bin');
             let libPath = path.join(binPath, 'utagger-ubuntu1804.so');
@@ -30,7 +30,7 @@ export default function () {
             done();
         });
 
-        afterAll(async (done) => {
+        afterAll((done) => {
             tagger = null;
             done()
         });

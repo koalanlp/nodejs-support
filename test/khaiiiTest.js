@@ -8,12 +8,12 @@ export default function () {
     describe('khaiii Module', () => {
         let tagger;
 
-        beforeAll(async (done) => {
+        beforeAll((done) => {
             tagger = new Tagger(KHAIII, {khaResource: process.env['KHAIII_RSC']});
             done();
         });
 
-        afterAll(async (done) => {
+        afterAll((done) => {
             tagger = null;
             done();
         });

@@ -12,12 +12,22 @@ export default function () {
         let entityRecog;
         let roleLabeler;
 
-        beforeAll(async() => {
+        beforeAll((done) => {
             splitter = new SentenceSplitter(OKT);
             tagger = new Tagger(OKT);
             parser = new Parser(HNN);
             entityRecog = new EntityRecognizer(ETRI, {etriKey: process.env['API_KEY']});
             roleLabeler = new RoleLabeler(ETRI, {etriKey: process.env['API_KEY']});
+            done();
+        });
+
+        afterAll((done) => {
+            splitter = null;
+            tagger = null;
+            parser = null;
+            entityRecog = null;
+            roleLabeler = null;
+            done();
         });
 
         describe('SentenceSplitter', () => {
