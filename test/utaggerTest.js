@@ -5,7 +5,7 @@ import * as os from 'os';
 import * as path from 'path';
 import * as fs from 'fs';
 import {compareSentence, EXAMPLES} from "./proc_common";
-
+import * as iconv from 'iconv-lite';
 
 export default function () {
     describe('utagger Module', () => {
@@ -19,10 +19,12 @@ export default function () {
             let configPath = path.join(utaggerPath, "Hlxcfg.txt");
             UTagger.setPath(libPath, configPath);
 
-            let lines = fs.readFileSync(configPath, {encoding:'euc-kr'}).split('\n');
+            let lines = fs.readFileSync(configPath);
+            lines = iconv.decode(lines, 'euc-kr').split('\n');
             lines = lines.map(it => it.replace("HLX_DIR ../", `HLX_DIR ${utaggerPath}/`));
             lines = lines.join('\n');
-            fs.writeFileSync(configPath, lines, {encoding: 'euc-kr'});
+            lines = iconv.encode(lines, 'euc-kr');
+            fs.writeFileSync(configPath, lines);
 
             tagger = new Tagger(UTAGGER);
         });
