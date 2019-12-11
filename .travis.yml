@@ -1,17 +1,24 @@
 dist: bionic
 language: node_js
 node_js: "lts/*"
-install:
-- yarn install
 cache:
   directories:
-  - "$HOME/.m2"
-  - "./node_modules"
+    - $HOME/.m2
+    - $HOME/utagger
+    - $HOME/khaiii-orig
+    - $HOME/.hunter
+    - ./node_modules
 script:
-- yarn run test
+  - yarn run test
 after_success:
-- "./node_modules/.bin/codecov"
+  - ./node_modules/.bin/codecov
+install:
+  - yarn install
+  - bash ./scripts/khaiii_install.sh
+  - bash ./scripts/utagger_install.sh
 env:
   global:
   - secure: kj3rDRzVlZo83j1IJKVn9aYLW6/S9ZL8voe3Bc3wr9kFdKIG13yIfxqIvnxSOt2dvX49gEYSBAurXhDIQXSWsq96cC0QDIGU2Htkw5wHU7RMpFf0CNfIuetbQOVxp088IFMOJeBQDHHoZTU77NEPg+QFyJMJqTiYTdJtZkKuMsn9MB6QJsAg5S7BbEKjMpMwXIe7FsMlNgbLOqUapX5RVp0OPN8pWV0SZxl8Z4z4i0D1XtElhYaIRJM6cg3X5G8maoBqov1D0iHq5w//RoH52CshxO0UUApKKEPAhpScDjkvdM4EtVm1lzeWD8coRhQ2aALKHpRZAoICJAVhmkjIa8SFJ4r/TlEDEiBtXdS2CkHES3KMi6dE6fC8o3UfEMrPfWTIhMhm/F0YtnQuGO7upym+AUdwVaxlx3JPop05wMwtPTaERKl3IDF1COh6TOWCMQUXfkI8jIpZvbTxf0SVDUOa8XlSORdFO3MRbUbk/k6Hmh29Ms16jRj4bPDVx8TXHHxL4pQ30JcyCuXh2H5Z0zRjAbeLCDxVgDp0ycvfxt+DR9jWpsyGaglfCFYr99nqqtDhexxXOmh52dpfVKLw1Ybx3Cy3Gy0TiDnX+6HKxmECC1hmrzEotXmTQM3UixMo8hTMrx439rdvbChZ3SfJTB/bBk/6nLWznkXdD7bq5AY=
   - secure: kZzjdvKk1+PuMzKIdoSmuaD6P8VTRCJeWizVq8/QCTXBAO9MYvjsG7/OkRsdobDsVnPc+XVuQzWPv/VFytCfQHO1YeC5UmAqfM+r/X3UQT8w3yi8M/ZR+Y8Q6D+6s3grldd3ocVvoSwasuxRuTBGcnIRA5QOfvh7r43JIBGGm+C3REenVplJZchJTuE+kAgw4eSCbt0AArE3Evtm7N9bnQNdoNCdjoLdW0aP3zqNc/2hvaYGLyeX4gdrVF19QUqEvpqNYI7dYg4IYgD+ISAmESx+dd84IjSZ8Q/hkNbgQ2/c0IWYmr3aqxOI2+YebISn/d1VFox4PIF8McJmb4LZ1y9FwVV/ZjLCuv4MUgk63Ytq9mM2QRJS8mqPjS4ei1yHI50Wn3US2BOWGQyvv0F/zMJU4VVy9Uze0B6Z9JUJEk9hQAHMq3Epc8CO4Bupka/buLg5j++dD0ksa2i9K/R+3CWGr5nFJB+hMKnDUZAtx2v93C/ENEQtJnsYYDRwx6qa5s+l3TmvS8mCXzyZ+oOwr8JOgiGbxvASq93+3a+2dF/hl4nXfOysh49x71fszztNzuyMek/OQxsPOl6ielkRApIDILTg+D6rHTVxeBaeriBohSOReLg7bW0XqxBNvuhncSapW7j4LwIyZv+F+TqlpHhWySME0+5PgZfyU3AMO/c=
+  - KHAIII_RSC=$HOME/khaiii-orig/build/share/khaiii
+  - KHAIII_LIB=$HOME/khaiii-orig/build/lib
