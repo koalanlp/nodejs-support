@@ -3,7 +3,8 @@ const presets = [
         'targets': {
             'node': '8.0.0'
         },
-        'useBuiltIns': 'usage'
+        'useBuiltIns': 'usage',
+        'corejs': 2,
     }]
 ];
 

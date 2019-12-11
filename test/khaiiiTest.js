@@ -12,6 +12,10 @@ export default function () {
             tagger = new Tagger(KHAIII, {khaResource: process.env['KHAIII_RSC']});
         });
 
+        afterAll(async() => {
+            tagger = null;
+        });
+
         describe('Tagger', () => {
             it('can handle empty sentence', async() => {
                 expect(await tagger('')).toHaveLength(0);

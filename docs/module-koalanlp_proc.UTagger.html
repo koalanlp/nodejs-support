@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>RoleEdge - Documentation</title>
+    <title>UTagger - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">RoleEdge</h1>
+    <h1 class="page-title">UTagger</h1>
     
 
     
@@ -47,30 +47,12 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="module-koalanlp_data.html">koalanlp/data</a>.</span>
+            <span class="ancestors"><a href="module-koalanlp_proc.html">koalanlp/proc</a>.</span>
         
-        RoleEdge
+        UTagger
         </h2>
         
-            <div class="class-description"><p>의미역 구조 분석의 결과.</p>
-<h2>참고</h2>
-<p><strong>의미역 결정</strong> 은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.</p>
-<p>예) '나는 밥을 어제 집에서 먹었다'라는 문장에는</p>
-<p>동사 '먹었다'를 중심으로</p>
-<ul>
-<li>'나는'은 동작의 주체를,</li>
-<li>'밥을'은 동작의 대상을,</li>
-<li>'어제'는 동작의 시점을</li>
-<li>'집에서'는 동작의 장소를 나타냅니다.</li>
-</ul>
-<p>아래를 참고해보세요.</p>
-<ul>
-<li><a href="module-koalanlp_proc.RoleLabeler.html"><code>RoleLabeler</code></a> 의미역 분석을 수행하는 interface.</li>
-<li><a href="module-koalanlp_data.Word.html#argumentRoles"><code>Word#argumentRoles</code></a> 어절이 술어인 논항들의 [RoleEdge] 목록을 가져오는 API</li>
-<li><a href="module-koalanlp_data.Word.html#predicateRoles"><code>Word#predicateRoles</code></a> 어절이 논항인 [RoleEdge]의 술어를 가져오는 API</li>
-<li><a href="module-koalanlp_data.Sentence.html#roles"><code>Sentence#roles</code></a> 전체 문장을 분석한 의미역 구조 [RoleEdge]를 가져오는 API</li>
-<li><a href="module-koalanlp_types.RoleType.html"><code>RoleType</code></a> 의미역 분류를 갖는 Enum 값</li>
-</ul></div>
+            <div class="class-description"><p>울산대 UTagger 라이브러리 연결용 Static class</p></div>
         
     
 </header>
@@ -85,7 +67,7 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="RoleEdge"><span class="type-signature"></span>new RoleEdge<span class="signature">(value<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="UTagger"><span class="type-signature"></span>new UTagger<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
@@ -97,7 +79,111 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1165">line 1165</a>
+        <a href="proc.js.html">proc.js</a>, <a href="proc.js.html#line739">line 739</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".setPath"><span class="type-signature">(static) </span>setPath<span class="signature">(libPath, confPath)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="proc.js.html">proc.js</a>, <a href="proc.js.html#line746">line 746</a>
     </li></ul></dd>
     
 
@@ -137,7 +223,7 @@
 
 
 <div class="description">
-    <p>의미역 구조를 생성합니다.</p>
+    <p>UTagger의 라이브러리와 설정파일의 위치를 지정합니다.</p>
 </div>
 
 
@@ -175,15 +261,10 @@
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>libPath</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
             
             </td>
 
@@ -191,1102 +272,30 @@
 
             
 
-            <td class="description last"><p>RoleEdge의 값을 나타내는 객체.</p>
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>predicate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Word</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>의미역 구조의 술어</p></td>
+            <td class="description last"><p>라이브러리 파일의 위치</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>argument</code></td>
+                <td class="name"><code>confPath</code></td>
             
 
             <td class="type">
             
-                
-<span class="param-type">Word</span>
-
-
-            
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"><p>의미역 구조의 논항</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>label</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">RoleType</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>의미역 구조의 표지자</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>modifiers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Word></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>논항의 수식어구들</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>originalLabel</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>의미역 구조 표지자의 원본분석기 표기</p></td>
+            <td class="description last"><p>설정 파일의 위치</p></td>
         </tr>
 
     
     </tbody>
 </table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        </div>
-    
-
-    
-        <h3 class="subsection-title">Extends</h3>
-
-        
-
-
-    <ul>
-        <li>DAGEdge</li>
-    </ul>
-
-
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="predicate"><span class="type-signature">(non-null) </span>predicate<span class="type-signature"> :Word</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1207">line 1207</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>의미역 구조에서 표현하는 동사 [Word]</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Word</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="argument"><span class="type-signature">(non-null) </span>argument<span class="type-signature"> :Word</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1222">line 1222</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>의미역 구조에서 서술된 논항 [Word]</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Word</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="label"><span class="type-signature"></span>label<span class="type-signature"> :RoleType</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1237">line 1237</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">RoleType</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="modifiers"><span class="type-signature"></span>modifiers<span class="type-signature"> :ReadonlyArray.&lt;Word></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1245">line 1245</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>논항의 수식어구들</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">ReadonlyArray.&lt;Word></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="originalLabel"><span class="type-signature"></span>originalLabel<span class="type-signature"> :string</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1260">line 1260</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>원본 분석기의 표지자 String 값. 기본값은 undefined.</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">string</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="getPredicate"><span class="type-signature"></span>getPredicate<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {Word}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1214">line 1214</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>의미역 구조에서 표현하는 동사 [Word]</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Word</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="getArgument"><span class="type-signature"></span>getArgument<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {Word}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1229">line 1229</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>의미역 구조에서 서술된 논항 [Word]</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Word</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="getModifiers"><span class="type-signature"></span>getModifiers<span class="signature">()</span><span class="type-signature"> &rarr; {ReadonlyArray.&lt;Word>}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1252">line 1252</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>논항의 수식어구들</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">ReadonlyArray.&lt;Word></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="getOriginalLabel"><span class="type-signature"></span>getOriginalLabel<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1267">line 1267</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>원본 분석기의 표지자 String 값. 기본값은 undefined.</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data.js.html">data.js</a>, <a href="data.js.html#line1274">line 1274</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

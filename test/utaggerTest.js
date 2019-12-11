@@ -33,6 +33,10 @@ export default function () {
             tagger = new Tagger(UTAGGER);
         });
 
+        afterAll(async() => {
+            tagger = null;
+        });
+
         describe('Tagger', () => {
             it('can handle empty sentence', async() => {
                 expect(await tagger('')).toHaveLength(0);

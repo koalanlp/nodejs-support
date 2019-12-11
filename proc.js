@@ -15,7 +15,9 @@ var _data = require("./data");
 
 var _common = require("./common");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -208,11 +210,11 @@ class Tagger extends Function {
    *
    * @param {!API} api 사용할 품사분석기의 유형.
    * @param {Object} [options={}]
-   * @param {string} options.apiKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key (2.2.0에서 삭제 예정)
-   * @param {string} options.etriKey ETRI 분석기의 경우, ETRI에서 발급받은 API Key
+   * @param {string} [options.apiKey=''] ETRI 분석기의 경우, ETRI에서 발급받은 API Key (2.2.0에서 삭제 예정)
+   * @param {string} [options.etriKey=''] ETRI 분석기의 경우, ETRI에서 발급받은 API Key
    * @param {boolean} [options.useLightTagger=false] 코모란(KMR) 분석기의 경우, 경량 분석기를 사용할 것인지의 여부. (2.2.0에서 삭제 예정)
    * @param {boolean} [options.kmrLight=false] 코모란(KMR) 분석기의 경우, 경량 분석기를 사용할 것인지의 여부.
-   * @param {string} options.khaResource Khaiii 분석기의 경우, 리소스 파일이 위치한 폴더.
+   * @param {string} [options.khaResource=''] Khaiii 분석기의 경우, 리소스 파일이 위치한 폴더.
    * @param {string} [options.khaPreanal=true] Khaiii 분석기의 경우, 기분석 사전을 사용할지의 여부.
    * @param {string} [options.khaErrorpatch=true] Khaiii 분석기의 경우, 오분석 사전 사용 여부
    * @param {string} [options.khaRestore=true] Khaiii 분석기의 경우, 형태소 재구성 여부
@@ -229,7 +231,13 @@ class Tagger extends Function {
         options.etriKey = options.apiKey;
       }
 
-      let etriKey = options.etriKey;
+      let etriKey = options.etriKey || '';
+
+      if (!options.etriKey) {
+        console.error(`${this.constructor.name}(API.ETRI)는 키워드 인자 "etriKey"가 필요합니다. ETRI OpenAI hub에서 키를 발급받으세요.`);
+        throw Error('etriKey 값이 비어있음');
+      }
+
       this._api = API.query(api, this.constructor.name)(etriKey);
     } else if (api === API.KMR) {
       if (options.useLightTagger) {
@@ -242,7 +250,14 @@ class Tagger extends Function {
     } else if (api === API.KHAIII) {
       let config = _jvm.JVM.koalaClassOf('khaiii', 'KhaiiiConfig')(options.khaPreanal || true, options.khaErrorpatch || true, options.khaRestore || true);
 
-      this._api = API.query(api, this.constructor.name)(options.khaResource, config);
+      let rsc = options.khaResource || '';
+
+      if (!options.khaResource) {
+        console.error(`${this.constructor.name}(API.KHAIII)는 키워드 인자 "khaResource"가 필요합니다. 리소스 파일 위치를 지정해주세요.`);
+        throw Error('khaResource 값이 비어있음');
+      }
+
+      this._api = API.query(api, this.constructor.name)(rsc, config);
     } else {
       this._api = API.query(api, this.constructor.name)();
     }
@@ -382,7 +397,13 @@ class CanAnalyzeProperty extends Function {
         options.etriKey = options.apiKey;
       }
 
-      let etriKey = options.etriKey;
+      let etriKey = options.etriKey || '';
+
+      if (!options.etriKey) {
+        console.error(`${this.constructor.name}(API.ETRI)는 키워드 인자 "etriKey"가 필요합니다. ETRI OpenAI hub에서 키를 발급받으세요.`);
+        throw Error('etriKey 값이 비어있음');
+      }
+
       this._api = API.query(api, cls)(etriKey);
     } else {
       this._api = API.query(api, cls)();

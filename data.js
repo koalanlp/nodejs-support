@@ -19,6 +19,8 @@ var _jvm = require("./jvm");
 
 var _common = require("./common");
 
+let _Symbol$iterator;
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -100,7 +102,7 @@ class JavaWrappable {
  */
 
 
-var _Symbol$iterator = Symbol.iterator;
+_Symbol$iterator = Symbol.iterator;
 
 class ImmutableArray extends JavaWrappable {
   /**
