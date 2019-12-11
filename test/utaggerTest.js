@@ -13,19 +13,7 @@ export default function () {
         beforeAll(async() => {
             let utaggerPath = path.normalize(path.join(process.env['HOME'], 'utagger'));
             let binPath = path.join(utaggerPath, 'bin');
-            let libPath;
-
-            let distro = process.env.TRAVIS_DIST || 'ubuntu';
-
-            if (os.platform() === 'win32' && os.arch() === 'amd64'){
-                libPath = "utagger-win64.dll"
-            }else if (distro.toLowerCase().includes('ubuntu')) {
-                libPath = 'utagger-ubuntu1804.so'
-            }else {
-                libPath = 'utagger-centos7.so'
-            }
-
-            libPath = path.join(binPath, libPath);
+            let libPath = path.join(binPath, 'utagger-ubuntu1804.so');
 
             let configPath = path.join(utaggerPath, "Hlxcfg.txt");
             UTagger.setPath(libPath, configPath);

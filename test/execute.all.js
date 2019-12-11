@@ -11,16 +11,17 @@ import utaggertest from './utaggerTest';
 import {JVM} from '../src/jvm';
 
 beforeAll(async () => {
-    await initialize({packages: {OKT: 'LATEST', HNN: 'LATEST',
-            ETRI: 'LATEST', KKMA: 'LATEST',
-            KHAIII: 'LATEST', UTAGGER: 'LATEST'}});
+    await initialize({
+        packages: {OKT: 'LATEST', HNN: 'LATEST', ETRI: 'LATEST', KKMA: 'LATEST', KHAIII: 'LATEST', UTAGGER: 'LATEST'},
+        javaOptions: ["-Xmx4g", "-Dfile.encoding=utf-8", "-Djna.library.path=" + process.env['KHAIII_LIB']]
+    });
 });
 
 describe('JVM', () => {
     it('can check loadable packages', () => {
-        expect(JVM.canLoadPackages({ARIRANG: 'LATEST'})).toEqual({ARIRANG:false});
-        expect(JVM.canLoadPackages({OKT: 'LATEST'})).toEqual({OKT:true});
-        expect(JVM.canLoadPackages({OKT: '3.0.0'})).toEqual({OKT:false});
+        expect(JVM.canLoadPackages({ARIRANG: 'LATEST'})).toEqual({ARIRANG: false});
+        expect(JVM.canLoadPackages({OKT: 'LATEST'})).toEqual({OKT: true});
+        expect(JVM.canLoadPackages({OKT: '3.0.0'})).toEqual({OKT: false});
     });
     it('only initialize once', () => {
         expect(() => JVM.init()).toThrowError();

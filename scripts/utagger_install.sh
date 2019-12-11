@@ -7,7 +7,7 @@ then
     exit 0
 fi
 
-if [ -f "utagger/Hlxcfg.txt" ]
+if [ -f "$HOME/utagger/Hlxcfg.txt" ]
 then
     echo "UTagger already installed."
     exit 0
