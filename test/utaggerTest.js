@@ -11,7 +11,7 @@ export default function () {
     describe('utagger Module', () => {
         let tagger;
 
-        beforeAll(async() => {
+        beforeAll(async (done) => {
             let utaggerPath = path.normalize(path.join(process.env['HOME'], 'utagger'));
             let binPath = path.join(utaggerPath, 'bin');
             let libPath = path.join(binPath, 'utagger-ubuntu1804.so');
@@ -27,10 +27,12 @@ export default function () {
             fs.writeFileSync(configPath, lines);
 
             tagger = new Tagger(UTAGGER);
+            done();
         });
 
-        afterAll(async() => {
+        afterAll(async (done) => {
             tagger = null;
+            done()
         });
 
         describe('Tagger', () => {

@@ -14,7 +14,7 @@
   },
   "main": "./index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "test": "jest --detectOpenHandles --forceExit",
     "compile": "./node_modules/.bin/babel -d ./ src/",
     "jsdoc": "rm -rf docs/* && ./node_modules/jsdoc/jsdoc.js -c .jsdoc.json && git add docs/*",
     "snyk-protect": "snyk protect",
