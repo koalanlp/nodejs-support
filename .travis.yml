@@ -9,7 +9,7 @@ cache:
     - $HOME/.hunter
     - ./node_modules
 script:
-  - npm run test
+  - ./node_modules/jest/bin/jest.js --detectOpenHandles --forceExit; if [ "$?" != "0" ]; then cat /home/travis/.npm/_logs/*.log; fi
 after_success:
   - ./node_modules/.bin/codecov
 install:

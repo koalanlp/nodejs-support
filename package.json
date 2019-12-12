@@ -18,7 +18,7 @@
     "compile": "./node_modules/.bin/babel -d ./ src/",
     "jsdoc": "rm -rf docs/* && ./node_modules/jsdoc/jsdoc.js -c .jsdoc.json && git add docs/*",
     "snyk-protect": "snyk protect",
-    "prepublish": "if [ -z \"$TRAVIS_OS\" ]; then npm run snyk-protect; fi"
+    "prepublish": "if [ -z \"$TRAVIS_OS_NAME\" ]; then npm run snyk-protect; fi"
   },
   "licenses": [
     {
