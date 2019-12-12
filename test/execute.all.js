@@ -35,5 +35,5 @@ typetest();
 exttest();
 proctest();
 datatest();
-khaiiitest();
+// khaiiitest();
 utaggertest();
