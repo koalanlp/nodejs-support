@@ -82,11 +82,11 @@ let remoteRepos = [
     },
     {
         id: 'maven-central-1',
-        url: 'http://repo1.maven.org/maven2/'
+        url: 'https://repo1.maven.org/maven2/'
     },
     {
         id: 'maven-central-2',
-        url: 'http://central.maven.org/maven2/'
+        url: 'http://insecure.repo1.maven.org/maven2/'
     },
     {
         id: 'kotlin-dev',
