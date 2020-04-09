@@ -78,7 +78,7 @@ let remoteRepos = [
     },
     {
         id: 'jcenter',
-        url: 'http://jcenter.bintray.com/'
+        url: 'https://jcenter.bintray.com/'
     },
     {
         id: 'maven-central-1',
