@@ -51,7 +51,7 @@
     "java": "^0.12.0",
     "node-java-maven": "^0.1.1",
     "request": "^2.88.0",
-    "snyk": "^1.189.0",
+    "snyk": "^1.278.2",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
