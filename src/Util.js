@@ -19,17 +19,17 @@ import {assert, isDefined} from './common';
 async function queryVersion(api){
     const request = require('request');
 
-    let url = `https://oss.sonatype.org/content/repositories/public/kr/bydelta/koalanlp-${api}`;
+    let url = `https://repo1.maven.org/maven2/kr/bydelta/koalanlp-${api}/`;
     let result = await new Promise((resolve, reject) => {
-        request(url,
+        request(url, {headers: {'User-Agent': 'curl/7.58.0'}},  // Query as if CURL did.
             (error, res, body) => {
                 if(error) reject(error);
                 else resolve(body);
         });
     });
 
-    let matches = result.match(new RegExp(`${url}/(\\d+\\.\\d+\\.\\d+(-[A-Za-z]+(\\.\\d+)?)?)/`, 'g'));
-    matches = matches.map((line) => line.split('/').reverse()[1]);
+    let matches = result.match(new RegExp('href="(\\d+\\.\\d+\\.\\d+(-[A-Za-z]+(\\.\\d+)?)?)/"', 'g'));
+    matches = matches.map((line) => line.substring(6, line.length - 2));
 
     let version = matches.sort().reverse()[0];
     console.info(`[INFO] Latest version of kr.bydelta:koalanlp-${api} (${version}) will be used`);
