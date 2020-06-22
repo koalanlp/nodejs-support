@@ -83,9 +83,9 @@ export class JVM {
             return array.map(itemConverter);
 
         let result = [];
-        let it = array.iterator();
-        while (it.hasNext()) {
-            result.push(itemConverter(it.next()));
+        let length = array.size();
+        for (let i = 0; i < length; ++i) {
+            result.push(itemConverter(array.get(i)));
         }
 
         return result;
