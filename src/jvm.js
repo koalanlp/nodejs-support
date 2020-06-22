@@ -83,9 +83,16 @@ export class JVM {
             return array.map(itemConverter);
 
         let result = [];
-        let length = array.size();
-        for (let i = 0; i < length; ++i) {
-            result.push(itemConverter(array.get(i)));
+        if (array.class.indexOf('Iter') !== -1) {
+            let it = array.iterator();
+            while (it.hasNext()) {
+                result.push(itemConverter(it.next()));
+            }
+        } else {
+            let length = array.size();
+            for (let i = 0; i < length; ++i) {
+                result.push(itemConverter(array.get(i)));
+            }
         }
 
         return result;
