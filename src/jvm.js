@@ -76,14 +76,14 @@ export class JVM {
      * @param itemConverter
      * @returns {Array}
      */
-    static toJsArray(array, itemConverter = (x) => x) {
+    static toJsArray(array, itemConverter = (x) => x, isIterable = false) {
         if (typeof array === "undefined" || array === null)
             return [];
         if (Array.isArray(array))
             return array.map(itemConverter);
 
         let result = [];
-        if (array.class.indexOf('Iter') !== -1) {
+        if (isIterable) {
             let it = array.iterator();
             while (it.hasNext()) {
                 result.push(itemConverter(it.next()));

@@ -717,7 +717,7 @@ export class Dictionary {
      * @return {DicEntry[]} {'surface':형태소, 'tag':품사}의 list
      */
     async getItems() {
-        return JVM.toJsArray(await this._api.getItemsPromise(), readDicEntry);
+        return JVM.toJsArray(await this._api.getItemsPromise(), readDicEntry, true);
     }
 
     /**
