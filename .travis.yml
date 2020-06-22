@@ -14,8 +14,8 @@ after_success:
   - ./node_modules/.bin/codecov
 install:
   - yarn install
-  - bash ./scripts/khaiii_install.sh
-  - bash ./scripts/utagger_install.sh
+#  - bash ./scripts/khaiii_install.sh
+#  - bash ./scripts/utagger_install.sh
 env:
   global:
   - secure: kj3rDRzVlZo83j1IJKVn9aYLW6/S9ZL8voe3Bc3wr9kFdKIG13yIfxqIvnxSOt2dvX49gEYSBAurXhDIQXSWsq96cC0QDIGU2Htkw5wHU7RMpFf0CNfIuetbQOVxp088IFMOJeBQDHHoZTU77NEPg+QFyJMJqTiYTdJtZkKuMsn9MB6QJsAg5S7BbEKjMpMwXIe7FsMlNgbLOqUapX5RVp0OPN8pWV0SZxl8Z4z4i0D1XtElhYaIRJM6cg3X5G8maoBqov1D0iHq5w//RoH52CshxO0UUApKKEPAhpScDjkvdM4EtVm1lzeWD8coRhQ2aALKHpRZAoICJAVhmkjIa8SFJ4r/TlEDEiBtXdS2CkHES3KMi6dE6fC8o3UfEMrPfWTIhMhm/F0YtnQuGO7upym+AUdwVaxlx3JPop05wMwtPTaERKl3IDF1COh6TOWCMQUXfkI8jIpZvbTxf0SVDUOa8XlSORdFO3MRbUbk/k6Hmh29Ms16jRj4bPDVx8TXHHxL4pQ30JcyCuXh2H5Z0zRjAbeLCDxVgDp0ycvfxt+DR9jWpsyGaglfCFYr99nqqtDhexxXOmh52dpfVKLw1Ybx3Cy3Gy0TiDnX+6HKxmECC1hmrzEotXmTQM3UixMo8hTMrx439rdvbChZ3SfJTB/bBk/6nLWznkXdD7bq5AY=

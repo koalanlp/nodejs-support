@@ -77,14 +77,23 @@ class JVM {
    */
 
 
-  static toJsArray(array, itemConverter = x => x) {
+  static toJsArray(array, itemConverter = x => x, isIterable = false) {
     if (typeof array === "undefined" || array === null) return [];
     if (Array.isArray(array)) return array.map(itemConverter);
     let result = [];
-    let it = array.iterator();
 
-    while (it.hasNext()) {
-      result.push(itemConverter(it.next()));
+    if (isIterable) {
+      let it = array.iterator();
+
+      while (it.hasNext()) {
+        result.push(itemConverter(it.next()));
+      }
+    } else {
+      let length = array.size();
+
+      for (let i = 0; i < length; ++i) {
+        result.push(itemConverter(array.get(i)));
+      }
     }
 
     return result;
