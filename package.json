@@ -18,7 +18,7 @@
     "compile": "./node_modules/.bin/babel -d ./ src/",
     "jsdoc": "rm -rf docs/* && ./node_modules/jsdoc/jsdoc.js -c .jsdoc.json && git add docs/*",
     "snyk-protect": "snyk protect",
-    "prepublish": "if [ -z \"$TRAVIS_OS_NAME\" ]; then npm run snyk-protect; fi"
+    "prepublish": "if [ -z \"$TRAVIS_OS_NAME\" ]; then yarn run snyk-protect; fi"
   },
   "licenses": [
     {
@@ -51,7 +51,7 @@
     "java": "^0.12.0",
     "node-java-maven": "^0.1.1",
     "request": "^2.88.0",
-    "snyk": "^1.290.1",
+    "snyk": "^1.316.1",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
