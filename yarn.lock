@@ -1505,12 +1505,10 @@ async-limiter@~1.0.0:
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
   integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
-async@2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
-  integrity sha512-fNEiL2+AZt6AlAw/29Cr0UDe4sRAHCpEHh54WMz+Bb7QfNcFw4h3loofyJpLeQs4Yx7yuqu/2dLgM5hKOs6HlQ==
-  dependencies:
-    lodash "^4.17.10"
+async@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/async/-/async-0.9.0.tgz#ac3613b1da9bed1b47510bb4651b8931e47146c7"
+  integrity sha1-rDYTsdqb7RtHUQu0ZRuJMeRxRsc=
 
 async@^0.9.0:
   version "0.9.2"
@@ -1782,7 +1780,7 @@ boxen@^4.2.0:
     type-fest "^0.8.1"
     widest-line "^3.1.0"
 
-brace-expansion@^1.1.7:
+brace-expansion@^1.0.0, brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
   integrity sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==
@@ -2695,13 +2693,12 @@ fill-range@^4.0.0:
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
-find-java-home@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/find-java-home/-/find-java-home-0.2.0.tgz#5c500bbad3018832abb9886f7d0f03f57146cddc"
-  integrity sha512-nq5PFOHxE1VSEbdDVkLoA2bAcRnG4ETqJO8ipFq3glIWA52hdWCXYX3emuUyMAQfaqFU4Ea85gqcgaPmOApEPA==
+find-java-home@0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/find-java-home/-/find-java-home-0.1.2.tgz#a09980abc584fb0d62f7cfba04a9397dc93316b6"
+  integrity sha1-oJmAq8WE+w1i98+6BKk5fckzFrY=
   dependencies:
     which "~1.0.5"
-    winreg "~1.2.2"
 
 find-up@^2.1.0:
   version "2.1.0"
@@ -2835,15 +2832,14 @@ glob-parent@^3.1.0:
     is-glob "^3.1.0"
     path-dirname "^1.0.0"
 
-glob@7.1.3:
-  version "7.1.3"
-  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.3.tgz#3960832d3f1574108342dafd3a67b332c0969df1"
-  integrity sha512-vcfuiIxogLV4DlGBHIUOwI0IbrJ8HWPc4MU7HzviGeNho/UJDfi6B5p3sHeWIQ0KGIU0Jpxi5ZHxemQfLkkAwQ==
+glob@5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-5.0.5.tgz#784431e4e29a900ae0d47fba6aa1c7f16a8e7df7"
+  integrity sha1-eEQx5OKakArg1H+6aqHH8WqOffc=
   dependencies:
-    fs.realpath "^1.0.0"
     inflight "^1.0.4"
     inherits "2"
-    minimatch "^3.0.4"
+    minimatch "^2.0.1"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
@@ -3500,16 +3496,15 @@ istanbul-reports@^2.2.6:
   dependencies:
     html-escaper "^2.0.0"
 
-java@^0.12.0:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/java/-/java-0.12.1.tgz#9c28fed9b4068faa15e1538f779fb09d8d9b90cf"
-  integrity sha512-Rll5pmWImAPGmL8R2Cquq5cMtBgFcG6pvYD+/vVuV016oXfsw+jZntLybwLI18xCctDOmd0DjdL+bGh7Sh9Bsw==
+java@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/java/-/java-5.0.1.tgz#31b388129dca27863223a4055774c86f66066ca0"
+  integrity sha1-MbOIEp3KJ4YyI6QFV3TIb2YGbKA=
   dependencies:
-    async "2.6.1"
-    find-java-home "0.2.0"
-    glob "7.1.3"
-    lodash "4.17.14"
-    nan "2.14.0"
+    async "0.9.0"
+    find-java-home "0.1.2"
+    glob "5.0.5"
+    nan "1.7.0"
 
 jest-changed-files@^24.9.0:
   version "24.9.0"
@@ -4219,12 +4214,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@4.17.14:
-  version "4.17.14"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
-  integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
-
-lodash@^4.17.10, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4:
+lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -4379,6 +4369,13 @@ min-document@^2.19.0:
   dependencies:
     dom-walk "^0.1.0"
 
+minimatch@^2.0.1:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-2.0.10.tgz#8d087c39c6b38c001b97fca7ce6d0e1e80afbac7"
+  integrity sha1-jQh8OcazjAAbl/ynzm0OHoCvusc=
+  dependencies:
+    brace-expansion "^1.0.0"
+
 minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
@@ -4426,10 +4423,10 @@ mute-stream@0.0.7:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
   integrity sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=
 
-nan@2.14.0:
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
-  integrity sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
+nan@1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-1.7.0.tgz#755b997404e83cbe7bc08bc3c5c56291bce87438"
+  integrity sha1-dVuZdAToPL57wIvDxcVikbzodDg=
 
 nan@^2.12.1:
   version "2.14.1"
@@ -6669,11 +6666,6 @@ windows-release@^3.1.0:
   integrity sha512-Pngk/RDCaI/DkuHPlGTdIkDiTAnAkyMjoQMZqRsxydNl1qGXNIoZrB7RK8g53F2tEgQBMqQJHQdYZuQEEAu54A==
   dependencies:
     execa "^1.0.0"
-
-winreg@~1.2.2:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/winreg/-/winreg-1.2.4.tgz#ba065629b7a925130e15779108cf540990e98d1b"
-  integrity sha1-ugZWKbepJRMOFXeRCM9UCZDpjRs=
 
 word-wrap@~1.2.3:
   version "1.2.3"
