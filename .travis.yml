@@ -11,9 +11,9 @@ matrix:
         - choco install yarn -y
         - java --version
         - node -v
+        - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
       env:
         - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-16.0.1"
-        - PATH="$JAVA_HOME/bin:$PATH"
     - name: "OSX11.3 with OpenJDK 16"
       os: osx
       osx_image: xcode12.5
@@ -21,14 +21,13 @@ matrix:
       jdk: openjdk16.0.1
       before_install:
         - eval "$(pyenv init -)"
-        - brew install nodejs -y
-        - brew install yarn -y
+        - brew install nodejs
+        - brew install yarn
         - node -v
       env:
         - LDFLAGS="${LDFLAGS} -L$(brew --prefix zlib)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix openssl)/lib"
         - CPPFLAGS="${CPPFLAGS} -I$(brew --prefix zlib)/include -I$(brew --prefix readline)/include -I$(brew --prefix openssl)/include -I$(xcrun --show-sdk-path)/include"
         - PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix zlib)/lib/pkgconfig"
-        - PATH="$HOME/.pyenv:$PATH"
     - name: "Ubuntu Focal with OpenJDK 16"
       dist: focal
       jdk: openjdk16
