@@ -9,9 +9,9 @@ matrix:
         - choco install openjdk --version 16.0.1 -y
         - choco install nodejs-lts -y
         - choco install yarn -y
+        - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
         - java --version
         - node -v
-        - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
       env:
         - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-16.0.1"
     - name: "OSX11.3 with OpenJDK 16"
