@@ -10,10 +10,9 @@ matrix:
         - choco install nodejs-lts -y
         - choco install yarn -y
         - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
+        - export JAVA_HOME=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$JAVA_HOME' ")
         - java --version
         - node -v
-      env:
-        - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-16.0.1"
     - name: "OSX11.3 with OpenJDK 16"
       os: osx
       osx_image: xcode12.5
@@ -21,7 +20,6 @@ matrix:
       jdk: openjdk16.0.1
       before_install:
         - eval "$(pyenv init -)"
-        - brew install nodejs
         - brew install yarn
         - node -v
       env:
@@ -42,7 +40,7 @@ cache:
 script:
   - yarn run test
 after_success:
-  - if [ $TRAVIS_OS_NAME == 'linux' ] then; ./node_modules/.bin/codecov; fi
+  - if [ $TRAVIS_OS_NAME == 'linux' ]; then ./node_modules/.bin/codecov; fi
 install:
   - yarn install
 #  - bash ./scripts/khaiii_install.sh
