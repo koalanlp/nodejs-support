@@ -1,10 +1,10 @@
 # NodeJS-KoalaNLP
 
-[![NPM Version](https://img.shields.io/npm/v/koalanlp.svg?style=flat-square)](https://github.com/koalanlp/nodejs-koalanlp)
+[![NPM Version](https://img.shields.io/npm/v/koalanlp.svg?style=flat-square)](https://github.com/koalanlp/nodejs-support)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support/)
 
-[![Build Status](https://img.shields.io/travis/koalanlp/nodejs-support.svg?style=flat-square&branch=master)](https://travis-ci.org/koalanlp/nodejs-koalanlp)
+[![Build Status](https://img.shields.io/travis/koalanlp/nodejs-support.svg?style=flat-square&branch=master)](https://travis-ci.com/koalanlp/nodejs-support)
 [![codecov](https://codecov.io/gh/koalanlp/nodejs-support/branch/master/graph/badge.svg)](https://codecov.io/gh/koalanlp/nodejs-support)
 
 [![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
@@ -27,7 +27,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * 최석재님의 [RHINO v2.5.4](https://github.com/SukjaeChoi/RHINO)
 * KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
 * Kakao의 [카이(Khaiii) v0.4](https://github.com/kakao/khaiii) <sup>(별도설치 필요: [설치법](https://github.com/kakao/khaiii/wiki/빌드-및-설치))</sup>
-* 울산대학교의 [UTagger 2018년 10월 31일자](http://nlplab.ulsan.ac.kr/doku.php?id=start) <sup>1-2, (별도설치 필요: [설치법](https://koalanlp.github.io/usage/Install-UTagger.md))</sup>
+* 울산대학교의 [UTagger 2018년 10월 31일자](http://nlplab.ulsan.ac.kr/doku.php?id=start) <sup>1-2, (별도설치 필요: [설치법](https://koalanlp.github.io/koalanlp/usage/Install-UTagger.md))</sup>
 
 > <sup>주1-1</sup> Arirang 분석기의 출력을 형태소분석에 적합하게 조금 다듬었으므로, 원본과 약간 다른 결과를 낼 수도 있습니다.
 >
@@ -53,7 +53,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 
    모델마다 실행 방법, 실행 결과를 표현하는 형태가 다릅니다. KoalaNLP는 이를 정부 및 관계기관의 표준안에 따라 표준화합니다. 따라서 모델에 독립적으로 응용 프로그램 개발이 가능합니다.
 
-4. [Java, Kotlin](https://koalanlp.github.io/koalanlp), [Scala](https://koalanlp.github.io/scala-support), [Python 3](https://koalanlp.github.io/python-support), [NodeJS](https://koalanlp.github.io/nodejs-support)에서 크게 다르지 않은 코드:
+4. [Java, Kotlin](https://koalanlp.github.io/koalanlp), [Scala](https://koalanlp.github.io/scala-support), [Python 3](https://koalanlp.github.io/python-support), [NodeJS](https://koalanlp.github.io/nodejs-support) 에서 크게 다르지 않은 코드:
 
    KoalaNLP는 여러 프로그래밍 언어에서 사용할 수 있습니다. 어디서 개발을 하더라도 크게 코드가 다르지 않습니다. 
 
@@ -79,11 +79,11 @@ KoalaNLP의 프로젝트와 인터페이스 통합을 위한 코드는
 
 # 사용법
 
-상세한 사항은 [Usage](https://koalanlp.github.io/koalanlp/usage/) 또는 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.com/nodejs-koalanlp/)을 참고하십시오.
+상세한 사항은 [Usage](https://koalanlp.github.io/koalanlp/usage/) 또는 [![JS Doc](https://img.shields.io/badge/JS-Doc-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support/) 을 참고하십시오.
 
 ## Dependency 추가
 우선 Java 8 및 NodeJS 8 이상을 설치하고, `JAVA_HOME`을 환경변수에 등록해주십시오.
-그런 다음, 아래와 같이 설치하십시오. (현재 nodejs-koalanlp 버전은 [![NPM Version](https://img.shields.io/npm/v/koalanlp.svg?style=flat-square)](https://github.com/koalanlp/nodejs-koalanlp)입니다.)
+그런 다음, 아래와 같이 설치하십시오. (현재 nodejs-koalanlp 버전은 [![NPM Version](https://img.shields.io/npm/v/koalanlp.svg?style=flat-square)](https://github.com/koalanlp/nodejs-support) 입니다.)
 
 ```bash
 $ npm install koalanlp --save 
@@ -111,7 +111,7 @@ $ npm install koalanlp --save
 >
 > <sup>주2-3</sup> Khaiii 분석기의 경우는 Java가 아닌 C++로 구현되어 사용 전 분석기의 설치가 필요합니다. Python3.6 및 CMake 3.10+만 설치되어 있다면 설치 자체가 복잡한 편은 아니니 [여기](https://github.com/kakao/khaiii/blob/v0.1/doc/setup.md)를 참조하여 설치해보세요. (단, v0.1에서는 빌드시 'python3' 호출시 'python3.6'이 연결되어야 합니다.) 참고로, KoalaNLP가 Travis CI에서 패키지를 자동 테스트하기 위해 구현된 bash script는 [여기](https://github.com/koalanlp/koalanlp/blob/master/khaiii/install.sh)에 있습니다.
 >
-> <sup>주2-4</sup> UTagger 분석기의 경우에도 C/C++로 구현되어, 사용 전 분석기의 설치가 필요합니다. 윈도우와 리눅스(우분투, CentOS)용 라이브러리 파일만 제공되며, 설치 방법은 [여기](https://koalanlp.github.io/usage/Install-UTagger.md)를 참조하십시오.
+> <sup>주2-4</sup> UTagger 분석기의 경우에도 C/C++로 구현되어, 사용 전 분석기의 설치가 필요합니다. 윈도우와 리눅스(우분투, CentOS)용 라이브러리 파일만 제공되며, 설치 방법은 [여기](https://koalanlp.github.io/koalanlp/usage/Install-UTagger.md)를 참조하십시오.
 
 ## 간단한 예시
 `koalanlp`는, `node-java` 및 `node-java-maven` 패키지의 도움을 받아, 필요한 java dependency를 자동으로 가져옵니다.

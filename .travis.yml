@@ -1,23 +1,23 @@
 language: node_js
 matrix:
   include:
-    - name: "Windows with OpenJDK 16"
+    - name: "Windows with OpenJDK 11 (LTS)"
       os: windows
       language: shell
       filter_secrets: false
       before_install:
-        - choco install openjdk --version 16.0.1 -y
+        - choco install openjdk11 -y
         - choco install nodejs-lts -y
         - choco install yarn -y
         - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
         - export JAVA_HOME=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$JAVA_HOME' ")
         - java --version
         - node -v
-    - name: "OSX11.3 with OpenJDK 16"
+    - name: "OSX11.3 with OpenJDK 11 (LTS)"
       os: osx
       osx_image: xcode12.5
       language: shell
-      jdk: openjdk16.0.1
+      jdk: openjdk11
       before_install:
         - eval "$(pyenv init -)"
         - brew install yarn
@@ -26,9 +26,9 @@ matrix:
         - LDFLAGS="${LDFLAGS} -L$(brew --prefix zlib)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix openssl)/lib"
         - CPPFLAGS="${CPPFLAGS} -I$(brew --prefix zlib)/include -I$(brew --prefix readline)/include -I$(brew --prefix openssl)/include -I$(xcrun --show-sdk-path)/include"
         - PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix zlib)/lib/pkgconfig"
-    - name: "Ubuntu Focal with OpenJDK 16"
+    - name: "Ubuntu Focal with OpenJDK 11 (LTS)"
       dist: focal
-      jdk: openjdk16
+      jdk: openjdk11
       node_js: "lts/*"
 cache:
   directories:
