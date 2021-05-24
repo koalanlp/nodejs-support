@@ -10,12 +10,13 @@ matrix:
         - choco install nodejs-lts -y
         - choco install yarn -y
         - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
-        - export JAVA_HOME=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$JAVA_HOME' ")
         - java --version
         - node -v
+      env:
+        - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-11.0.11_9"
     - name: "OSX11.3 with OpenJDK 11 (LTS)"
       os: osx
-      osx_image: xcode12.5
+      osx_image: xcode12u
       language: shell
       jdk: openjdk11
       before_install:
