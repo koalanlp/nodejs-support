@@ -37,6 +37,5 @@ exttest();
 proctest();
 datatest();
 
-const platformType = platform()
-if (platformType === 'linux' || platformType === 'darwin') khaiiitest();
-if (platformType === 'win32') utaggertest();
+if (platform === 'linux' || platform === 'darwin') khaiiitest();
+if (platform === 'win32') utaggertest();
