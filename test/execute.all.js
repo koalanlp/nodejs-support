@@ -1,4 +1,5 @@
 jest.setTimeout(5000000);
+import {platform} from 'process';
 import {initialize} from '../src/Util';
 import dictest from './dictionary';
 import typetest from './type';
@@ -35,5 +36,7 @@ typetest();
 exttest();
 proctest();
 datatest();
-// khaiiitest();
-// utaggertest();
+
+const platformType = platform()
+if (platformType === 'linux' || platformType === 'darwin') khaiiitest();
+if (platformType === 'win32') utaggertest();

@@ -25,8 +25,9 @@ matrix:
         - node -v
       env:
         - LDFLAGS="${LDFLAGS} -L$(brew --prefix zlib)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix openssl)/lib"
-        - CPPFLAGS="${CPPFLAGS} -I$(brew --prefix zlib)/include -I$(brew --prefix readline)/include -I$(brew --prefix openssl)/include -I$(xcrun --show-sdk-path)/include"
+        - CPPFLAGS="${CPPFLAGS} -I$(brew --prefix zlib)/include -I$(brew --prefix readline)/include -I$(brew --prefix openssl)/include -I$(xcrun --show-sdk-path)/include -I${JAVA_HOME}/include/darwin/"
         - PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix zlib)/lib/pkgconfig"
+        - DYLD_INSERT_LIBRARIES=${JAVA_HOME}/lib/server/libjvm.dylib
     - name: "Ubuntu Focal with OpenJDK 11 (LTS)"
       dist: focal
       jdk: openjdk11
@@ -43,7 +44,7 @@ script:
 after_success:
   - if [ $TRAVIS_OS_NAME == 'linux' ]; then ./node_modules/.bin/codecov; fi
 install:
-  - yarn install
+  - yarn install --verbose --force
 #  - bash ./scripts/khaiii_install.sh
 #  - bash ./scripts/utagger_install.sh
 env:
