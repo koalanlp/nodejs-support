@@ -44,7 +44,7 @@ script:
 after_success:
   - if [ $TRAVIS_OS_NAME == 'linux' ]; then ./node_modules/.bin/codecov; fi
 install:
-  - yarn install --verbose --force
+  - yarn install --force
 #  - bash ./scripts/khaiii_install.sh
 #  - bash ./scripts/utagger_install.sh
 env:
