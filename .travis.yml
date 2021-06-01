@@ -12,6 +12,8 @@ matrix:
         - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
         - java --version
         - node -v
+        - yarn global add windows-build-tools
+        - export PATH="$(yarn global bin):$PATH"
       env:
         - JAVA_HOME="/c/Progra~1/OpenJDK/openjdk-11.0.11_9"
       cache:
@@ -25,32 +27,33 @@ matrix:
       jdk: openjdk11
       before_install:
         - brew install yarn
+        - brew upgrade node@14  # LTS version
         - java --version
         - node -v
-        - export JAVA_HOME=$(dirname $(readlink $(which javac)))/java_home
-        - export DYLD_INSERT_LIBRARIES="${JAVA_HOME}/lib/server/libjvm.dylib"
         - echo $JAVA_HOME
+        - export DYLD_INSERT_LIBRARIES="${JAVA_HOME}/lib/server/libjvm.dylib"
       env:
         - LDFLAGS="${LDFLAGS} -L$(brew --prefix zlib)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix openssl)/lib"
         - CPPFLAGS="${CPPFLAGS} -I$(brew --prefix zlib)/include -I$(brew --prefix readline)/include -I$(brew --prefix openssl)/include -I$(xcrun --show-sdk-path)/include -I${JAVA_HOME}/include/darwin/"
         - PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix zlib)/lib/pkgconfig"
+        - HOMEBREW_NO_AUTO_UPDATE=1
       cache:
         directories:
           - $HOME/.m2
           - $HOME/khaiii-orig
           - $HOME/.hunter
-    - name: "Ubuntu Focal with OpenJDK 11 (LTS)"
-      dist: focal
-      jdk: openjdk11
-      node_js: "lts/*"
-      before_install:
-        - java --version
-        - node -v
-      cache:
-        directories:
-          - $HOME/.m2
-          - $HOME/khaiii-orig
-          - $HOME/.hunter
+#    - name: "Ubuntu Focal with OpenJDK 11 (LTS)"
+#      dist: focal
+#      jdk: openjdk11
+#      node_js: "lts/*"
+#      before_install:
+#        - java --version
+#        - node -v
+#      cache:
+#        directories:
+#          - $HOME/.m2
+#          - $HOME/khaiii-orig
+#          - $HOME/.hunter
 script:
   - yarn run test
 after_success:
