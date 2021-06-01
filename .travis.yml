@@ -27,14 +27,13 @@ matrix:
         - brew install yarn
         - brew upgrade node@14  # LTS version
         - node -v
-        - /usr/libexec/java_home -V
-        - export DYLD_INSERT_LIBRARIES="${JAVA_HOME}/lib/server/libjvm.dylib"
       env:
         - LDFLAGS="${LDFLAGS} -L$(brew --prefix zlib)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix openssl)/lib"
         - CPPFLAGS="${CPPFLAGS} -I$(brew --prefix zlib)/include -I$(brew --prefix readline)/include -I$(brew --prefix openssl)/include -I$(xcrun --show-sdk-path)/include -I${JAVA_HOME}/include/darwin/"
         - PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix zlib)/lib/pkgconfig"
         - HOMEBREW_NO_AUTO_UPDATE=1
         - JAVA_HOME=$(/usr/libexec/java_home)
+        - GYP_DEFINES="javalibdir%=${JAVA_HOME}/lib"  # Trick for MacOS with JDK11+
       cache:
         directories:
           - $HOME/.m2
