@@ -18,6 +18,9 @@
     "compile": "./node_modules/.bin/babel -d ./ src/",
     "jsdoc": "rm -rf docs/* && ./node_modules/jsdoc/jsdoc.js -c .jsdoc.json && git add docs/*"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "licenses": [
     {
       "type": "MIT",

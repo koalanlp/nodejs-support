@@ -10,6 +10,7 @@ matrix:
         - choco install nodejs-lts -y
         - choco install yarn -y
         - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
+        - echo $PATH
         - java --version
         - node -v
       env:
@@ -33,7 +34,7 @@ matrix:
         - PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix zlib)/lib/pkgconfig"
         - HOMEBREW_NO_AUTO_UPDATE=1
         - JAVA_HOME=$(/usr/libexec/java_home)
-        - GYP_DEFINES="javalibdir%=${JAVA_HOME}/lib"  # Trick for MacOS with JDK11+
+        - GYP_DEFINES="javalibdir=${JAVA_HOME}/lib"  # Trick for MacOS with JDK11+
       cache:
         directories:
           - $HOME/.m2
