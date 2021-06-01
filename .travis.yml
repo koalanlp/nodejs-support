@@ -14,39 +14,51 @@ matrix:
         - node -v
       env:
         - JAVA_HOME="/c/Progra~1/OpenJDK/openjdk-11.0.11_9"
+      cache:
+        directories:
+          - $HOME/.m2
+          - $HOME/utagger
     - name: "OSX11.3 with OpenJDK 11 (LTS)"
       os: osx
       osx_image: xcode12u
       language: shell
       jdk: openjdk11
       before_install:
-        - eval "$(pyenv init -)"
         - brew install yarn
+        - java --version
         - node -v
+        - export JAVA_HOME=$(dirname $(readlink $(which javac)))/java_home
+        - export DYLD_INSERT_LIBRARIES="${JAVA_HOME}/lib/server/libjvm.dylib"
+        - echo $JAVA_HOME
       env:
         - LDFLAGS="${LDFLAGS} -L$(brew --prefix zlib)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix openssl)/lib"
         - CPPFLAGS="${CPPFLAGS} -I$(brew --prefix zlib)/include -I$(brew --prefix readline)/include -I$(brew --prefix openssl)/include -I$(xcrun --show-sdk-path)/include -I${JAVA_HOME}/include/darwin/"
         - PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix zlib)/lib/pkgconfig"
-        - DYLD_INSERT_LIBRARIES=${JAVA_HOME}/lib/server/libjvm.dylib
+      cache:
+        directories:
+          - $HOME/.m2
+          - $HOME/khaiii-orig
+          - $HOME/.hunter
     - name: "Ubuntu Focal with OpenJDK 11 (LTS)"
       dist: focal
       jdk: openjdk11
       node_js: "lts/*"
-cache:
-  directories:
-    - $HOME/.m2
-    - $HOME/utagger
-    - $HOME/khaiii-orig
-    - $HOME/.hunter
-    - ./node_modules
+      before_install:
+        - java --version
+        - node -v
+      cache:
+        directories:
+          - $HOME/.m2
+          - $HOME/khaiii-orig
+          - $HOME/.hunter
 script:
   - yarn run test
 after_success:
   - if [ $TRAVIS_OS_NAME == 'linux' ]; then ./node_modules/.bin/codecov; fi
 install:
   - yarn install --force
-#  - bash ./scripts/khaiii_install.sh
-#  - bash ./scripts/utagger_install.sh
+  - if [ $TRAVIS_OS_NAME != 'windows' ]; then bash ./scripts/khaiii_install.sh; fi
+  - if [ $TRAVIS_OS_NAME == 'windows' ]; then bash ./scripts/utagger_install.sh; fi
 env:
   global:
   - secure: kj3rDRzVlZo83j1IJKVn9aYLW6/S9ZL8voe3Bc3wr9kFdKIG13yIfxqIvnxSOt2dvX49gEYSBAurXhDIQXSWsq96cC0QDIGU2Htkw5wHU7RMpFf0CNfIuetbQOVxp088IFMOJeBQDHHoZTU77NEPg+QFyJMJqTiYTdJtZkKuMsn9MB6QJsAg5S7BbEKjMpMwXIe7FsMlNgbLOqUapX5RVp0OPN8pWV0SZxl8Z4z4i0D1XtElhYaIRJM6cg3X5G8maoBqov1D0iHq5w//RoH52CshxO0UUApKKEPAhpScDjkvdM4EtVm1lzeWD8coRhQ2aALKHpRZAoICJAVhmkjIa8SFJ4r/TlEDEiBtXdS2CkHES3KMi6dE6fC8o3UfEMrPfWTIhMhm/F0YtnQuGO7upym+AUdwVaxlx3JPop05wMwtPTaERKl3IDF1COh6TOWCMQUXfkI8jIpZvbTxf0SVDUOa8XlSORdFO3MRbUbk/k6Hmh29Ms16jRj4bPDVx8TXHHxL4pQ30JcyCuXh2H5Z0zRjAbeLCDxVgDp0ycvfxt+DR9jWpsyGaglfCFYr99nqqtDhexxXOmh52dpfVKLw1Ybx3Cy3Gy0TiDnX+6HKxmECC1hmrzEotXmTQM3UixMo8hTMrx439rdvbChZ3SfJTB/bBk/6nLWznkXdD7bq5AY=
