@@ -2172,6 +2172,16 @@ class Word extends ImmutableArray {
    * @inheritDoc
    */
 
+  getTagSurface() {
+    return this.map(m => ({ tag: m._tag, surface: m.surface}))
+  }
+  /**
+   * tag 와 surface 로 이루어진 Object 로 반환합니다.
+   *
+   * 예) [ { tag: 'NNG', surface: '고양이' }, { tag: 'JX', surface: '는' } ]
+   *
+   * @return {Object} tag 와 surface 로 이루어진 Object
+   */
 
   toString() {
     return `${this.surface} = ${this.singleLineString()}`;
